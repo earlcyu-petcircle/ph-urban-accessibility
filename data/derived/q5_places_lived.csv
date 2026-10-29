@@ -1,0 +1,4 @@
+place_lived,barangays,people,composite,percentile,grocery,health,parks,transit,schools,pct_grocery_5min,pct_palengke_10min,pct_park_5min,pct_rail_15min,worst_barangay_score,best_barangay_score
+oranbo,1,3267.0,91.9,94.0,96.0,86.0,89.0,94.0,94.0,87.0,0.0,68.0,0.0,91.9,91.9
+tondo,259,654220.0,78.5,66.0,89.0,90.0,34.0,91.0,88.0,76.0,63.0,9.0,22.0,26.9,100.0
+loyola,1,21140.0,76.2,57.0,69.0,85.0,74.0,67.0,86.0,33.0,58.0,37.0,32.0,76.2,76.2

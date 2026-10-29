@@ -1,0 +1,3 @@
+variant,metro_composite,main_composite,spearman_vs_main
+all Overture records,75.2,73.0,0.986
+transit without jeepney routes,71.4,73.0,0.989

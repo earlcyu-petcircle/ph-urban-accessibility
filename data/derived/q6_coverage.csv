@@ -1,0 +1,4 @@
+service,overture_all,overture_used,osm_features,pct_osm_matched
+grocery,11683,7112,7138,60.0
+health,12864,9461,5025,80.0
+schools,7757,6895,2460,75.0

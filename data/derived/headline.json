@@ -1,0 +1,68 @@
+{
+  "overture_release": "2026-10-21.0",
+  "osm_snapshot": "2026-10-28T21:21:02Z",
+  "min_overture_confidence": 0.5,
+  "people": 13484462,
+  "barangays": 1712,
+  "barangays_with_people": 1710,
+  "origins": 1571338,
+  "resident_weighted_composite": 73.0,
+  "resident_weighted_scores": {
+    "grocery": 83.0,
+    "health": 84.5,
+    "parks": 41.1,
+    "transit": 71.8,
+    "schools": 84.7
+  },
+  "share_within": {
+    "grocery": {
+      "5": 0.6123,
+      "10": 0.9051,
+      "15": 0.9741
+    },
+    "health": {
+      "5": 0.6468,
+      "10": 0.9145,
+      "15": 0.9733
+    },
+    "parks": {
+      "5": 0.1514,
+      "10": 0.4175,
+      "15": 0.6631
+    },
+    "transit": {
+      "5": 0.5145,
+      "10": 0.764,
+      "15": 0.8757
+    },
+    "schools": {
+      "5": 0.6384,
+      "10": 0.9255,
+      "15": 0.977
+    },
+    "palengke": {
+      "5": 0.1365,
+      "10": 0.4365,
+      "15": 0.6736
+    },
+    "rail": {
+      "5": 0.0146,
+      "10": 0.0652,
+      "15": 0.1255
+    }
+  },
+  "barangays_scoring_100": 25,
+  "barangays_below_50": 19,
+  "people_in_barangays_below_50": 521807,
+  "walk_network_segments": 825945,
+  "walk_network_km": 20682,
+  "parks_polygons": 993,
+  "parks_hectares": 923,
+  "transit_osm": {
+    "rail": 101,
+    "jeepney": 49781,
+    "stop": 4686
+  },
+  "rail_station_names": 51,
+  "jeepney_route_relations_ncr": 314
+}

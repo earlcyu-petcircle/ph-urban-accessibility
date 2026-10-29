@@ -1,0 +1,21 @@
+best_rank,worst_rank,barangay,city,district,pop2020,composite,grocery,health,parks,transit,schools
+1,297,Poblacion,City of Makati,,16706,97.3,100.0,100.0,94.0,97.0,96.0
+2,296,Comembo,City of Makati,,15805,95.4,96.0,99.0,85.0,97.0,100.0
+3,295,Santo Tomas,City of Pasig,,12904,95.3,100.0,100.0,83.0,100.0,94.0
+4,294,Calumpang,City of Marikina,,15602,94.9,96.0,91.0,92.0,99.0,97.0
+5,293,Post Proper Northside,City of Makati,,57940,94.5,97.0,92.0,93.0,98.0,92.0
+6,292,West Rembo,City of Makati,,29649,92.9,97.0,95.0,72.0,100.0,100.0
+8,290,San Roque,City of Marikina,,16949,92.6,94.0,97.0,86.0,92.0,94.0
+7,291,Katipunan,Quezon City,,10508,92.6,84.0,96.0,96.0,94.0,93.0
+9,289,Barangay 598,City of Manila,Sampaloc,12027,92.1,100.0,96.0,91.0,79.0,95.0
+10,288,Tugatog,City of Malabon,,25526,91.6,89.0,96.0,82.0,93.0,97.0
+288,10,Canumay East (Canumay),City of Valenzuela,,14657,45.5,48.0,48.0,0.0,59.0,73.0
+289,9,Fortune,City of Marikina,,38624,43.8,37.0,57.0,4.0,41.0,81.0
+290,8,Punturin,City of Valenzuela,,24437,43.6,68.0,64.0,7.0,4.0,75.0
+291,7,Lingunan,City of Valenzuela,,24088,42.4,74.0,59.0,0.0,1.0,78.0
+292,6,Barangay 20,City of Manila,Tondo,45772,42.1,55.0,57.0,0.0,42.0,56.0
+293,5,Coloong,City of Valenzuela,,12550,41.7,64.0,73.0,7.0,6.0,58.0
+294,4,Balangkas,City of Valenzuela,,14318,41.2,38.0,80.0,34.0,0.0,53.0
+295,3,Pansol,Quezon City,,35254,39.5,40.0,48.0,47.0,23.0,39.0
+296,2,Lawang Bato,City of Valenzuela,,23786,34.1,42.0,52.0,5.0,15.0,56.0
+297,1,Barangay 128,City of Manila,Tondo,23702,26.9,40.0,29.0,20.0,25.0,20.0
