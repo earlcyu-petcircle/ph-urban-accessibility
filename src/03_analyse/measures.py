@@ -206,3 +206,49 @@ def hex_table(w):
     for c in cols:
         h[c] = h[c] / h.people.where(h.people > 0)
     return h.reset_index()
+
+
+def group_median(values, people, keys):
+    """People-weighted median of `values` within each key (the value at which half the people are reached)."""
+    d = pd.DataFrame({"k": keys, "v": values, "p": people}).sort_values(["k", "v"])
+    d["cum"] = d.groupby("k").p.cumsum()
+    d["half"] = d.groupby("k").p.transform("sum") / 2
+    return d[d.cum >= d.half].drop_duplicates("k").set_index("k").v
+
+
+def group_mean(values, people, keys):
+    d = pd.DataFrame({"k": keys, "v": np.asarray(values, dtype=float) * people, "p": people}).groupby("k").sum()
+    return d.v / d.p
+
+
+def barangay_table(w):
+    """The same measures for every barangay with people, for the comparison site: the median
+    resident's walk to each category (M1) and the share within the 10-minute minimum, the
+    share of Metro Manila residents with a longer walk than that median, E2SFCA access against
+    the Metro Manila mean (M3), mean categories within 15 minutes (M4) as a 0-100 score, and
+    the transit shares (M5). One row per barangay, wide."""
+    w = w[w.people > 0]
+    keys, p = w.pcode.values, w.people.values
+    out = pd.DataFrame({"people": w.groupby("pcode").people.sum()})
+    for c in CATEGORIES:
+        d = w[f"d_{c}"].values
+        med = group_median(d, p, keys)
+        out[f"min_{c}"] = minutes(med)
+        out[f"within10_{c}"] = group_mean(minutes(d) <= SUFFICIENCY_MIN, p, keys)
+        order = np.argsort(d)
+        xs, cw = d[order], np.cumsum(p[order])
+        out[f"metro_longer_{c}"] = (
+            1 - np.r_[0, cw][np.searchsorted(xs, med.reindex(out.index).values, "right")] / cw[-1]
+        )
+        if c in M3_CATEGORIES:
+            out[f"m3_index_{c}"] = group_mean(w[f"a_{c}"].values, p, keys) / wmean(w[f"a_{c}"], p)
+    cov = coverage(w).values
+    out["m4_mean"] = group_mean(cov, p, keys)
+    out["score"] = out.m4_mean / len(CATEGORIES) * 100
+    out["share_bus_jeepney_500m"] = group_mean(w.d_bus_jeepney.values <= TRANSIT_LOW_CAPACITY_M, p, keys)
+    out["share_rail_1km"] = group_mean(w.d_rail.values <= TRANSIT_HIGH_CAPACITY_M, p, keys)
+    out["share_convenient"] = group_mean(
+        (w.d_bus_jeepney.values <= TRANSIT_LOW_CAPACITY_M) | (w.d_rail.values <= TRANSIT_HIGH_CAPACITY_M), p, keys
+    )
+    out["score_rank"] = out.score.rank(ascending=False, method="min").astype(int)
+    return out.reset_index()
