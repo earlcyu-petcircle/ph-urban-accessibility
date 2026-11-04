@@ -8,8 +8,8 @@
 #   ./03_analyse.sh        walking times, the five measures and the checks in results/
 #   ./04_build_map.sh      web map tiles in docs/map/data/
 # Needs Python 3.12, curl and tippecanoe (brew install tippecanoe), plus the PSA 2024 census
-# workbooks and the DOH facility registry downloaded by hand into data/manual/ (docs/paper.md,
-# section 3). The phases are stubs until PR 2 onwards and stop with the PR that builds them.
+# workbook (and, optionally, the DOH facility registry) saved by hand into data/manual/
+# (docs/data-quality.md). Phases 3 and 4 are stubs until PR 3 and PR 4 and stop there.
 set -euo pipefail
 cd "$(dirname "$0")"
 source src/shared/setup.sh

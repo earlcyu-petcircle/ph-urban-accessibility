@@ -1,0 +1,366 @@
+{
+  "snapshots": {
+    "census": "PSA 2024 Census of Population, 1 July 2024",
+    "boundaries": "OCHA COD-AB Philippines v03, valid from 2025-02-13",
+    "worldpop": "WorldPop R2025A, 2024, constrained, 100 m",
+    "ghs_pop": "JRC GHS-POP R2023A, 2025 epoch, 100 m, tile R8_C30",
+    "overture": "Overture Maps release 2026-10-21.0",
+    "openstreetmap": "Geofabrik Philippines extract, replication time 2026-11-03T21:24:23Z",
+    "deped": "OSMaPaaralan (DepEd MaPaaralan school list, cleaned by OpenStreetMap Philippines), 2019"
+  },
+  "licences": {
+    "census": "PSA publication",
+    "boundaries": "CC BY-IGO",
+    "worldpop": "CC BY 4.0",
+    "ghs_pop": "CC BY 4.0",
+    "overture_buildings": "ODbL",
+    "overture_places": "CDLA Permissive 2.0 and per-source terms",
+    "openstreetmap": "ODbL",
+    "deped": "DepEd data, published for OpenStreetMap use; not redistributed here",
+    "hot_education": "ODbL"
+  },
+  "study_box": {
+    "west_south_east_north": [
+      120.88,
+      14.33,
+      121.16,
+      14.81
+    ],
+    "fringe_bounds": [
+      120.8878,
+      14.3337,
+      121.1536,
+      14.8034
+    ]
+  },
+  "census": {
+    "census_barangays": 1715,
+    "census_total": 14001751,
+    "table_b_ncr_total": 14001751,
+    "codab_barangays": 1712,
+    "match": {
+      "name": 1698,
+      "name_ncr": 10,
+      "none": 2,
+      "name_split": 1,
+      "fuzzy": 1
+    },
+    "census_people_matched": 14001751,
+    "census_people_not_placed": 0,
+    "tondo_district_barangays": 259,
+    "problems": []
+  },
+  "people": {
+    "census_people": 14001751,
+    "buildings_in_metro_manila": 1629555,
+    "residential_buildings": 1577565,
+    "buildings_by_source": {
+      "OpenStreetMap": 1107935,
+      "Google Open Buildings": 363828,
+      "Microsoft ML Buildings": 105802
+    },
+    "origins": 1573122,
+    "origins_by_method": {
+      "buildings x WorldPop": 1573122
+    },
+    "people_by_method": {
+      "buildings x WorldPop": 14001751
+    },
+    "barangays_by_method": {
+      "buildings x WorldPop": 1709,
+      "no people": 3
+    },
+    "people_ghs_by_method": {
+      "buildings x GHS-POP": 1572984,
+      "residential buildings by area": 138
+    },
+    "worldpop": {
+      "grid_people_in_metro_manila": 14270541,
+      "grid_people_in_cells_with_a_residential_building": 14137886,
+      "share_in_cells_with_a_residential_building": 0.9907
+    },
+    "ghs_pop": {
+      "grid_people_in_metro_manila": 13987148,
+      "grid_people_in_cells_with_a_residential_building": 13858871,
+      "share_in_cells_with_a_residential_building": 0.9908
+    },
+    "people_per_origin_max": 3240.8,
+    "origins_over_500_people": 111,
+    "barangays_census_over_3x_worldpop": {
+      "barangays": 112,
+      "people": 526628,
+      "largest": [
+        {
+          "pcode": "PH1307602022",
+          "barangay": "Post Proper Southside",
+          "city": "City of Makati",
+          "people": 68388,
+          "worldpop_2024": 4780
+        },
+        {
+          "pcode": "PH1307401014",
+          "barangay": "Hulo",
+          "city": "City of Mandaluyong",
+          "people": 47757,
+          "worldpop_2024": 14246
+        },
+        {
+          "pcode": "PH1307607027",
+          "barangay": "South Daang Hari",
+          "city": "Taguig City",
+          "people": 25037,
+          "worldpop_2024": 6720
+        },
+        {
+          "pcode": "PH1307501073",
+          "barangay": "Barangay 73",
+          "city": "Caloocan City",
+          "people": 17965,
+          "worldpop_2024": 3880
+        },
+        {
+          "pcode": "PH1307405020",
+          "barangay": "West Crame",
+          "city": "City of San Juan",
+          "people": 17359,
+          "worldpop_2024": 4179
+        },
+        {
+          "pcode": "PH1307607023",
+          "barangay": "North Daang Hari",
+          "city": "Taguig City",
+          "people": 14614,
+          "worldpop_2024": 2014
+        },
+        {
+          "pcode": "PH1307404136",
+          "barangay": "Capri",
+          "city": "Quezon City",
+          "people": 12940,
+          "worldpop_2024": 4090
+        },
+        {
+          "pcode": "PH1303901775",
+          "barangay": "Barangay 775",
+          "city": "City of Manila",
+          "people": 12116,
+          "worldpop_2024": 2645
+        },
+        {
+          "pcode": "PH1307404049",
+          "barangay": "Katipunan",
+          "city": "Quezon City",
+          "people": 10837,
+          "worldpop_2024": 2814
+        },
+        {
+          "pcode": "PH1307605145",
+          "barangay": "Barangay 145",
+          "city": "Pasay City",
+          "people": 10288,
+          "worldpop_2024": 3175
+        }
+      ]
+    }
+  },
+  "services": {
+    "overture_places_in_box": 320705,
+    "overture_records_by_category": {
+      "food_retail": 7489,
+      "primary_care": 4693,
+      "pharmacy": 3450,
+      "public_elementary": 1287,
+      "public_high": 875,
+      "hospital": 751,
+      "palengke": 523,
+      "transit": 336
+    },
+    "osm_tagged_points_and_areas_in_box": 141064,
+    "osm_records_by_category": {
+      "food_retail": 6995,
+      "transit": 4535,
+      "pharmacy": 2129,
+      "primary_care": 988,
+      "public_elementary": 845,
+      "public_high": 526,
+      "palengke": 420,
+      "hospital": 309
+    },
+    "osm_schools_in_metro_manila_this_extraction": 1851,
+    "hot_education_schools_in_metro_manila": 1862,
+    "hot_education_schools_public": 837,
+    "open_space_mapped": 2169,
+    "open_space_kept": 960,
+    "open_space_nested_dropped": 67,
+    "open_space_access_points": 18099,
+    "routes": {
+      "bus": 1168,
+      "jeepney": 334,
+      "rail": 8
+    },
+    "route_vertices_in_box": {
+      "bus": 54374,
+      "jeepney": 9042
+    },
+    "routes_in_box": {
+      "bus": 768,
+      "jeepney": 95
+    },
+    "deped_schools_in_box": 1064,
+    "doh_registry": null,
+    "healthsites_check": null,
+    "records_in_fringe": 32965,
+    "records_by_source": {
+      "overture": 16893,
+      "osm": 15185,
+      "deped": 887
+    },
+    "default_services_by_category": {
+      "food_retail": 8788,
+      "transit": 4407,
+      "primary_care": 3941,
+      "pharmacy": 3587,
+      "open_space": 787,
+      "hospital": 637,
+      "public_elementary": 587,
+      "palengke": 578,
+      "public_high": 267
+    },
+    "default_services_in_metro_manila_by_category": {
+      "food_retail": 7666,
+      "transit": 4201,
+      "primary_care": 3582,
+      "pharmacy": 3210,
+      "open_space": 666,
+      "hospital": 563,
+      "palengke": 505,
+      "public_elementary": 483,
+      "public_high": 231
+    }
+  },
+  "walking_network": {
+    "osm_snapshot": "2026-11-03T21:24:23Z",
+    "nodes_in_box": 622713,
+    "segments_in_box": 693215,
+    "connected_pieces": 1493,
+    "nodes_kept": 605898,
+    "share_of_nodes_kept": 0.973,
+    "segments_kept": 677005,
+    "km_kept": 16740.8,
+    "km_dropped_in_small_pieces": 325.9,
+    "ways_kept": 174506,
+    "footbridge_ways_kept": 1692,
+    "footbridge_km_kept": 47.7,
+    "km_by_highway": {
+      "residential": 8803.8,
+      "service": 2538.0,
+      "tertiary": 1361.1,
+      "footway": 1212.7,
+      "secondary": 961.0,
+      "primary": 572.7,
+      "unclassified": 507.9,
+      "path": 326.7,
+      "trunk": 159.8,
+      "pedestrian": 111.7,
+      "track": 75.6,
+      "primary_link": 30.5,
+      "steps": 27.6,
+      "trunk_link": 20.2,
+      "corridor": 13.6,
+      "secondary_link": 10.2,
+      "living_street": 3.4,
+      "tertiary_link": 3.0,
+      "bridleway": 1.1,
+      "road": 0.3,
+      "elevator": 0.0
+    }
+  },
+  "hand_downloads": {
+    "census_ncr_workbook": "used",
+    "doh_nhfr": "not saved; no DOH registry match or hospital beds in this build",
+    "healthsites": "not downloaded (HDX bot challenge); check skipped"
+  },
+  "study_barangays": {
+    "Barangay 136": {
+      "pcode": "PH1303901136",
+      "city": "City of Manila",
+      "people": 1302,
+      "area_km2": 0.0287,
+      "people_per_km2": 45366,
+      "buildings": 97,
+      "residential_buildings": 97,
+      "origins": 97,
+      "placement": "buildings x WorldPop",
+      "people_per_origin_median": 10.8,
+      "people_in_largest_origin": 94.4,
+      "share_in_largest_10_origins": 0.312,
+      "worldpop_2024": 1322,
+      "ghs_pop_2025": 4437,
+      "services_inside": {
+        "food_retail": 1,
+        "palengke": 0,
+        "pharmacy": 0,
+        "primary_care": 0,
+        "hospital": 0,
+        "public_elementary": 0,
+        "public_high": 0,
+        "open_space": 0,
+        "transit": 0
+      }
+    },
+    "Loyola Heights": {
+      "pcode": "PH1307404055",
+      "city": "Quezon City",
+      "people": 21768,
+      "area_km2": 2.4255,
+      "people_per_km2": 8975,
+      "buildings": 3376,
+      "residential_buildings": 3206,
+      "origins": 3206,
+      "placement": "buildings x WorldPop",
+      "people_per_origin_median": 4.3,
+      "people_in_largest_origin": 76.5,
+      "share_in_largest_10_origins": 0.027,
+      "worldpop_2024": 27455,
+      "ghs_pop_2025": 30511,
+      "services_inside": {
+        "food_retail": 39,
+        "palengke": 4,
+        "pharmacy": 9,
+        "primary_care": 7,
+        "hospital": 1,
+        "public_elementary": 1,
+        "public_high": 1,
+        "open_space": 9,
+        "transit": 15
+      }
+    },
+    "Oranbo": {
+      "pcode": "PH1307403013",
+      "city": "City of Pasig",
+      "people": 3374,
+      "area_km2": 0.5213,
+      "people_per_km2": 6472,
+      "buildings": 823,
+      "residential_buildings": 762,
+      "origins": 762,
+      "placement": "buildings x WorldPop",
+      "people_per_origin_median": 1.9,
+      "people_in_largest_origin": 72.6,
+      "share_in_largest_10_origins": 0.151,
+      "worldpop_2024": 3279,
+      "ghs_pop_2025": 5339,
+      "services_inside": {
+        "food_retail": 9,
+        "palengke": 2,
+        "pharmacy": 5,
+        "primary_care": 4,
+        "hospital": 1,
+        "public_elementary": 1,
+        "public_high": 0,
+        "open_space": 2,
+        "transit": 3
+      }
+    }
+  }
+}
