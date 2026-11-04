@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Build the nine-category service layer (CATEGORIES in src/shared/common.py) from Overture
-places, OpenStreetMap and the DepEd public-school registry, and check it against the other
-registries.
+places, OpenStreetMap and the DepEd public-school registry, and check it against that registry
+and Healthsites.io.
 
 Sources and rules (docs/data-quality.md, "The service layer", explains each one):
   - Overture places at confidence 0.3 or more (the lowest value of check 08), not marked
@@ -53,7 +53,6 @@ from common import (
     DEDUPE_M,
     DEPED_SCHOOLS,
     DERIVED,
-    DOH_NHFR_FOLDER,
     FRINGE_KM,
     HEALTHSITES_CSV,
     HOT_EDUCATION,
@@ -408,61 +407,7 @@ print(f"DepEd registry: {len(dep):,} public schools in the box, {len(dep_rows):,
 
 
 # ---------------------------------------------------------------------------
-# 4. The DOH National Health Facility Registry, when saved by hand
-# ---------------------------------------------------------------------------
-def read_doh():
-    """The NHFR export in data/manual/doh_nhfr/, or None. Columns are found by name."""
-    files = sorted(DOH_NHFR_FOLDER.glob("*.csv")) + sorted(DOH_NHFR_FOLDER.glob("*.xlsx"))
-    if not files:
-        return None
-    f = files[0]
-    df = pd.read_csv(f, dtype=str) if f.suffix == ".csv" else pd.read_excel(f, dtype=str)
-    cols = {c: re.sub(r"[^a-z]", "", c.lower()) for c in df.columns}
-
-    def col(*keys):
-        hit = [c for c, k in cols.items() if any(k.startswith(x) for x in keys)]
-        if not hit:
-            sys.exit(f"{f.relative_to(ROOT)}: no column like {keys}; columns are {list(df.columns)}")
-        return df[hit[0]]
-
-    out = pd.DataFrame(
-        {
-            "source_id": "doh" + col("healthfacilitycode", "facilitycode").astype(str),
-            "name": col("facilityname", "name"),
-            "type": col("healthfacilitytype", "facilitytype", "type"),
-            "lon": pd.to_numeric(col("longitude"), errors="coerce"),
-            "lat": pd.to_numeric(col("latitude"), errors="coerce"),
-            "beds": pd.to_numeric(col("bedcapacity", "authorizedbed", "beds"), errors="coerce"),
-        }
-    )
-    out = out[out.lon.between(W, E) & out.lat.between(S, N)]
-    t = out.type.fillna("").str.lower()
-    out["category"] = np.select(
-        [
-            t.str.contains("hospital|infirmary"),
-            t.str.contains("health station|health center|rural health|clinic|birthing|lying"),
-        ],
-        ["hospital", "primary_care"],
-        None,
-    )
-    return out[out.category.notna()].assign(
-        source="doh", kind="facility", capacity=lambda d: d.beds, capacity_source="beds"
-    )
-
-
-doh = read_doh()
-print(
-    "DOH registry: "
-    + (
-        "not saved in data/manual/doh_nhfr/, so no DOH match or beds in this build"
-        if doh is None
-        else f"{len(doh):,} facilities in the box"
-    )
-)
-
-
-# ---------------------------------------------------------------------------
-# 5. One table, limited to Metro Manila and its fringe, with duplicates grouped
+# 4. One table, limited to Metro Manila and its fringe, with duplicates grouped
 # ---------------------------------------------------------------------------
 cols = [
     "category",
@@ -481,7 +426,7 @@ cols = [
     "network",
     "footprint",
 ]
-parts = [ov_places, osm_places, osm_open, dep_rows] + ([doh] if doh is not None else [])
+parts = [ov_places, osm_places, osm_open, dep_rows]
 svc = pd.concat([p.reindex(columns=cols) for p in parts], ignore_index=True)
 svc = svc[svc.category.isin(CATEGORIES)].reset_index(drop=True)
 
@@ -500,7 +445,7 @@ hit = hit[~hit.index.duplicated()]
 svc["pcode"] = hit.adm4_pcode.reindex(svc.index).values
 
 svc["key"] = svc.name.map(norm_name)
-svc["default_source"] = svc.source.isin(["osm", "deped", "doh"]) | (svc.confidence >= OVERTURE_MIN_CONFIDENCE)
+svc["default_source"] = svc.source.isin(["osm", "deped"]) | (svc.confidence >= OVERTURE_MIN_CONFIDENCE)
 svc["dup_group"] = -1
 next_group = 0
 for category, g in svc.groupby("category"):
@@ -534,9 +479,9 @@ for category, g in svc.groupby("category"):
     svc.loc[idx, "dup_group"] = codes + next_group
     next_group += codes.max() + 1
 # Where a registry lists a category, it decides what belongs in it: DepEd for public schools
-# (names cannot tell public from private, and misplaced Overture records pass a name rule) and,
-# when saved, DOH for hospitals. The OpenStreetMap and Overture records stay for check 07.
-REGISTRY_FOR = {"public_elementary": "deped", "public_high": "deped"} | ({"hospital": "doh"} if doh is not None else {})
+# (names cannot tell public from private, and misplaced Overture records pass a name rule).
+# The OpenStreetMap and Overture records stay for check 07.
+REGISTRY_FOR = {"public_elementary": "deped", "public_high": "deped"}
 group_sources = svc.groupby("dup_group").source.agg(set)
 listed = pd.Series(True, index=svc.index)
 for category, registry in REGISTRY_FOR.items():
@@ -544,7 +489,7 @@ for category, registry in REGISTRY_FOR.items():
     listed[rows_] = svc.dup_group[rows_].map(lambda g, r=registry: r in group_sources[g])
 # One record per group carries it in the default layer: OpenStreetMap first (its points sit on
 # the building), then the registries, then the most confident Overture record
-rank = svc.source.map({"osm": 0, "deped": 1, "doh": 1, "overture": 2})
+rank = svc.source.map({"osm": 0, "deped": 1, "overture": 2})
 order = svc[svc.default_source].assign(rank=rank, conf=-svc.confidence.fillna(1)).sort_values(["rank", "conf"])
 svc["in_default"] = svc.index.isin(order.drop_duplicates("dup_group").index) & listed
 svc["sources_in_group"] = svc.groupby("dup_group").source.transform(lambda s: ";".join(sorted(set(s))))
@@ -588,7 +533,7 @@ for f in ("services.parquet", "open_space_access.parquet", "transit_routes.parqu
 
 
 # ---------------------------------------------------------------------------
-# 6. Registry matches and completeness checks
+# 5. Registry matches and completeness checks
 # ---------------------------------------------------------------------------
 def found(reg, layer, radius):
     """For each outside point, whether a layer point of the same category is within `radius` metres."""
@@ -612,8 +557,6 @@ for pcode, place in BARANGAYS.items():
 
 rows = []
 regs = {"deped": svc[svc.source.eq("deped")]}
-if doh is not None:
-    regs["doh"] = svc[svc.source.eq("doh")]
 for reg_name, reg in regs.items():
     reg = reg.assign(found=reg.dup_group.isin(open_layer_groups))
     for area, pcodes in AREAS.items():
@@ -711,7 +654,6 @@ stats = {
     "route_vertices_in_box": {k: int(v) for k, v in rv.drop_duplicates("node_id").groupby("mode").size().items()},
     "routes_in_box": {k: int(v) for k, v in rv.drop_duplicates("route_id").groupby("mode").size().items()},
     "deped_schools_in_box": len(dep),
-    "doh_registry": None if doh is None else len(doh),
     "healthsites_check": healthsites,
     "records_in_fringe": len(svc),
     "records_by_source": {k: int(v) for k, v in svc.source.value_counts().items()},

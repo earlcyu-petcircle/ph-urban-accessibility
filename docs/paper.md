@@ -4,14 +4,15 @@ Earl Yu, November 2026.
 Open data only.
 
 This is the full paper for the project.
-The research design is final (approved on 4 November 2026) and the data are collected and built (section 5); the results and discussion fill in as the next pull requests land, and each one says which.
+The research design is final (approved on 4 November 2026), the data are collected and built (section 5) and the results are in (section 6); the full discussion and the story site and map come with the next pull request.
 
 **In short.**
 Which of the three Metro Manila barangays I have lived in puts everyday life within a short walk?
 The study compares walking access to nine everyday services for every resident of Barangay 136 in Tondo, Loyola Heights in Quezon City and Oranbo in Pasig, and sets each against the rest of Metro Manila.
 Five measures, from walking time to the nearest service to supply per resident once crowding is counted, are reported side by side rather than folded into one score.
 A difference between the three counts as a finding only if it survives ten changes of assumption.
-No results are in yet: they arrive with the analysis (PR 3) and the story site and map (PR 4).
+No barangay wins outright: Barangay 136 has the most of the nine basics within 15 minutes (8.7 on average) but the least supply per resident once crowding is counted; Oranbo has more supply per resident than Metro Manila for most services and the nearest open space, but no public high school within reach; Loyola Heights trails on most basics, above all public schools, and only 48% of its residents have convenient public transport.
+14 of the 33 pairwise differences survive all ten checks.
 One caveat is already known: sari-sari stores, the corner shops of everyday Filipino life, are almost absent from open maps, so food access will be understated, most of all in Barangay 136.
 
 ## Contents
@@ -101,7 +102,7 @@ Where people actually go, and whether access shapes health or income, are out of
 ## 3. Data sources
 
 Every source is public and free to download.
-The PSA census workbook and the DOH facility registry refuse scripted downloads, so they are saved by hand into `data/manual/`; HDX sometimes challenges scripts too, and the [data-quality notes](data-quality.md#getting-the-hand-downloads) give the fallback for each file.
+The PSA census workbook refuses scripted downloads, so it is saved by hand into `data/manual/`; HDX sometimes challenges scripts too, and the [data-quality notes](data-quality.md#getting-the-hand-downloads) give the fallback for each file.
 
 | Role | Source | Grain | Year | Licence | Why this one |
 |---|---|---|---|---|---|
@@ -112,8 +113,8 @@ The PSA census workbook and the DOH facility registry refuse scripted downloads,
 | Boundaries and codes | [OCHA COD-AB Philippines](https://data.humdata.org/dataset/cod-ab-phl), PSGC codes | Barangay | Files of 28 May 2026 | CC BY-IGO | Official NAMRIA and PSA boundaries |
 | Services | Overture Maps places | Point | Release 2026-10-21.0 | CDLA Permissive 2.0 and per-source terms | The widest open list of shops, clinics and schools, with a confidence score |
 | Services, markets, parks, network, transit | [OpenStreetMap](https://download.geofabrik.de/asia/philippines.html), Geofabrik Philippines extract | Point, polygon, way | Pinned snapshot | ODbL | Palengke, parks, the walking network, and jeepney, bus and rail routes |
-| Health registry | DOH National Health Facility Registry (downloaded by hand) | Facility | Live | Government publication | The official list of health facilities, with hospital beds for M3 |
-| Health check | [Healthsites.io](https://data.humdata.org/dataset/philippines-healthsites) | Facility | Sep 2026 | ODbL | A completeness check on the health layer |
+| Health registry | DOH National Health Facility Registry | Facility | Live | Government publication | Not used: its export fails, even in a browser, so health rests on Overture and OpenStreetMap, with no registry match and no hospital beds |
+| Health check | [Healthsites.io](https://data.humdata.org/dataset/philippines-healthsites) | Facility | Sep 2026 | ODbL | An open completeness check on the health layer, used when HDX allows the download (it refused in this build) |
 | School registry | DepEd's public-school list as cleaned by OpenStreetMap Philippines ([OSMaPaaralan](https://github.com/OSMPH/deped_schools_db)); [HOT OpenStreetMap education facilities](https://data.humdata.org/dataset/hotosm_phl_education_facilities) | School | 2019; Oct 2026 | DepEd data published for OpenStreetMap use; ODbL | Public schools for the learning categories, with level and enrolment, and their match rate |
 | Walk audit | Mapillary street imagery | Photo | Varies | CC BY-SA | Sidewalks, crossings, shade, obstruction and sari-sari stores on sample routes |
 | Context, map only | Meta Relative Wealth Index; UP NOAH flood hazard | 2.4 km tile; hazard zone | 2021; varies | CC BY-NC 4.0; to confirm | Optional map layers for context, not measures |
@@ -224,7 +225,7 @@ Every parameter lives in [`src/shared/common.py`](../src/shared/common.py).
 ### 4.6 Validation and audits
 
 - **Service audit.** A random 30 services per barangay checked against street imagery, giving a found-and-open rate per category.
-- **Registry match.** The share of DOH and DepEd public facilities found in the merged service layer, per barangay.
+- **Registry match.** The share of DepEd public schools found in the merged service layer, per area (the DOH registry cannot be exported, so health has no registry match).
 - **Walk audit.** About 20 routes in and around each barangay scored on street imagery for sidewalk, crossings, shade and obstruction, after the Pasig protocol [28], with a count of sari-sari stores seen per kilometre; reported beside M1 to M5, not inside them.
 
 ### 4.7 The interactive web map
@@ -266,16 +267,160 @@ The data-quality headline:
 - 99.1% of WorldPop's Metro Manila population sits in a 100 m cell with a residential footprint, so people are placed by buildings and WorldPop together in every barangay.
 - In Metro Manila the default layer holds 7,666 food shops, 505 markets, 3,210 pharmacies, 3,582 primary care places, 563 hospitals, 483 public elementary and 231 public high schools, 666 open spaces and 4,201 transit stops and stations.
 - 82% of the DepEd public elementary schools and 86% of the public high schools in Metro Manila are found in OpenStreetMap or Overture.
-- The known gaps: 234 sari-sari stores mapped in all of Metro Manila and none in Barangay 136; 95 mapped jeepney routes against 768 bus routes; hospitals without a registry check or bed counts until the DOH registry is saved by hand; and 112 barangays, none of them study barangays, whose census count is more than three times WorldPop's, mostly where COD-AB and the census draw the boundary differently.
+- The known gaps: 234 sari-sari stores mapped in all of Metro Manila and none in Barangay 136; 95 mapped jeepney routes against 768 bus routes; hospitals and primary care without a registry check or bed counts, because the DOH registry cannot be exported; and 112 barangays, none of them study barangays, whose census count is more than three times WorldPop's, mostly where COD-AB and the census draw the boundary differently.
 
 ## 6. Results
 
-*To come with PR 3 (analysis), one subsection per research question:*
-6.1 RQ1 proximity, 6.2 RQ2 choice, 6.3 RQ3 crowding, 6.4 RQ4 transit, 6.5 RQ5 context and fairness, and 6.6 robustness.
+The analysis runs as six notebooks in [`notebooks/`](../notebooks/), each with its tables, charts and a short reading; this section gives the results they share.
+Every figure is weighted by residents: the 14,001,751 people of the 2024 census, placed in 1,573,122 residential buildings.
+Walks run along the street network at 4.2 km/h (70 m a minute); services count wherever they are, up to 2 km beyond Metro Manila.
+Health services rest on Overture and OpenStreetMap alone, because the DOH facility registry cannot be exported (section 8).
+
+### 6.1 RQ1 Proximity
+
+| Median walk, minutes (M1) | Barangay 136 | Loyola Heights | Oranbo | Metro Manila |
+|---|---:|---:|---:|---:|
+| Food retail | 1.7 | 6.0 | 3.7 | 3.8 |
+| Palengke | 13.0 | 8.8 | 6.4 | 10.6 |
+| Pharmacy | 2.3 | 7.9 | 4.7 | 5.4 |
+| Primary care | 2.5 | 7.3 | 6.6 | 5.0 |
+| Hospital | 10.5 | 17.2 | 10.8 | 11.8 |
+| Public elementary | 3.7 | 20.9 | 6.7 | 9.6 |
+| Public high | 4.0 | 20.6 | 21.4 | 13.9 |
+| Open space | 14.4 | 6.9 | 3.9 | 12.2 |
+| Transit | 2.9 | 7.8 | 3.3 | 4.6 |
+
+*The median resident's walk to the nearest service of each category. Food retail is supermarkets, groceries, convenience stores and the few mapped sari-sari stores. Source: [`measures.csv`](../results/tables/measures.csv), with P10, P90 and the share within 10 minutes; figure: [`m1_nearest_walk.png`](../results/figures/m1_nearest_walk.png).*
+
+![M1: minutes to the nearest service](../results/figures/m1_nearest_walk.png)
+
+- **Barangay 136** has the shortest median walk of the three for seven categories, and everyone there is within 10 minutes of food, a pharmacy, primary care, both public school levels and transit.
+  Its gaps are the palengke and open space: 2% of residents are within 10 minutes of a palengke, and none of open space.
+- **Loyola Heights** has the longest median walk of the three for six categories, and is slower than the Metro Manila median for all but the palengke and open space.
+  Its median resident walks about 21 minutes to a public school of either level, and 9% of residents are within 10 minutes of a public elementary school.
+- **Oranbo** has the shortest walk to open space (3.9 minutes) and the palengke (6.4), but nobody there is within 10 minutes of a public high school (median 21.4 minutes).
+- **Food without convenience stores.** Leaving convenience stores out nearly doubles Oranbo's median walk to food (3.7 to 6.8 minutes), lifts Loyola Heights' from 6.0 to 7.1 and Metro Manila's from 3.8 to 5.8, and barely moves Barangay 136's (1.7 to 1.8).
+  Neither version counts the unmapped sari-sari stores.
+
+### 6.2 RQ2 Choice
+
+| Services within 10 minutes, median resident (M2) | Barangay 136 | Loyola Heights | Oranbo | Metro Manila |
+|---|---:|---:|---:|---:|
+| Food retail | 5 | 7 | 11 | 9 |
+| Palengke | 0 | 1 | 1 | 0 |
+| Pharmacy | 6 | 2 | 6 | 4 |
+| Primary care | 6 | 1 | 4 | 4 |
+| Hospital | 1 | 0 | 0 | 0 |
+| Public elementary | 2 | 0 | 1 | 1 |
+| Public high | 1 | 0 | 0 | 0 |
+| Open space | 0 | 1 | 2 | 0 |
+| Transit stops and stations | 5 | 2 | 6 | 4 |
+
+*Duplicate records of one service count once. The 5 and 15-minute counts are in [`measures.csv`](../results/tables/measures.csv); figure: [`m2_choice.png`](../results/figures/m2_choice.png).*
+
+- Within 5 minutes Barangay 136's median resident has the most choice (three food shops, four pharmacies, four clinics, against at most one in the other two).
+- Within 15 minutes Oranbo's median resident reaches the most food shops (31, against 24 in Loyola Heights and 11 in Barangay 136), pharmacies, hospitals, open spaces and transit stops.
+- Loyola Heights' median resident has no public school of either level within 15 minutes.
+
+### 6.3 RQ3 Crowding
+
+| Supply per resident against Metro Manila (M3) | Barangay 136 | Loyola Heights | Oranbo |
+|---|---:|---:|---:|
+| Food retail | 0.33 | 2.70 | 2.23 |
+| Palengke | 0.23 | 3.17 | 5.19 |
+| Pharmacy | 0.66 | 1.46 | 2.76 |
+| Primary care | 0.83 | 1.19 | 1.58 |
+| Hospital | 0.41 | 0.65 | 1.48 |
+| Public elementary | 2.36 | 0.15 | 1.01 |
+| Public high | 2.95 | 0.40 | 0.00 |
+| Open space | 0.05 | 7.07 | 3.37 |
+
+*E2SFCA access of the mean resident, as a multiple of the Metro Manila mean (1.00). Supply is 1 per service, except public schools, which weigh their DepEd 2015 enrolment; with no DOH bed counts, hospitals count 1 each, the design's fallback, so the hospital row is facilities per person rather than beds. Demand is every Metro Manila resident within 15 minutes, with Gaussian decay. Transit has no supply and no M3. Figure: [`m3_crowding.png`](../results/figures/m3_crowding.png).*
+
+- **Barangay 136 is close to services but short of them per person.** Its mean resident has a third of Metro Manila's food supply per person and less than half of its hospital and palengke supply, although these are a short walk away; public schools are the exception (2.4 and 3.0 times Metro Manila).
+- **Oranbo has more supply per resident than Metro Manila** for food, the palengke, pharmacies, primary care, hospitals and open space, the Metro Manila level for public elementary places, and almost no public high school places within reach.
+- **Loyola Heights** is above Metro Manila for food, the palengke, pharmacies, primary care and open space (7.1 times), and below it for hospitals (0.65) and public schools (0.15 and 0.40).
+
+### 6.4 RQ4 Transit and the 15-minute headline
+
+| | Barangay 136 | Loyola Heights | Oranbo | Metro Manila |
+|---|---:|---:|---:|---:|
+| **M4** categories within 15 minutes, mean (of 9) | 8.7 | 6.5 | 7.7 | 7.0 |
+| M4 share of residents with all nine | 74% | 11% | 5% | 25% |
+| **M5** within 500 m of a bus or jeepney stop or route | 100% | 46% | 95% | 66% |
+| M5 within 1 km of an LRT or MRT station | 0% | 26% | 0% | 11% |
+| M5 convenient access by either (SDG 11.2.1) | 100% | 48% | 95% | 66% |
+
+*Figures: [`m4_coverage.png`](../results/figures/m4_coverage.png), [`m5_transit.png`](../results/figures/m5_transit.png).*
+
+![M4: categories within 15 minutes](../results/figures/m4_coverage.png)
+
+- **Coverage (M4).** In the headline's own terms, Barangay 136's typical resident has all nine basics within 15 minutes, Oranbo's eight and Loyola Heights' seven, against seven for Metro Manila.
+  The usual missing category is open space in Barangay 136 (at the edge of 15 minutes), a public high school in Oranbo, and public schools, and for some a hospital, in Loyola Heights.
+- **Transit (M5).** Every resident of Barangay 136 and 95% of Oranbo's have convenient public transport by the UN test, all through buses and jeepneys; neither is within 1 km of rail.
+  Loyola Heights is lowest at 48%, with 26% of residents within 1 km of an LRT-2 station.
+  Only 95 jeepney routes are mapped in the study area, so these shares are floors: with mapped stops alone (check 10), Oranbo falls to 58% and Loyola Heights to 40%.
+
+### 6.5 RQ5 Context and fairness
+
+| Share of Metro Manila residents with worse access than the median resident | Barangay 136 | Loyola Heights | Oranbo |
+|---|---:|---:|---:|
+| Food retail | 85% | 26% | 52% |
+| Palengke | 38% | 61% | 77% |
+| Pharmacy | 87% | 29% | 57% |
+| Primary care | 83% | 29% | 35% |
+| Hospital | 57% | 29% | 55% |
+| Public elementary | 90% | 14% | 70% |
+| Public high | 95% | 27% | 25% |
+| Open space | 40% | 77% | 90% |
+| Transit | 66% | 31% | 61% |
+| Coverage (M4) | 75% | 33% | 51% |
+
+*Above 50% is better than the Metro Manila median. [`context.csv`](../results/tables/context.csv) also gives each share among residents of barangays of similar density; figure: [`context_percentiles.png`](../results/figures/context_percentiles.png).*
+
+![Each barangay's median resident in Metro Manila](../results/figures/context_percentiles.png)
+
+- **Against Metro Manila,** Barangay 136's and Oranbo's median residents are each in the better-served part of the city for seven of the nine categories, and Loyola Heights' for two (the palengke and open space).
+- **Against places of similar density,** Loyola Heights and Oranbo (both in the least dense tenth of Metro Manila's residents) both move up; Oranbo sits above the middle for every category except public high schools (49%), Loyola Heights below it for six.
+- **Against the neighbours,** Barangay 136 is quicker than the other 258 Tondo barangays for food, pharmacies, clinics and schools and slower for the palengke, hospitals, open space and transit (coverage 8.7 against 8.0); Loyola Heights is slower than the rest of Quezon City for all but the palengke and open space (6.5 against 6.8); Oranbo is quicker than the rest of Pasig for the palengke, open space, elementary schools and transit and slower for primary care and public high schools (7.7 against 7.5).
+- **Inside each barangay,** access is most even in Barangay 136 (P90/P10 ratios of 1.2 to 5.3), as a one-block barangay must be; Loyola Heights is the most unequal of the three for food (7.8) and transit (8.9), and Oranbo for open space (9.5).
+
+### 6.6 Robustness
+
+Of the 33 pairwise differences in the headline metrics (the median walk to each of the nine categories, M4 and M5, for three pairs of barangays), 14 keep their order in every variant of all ten checks, and two more only tie somewhere.
+
+![Which differences survive the ten checks](../results/figures/robustness.png)
+
+| Finding that survives every check | Base case |
+|---|---|
+| Loyola Heights has a longer walk than both others to food, pharmacies and public elementary schools | e.g. food 6.0 against 1.7 and 3.7 minutes |
+| Loyola Heights has a longer walk than Barangay 136 to hospitals and public high schools, and fewer categories within 15 minutes | coverage 6.5 against 8.7 |
+| Loyola Heights has a longer walk than Oranbo to transit | 7.8 against 3.3 minutes |
+| Barangay 136 has a shorter walk than both others to public elementary schools | 3.7 against 20.9 and 6.7 minutes |
+| Barangay 136 has a longer walk than both others to open space, and than Loyola Heights to the palengke | open space 14.4 against 6.9 and 3.9 minutes |
+
+*[`robustness.csv`](../results/tables/robustness.csv) lists every pair and the variants that change it; [`sensitivity.csv`](../results/tables/sensitivity.csv) every value.*
+
+- **The study-area check decides most of the rest.** The equal walk-shed check (03) changes 14 orderings and reverses 11, most of them between Barangay 136 and Oranbo: a 10 to 20-minute walk-shed round Barangay 136's centre takes in many Tondo blocks around the one-block barangay.
+  So most differences between Barangay 136 and Oranbo reflect the barangays' sizes as much as the places.
+- **The data choices matter less.** The service source (07) changes seven orderings, straight-line distance (05) five, origin resolution (06) four, and the time threshold (02), Overture confidence (08) and the population surface (09) one each; walking speed (01) and the jeepney rule (10) change none.
+- **The home lens (04)** is run privately from home points kept off the repository and was not run for this build.
+
+### 6.7 Audits
+
+- **Registry match.** OpenStreetMap or Overture holds a record for 82% of Metro Manila's DepEd public elementary schools and 86% of its public high schools, and for every DepEd school in Loyola Heights and Oranbo ([`registry_match.csv`](../results/tables/registry_match.csv)).
+  There is no registry check for health: the DOH registry cannot be exported, and HDX refused the Healthsites.io download.
+- **Service and walk audits.** The fixed samples are drawn: 30 services within 15 minutes of each barangay's residents ([`service_audit_sample.csv`](../results/tables/service_audit_sample.csv)) and 20 walking routes from street points in each barangay ([`walk_audit_routes.csv`](../results/tables/walk_audit_routes.csv)), each with a street-imagery link.
+  Scoring the imagery, including the sari-sari stores seen per kilometre, is a by-hand step still to do, so their results are not in this version.
 
 ## 7. Discussion
 
-*To come with PR 4 (results), covering how the three barangays compare, which services drive the gaps, how the results sit beside the Pasig and Quezon City indices, and what the results cannot say.*
+*The full discussion comes with the story site (PR 4). What the results already say:*
+
+- **No barangay wins outright.** Barangay 136 puts the most of the nine basics within a short walk, but it has the least supply per resident of the three for most services once neighbours are counted, and lacks open space and a palengke nearby; Oranbo has more supply per resident than Metro Manila for most services and the shortest walk to open space, but no public high school within reach; Loyola Heights trails on most basics, most of all public schools, and has the lowest transit share.
+- **Proximity and crowding point different ways in the densest place,** as the design expected: Barangay 136's short walks hide less supply per person for food, hospitals and the palengke.
+- **Only the differences in section 6.6 are findings.** Many others, above all between Barangay 136 and Oranbo, do not survive the equal walk-shed check.
+- **What the results cannot say:** they measure potential access on mapped services, not where people go; food access leaves out sari-sari stores; and health access rests on open data without a registry check.
 
 ## 8. Limitations
 
@@ -286,7 +431,13 @@ The data-quality headline:
   The study states this on every food figure, chart and map legend, counts sari-sari stores on the walk-audit routes to give a stores-per-kilometre figure beside the measures, and reports food access with and without convenience stores so readers can see how much the definition matters.
 - **Potential, not realised, access.** There is no data on where people actually go.
 - **Mapped is not there.** Beyond informal retail, new shops are missed and closed ones kept, which the service audit measures.
-- **Quality, price and capacity** of services are invisible except where registries give capacity: school enrolment from DepEd, and hospital beds only once the DOH registry is saved by hand.
+- **No health registry.** The DOH National Health Facility Registry cannot be exported (the export fails even in a browser), so hospitals and primary care rest on Overture and OpenStreetMap alone, with no registry match.
+  Hospitals have no bed counts, so the crowding measure (M3) counts each hospital as 1, the design's fallback: it measures hospitals per person, not beds.
+  The open cross-check, Healthsites.io, could not be downloaded either (HDX refused it).
+- **Quality, price and capacity** of services are invisible except where registries give capacity: school enrolment from DepEd (2015 figures).
+- **The edge of the study area.** People just outside Metro Manila are not placed, so services near its edge face less competition in M3 than they do.
+- **Hops in M2 and M3.** Counts and crowding are read at each home's nearest street node, without the short hop to it (median 23 m), which M1, M4 and M5 include.
+- **The audits are drawn, not yet scored.** The service and walk audit samples wait for by-hand scoring on street imagery, so the found-and-open rates and the sari-sari count per kilometre are still to come.
 - **The walk itself.** Heat, floods, crossings, footbridges, safety and sidewalks are not in the network; the walk audit covers only a sample of routes.
 - **Jeepney routes may be dated.** OpenStreetMap routes may pre-date the LTFRB route rationalisation, which check 10 brackets.
 - **Population can land in the wrong place.** Placement errors cluster at ports, reclamations, campuses and malls, so every building in Barangay 136, the Ateneo campus and Capitol Commons get a by-hand check.
@@ -294,7 +445,7 @@ The data-quality headline:
 
 ## 9. Conclusion and future work
 
-*The conclusion comes with the results.*
+*The conclusion comes with the full discussion in PR 4.*
 
 What would take this further, already visible from the design:
 
@@ -305,7 +456,7 @@ What would take this further, already visible from the design:
 
 ## 10. How to reproduce
 
-Phases 1 and 2 run now; phases 3 and 4 stop with a message until PR 3 and PR 4 build them.
+Phases 1 to 3 run now; phase 4 stops with a message until PR 4 builds it.
 
 ```bash
 git clone https://github.com/earlcyu-petcircle/metro-manila-accessibility.git
@@ -320,8 +471,8 @@ cd metro-manila-accessibility
 ```
 
 It needs Python 3.12, `curl` and [tippecanoe](https://github.com/felt/tippecanoe) (`brew install tippecanoe`); nothing else is installed globally, since `src/shared/setup.sh` makes a local virtual environment from `requirements.txt`.
-The downloads take about 1.3 GB and the build about two minutes.
-The PSA 2024 census workbook (and, optionally, the DOH facility registry) is saved by hand into `data/manual/` as the [data-quality notes](data-quality.md#getting-the-hand-downloads) describe, and the private home points for the home lens go in `data/manual/homes.csv`; the whole folder is gitignored.
+The downloads take about 1.3 GB, the build about two minutes and the analysis about three.
+The PSA 2024 census workbook is saved by hand into `data/manual/` as the [data-quality notes](data-quality.md#getting-the-hand-downloads) describe, and the private home points for the home lens go in `data/manual/homes.csv`; the whole folder is gitignored.
 
 ## References
 
@@ -360,13 +511,14 @@ Entries marked (abstract) were read from their abstract or publication page only
 30. Bohannon, R. W. "Comfortable and maximum walking speed of adults aged 20-79 years: reference values and determinants." *Age and Ageing* 26 (1), 15-19, 1997. <https://doi.org/10.1093/ageing/26.1.15> (abstract)
 31. Interaksyon. "More sari-sari stores selling 'tingi' supplies spring up near schools, says study." 14 August 2025. <https://media.interaksyon.com/trends-spotlights/2025/08/14/300595/more-sari-sari-stores-selling-tingi-supplies-spring-up-near-schools-says-study/> (news; used only for the size of one firm's store network)
 
-Data: PSA 2024 Census of Population; WorldPop, University of Southampton (CC BY 4.0); JRC GHS-POP (CC BY 4.0); OCHA COD-AB Philippines (CC BY-IGO); © OpenStreetMap contributors (ODbL); Overture Maps buildings (ODbL) and places (CDLA Permissive 2.0 and per-source terms); DOH National Health Facility Registry; Healthsites.io (ODbL); DepEd, via OpenStreetMap Philippines' OSMaPaaralan; HOT (ODbL); Mapillary (CC BY-SA).
+Data: PSA 2024 Census of Population; WorldPop, University of Southampton (CC BY 4.0); JRC GHS-POP (CC BY 4.0); OCHA COD-AB Philippines (CC BY-IGO); © OpenStreetMap contributors (ODbL); Overture Maps buildings (ODbL) and places (CDLA Permissive 2.0 and per-source terms); DepEd, via OpenStreetMap Philippines' OSMaPaaralan; HOT (ODbL); Mapillary (CC BY-SA).
 
 ## Appendix A. Code and pipeline
 
 The code sits in one folder per phase under [`src/`](../src/), named after the phase script at the repo root that runs it, with shared paths and study constants in [`src/shared/common.py`](../src/shared/common.py) and the phase scripts' setup in [`src/shared/setup.sh`](../src/shared/setup.sh).
-The phase 1 and 2 scripts are built; the phase 3 and 4 scripts are stubs that describe their step and stop with the PR that builds them.
-From PR 3 the analysis runs as narrative notebooks in [`notebooks/`](../notebooks/), which import their logic from `src/03_analyse/`.
+The phase 1 to 3 scripts are built; the phase 4 scripts are stubs that describe their step and stop with PR 4.
+The analysis runs as six narrative notebooks in [`notebooks/`](../notebooks/), committed with their outputs so each table and chart sits beside a short reading; their logic lives in [`src/03_analyse/`](../src/03_analyse/), which they import.
+Shared helpers are in [`src/shared/`](../src/shared/): `common.py` (paths and study constants), `service_rules.py` (the rules that sort places into categories), `atlas.py` (the Atlas Grid chart style and its Riso data palette, mirrored from ph-lottery-outlets, with the fonts committed in `fonts/`), `run_notebook.py` (the notebook runner) and `setup.sh` (the phase scripts' setup).
 Libraries are added to `requirements.txt` in the PR that first uses them.
 
 | Phase script | Step | Script | Writes | PR |
@@ -378,17 +530,35 @@ Libraries are added to `requirements.txt` in the PR that first uses them.
 | | The nine-category service layer and registry match | `src/02_build_tables/build_services.py` | `data/work/services.parquet`, `open_space_access.parquet`, `transit_routes.parquet`, `data/derived/service_quality.csv` | 2 |
 | | The walking network | `src/02_build_tables/build_walk_network.py` | `data/work/walk_nodes.parquet`, `walk_edges.parquet` | 2 |
 | | Barangay and data-quality tables | `src/02_build_tables/build_tables.py` | `data/derived/barangays.csv`, `data_quality.json` | 2 |
-| `03_analyse.sh` | Walking times | `src/03_analyse/walk_times.py` | `data/work/` | 3 |
-| | The five measures | `src/03_analyse/measures.py` | `results/tables/` | 3 |
-| | The ten sensitivity checks | `src/03_analyse/sensitivity.py` | `results/tables/` | 3 |
-| | Service, registry and walk audits | `src/03_analyse/audits.py` | `results/tables/` | 3 |
-| | Figures | `src/03_analyse/charts.py` | `results/figures/` | 3 |
+| `03_analyse.sh` | Walking distances from every resident to every category | `src/03_analyse/walk_times.py` | `data/work/walk_times.parquet`, `nearest_nodes.npz` | 3 |
+| | M1 nearest walk and M2 choice (RQ1, RQ2) | [`notebooks/01_proximity_and_choice.ipynb`](../notebooks/01_proximity_and_choice.ipynb), with `measures.py` | `results/tables/measures.csv` | 3 |
+| | M3 crowding (RQ3) | [`notebooks/02_crowding.ipynb`](../notebooks/02_crowding.ipynb) | figures | 3 |
+| | M4 coverage and M5 transit (RQ4) | [`notebooks/03_coverage_and_transit.ipynb`](../notebooks/03_coverage_and_transit.ipynb) | figures | 3 |
+| | Context and fairness (RQ5) | [`notebooks/04_context_and_fairness.ipynb`](../notebooks/04_context_and_fairness.ipynb) | `results/tables/context.csv`, `data/work/hex_measures.parquet` | 3 |
+| | The ten sensitivity checks | [`notebooks/05_robustness.ipynb`](../notebooks/05_robustness.ipynb), with `sensitivity.py` | `results/tables/sensitivity.csv`, `robustness.csv` | 3 |
+| | Registry match and the audit samples | [`notebooks/06_audits.ipynb`](../notebooks/06_audits.ipynb), with `audits.py` | `results/tables/registry_match.csv`, `service_audit_sample.csv`, `walk_audit_routes.csv` | 3 |
+| | Figures (Atlas style, Riso palette) | `src/03_analyse/charts.py` | `results/figures/` | 3 |
 | `04_build_map.sh` | Web map tiles | `src/04_build_map/build_map_tiles.py` | `docs/map/data/` | 4 |
 | | Local preview server | `src/04_build_map/serve_map.py` | | 4 |
 
 ## Appendix B. Every figure and table
 
-*To come with PR 3 and PR 4: the tables in `results/tables/`, the figures in `results/figures/`, and the web map in `docs/map/`.*
+| Figure or table | What it shows | Section |
+|---|---|---|
+| [`m1_nearest_walk.png`](../results/figures/m1_nearest_walk.png) | Minutes to the nearest service: median, P10 to P90, Metro Manila median | 6.1 |
+| [`m2_choice.png`](../results/figures/m2_choice.png) | Services within 10 minutes of the median resident | 6.2 |
+| [`m3_crowding.png`](../results/figures/m3_crowding.png) | E2SFCA access against the Metro Manila mean | 6.3 |
+| [`m4_coverage.png`](../results/figures/m4_coverage.png) | Categories within 15 minutes, share of residents | 6.4 |
+| [`m5_transit.png`](../results/figures/m5_transit.png) | Convenient public transport, SDG 11.2.1 | 6.4 |
+| [`context_percentiles.png`](../results/figures/context_percentiles.png) | Each barangay's median resident among Metro Manila's | 6.5 |
+| [`robustness.png`](../results/figures/robustness.png) | Which differences survive the ten checks | 6.6 |
+| [`measures.csv`](../results/tables/measures.csv) | M1 to M5 for the three barangays, their neighbours and Metro Manila | 6.1 to 6.5 |
+| [`context.csv`](../results/tables/context.csv) | Metro Manila and similar-density percentiles | 6.5 |
+| [`sensitivity.csv`](../results/tables/sensitivity.csv), [`robustness.csv`](../results/tables/robustness.csv) | Every check's values; every pair's verdict | 6.6 |
+| [`registry_match.csv`](../results/tables/registry_match.csv) | DepEd schools found in the open sources | 6.7 |
+| [`service_audit_sample.csv`](../results/tables/service_audit_sample.csv), [`walk_audit_routes.csv`](../results/tables/walk_audit_routes.csv) | The audit worksheets, to be scored by hand | 6.7 |
+
+*The web map comes with PR 4.*
 
 ## Appendix C. Project history
 
@@ -397,3 +567,4 @@ A first pass ([#1](https://github.com/earlcyu-petcircle/metro-manila-accessibili
 The research design was then redone from the literature, reviewed in three rounds and approved on 4 November 2026: barangay level for all three places, a private home lens, walking plus walking to transit, nine service categories, a profile of measures rather than one score, today's data only, and a street-imagery walk audit.
 [#2](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/2) puts this paper and the project skeleton in place.
 [#3](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/3) collects the data and builds the analysis inputs (section 5); the 2008 DepEd school file gave way to DepEd's 2019 list as cleaned by OpenStreetMap Philippines, because HDX refused scripted downloads that day and the newer list carries school levels and enrolment.
+[#4](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/4) runs the analysis (section 6); with it the DOH registry was dropped for good, because its export fails even in a browser.

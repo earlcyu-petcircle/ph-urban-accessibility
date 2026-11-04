@@ -1,0 +1,34 @@
+metric,a,b,value_a,value_b,better_in_base,survives,never_reversed,variants_that_change_it
+M1 food_retail,Barangay 136,Loyola Heights,1.71776,5.9761,Barangay 136,True,True,
+M1 food_retail,Barangay 136,Oranbo,1.71776,3.68161,Barangay 136,False,False,03 10-min walk-shed (reversed); 03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed)
+M1 food_retail,Loyola Heights,Oranbo,5.9761,3.68161,Oranbo,True,True,
+M1 palengke,Barangay 136,Loyola Heights,12.9704,8.81159,Loyola Heights,True,True,
+M1 palengke,Barangay 136,Oranbo,12.9704,6.37855,Oranbo,False,False,03 10-min walk-shed (reversed); 03 20-min walk-shed (reversed); 07 OpenStreetMap only (reversed)
+M1 palengke,Loyola Heights,Oranbo,8.81159,6.37855,Oranbo,False,False,03 10-min walk-shed (reversed); 03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed); 07 OpenStreetMap only (reversed)
+M1 pharmacy,Barangay 136,Loyola Heights,2.25649,7.93305,Barangay 136,True,True,
+M1 pharmacy,Barangay 136,Oranbo,2.25649,4.71704,Barangay 136,False,False,03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed)
+M1 pharmacy,Loyola Heights,Oranbo,7.93305,4.71704,Oranbo,True,True,
+M1 primary_care,Barangay 136,Loyola Heights,2.49359,7.3232,Barangay 136,False,False,07 OpenStreetMap only (reversed)
+M1 primary_care,Barangay 136,Oranbo,2.49359,6.60422,Barangay 136,False,False,03 10-min walk-shed (reversed); 03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed)
+M1 primary_care,Loyola Heights,Oranbo,7.3232,6.60422,Oranbo,False,False,05 straight line (reversed); 06 H3 resolution 9 (reversed); 07 OpenStreetMap only (reversed)
+M1 hospital,Barangay 136,Loyola Heights,10.4923,17.2024,Barangay 136,True,True,
+M1 hospital,Barangay 136,Oranbo,10.4923,10.8246,Barangay 136,False,False,05 straight line (reversed); 06 100 m cells (reversed); 09 GHS-POP (reversed)
+M1 hospital,Loyola Heights,Oranbo,17.2024,10.8246,Oranbo,False,False,08 confidence 0.7 (reversed)
+M1 public_elementary,Barangay 136,Loyola Heights,3.74565,20.9008,Barangay 136,True,True,
+M1 public_elementary,Barangay 136,Oranbo,3.74565,6.69792,Barangay 136,True,True,
+M1 public_elementary,Loyola Heights,Oranbo,20.9008,6.69792,Oranbo,True,True,
+M1 public_high,Barangay 136,Loyola Heights,3.97904,20.5952,Barangay 136,True,True,
+M1 public_high,Barangay 136,Oranbo,3.97904,21.4324,Barangay 136,False,False,03 10-min walk-shed (reversed); 03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed)
+M1 public_high,Loyola Heights,Oranbo,20.5952,21.4324,Loyola Heights,False,False,03 10-min walk-shed (reversed); 03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed); 07 Overture only (reversed)
+M1 open_space,Barangay 136,Loyola Heights,14.3617,6.92319,Loyola Heights,True,True,
+M1 open_space,Barangay 136,Oranbo,14.3617,3.94861,Oranbo,True,True,
+M1 open_space,Loyola Heights,Oranbo,6.92319,3.94861,Oranbo,False,False,03 20-min walk-shed (reversed)
+M1 transit,Barangay 136,Loyola Heights,2.86069,7.81277,Barangay 136,False,False,03 20-min walk-shed (reversed)
+M1 transit,Barangay 136,Oranbo,2.86069,3.32192,Barangay 136,False,False,03 10-min walk-shed (reversed); 03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed); 05 straight line (reversed); 06 100 m cells (reversed)
+M1 transit,Loyola Heights,Oranbo,7.81277,3.32192,Oranbo,True,True,
+M4,Barangay 136,Loyola Heights,8.73994,6.50831,Barangay 136,True,True,
+M4,Barangay 136,Oranbo,8.73994,7.71775,Barangay 136,False,False,02 10 min (reversed); 03 15-min walk-shed (reversed); 03 20-min walk-shed (reversed); 07 Overture only (reversed)
+M4,Loyola Heights,Oranbo,6.50831,7.71775,Oranbo,False,False,05 straight line (reversed); 07 OpenStreetMap only (reversed)
+M5,Barangay 136,Loyola Heights,1,0.484243,Barangay 136,False,True,03 10-min walk-shed (tie)
+M5,Barangay 136,Oranbo,1,0.949841,Barangay 136,False,False,03 10-min walk-shed (tie); 05 straight line (tie); 06 H3 resolution 9 (reversed)
+M5,Loyola Heights,Oranbo,0.484243,0.949841,Oranbo,False,True,03 10-min walk-shed (tie)

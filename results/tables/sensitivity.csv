@@ -1,0 +1,505 @@
+check,check_name,variant,barangay,metric,value
+base,Base case,base,Barangay 136,M1 food_retail,1.71776
+base,Base case,base,Barangay 136,M1 palengke,12.9704
+base,Base case,base,Barangay 136,M1 pharmacy,2.25649
+base,Base case,base,Barangay 136,M1 primary_care,2.49359
+base,Base case,base,Barangay 136,M1 hospital,10.4923
+base,Base case,base,Barangay 136,M1 public_elementary,3.74565
+base,Base case,base,Barangay 136,M1 public_high,3.97904
+base,Base case,base,Barangay 136,M1 open_space,14.3617
+base,Base case,base,Barangay 136,M1 transit,2.86069
+base,Base case,base,Barangay 136,M4,8.73994
+base,Base case,base,Barangay 136,M5,1
+base,Base case,base,Loyola Heights,M1 food_retail,5.9761
+base,Base case,base,Loyola Heights,M1 palengke,8.81159
+base,Base case,base,Loyola Heights,M1 pharmacy,7.93305
+base,Base case,base,Loyola Heights,M1 primary_care,7.3232
+base,Base case,base,Loyola Heights,M1 hospital,17.2024
+base,Base case,base,Loyola Heights,M1 public_elementary,20.9008
+base,Base case,base,Loyola Heights,M1 public_high,20.5952
+base,Base case,base,Loyola Heights,M1 open_space,6.92319
+base,Base case,base,Loyola Heights,M1 transit,7.81277
+base,Base case,base,Loyola Heights,M4,6.50831
+base,Base case,base,Loyola Heights,M5,0.484243
+base,Base case,base,Oranbo,M1 food_retail,3.68161
+base,Base case,base,Oranbo,M1 palengke,6.37855
+base,Base case,base,Oranbo,M1 pharmacy,4.71704
+base,Base case,base,Oranbo,M1 primary_care,6.60422
+base,Base case,base,Oranbo,M1 hospital,10.8246
+base,Base case,base,Oranbo,M1 public_elementary,6.69792
+base,Base case,base,Oranbo,M1 public_high,21.4324
+base,Base case,base,Oranbo,M1 open_space,3.94861
+base,Base case,base,Oranbo,M1 transit,3.32192
+base,Base case,base,Oranbo,M4,7.71775
+base,Base case,base,Oranbo,M5,0.949841
+01,Walking speed,3.6 km/h,Barangay 136,M1 food_retail,2.00405
+01,Walking speed,3.6 km/h,Barangay 136,M1 palengke,15.1321
+01,Walking speed,3.6 km/h,Barangay 136,M1 pharmacy,2.63258
+01,Walking speed,3.6 km/h,Barangay 136,M1 primary_care,2.90919
+01,Walking speed,3.6 km/h,Barangay 136,M1 hospital,12.241
+01,Walking speed,3.6 km/h,Barangay 136,M1 public_elementary,4.36993
+01,Walking speed,3.6 km/h,Barangay 136,M1 public_high,4.64221
+01,Walking speed,3.6 km/h,Barangay 136,M1 open_space,16.7553
+01,Walking speed,3.6 km/h,Barangay 136,M1 transit,3.33747
+01,Walking speed,3.6 km/h,Barangay 136,M4,7.48001
+01,Walking speed,3.6 km/h,Barangay 136,M5,1
+01,Walking speed,4.8 km/h,Barangay 136,M1 food_retail,1.50304
+01,Walking speed,4.8 km/h,Barangay 136,M1 palengke,11.3491
+01,Walking speed,4.8 km/h,Barangay 136,M1 pharmacy,1.97443
+01,Walking speed,4.8 km/h,Barangay 136,M1 primary_care,2.1819
+01,Walking speed,4.8 km/h,Barangay 136,M1 hospital,9.18074
+01,Walking speed,4.8 km/h,Barangay 136,M1 public_elementary,3.27745
+01,Walking speed,4.8 km/h,Barangay 136,M1 public_high,3.48166
+01,Walking speed,4.8 km/h,Barangay 136,M1 open_space,12.5665
+01,Walking speed,4.8 km/h,Barangay 136,M1 transit,2.50311
+01,Walking speed,4.8 km/h,Barangay 136,M4,8.95041
+01,Walking speed,4.8 km/h,Barangay 136,M5,1
+02,Time threshold,5 min,Barangay 136,M4,5.45126
+02,Time threshold,10 min,Barangay 136,M4,6.41067
+02,Time threshold,20 min,Barangay 136,M4,8.97604
+01,Walking speed,3.6 km/h,Loyola Heights,M1 food_retail,6.97212
+01,Walking speed,3.6 km/h,Loyola Heights,M1 palengke,10.2802
+01,Walking speed,3.6 km/h,Loyola Heights,M1 pharmacy,9.25523
+01,Walking speed,3.6 km/h,Loyola Heights,M1 primary_care,8.54373
+01,Walking speed,3.6 km/h,Loyola Heights,M1 hospital,20.0695
+01,Walking speed,3.6 km/h,Loyola Heights,M1 public_elementary,24.3843
+01,Walking speed,3.6 km/h,Loyola Heights,M1 public_high,24.0278
+01,Walking speed,3.6 km/h,Loyola Heights,M1 open_space,8.07705
+01,Walking speed,3.6 km/h,Loyola Heights,M1 transit,9.1149
+01,Walking speed,3.6 km/h,Loyola Heights,M4,5.86238
+01,Walking speed,3.6 km/h,Loyola Heights,M5,0.484243
+01,Walking speed,4.8 km/h,Loyola Heights,M1 food_retail,5.22909
+01,Walking speed,4.8 km/h,Loyola Heights,M1 palengke,7.71014
+01,Walking speed,4.8 km/h,Loyola Heights,M1 pharmacy,6.94142
+01,Walking speed,4.8 km/h,Loyola Heights,M1 primary_care,6.4078
+01,Walking speed,4.8 km/h,Loyola Heights,M1 hospital,15.0521
+01,Walking speed,4.8 km/h,Loyola Heights,M1 public_elementary,18.2882
+01,Walking speed,4.8 km/h,Loyola Heights,M1 public_high,18.0208
+01,Walking speed,4.8 km/h,Loyola Heights,M1 open_space,6.05779
+01,Walking speed,4.8 km/h,Loyola Heights,M1 transit,6.83617
+01,Walking speed,4.8 km/h,Loyola Heights,M4,6.98795
+01,Walking speed,4.8 km/h,Loyola Heights,M5,0.484243
+02,Time threshold,5 min,Loyola Heights,M4,1.84759
+02,Time threshold,10 min,Loyola Heights,M4,4.69087
+02,Time threshold,20 min,Loyola Heights,M4,7.42187
+01,Walking speed,3.6 km/h,Oranbo,M1 food_retail,4.29521
+01,Walking speed,3.6 km/h,Oranbo,M1 palengke,7.44164
+01,Walking speed,3.6 km/h,Oranbo,M1 pharmacy,5.50321
+01,Walking speed,3.6 km/h,Oranbo,M1 primary_care,7.70492
+01,Walking speed,3.6 km/h,Oranbo,M1 hospital,12.6287
+01,Walking speed,3.6 km/h,Oranbo,M1 public_elementary,7.81424
+01,Walking speed,3.6 km/h,Oranbo,M1 public_high,25.0045
+01,Walking speed,3.6 km/h,Oranbo,M1 open_space,4.60672
+01,Walking speed,3.6 km/h,Oranbo,M1 transit,3.87558
+01,Walking speed,3.6 km/h,Oranbo,M4,7.37877
+01,Walking speed,3.6 km/h,Oranbo,M5,0.949841
+01,Walking speed,4.8 km/h,Oranbo,M1 food_retail,3.22141
+01,Walking speed,4.8 km/h,Oranbo,M1 palengke,5.58123
+01,Walking speed,4.8 km/h,Oranbo,M1 pharmacy,4.12741
+01,Walking speed,4.8 km/h,Oranbo,M1 primary_care,5.77869
+01,Walking speed,4.8 km/h,Oranbo,M1 hospital,9.47151
+01,Walking speed,4.8 km/h,Oranbo,M1 public_elementary,5.86068
+01,Walking speed,4.8 km/h,Oranbo,M1 public_high,18.7534
+01,Walking speed,4.8 km/h,Oranbo,M1 open_space,3.45504
+01,Walking speed,4.8 km/h,Oranbo,M1 transit,2.90668
+01,Walking speed,4.8 km/h,Oranbo,M4,8.01724
+01,Walking speed,4.8 km/h,Oranbo,M5,0.949841
+02,Time threshold,5 min,Oranbo,M4,3.81272
+02,Time threshold,10 min,Oranbo,M4,6.7547
+02,Time threshold,20 min,Oranbo,M4,8.29186
+03,Study area,10-min walk-shed,Barangay 136,M1 food_retail,2.29207
+03,Study area,10-min walk-shed,Barangay 136,M1 palengke,13.2922
+03,Study area,10-min walk-shed,Barangay 136,M1 pharmacy,6.3698
+03,Study area,10-min walk-shed,Barangay 136,M1 primary_care,4.84157
+03,Study area,10-min walk-shed,Barangay 136,M1 hospital,5.30956
+03,Study area,10-min walk-shed,Barangay 136,M1 public_elementary,6.84426
+03,Study area,10-min walk-shed,Barangay 136,M1 public_high,21.5834
+03,Study area,10-min walk-shed,Barangay 136,M1 open_space,8.27927
+03,Study area,10-min walk-shed,Barangay 136,M1 transit,1.67043
+03,Study area,10-min walk-shed,Barangay 136,M4,7.75974
+03,Study area,10-min walk-shed,Barangay 136,M5,1
+03,Study area,15-min walk-shed,Barangay 136,M1 food_retail,2.44683
+03,Study area,15-min walk-shed,Barangay 136,M1 palengke,10.3383
+03,Study area,15-min walk-shed,Barangay 136,M1 pharmacy,5.06465
+03,Study area,15-min walk-shed,Barangay 136,M1 primary_care,4.56721
+03,Study area,15-min walk-shed,Barangay 136,M1 hospital,4.79238
+03,Study area,15-min walk-shed,Barangay 136,M1 public_elementary,7.38931
+03,Study area,15-min walk-shed,Barangay 136,M1 public_high,21.2207
+03,Study area,15-min walk-shed,Barangay 136,M1 open_space,7.2821
+03,Study area,15-min walk-shed,Barangay 136,M1 transit,2.0185
+03,Study area,15-min walk-shed,Barangay 136,M4,7.93731
+03,Study area,15-min walk-shed,Barangay 136,M5,1
+03,Study area,20-min walk-shed,Barangay 136,M1 food_retail,2.4088
+03,Study area,20-min walk-shed,Barangay 136,M1 palengke,7.61675
+03,Study area,20-min walk-shed,Barangay 136,M1 pharmacy,4.3848
+03,Study area,20-min walk-shed,Barangay 136,M1 primary_care,4.24109
+03,Study area,20-min walk-shed,Barangay 136,M1 hospital,5.38033
+03,Study area,20-min walk-shed,Barangay 136,M1 public_elementary,7.60403
+03,Study area,20-min walk-shed,Barangay 136,M1 public_high,21.223
+03,Study area,20-min walk-shed,Barangay 136,M1 open_space,6.61908
+03,Study area,20-min walk-shed,Barangay 136,M1 transit,2.19286
+03,Study area,20-min walk-shed,Barangay 136,M4,8.07174
+03,Study area,20-min walk-shed,Barangay 136,M5,1
+03,Study area,10-min walk-shed,Loyola Heights,M1 food_retail,3.06734
+03,Study area,10-min walk-shed,Loyola Heights,M1 palengke,8.71486
+03,Study area,10-min walk-shed,Loyola Heights,M1 pharmacy,9.42204
+03,Study area,10-min walk-shed,Loyola Heights,M1 primary_care,9.21412
+03,Study area,10-min walk-shed,Loyola Heights,M1 hospital,12.2444
+03,Study area,10-min walk-shed,Loyola Heights,M1 public_elementary,26.6545
+03,Study area,10-min walk-shed,Loyola Heights,M1 public_high,25.9679
+03,Study area,10-min walk-shed,Loyola Heights,M1 open_space,4.51627
+03,Study area,10-min walk-shed,Loyola Heights,M1 transit,2.81665
+03,Study area,10-min walk-shed,Loyola Heights,M4,6.48485
+03,Study area,10-min walk-shed,Loyola Heights,M5,0.998487
+03,Study area,15-min walk-shed,Loyola Heights,M1 food_retail,3.08983
+03,Study area,15-min walk-shed,Loyola Heights,M1 palengke,8.02168
+03,Study area,15-min walk-shed,Loyola Heights,M1 pharmacy,8.19244
+03,Study area,15-min walk-shed,Loyola Heights,M1 primary_care,8.09881
+03,Study area,15-min walk-shed,Loyola Heights,M1 hospital,11.6964
+03,Study area,15-min walk-shed,Loyola Heights,M1 public_elementary,26.4419
+03,Study area,15-min walk-shed,Loyola Heights,M1 public_high,25.918
+03,Study area,15-min walk-shed,Loyola Heights,M1 open_space,4.69624
+03,Study area,15-min walk-shed,Loyola Heights,M1 transit,2.45679
+03,Study area,15-min walk-shed,Loyola Heights,M4,6.215
+03,Study area,15-min walk-shed,Loyola Heights,M5,0.881758
+03,Study area,20-min walk-shed,Loyola Heights,M1 food_retail,2.72402
+03,Study area,20-min walk-shed,Loyola Heights,M1 palengke,6.6965
+03,Study area,20-min walk-shed,Loyola Heights,M1 pharmacy,6.66243
+03,Study area,20-min walk-shed,Loyola Heights,M1 primary_care,4.41821
+03,Study area,20-min walk-shed,Loyola Heights,M1 hospital,9.69953
+03,Study area,20-min walk-shed,Loyola Heights,M1 public_elementary,19.3007
+03,Study area,20-min walk-shed,Loyola Heights,M1 public_high,25.4621
+03,Study area,20-min walk-shed,Loyola Heights,M1 open_space,3.75895
+03,Study area,20-min walk-shed,Loyola Heights,M1 transit,1.63056
+03,Study area,20-min walk-shed,Loyola Heights,M4,6.66221
+03,Study area,20-min walk-shed,Loyola Heights,M5,0.940824
+03,Study area,10-min walk-shed,Oranbo,M1 food_retail,1.918
+03,Study area,10-min walk-shed,Oranbo,M1 palengke,14.2475
+03,Study area,10-min walk-shed,Oranbo,M1 pharmacy,6.52057
+03,Study area,10-min walk-shed,Oranbo,M1 primary_care,3.28987
+03,Study area,10-min walk-shed,Oranbo,M1 hospital,8.52575
+03,Study area,10-min walk-shed,Oranbo,M1 public_elementary,18.0239
+03,Study area,10-min walk-shed,Oranbo,M1 public_high,12.1341
+03,Study area,10-min walk-shed,Oranbo,M1 open_space,1.22718
+03,Study area,10-min walk-shed,Oranbo,M1 transit,0.867258
+03,Study area,10-min walk-shed,Oranbo,M4,7.69777
+03,Study area,10-min walk-shed,Oranbo,M5,1
+03,Study area,15-min walk-shed,Oranbo,M1 food_retail,1.66962
+03,Study area,15-min walk-shed,Oranbo,M1 palengke,8.73812
+03,Study area,15-min walk-shed,Oranbo,M1 pharmacy,3.19592
+03,Study area,15-min walk-shed,Oranbo,M1 primary_care,3.09531
+03,Study area,15-min walk-shed,Oranbo,M1 hospital,7.41236
+03,Study area,15-min walk-shed,Oranbo,M1 public_elementary,12.3059
+03,Study area,15-min walk-shed,Oranbo,M1 public_high,12.2675
+03,Study area,15-min walk-shed,Oranbo,M1 open_space,3.68552
+03,Study area,15-min walk-shed,Oranbo,M1 transit,1.29751
+03,Study area,15-min walk-shed,Oranbo,M4,8.33389
+03,Study area,15-min walk-shed,Oranbo,M5,0.969489
+03,Study area,20-min walk-shed,Oranbo,M1 food_retail,1.95066
+03,Study area,20-min walk-shed,Oranbo,M1 palengke,7.76855
+03,Study area,20-min walk-shed,Oranbo,M1 pharmacy,3.05617
+03,Study area,20-min walk-shed,Oranbo,M1 primary_care,3.5998
+03,Study area,20-min walk-shed,Oranbo,M1 hospital,6.35035
+03,Study area,20-min walk-shed,Oranbo,M1 public_elementary,10.579
+03,Study area,20-min walk-shed,Oranbo,M1 public_high,10.2691
+03,Study area,20-min walk-shed,Oranbo,M1 open_space,5.08421
+03,Study area,20-min walk-shed,Oranbo,M1 transit,1.39115
+03,Study area,20-min walk-shed,Oranbo,M4,8.62987
+03,Study area,20-min walk-shed,Oranbo,M5,0.979695
+05,Distance type,straight line,Barangay 136,M1 food_retail,0.912743
+05,Distance type,straight line,Barangay 136,M1 palengke,7.78952
+05,Distance type,straight line,Barangay 136,M1 pharmacy,1.51202
+05,Distance type,straight line,Barangay 136,M1 primary_care,1.96336
+05,Distance type,straight line,Barangay 136,M1 hospital,6.83828
+05,Distance type,straight line,Barangay 136,M1 public_elementary,2.35941
+05,Distance type,straight line,Barangay 136,M1 public_high,2.52715
+05,Distance type,straight line,Barangay 136,M1 open_space,12.4952
+05,Distance type,straight line,Barangay 136,M1 transit,1.7578
+05,Distance type,straight line,Barangay 136,M4,9
+05,Distance type,straight line,Barangay 136,M5,1
+05,Distance type,straight line,Loyola Heights,M1 food_retail,3.42224
+05,Distance type,straight line,Loyola Heights,M1 palengke,4.87728
+05,Distance type,straight line,Loyola Heights,M1 pharmacy,4.18708
+05,Distance type,straight line,Loyola Heights,M1 primary_care,3.87552
+05,Distance type,straight line,Loyola Heights,M1 hospital,9.58819
+05,Distance type,straight line,Loyola Heights,M1 public_elementary,9.44962
+05,Distance type,straight line,Loyola Heights,M1 public_high,9.85879
+05,Distance type,straight line,Loyola Heights,M1 open_space,3.68847
+05,Distance type,straight line,Loyola Heights,M1 transit,3.98255
+05,Distance type,straight line,Loyola Heights,M4,8.73458
+05,Distance type,straight line,Loyola Heights,M5,0.851585
+05,Distance type,straight line,Oranbo,M1 food_retail,1.95988
+05,Distance type,straight line,Oranbo,M1 palengke,2.69879
+05,Distance type,straight line,Oranbo,M1 pharmacy,2.53713
+05,Distance type,straight line,Oranbo,M1 primary_care,4.2209
+05,Distance type,straight line,Oranbo,M1 hospital,6.0766
+05,Distance type,straight line,Oranbo,M1 public_elementary,3.84408
+05,Distance type,straight line,Oranbo,M1 public_high,12.8187
+05,Distance type,straight line,Oranbo,M1 open_space,1.71939
+05,Distance type,straight line,Oranbo,M1 transit,1.6884
+05,Distance type,straight line,Oranbo,M4,8.62473
+05,Distance type,straight line,Oranbo,M5,1
+06,Origin resolution,100 m cells,Barangay 136,M1 food_retail,2.43972
+06,Origin resolution,100 m cells,Barangay 136,M1 palengke,13.1418
+06,Origin resolution,100 m cells,Barangay 136,M1 pharmacy,2.28575
+06,Origin resolution,100 m cells,Barangay 136,M1 primary_care,3.01596
+06,Origin resolution,100 m cells,Barangay 136,M1 hospital,10.5098
+06,Origin resolution,100 m cells,Barangay 136,M1 public_elementary,3.76429
+06,Origin resolution,100 m cells,Barangay 136,M1 public_high,3.99768
+06,Origin resolution,100 m cells,Barangay 136,M1 open_space,14.3097
+06,Origin resolution,100 m cells,Barangay 136,M1 transit,2.87933
+06,Origin resolution,100 m cells,Barangay 136,M4,8.83547
+06,Origin resolution,100 m cells,Barangay 136,M5,1
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 food_retail,0.812326
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 palengke,11.7103
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 pharmacy,1.34645
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 primary_care,1.37885
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 hospital,8.86481
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 public_elementary,2.15852
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 public_high,2.56362
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 open_space,12.9536
+06,Origin resolution,H3 resolution 9,Barangay 136,M1 transit,1.02901
+06,Origin resolution,H3 resolution 9,Barangay 136,M4,8.83116
+06,Origin resolution,H3 resolution 9,Barangay 136,M5,0.919303
+06,Origin resolution,100 m cells,Loyola Heights,M1 food_retail,5.85752
+06,Origin resolution,100 m cells,Loyola Heights,M1 palengke,8.86283
+06,Origin resolution,100 m cells,Loyola Heights,M1 pharmacy,7.83963
+06,Origin resolution,100 m cells,Loyola Heights,M1 primary_care,7.34091
+06,Origin resolution,100 m cells,Loyola Heights,M1 hospital,17.2191
+06,Origin resolution,100 m cells,Loyola Heights,M1 public_elementary,20.5866
+06,Origin resolution,100 m cells,Loyola Heights,M1 public_high,20.2087
+06,Origin resolution,100 m cells,Loyola Heights,M1 open_space,7.05228
+06,Origin resolution,100 m cells,Loyola Heights,M1 transit,7.36336
+06,Origin resolution,100 m cells,Loyola Heights,M4,6.47224
+06,Origin resolution,100 m cells,Loyola Heights,M5,0.505324
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 food_retail,6.37283
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 palengke,9.25516
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 pharmacy,7.87104
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 primary_care,6.76572
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 hospital,15.6642
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 public_elementary,20.5865
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 public_high,17.5767
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 open_space,6.04905
+06,Origin resolution,H3 resolution 9,Loyola Heights,M1 transit,7.4564
+06,Origin resolution,H3 resolution 9,Loyola Heights,M4,6.81962
+06,Origin resolution,H3 resolution 9,Loyola Heights,M5,0.458988
+06,Origin resolution,100 m cells,Oranbo,M1 food_retail,3.45086
+06,Origin resolution,100 m cells,Oranbo,M1 palengke,5.906
+06,Origin resolution,100 m cells,Oranbo,M1 pharmacy,4.25681
+06,Origin resolution,100 m cells,Oranbo,M1 primary_care,6.50554
+06,Origin resolution,100 m cells,Oranbo,M1 hospital,9.70676
+06,Origin resolution,100 m cells,Oranbo,M1 public_elementary,6.10805
+06,Origin resolution,100 m cells,Oranbo,M1 public_high,21.2964
+06,Origin resolution,100 m cells,Oranbo,M1 open_space,3.31986
+06,Origin resolution,100 m cells,Oranbo,M1 transit,2.68179
+06,Origin resolution,100 m cells,Oranbo,M4,7.81476
+06,Origin resolution,100 m cells,Oranbo,M5,0.955605
+06,Origin resolution,H3 resolution 9,Oranbo,M1 food_retail,3.56223
+06,Origin resolution,H3 resolution 9,Oranbo,M1 palengke,8.4782
+06,Origin resolution,H3 resolution 9,Oranbo,M1 pharmacy,5.00304
+06,Origin resolution,H3 resolution 9,Oranbo,M1 primary_care,6.99039
+06,Origin resolution,H3 resolution 9,Oranbo,M1 hospital,10.4379
+06,Origin resolution,H3 resolution 9,Oranbo,M1 public_elementary,8.76222
+06,Origin resolution,H3 resolution 9,Oranbo,M1 public_high,22.1207
+06,Origin resolution,H3 resolution 9,Oranbo,M1 open_space,4.19492
+06,Origin resolution,H3 resolution 9,Oranbo,M1 transit,4.93845
+06,Origin resolution,H3 resolution 9,Oranbo,M4,7.20624
+06,Origin resolution,H3 resolution 9,Oranbo,M5,0.984862
+07,Service source,Overture only,Barangay 136,M1 food_retail,1.76791
+07,Service source,Overture only,Barangay 136,M1 palengke,25.967
+07,Service source,Overture only,Barangay 136,M1 pharmacy,2.30057
+07,Service source,Overture only,Barangay 136,M1 primary_care,2.49359
+07,Service source,Overture only,Barangay 136,M1 hospital,10.4923
+07,Service source,Overture only,Barangay 136,M1 public_elementary,2.76867
+07,Service source,Overture only,Barangay 136,M1 public_high,4.26106
+07,Service source,Overture only,Barangay 136,M1 open_space,14.3617
+07,Service source,Overture only,Barangay 136,M1 transit,2.86069
+07,Service source,Overture only,Barangay 136,M4,7.73994
+07,Service source,Overture only,Barangay 136,M5,1
+07,Service source,OpenStreetMap only,Barangay 136,M1 food_retail,2.69432
+07,Service source,OpenStreetMap only,Barangay 136,M1 palengke,12.9704
+07,Service source,OpenStreetMap only,Barangay 136,M1 pharmacy,2.25649
+07,Service source,OpenStreetMap only,Barangay 136,M1 primary_care,16.0629
+07,Service source,OpenStreetMap only,Barangay 136,M1 hospital,16.2702
+07,Service source,OpenStreetMap only,Barangay 136,M1 public_elementary,6.25131
+07,Service source,OpenStreetMap only,Barangay 136,M1 public_high,6.25764
+07,Service source,OpenStreetMap only,Barangay 136,M1 open_space,14.3617
+07,Service source,OpenStreetMap only,Barangay 136,M1 transit,2.86069
+07,Service source,OpenStreetMap only,Barangay 136,M4,6.8435
+07,Service source,OpenStreetMap only,Barangay 136,M5,1
+08,Overture confidence,confidence 0.3,Barangay 136,M1 food_retail,1.71776
+08,Overture confidence,confidence 0.3,Barangay 136,M1 palengke,12.9704
+08,Overture confidence,confidence 0.3,Barangay 136,M1 pharmacy,2.22452
+08,Overture confidence,confidence 0.3,Barangay 136,M1 primary_care,2.49359
+08,Overture confidence,confidence 0.3,Barangay 136,M1 hospital,10.4923
+08,Overture confidence,confidence 0.3,Barangay 136,M1 public_elementary,3.74565
+08,Overture confidence,confidence 0.3,Barangay 136,M1 public_high,3.97904
+08,Overture confidence,confidence 0.3,Barangay 136,M1 open_space,14.3617
+08,Overture confidence,confidence 0.3,Barangay 136,M1 transit,2.86069
+08,Overture confidence,confidence 0.3,Barangay 136,M4,8.73994
+08,Overture confidence,confidence 0.3,Barangay 136,M5,1
+08,Overture confidence,confidence 0.7,Barangay 136,M1 food_retail,2.69432
+08,Overture confidence,confidence 0.7,Barangay 136,M1 palengke,12.9704
+08,Overture confidence,confidence 0.7,Barangay 136,M1 pharmacy,2.25649
+08,Overture confidence,confidence 0.7,Barangay 136,M1 primary_care,2.49359
+08,Overture confidence,confidence 0.7,Barangay 136,M1 hospital,10.4923
+08,Overture confidence,confidence 0.7,Barangay 136,M1 public_elementary,3.74565
+08,Overture confidence,confidence 0.7,Barangay 136,M1 public_high,3.97904
+08,Overture confidence,confidence 0.7,Barangay 136,M1 open_space,14.3617
+08,Overture confidence,confidence 0.7,Barangay 136,M1 transit,2.86069
+08,Overture confidence,confidence 0.7,Barangay 136,M4,8.73994
+08,Overture confidence,confidence 0.7,Barangay 136,M5,1
+10,Jeepney rule,mapped stops only,Barangay 136,M1 food_retail,1.71776
+10,Jeepney rule,mapped stops only,Barangay 136,M1 palengke,12.9704
+10,Jeepney rule,mapped stops only,Barangay 136,M1 pharmacy,2.25649
+10,Jeepney rule,mapped stops only,Barangay 136,M1 primary_care,2.49359
+10,Jeepney rule,mapped stops only,Barangay 136,M1 hospital,10.4923
+10,Jeepney rule,mapped stops only,Barangay 136,M1 public_elementary,3.74565
+10,Jeepney rule,mapped stops only,Barangay 136,M1 public_high,3.97904
+10,Jeepney rule,mapped stops only,Barangay 136,M1 open_space,14.3617
+10,Jeepney rule,mapped stops only,Barangay 136,M1 transit,3.15942
+10,Jeepney rule,mapped stops only,Barangay 136,M4,8.73994
+10,Jeepney rule,mapped stops only,Barangay 136,M5,1
+07,Service source,Overture only,Loyola Heights,M1 food_retail,7.95416
+07,Service source,Overture only,Loyola Heights,M1 palengke,16.4502
+07,Service source,Overture only,Loyola Heights,M1 pharmacy,8.89452
+07,Service source,Overture only,Loyola Heights,M1 primary_care,8.98416
+07,Service source,Overture only,Loyola Heights,M1 hospital,17.2024
+07,Service source,Overture only,Loyola Heights,M1 public_elementary,19.7911
+07,Service source,Overture only,Loyola Heights,M1 public_high,15.1115
+07,Service source,Overture only,Loyola Heights,M1 open_space,6.92319
+07,Service source,Overture only,Loyola Heights,M1 transit,7.81277
+07,Service source,Overture only,Loyola Heights,M4,6.14654
+07,Service source,Overture only,Loyola Heights,M5,0.484243
+07,Service source,OpenStreetMap only,Loyola Heights,M1 food_retail,5.99246
+07,Service source,OpenStreetMap only,Loyola Heights,M1 palengke,9.10879
+07,Service source,OpenStreetMap only,Loyola Heights,M1 pharmacy,8.53346
+07,Service source,OpenStreetMap only,Loyola Heights,M1 primary_care,9.98627
+07,Service source,OpenStreetMap only,Loyola Heights,M1 hospital,30.0972
+07,Service source,OpenStreetMap only,Loyola Heights,M1 public_elementary,21.2844
+07,Service source,OpenStreetMap only,Loyola Heights,M1 public_high,20.8639
+07,Service source,OpenStreetMap only,Loyola Heights,M1 open_space,6.92319
+07,Service source,OpenStreetMap only,Loyola Heights,M1 transit,7.81277
+07,Service source,OpenStreetMap only,Loyola Heights,M4,5.87795
+07,Service source,OpenStreetMap only,Loyola Heights,M5,0.484243
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 food_retail,5.09787
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 palengke,8.81132
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 pharmacy,7.68097
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 primary_care,6.86358
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 hospital,16.9784
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 public_elementary,20.9008
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 public_high,20.5952
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 open_space,6.92319
+08,Overture confidence,confidence 0.3,Loyola Heights,M1 transit,7.81277
+08,Overture confidence,confidence 0.3,Loyola Heights,M4,6.53122
+08,Overture confidence,confidence 0.3,Loyola Heights,M5,0.484243
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 food_retail,5.9761
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 palengke,8.81159
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 pharmacy,7.93406
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 primary_care,8.77682
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 hospital,17.284
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 public_elementary,20.9008
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 public_high,20.5952
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 open_space,6.92319
+08,Overture confidence,confidence 0.7,Loyola Heights,M1 transit,7.81277
+08,Overture confidence,confidence 0.7,Loyola Heights,M4,6.48631
+08,Overture confidence,confidence 0.7,Loyola Heights,M5,0.484243
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 food_retail,5.9761
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 palengke,8.81159
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 pharmacy,7.93305
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 primary_care,7.3232
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 hospital,17.2024
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 public_elementary,20.9008
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 public_high,20.5952
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 open_space,6.92319
+10,Jeepney rule,mapped stops only,Loyola Heights,M1 transit,9.29951
+10,Jeepney rule,mapped stops only,Loyola Heights,M4,6.48426
+10,Jeepney rule,mapped stops only,Loyola Heights,M5,0.402074
+07,Service source,Overture only,Oranbo,M1 food_retail,4.18738
+07,Service source,Overture only,Oranbo,M1 palengke,6.37855
+07,Service source,Overture only,Oranbo,M1 pharmacy,5.57002
+07,Service source,Overture only,Oranbo,M1 primary_care,6.60422
+07,Service source,Overture only,Oranbo,M1 hospital,10.8246
+07,Service source,Overture only,Oranbo,M1 public_elementary,6.2401
+07,Service source,Overture only,Oranbo,M1 public_high,12.3329
+07,Service source,Overture only,Oranbo,M1 open_space,3.94861
+07,Service source,Overture only,Oranbo,M1 transit,3.32192
+07,Service source,Overture only,Oranbo,M4,8.221
+07,Service source,Overture only,Oranbo,M5,0.949841
+07,Service source,OpenStreetMap only,Oranbo,M1 food_retail,4.17783
+07,Service source,OpenStreetMap only,Oranbo,M1 palengke,22.7268
+07,Service source,OpenStreetMap only,Oranbo,M1 pharmacy,5.21668
+07,Service source,OpenStreetMap only,Oranbo,M1 primary_care,16.9412
+07,Service source,OpenStreetMap only,Oranbo,M1 hospital,23.6331
+07,Service source,OpenStreetMap only,Oranbo,M1 public_elementary,6.83205
+07,Service source,OpenStreetMap only,Oranbo,M1 public_high,22.1316
+07,Service source,OpenStreetMap only,Oranbo,M1 open_space,3.94861
+07,Service source,OpenStreetMap only,Oranbo,M1 transit,3.32192
+07,Service source,OpenStreetMap only,Oranbo,M4,5.21766
+07,Service source,OpenStreetMap only,Oranbo,M5,0.949841
+08,Overture confidence,confidence 0.3,Oranbo,M1 food_retail,3.57557
+08,Overture confidence,confidence 0.3,Oranbo,M1 palengke,6.37855
+08,Overture confidence,confidence 0.3,Oranbo,M1 pharmacy,4.67796
+08,Overture confidence,confidence 0.3,Oranbo,M1 primary_care,5.52132
+08,Overture confidence,confidence 0.3,Oranbo,M1 hospital,10.8246
+08,Overture confidence,confidence 0.3,Oranbo,M1 public_elementary,6.69792
+08,Overture confidence,confidence 0.3,Oranbo,M1 public_high,21.4324
+08,Overture confidence,confidence 0.3,Oranbo,M1 open_space,3.94861
+08,Overture confidence,confidence 0.3,Oranbo,M1 transit,3.32192
+08,Overture confidence,confidence 0.3,Oranbo,M4,7.71775
+08,Overture confidence,confidence 0.3,Oranbo,M5,0.949841
+08,Overture confidence,confidence 0.7,Oranbo,M1 food_retail,3.70685
+08,Overture confidence,confidence 0.7,Oranbo,M1 palengke,6.37855
+08,Overture confidence,confidence 0.7,Oranbo,M1 pharmacy,4.71704
+08,Overture confidence,confidence 0.7,Oranbo,M1 primary_care,6.81275
+08,Overture confidence,confidence 0.7,Oranbo,M1 hospital,18.9384
+08,Overture confidence,confidence 0.7,Oranbo,M1 public_elementary,6.69792
+08,Overture confidence,confidence 0.7,Oranbo,M1 public_high,21.4324
+08,Overture confidence,confidence 0.7,Oranbo,M1 open_space,3.94861
+08,Overture confidence,confidence 0.7,Oranbo,M1 transit,3.32192
+08,Overture confidence,confidence 0.7,Oranbo,M4,6.9165
+08,Overture confidence,confidence 0.7,Oranbo,M5,0.949841
+10,Jeepney rule,mapped stops only,Oranbo,M1 food_retail,3.68161
+10,Jeepney rule,mapped stops only,Oranbo,M1 palengke,6.37855
+10,Jeepney rule,mapped stops only,Oranbo,M1 pharmacy,4.71704
+10,Jeepney rule,mapped stops only,Oranbo,M1 primary_care,6.60422
+10,Jeepney rule,mapped stops only,Oranbo,M1 hospital,10.8246
+10,Jeepney rule,mapped stops only,Oranbo,M1 public_elementary,6.69792
+10,Jeepney rule,mapped stops only,Oranbo,M1 public_high,21.4324
+10,Jeepney rule,mapped stops only,Oranbo,M1 open_space,3.94861
+10,Jeepney rule,mapped stops only,Oranbo,M1 transit,6.49251
+10,Jeepney rule,mapped stops only,Oranbo,M4,7.71775
+10,Jeepney rule,mapped stops only,Oranbo,M5,0.582257
+09,Population surface,GHS-POP,Barangay 136,M1 food_retail,1.76697
+09,Population surface,GHS-POP,Barangay 136,M1 palengke,12.8431
+09,Population surface,GHS-POP,Barangay 136,M1 pharmacy,2.32874
+09,Population surface,GHS-POP,Barangay 136,M1 primary_care,2.67597
+09,Population surface,GHS-POP,Barangay 136,M1 hospital,10.5743
+09,Population surface,GHS-POP,Barangay 136,M1 public_elementary,3.82765
+09,Population surface,GHS-POP,Barangay 136,M1 public_high,4.06104
+09,Population surface,GHS-POP,Barangay 136,M1 open_space,14.4655
+09,Population surface,GHS-POP,Barangay 136,M1 transit,2.94269
+09,Population surface,GHS-POP,Barangay 136,M4,8.66278
+09,Population surface,GHS-POP,Barangay 136,M5,1
+09,Population surface,GHS-POP,Loyola Heights,M1 food_retail,6.76695
+09,Population surface,GHS-POP,Loyola Heights,M1 palengke,9.74482
+09,Population surface,GHS-POP,Loyola Heights,M1 pharmacy,7.96218
+09,Population surface,GHS-POP,Loyola Heights,M1 primary_care,7.81582
+09,Population surface,GHS-POP,Loyola Heights,M1 hospital,19.1825
+09,Population surface,GHS-POP,Loyola Heights,M1 public_elementary,21.3543
+09,Population surface,GHS-POP,Loyola Heights,M1 public_high,19.9043
+09,Population surface,GHS-POP,Loyola Heights,M1 open_space,7.13915
+09,Population surface,GHS-POP,Loyola Heights,M1 transit,7.51199
+09,Population surface,GHS-POP,Loyola Heights,M4,6.31608
+09,Population surface,GHS-POP,Loyola Heights,M5,0.493203
+09,Population surface,GHS-POP,Oranbo,M1 food_retail,3.90875
+09,Population surface,GHS-POP,Oranbo,M1 palengke,6.39803
+09,Population surface,GHS-POP,Oranbo,M1 pharmacy,4.85387
+09,Population surface,GHS-POP,Oranbo,M1 primary_care,6.66601
+09,Population surface,GHS-POP,Oranbo,M1 hospital,9.32478
+09,Population surface,GHS-POP,Oranbo,M1 public_elementary,6.70292
+09,Population surface,GHS-POP,Oranbo,M1 public_high,21.0501
+09,Population surface,GHS-POP,Oranbo,M1 open_space,4.05108
+09,Population surface,GHS-POP,Oranbo,M1 transit,3.44209
+09,Population surface,GHS-POP,Oranbo,M4,7.75171
+09,Population surface,GHS-POP,Oranbo,M5,0.956744

@@ -207,7 +207,6 @@
       "jeepney": 95
     },
     "deped_schools_in_box": 1064,
-    "doh_registry": null,
     "healthsites_check": null,
     "records_in_fringe": 32965,
     "records_by_source": {
@@ -277,7 +276,6 @@
   },
   "hand_downloads": {
     "census_ncr_workbook": "used",
-    "doh_nhfr": "not saved; no DOH registry match or hospital beds in this build",
     "healthsites": "not downloaded (HDX bot challenge); check skipped"
   },
   "study_barangays": {

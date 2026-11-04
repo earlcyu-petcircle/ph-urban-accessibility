@@ -169,9 +169,6 @@ quality = {
     "walking_network": walk,
     "hand_downloads": {
         "census_ncr_workbook": "used",
-        "doh_nhfr": "not saved; no DOH registry match or hospital beds in this build"
-        if services["doh_registry"] is None
-        else "used",
         "healthsites": "not downloaded (HDX bot challenge); check skipped"
         if services["healthsites_check"] is None
         else "used",

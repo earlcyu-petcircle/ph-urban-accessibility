@@ -1,0 +1,946 @@
+area,measure,category,stat,value
+Barangay 136,people,,people,1302
+Barangay 136,M1,food_retail,median_min,1.71776
+Barangay 136,M1,food_retail,p10_min,0.530463
+Barangay 136,M1,food_retail,p90_min,2.81541
+Barangay 136,M1,food_retail,p90_p10_ratio,5.30746
+Barangay 136,M1,food_retail,share_within_10min,1
+Barangay 136,M2,food_retail,median_within_5min,3
+Barangay 136,M2,food_retail,mean_within_5min,2.74636
+Barangay 136,M2,food_retail,median_within_10min,5
+Barangay 136,M2,food_retail,mean_within_10min,5.53292
+Barangay 136,M2,food_retail,median_within_15min,11
+Barangay 136,M2,food_retail,mean_within_15min,12.3577
+Barangay 136,M3,food_retail,median_per_10k,1.714
+Barangay 136,M3,food_retail,mean_per_10k,1.87482
+Barangay 136,M1,palengke,median_min,12.9704
+Barangay 136,M1,palengke,p10_min,11.7455
+Barangay 136,M1,palengke,p90_min,14.4873
+Barangay 136,M1,palengke,p90_p10_ratio,1.23343
+Barangay 136,M1,palengke,share_within_10min,0.0191463
+Barangay 136,M2,palengke,median_within_5min,0
+Barangay 136,M2,palengke,mean_within_5min,0
+Barangay 136,M2,palengke,median_within_10min,0
+Barangay 136,M2,palengke,mean_within_10min,0.049591
+Barangay 136,M2,palengke,median_within_15min,1
+Barangay 136,M2,palengke,mean_within_15min,1.39897
+Barangay 136,M3,palengke,median_per_10k,0.0761598
+Barangay 136,M3,palengke,mean_per_10k,0.0882093
+Barangay 136,M1,pharmacy,median_min,2.25649
+Barangay 136,M1,pharmacy,p10_min,0.997466
+Barangay 136,M1,pharmacy,p90_min,3.79515
+Barangay 136,M1,pharmacy,p90_p10_ratio,3.80479
+Barangay 136,M1,pharmacy,share_within_10min,1
+Barangay 136,M2,pharmacy,median_within_5min,4
+Barangay 136,M2,pharmacy,mean_within_5min,3.84378
+Barangay 136,M2,pharmacy,median_within_10min,6
+Barangay 136,M2,pharmacy,mean_within_10min,5.38051
+Barangay 136,M2,pharmacy,median_within_15min,9
+Barangay 136,M2,pharmacy,mean_within_15min,9.55051
+Barangay 136,M3,pharmacy,median_per_10k,1.52184
+Barangay 136,M3,pharmacy,mean_per_10k,1.58007
+Barangay 136,M1,primary_care,median_min,2.49359
+Barangay 136,M1,primary_care,p10_min,1.93464
+Barangay 136,M1,primary_care,p90_min,3.39369
+Barangay 136,M1,primary_care,p90_p10_ratio,1.75417
+Barangay 136,M1,primary_care,share_within_10min,1
+Barangay 136,M2,primary_care,median_within_5min,4
+Barangay 136,M2,primary_care,mean_within_5min,3.7835
+Barangay 136,M2,primary_care,median_within_10min,6
+Barangay 136,M2,primary_care,mean_within_10min,6.1316
+Barangay 136,M2,primary_care,median_within_15min,10
+Barangay 136,M2,primary_care,mean_within_15min,10.5729
+Barangay 136,M3,primary_care,median_per_10k,2.25359
+Barangay 136,M3,primary_care,mean_per_10k,2.18269
+Barangay 136,M1,hospital,median_min,10.4923
+Barangay 136,M1,hospital,p10_min,8.75989
+Barangay 136,M1,hospital,p90_min,12.0407
+Barangay 136,M1,hospital,p90_p10_ratio,1.37452
+Barangay 136,M1,hospital,share_within_10min,0.391528
+Barangay 136,M2,hospital,median_within_5min,0
+Barangay 136,M2,hospital,mean_within_5min,0
+Barangay 136,M2,hospital,median_within_10min,1
+Barangay 136,M2,hospital,mean_within_10min,0.525726
+Barangay 136,M2,hospital,median_within_15min,1
+Barangay 136,M2,hospital,mean_within_15min,1.57102
+Barangay 136,M3,hospital,median_per_10k,0.175733
+Barangay 136,M3,hospital,mean_per_10k,0.174499
+Barangay 136,M1,public_elementary,median_min,3.74565
+Barangay 136,M1,public_elementary,p10_min,2.36097
+Barangay 136,M1,public_elementary,p90_min,5.29406
+Barangay 136,M1,public_elementary,p90_p10_ratio,2.24233
+Barangay 136,M1,public_elementary,share_within_10min,1
+Barangay 136,M2,public_elementary,median_within_5min,0
+Barangay 136,M2,public_elementary,mean_within_5min,0.449009
+Barangay 136,M2,public_elementary,median_within_10min,2
+Barangay 136,M2,public_elementary,mean_within_10min,2.13564
+Barangay 136,M2,public_elementary,median_within_15min,4
+Barangay 136,M2,public_elementary,mean_within_15min,4.46124
+Barangay 136,M3,public_elementary,median_per_10k,2187.54
+Barangay 136,M3,public_elementary,mean_per_10k,2228.55
+Barangay 136,M1,public_high,median_min,3.97904
+Barangay 136,M1,public_high,p10_min,2.59435
+Barangay 136,M1,public_high,p90_min,5.52745
+Barangay 136,M1,public_high,p90_p10_ratio,2.13057
+Barangay 136,M1,public_high,share_within_10min,1
+Barangay 136,M2,public_high,median_within_5min,0
+Barangay 136,M2,public_high,mean_within_5min,0.363839
+Barangay 136,M2,public_high,median_within_10min,1
+Barangay 136,M2,public_high,mean_within_10min,1.14702
+Barangay 136,M2,public_high,median_within_15min,3
+Barangay 136,M2,public_high,mean_within_15min,3.34909
+Barangay 136,M3,public_high,median_per_10k,1384.19
+Barangay 136,M3,public_high,mean_per_10k,1398.67
+Barangay 136,M1,open_space,median_min,14.3617
+Barangay 136,M1,open_space,p10_min,13.0258
+Barangay 136,M1,open_space,p90_min,15.8235
+Barangay 136,M1,open_space,p90_p10_ratio,1.21478
+Barangay 136,M1,open_space,share_within_10min,0
+Barangay 136,M2,open_space,median_within_5min,0
+Barangay 136,M2,open_space,mean_within_5min,0
+Barangay 136,M2,open_space,median_within_10min,0
+Barangay 136,M2,open_space,mean_within_10min,0
+Barangay 136,M2,open_space,median_within_15min,1
+Barangay 136,M2,open_space,mean_within_15min,0.777775
+Barangay 136,M3,open_space,median_per_10k,0.023955
+Barangay 136,M3,open_space,mean_per_10k,0.0232747
+Barangay 136,M1,transit,median_min,2.86069
+Barangay 136,M1,transit,p10_min,1.47167
+Barangay 136,M1,transit,p90_min,4.22528
+Barangay 136,M1,transit,p90_p10_ratio,2.87107
+Barangay 136,M1,transit,share_within_10min,1
+Barangay 136,M2,transit,median_within_5min,1
+Barangay 136,M2,transit,mean_within_5min,1.12732
+Barangay 136,M2,transit,median_within_10min,5
+Barangay 136,M2,transit,mean_within_10min,5.22766
+Barangay 136,M2,transit,median_within_15min,12
+Barangay 136,M2,transit,mean_within_15min,13.3866
+Barangay 136,M1,food_retail_no_convenience,median_min,1.82755
+Barangay 136,M1,food_retail_no_convenience,p10_min,0.530463
+Barangay 136,M1,food_retail_no_convenience,p90_min,4.16407
+Barangay 136,M1,food_retail_no_convenience,share_within_10min,1
+Barangay 136,M4,,mean_categories_within_15min,8.73994
+Barangay 136,M4,,median_categories_within_15min,9
+Barangay 136,M4,,share_with_0,0
+Barangay 136,M4,,share_with_1,0
+Barangay 136,M4,,share_with_2,0
+Barangay 136,M4,,share_with_3,0
+Barangay 136,M4,,share_with_4,0
+Barangay 136,M4,,share_with_5,0
+Barangay 136,M4,,share_with_6,0
+Barangay 136,M4,,share_with_7,0
+Barangay 136,M4,,share_with_8,0.260056
+Barangay 136,M4,,share_with_9,0.739944
+Barangay 136,M5,,share_within_500m_bus_jeepney,1
+Barangay 136,M5,,share_within_1km_rail,0
+Barangay 136,M5,,share_convenient,1
+Loyola Heights,people,,people,21768
+Loyola Heights,M1,food_retail,median_min,5.9761
+Loyola Heights,M1,food_retail,p10_min,1.5669
+Loyola Heights,M1,food_retail,p90_min,12.2808
+Loyola Heights,M1,food_retail,p90_p10_ratio,7.83761
+Loyola Heights,M1,food_retail,share_within_10min,0.8314
+Loyola Heights,M2,food_retail,median_within_5min,0
+Loyola Heights,M2,food_retail,mean_within_5min,2.42835
+Loyola Heights,M2,food_retail,median_within_10min,7
+Loyola Heights,M2,food_retail,mean_within_10min,9.97149
+Loyola Heights,M2,food_retail,median_within_15min,24
+Loyola Heights,M2,food_retail,mean_within_15min,24.4784
+Loyola Heights,M3,food_retail,median_per_10k,13.0475
+Loyola Heights,M3,food_retail,mean_per_10k,15.5099
+Loyola Heights,M1,palengke,median_min,8.81159
+Loyola Heights,M1,palengke,p10_min,3.32265
+Loyola Heights,M1,palengke,p90_min,15.8556
+Loyola Heights,M1,palengke,p90_p10_ratio,4.77196
+Loyola Heights,M1,palengke,share_within_10min,0.626462
+Loyola Heights,M2,palengke,median_within_5min,0
+Loyola Heights,M2,palengke,mean_within_5min,0.222606
+Loyola Heights,M2,palengke,median_within_10min,1
+Loyola Heights,M2,palengke,mean_within_10min,0.795489
+Loyola Heights,M2,palengke,median_within_15min,2
+Loyola Heights,M2,palengke,mean_within_15min,1.80254
+Loyola Heights,M3,palengke,median_per_10k,1.11012
+Loyola Heights,M3,palengke,mean_per_10k,1.19161
+Loyola Heights,M1,pharmacy,median_min,7.93305
+Loyola Heights,M1,pharmacy,p10_min,3.1585
+Loyola Heights,M1,pharmacy,p90_min,14.604
+Loyola Heights,M1,pharmacy,p90_p10_ratio,4.62371
+Loyola Heights,M1,pharmacy,share_within_10min,0.666961
+Loyola Heights,M2,pharmacy,median_within_5min,0
+Loyola Heights,M2,pharmacy,mean_within_5min,0.53062
+Loyola Heights,M2,pharmacy,median_within_10min,2
+Loyola Heights,M2,pharmacy,mean_within_10min,2.32135
+Loyola Heights,M2,pharmacy,median_within_15min,7
+Loyola Heights,M2,pharmacy,mean_within_15min,5.78426
+Loyola Heights,M3,pharmacy,median_per_10k,2.19464
+Loyola Heights,M3,pharmacy,mean_per_10k,3.48375
+Loyola Heights,M1,primary_care,median_min,7.3232
+Loyola Heights,M1,primary_care,p10_min,2.30972
+Loyola Heights,M1,primary_care,p90_min,15.2319
+Loyola Heights,M1,primary_care,p90_p10_ratio,6.59472
+Loyola Heights,M1,primary_care,share_within_10min,0.677896
+Loyola Heights,M2,primary_care,median_within_5min,0
+Loyola Heights,M2,primary_care,mean_within_5min,0.491289
+Loyola Heights,M2,primary_care,median_within_10min,1
+Loyola Heights,M2,primary_care,mean_within_10min,1.97017
+Loyola Heights,M2,primary_care,median_within_15min,5
+Loyola Heights,M2,primary_care,mean_within_15min,4.83529
+Loyola Heights,M3,primary_care,median_per_10k,2.93576
+Loyola Heights,M3,primary_care,mean_per_10k,3.1457
+Loyola Heights,M1,hospital,median_min,17.2024
+Loyola Heights,M1,hospital,p10_min,5.88889
+Loyola Heights,M1,hospital,p90_min,28.7413
+Loyola Heights,M1,hospital,p90_p10_ratio,4.8806
+Loyola Heights,M1,hospital,share_within_10min,0.276464
+Loyola Heights,M2,hospital,median_within_5min,0
+Loyola Heights,M2,hospital,mean_within_5min,0.079056
+Loyola Heights,M2,hospital,median_within_10min,0
+Loyola Heights,M2,hospital,mean_within_10min,0.31381
+Loyola Heights,M2,hospital,median_within_15min,0
+Loyola Heights,M2,hospital,mean_within_15min,0.717375
+Loyola Heights,M3,hospital,median_per_10k,0
+Loyola Heights,M3,hospital,mean_per_10k,0.273613
+Loyola Heights,M1,public_elementary,median_min,20.9008
+Loyola Heights,M1,public_elementary,p10_min,10.5582
+Loyola Heights,M1,public_elementary,p90_min,33.6171
+Loyola Heights,M1,public_elementary,p90_p10_ratio,3.18397
+Loyola Heights,M1,public_elementary,share_within_10min,0.0881816
+Loyola Heights,M2,public_elementary,median_within_5min,0
+Loyola Heights,M2,public_elementary,mean_within_5min,0.0295475
+Loyola Heights,M2,public_elementary,median_within_10min,0
+Loyola Heights,M2,public_elementary,mean_within_10min,0.114979
+Loyola Heights,M2,public_elementary,median_within_15min,0
+Loyola Heights,M2,public_elementary,mean_within_15min,0.36618
+Loyola Heights,M3,public_elementary,median_per_10k,0
+Loyola Heights,M3,public_elementary,mean_per_10k,145.727
+Loyola Heights,M1,public_high,median_min,20.5952
+Loyola Heights,M1,public_high,p10_min,11.6831
+Loyola Heights,M1,public_high,p90_min,27.5086
+Loyola Heights,M1,public_high,p90_p10_ratio,2.35456
+Loyola Heights,M1,public_high,share_within_10min,0.0472992
+Loyola Heights,M2,public_high,median_within_5min,0
+Loyola Heights,M2,public_high,mean_within_5min,0.00543831
+Loyola Heights,M2,public_high,median_within_10min,0
+Loyola Heights,M2,public_high,mean_within_10min,0.0388241
+Loyola Heights,M2,public_high,median_within_15min,0
+Loyola Heights,M2,public_high,mean_within_15min,0.24652
+Loyola Heights,M3,public_high,median_per_10k,0
+Loyola Heights,M3,public_high,mean_per_10k,190.598
+Loyola Heights,M1,open_space,median_min,6.92319
+Loyola Heights,M1,open_space,p10_min,2.19997
+Loyola Heights,M1,open_space,p90_min,11.6814
+Loyola Heights,M1,open_space,p90_p10_ratio,5.30982
+Loyola Heights,M1,open_space,share_within_10min,0.818849
+Loyola Heights,M2,open_space,median_within_5min,0
+Loyola Heights,M2,open_space,mean_within_5min,0.467448
+Loyola Heights,M2,open_space,median_within_10min,1
+Loyola Heights,M2,open_space,mean_within_10min,1.46192
+Loyola Heights,M2,open_space,median_within_15min,3
+Loyola Heights,M2,open_space,mean_within_15min,3.50291
+Loyola Heights,M3,open_space,median_per_10k,1.64506
+Loyola Heights,M3,open_space,mean_per_10k,3.60921
+Loyola Heights,M1,transit,median_min,7.81277
+Loyola Heights,M1,transit,p10_min,1.50195
+Loyola Heights,M1,transit,p90_min,13.32
+Loyola Heights,M1,transit,p90_p10_ratio,8.86848
+Loyola Heights,M1,transit,share_within_10min,0.657355
+Loyola Heights,M2,transit,median_within_5min,0
+Loyola Heights,M2,transit,mean_within_5min,0.626408
+Loyola Heights,M2,transit,median_within_10min,2
+Loyola Heights,M2,transit,mean_within_10min,3.27721
+Loyola Heights,M2,transit,median_within_15min,9
+Loyola Heights,M2,transit,mean_within_15min,10.2966
+Loyola Heights,M1,food_retail_no_convenience,median_min,7.14133
+Loyola Heights,M1,food_retail_no_convenience,p10_min,2.54031
+Loyola Heights,M1,food_retail_no_convenience,p90_min,14.8519
+Loyola Heights,M1,food_retail_no_convenience,share_within_10min,0.702639
+Loyola Heights,M4,,mean_categories_within_15min,6.50831
+Loyola Heights,M4,,median_categories_within_15min,7
+Loyola Heights,M4,,share_with_0,0
+Loyola Heights,M4,,share_with_1,0.00325013
+Loyola Heights,M4,,share_with_2,0.00972555
+Loyola Heights,M4,,share_with_3,0.0273989
+Loyola Heights,M4,,share_with_4,0.0313534
+Loyola Heights,M4,,share_with_5,0.129666
+Loyola Heights,M4,,share_with_6,0.287573
+Loyola Heights,M4,,share_with_7,0.293488
+Loyola Heights,M4,,share_with_8,0.108088
+Loyola Heights,M4,,share_with_9,0.109457
+Loyola Heights,M5,,share_within_500m_bus_jeepney,0.456234
+Loyola Heights,M5,,share_within_1km_rail,0.258258
+Loyola Heights,M5,,share_convenient,0.484243
+Oranbo,people,,people,3374
+Oranbo,M1,food_retail,median_min,3.68161
+Oranbo,M1,food_retail,p10_min,1.63522
+Oranbo,M1,food_retail,p90_min,5.27784
+Oranbo,M1,food_retail,p90_p10_ratio,3.2276
+Oranbo,M1,food_retail,share_within_10min,1
+Oranbo,M2,food_retail,median_within_5min,1
+Oranbo,M2,food_retail,mean_within_5min,2.2475
+Oranbo,M2,food_retail,median_within_10min,11
+Oranbo,M2,food_retail,mean_within_10min,10.8154
+Oranbo,M2,food_retail,median_within_15min,31
+Oranbo,M2,food_retail,mean_within_15min,28.9364
+Oranbo,M3,food_retail,median_per_10k,13.7052
+Oranbo,M3,food_retail,mean_per_10k,12.8228
+Oranbo,M1,palengke,median_min,6.37855
+Oranbo,M1,palengke,p10_min,3.15543
+Oranbo,M1,palengke,p90_min,11.7385
+Oranbo,M1,palengke,p90_p10_ratio,3.72009
+Oranbo,M1,palengke,share_within_10min,0.780806
+Oranbo,M2,palengke,median_within_5min,0
+Oranbo,M2,palengke,mean_within_5min,0.422354
+Oranbo,M2,palengke,median_within_10min,1
+Oranbo,M2,palengke,mean_within_10min,1.29049
+Oranbo,M2,palengke,median_within_15min,2
+Oranbo,M2,palengke,mean_within_15min,1.86346
+Oranbo,M3,palengke,median_per_10k,2.18347
+Oranbo,M3,palengke,mean_per_10k,1.95044
+Oranbo,M1,pharmacy,median_min,4.71704
+Oranbo,M1,pharmacy,p10_min,2.3601
+Oranbo,M1,pharmacy,p90_min,13.2921
+Oranbo,M1,pharmacy,p90_p10_ratio,5.63199
+Oranbo,M1,pharmacy,share_within_10min,0.822967
+Oranbo,M2,pharmacy,median_within_5min,1
+Oranbo,M2,pharmacy,mean_within_5min,1.13295
+Oranbo,M2,pharmacy,median_within_10min,6
+Oranbo,M2,pharmacy,mean_within_10min,6.2049
+Oranbo,M2,pharmacy,median_within_15min,16
+Oranbo,M2,pharmacy,mean_within_15min,15.3402
+Oranbo,M3,pharmacy,median_per_10k,7.08695
+Oranbo,M3,pharmacy,mean_per_10k,6.60506
+Oranbo,M1,primary_care,median_min,6.60422
+Oranbo,M1,primary_care,p10_min,3.22971
+Oranbo,M1,primary_care,p90_min,8.67491
+Oranbo,M1,primary_care,p90_p10_ratio,2.68597
+Oranbo,M1,primary_care,share_within_10min,0.972413
+Oranbo,M2,primary_care,median_within_5min,0
+Oranbo,M2,primary_care,mean_within_5min,0.802179
+Oranbo,M2,primary_care,median_within_10min,4
+Oranbo,M2,primary_care,mean_within_10min,3.69738
+Oranbo,M2,primary_care,median_within_15min,10
+Oranbo,M2,primary_care,mean_within_15min,9.87118
+Oranbo,M3,primary_care,median_per_10k,4.03429
+Oranbo,M3,primary_care,mean_per_10k,4.18036
+Oranbo,M1,hospital,median_min,10.8246
+Oranbo,M1,hospital,p10_min,4.4602
+Oranbo,M1,hospital,p90_min,20.1493
+Oranbo,M1,hospital,p90_p10_ratio,4.51757
+Oranbo,M1,hospital,share_within_10min,0.477821
+Oranbo,M2,hospital,median_within_5min,0
+Oranbo,M2,hospital,mean_within_5min,0.194018
+Oranbo,M2,hospital,median_within_10min,0
+Oranbo,M2,hospital,mean_within_10min,0.567164
+Oranbo,M2,hospital,median_within_15min,2
+Oranbo,M2,hospital,mean_within_15min,1.35162
+Oranbo,M3,hospital,median_per_10k,0.597907
+Oranbo,M3,hospital,mean_per_10k,0.622867
+Oranbo,M1,public_elementary,median_min,6.69792
+Oranbo,M1,public_elementary,p10_min,3.48097
+Oranbo,M1,public_elementary,p90_min,13.6729
+Oranbo,M1,public_elementary,p90_p10_ratio,3.92789
+Oranbo,M1,public_elementary,share_within_10min,0.726114
+Oranbo,M2,public_elementary,median_within_5min,0
+Oranbo,M2,public_elementary,mean_within_5min,0.298056
+Oranbo,M2,public_elementary,median_within_10min,1
+Oranbo,M2,public_elementary,mean_within_10min,0.746579
+Oranbo,M2,public_elementary,median_within_15min,1
+Oranbo,M2,public_elementary,mean_within_15min,1.15234
+Oranbo,M3,public_elementary,median_per_10k,1126.21
+Oranbo,M3,public_elementary,mean_per_10k,949.773
+Oranbo,M1,public_high,median_min,21.4324
+Oranbo,M1,public_high,p10_min,15.6643
+Oranbo,M1,public_high,p90_min,31.4459
+Oranbo,M1,public_high,p90_p10_ratio,2.0075
+Oranbo,M1,public_high,share_within_10min,0
+Oranbo,M2,public_high,median_within_5min,0
+Oranbo,M2,public_high,mean_within_5min,0
+Oranbo,M2,public_high,median_within_10min,0
+Oranbo,M2,public_high,mean_within_10min,0
+Oranbo,M2,public_high,median_within_15min,0
+Oranbo,M2,public_high,mean_within_15min,0.00530784
+Oranbo,M3,public_high,median_per_10k,0
+Oranbo,M3,public_high,mean_per_10k,0.825437
+Oranbo,M1,open_space,median_min,3.94861
+Oranbo,M1,open_space,p10_min,0.898576
+Oranbo,M1,open_space,p90_min,8.56543
+Oranbo,M1,open_space,p90_p10_ratio,9.53223
+Oranbo,M1,open_space,share_within_10min,0.974582
+Oranbo,M2,open_space,median_within_5min,1
+Oranbo,M2,open_space,mean_within_5min,1.00143
+Oranbo,M2,open_space,median_within_10min,2
+Oranbo,M2,open_space,mean_within_10min,2.07691
+Oranbo,M2,open_space,median_within_15min,4
+Oranbo,M2,open_space,mean_within_15min,3.71342
+Oranbo,M3,open_space,median_per_10k,1.66217
+Oranbo,M3,open_space,mean_per_10k,1.72155
+Oranbo,M1,transit,median_min,3.32192
+Oranbo,M1,transit,p10_min,0.861668
+Oranbo,M1,transit,p90_min,6.14702
+Oranbo,M1,transit,p90_p10_ratio,7.13386
+Oranbo,M1,transit,share_within_10min,1
+Oranbo,M2,transit,median_within_5min,0
+Oranbo,M2,transit,mean_within_5min,1.36237
+Oranbo,M2,transit,median_within_10min,6
+Oranbo,M2,transit,mean_within_10min,5.23008
+Oranbo,M2,transit,median_within_15min,14
+Oranbo,M2,transit,mean_within_15min,11.8509
+Oranbo,M1,food_retail_no_convenience,median_min,6.80864
+Oranbo,M1,food_retail_no_convenience,p10_min,3.23183
+Oranbo,M1,food_retail_no_convenience,p90_min,13.6479
+Oranbo,M1,food_retail_no_convenience,share_within_10min,0.812981
+Oranbo,M4,,mean_categories_within_15min,7.71775
+Oranbo,M4,,median_categories_within_15min,8
+Oranbo,M4,,share_with_0,0
+Oranbo,M4,,share_with_1,0
+Oranbo,M4,,share_with_2,0
+Oranbo,M4,,share_with_3,0
+Oranbo,M4,,share_with_4,0
+Oranbo,M4,,share_with_5,0.0422336
+Oranbo,M4,,share_with_6,0.0151776
+Oranbo,M4,,share_with_7,0.176274
+Oranbo,M4,,share_with_8,0.715235
+Oranbo,M4,,share_with_9,0.0510802
+Oranbo,M5,,share_within_500m_bus_jeepney,0.949841
+Oranbo,M5,,share_within_1km_rail,0
+Oranbo,M5,,share_convenient,0.949841
+"Tondo, other 258 barangays",people,,people,636640
+"Tondo, other 258 barangays",M1,food_retail,median_min,3.12972
+"Tondo, other 258 barangays",M1,food_retail,p10_min,1.31539
+"Tondo, other 258 barangays",M1,food_retail,p90_min,7.90644
+"Tondo, other 258 barangays",M1,food_retail,p90_p10_ratio,6.01073
+"Tondo, other 258 barangays",M1,food_retail,share_within_10min,0.934041
+"Tondo, other 258 barangays",M2,food_retail,median_within_5min,3
+"Tondo, other 258 barangays",M2,food_retail,mean_within_5min,3.15469
+"Tondo, other 258 barangays",M2,food_retail,median_within_10min,13
+"Tondo, other 258 barangays",M2,food_retail,mean_within_10min,13.7433
+"Tondo, other 258 barangays",M2,food_retail,median_within_15min,32
+"Tondo, other 258 barangays",M2,food_retail,mean_within_15min,32.5654
+"Tondo, other 258 barangays",M3,food_retail,median_per_10k,2.44796
+"Tondo, other 258 barangays",M3,food_retail,mean_per_10k,2.71648
+"Tondo, other 258 barangays",M1,palengke,median_min,8.1231
+"Tondo, other 258 barangays",M1,palengke,p10_min,3.78116
+"Tondo, other 258 barangays",M1,palengke,p90_min,16.5995
+"Tondo, other 258 barangays",M1,palengke,p90_p10_ratio,4.39005
+"Tondo, other 258 barangays",M1,palengke,share_within_10min,0.659116
+"Tondo, other 258 barangays",M2,palengke,median_within_5min,0
+"Tondo, other 258 barangays",M2,palengke,mean_within_5min,0.250795
+"Tondo, other 258 barangays",M2,palengke,median_within_10min,1
+"Tondo, other 258 barangays",M2,palengke,mean_within_10min,1.1503
+"Tondo, other 258 barangays",M2,palengke,median_within_15min,2
+"Tondo, other 258 barangays",M2,palengke,mean_within_15min,2.64378
+"Tondo, other 258 barangays",M3,palengke,median_per_10k,0.187867
+"Tondo, other 258 barangays",M3,palengke,mean_per_10k,0.216331
+"Tondo, other 258 barangays",M1,pharmacy,median_min,4.06415
+"Tondo, other 258 barangays",M1,pharmacy,p10_min,1.61989
+"Tondo, other 258 barangays",M1,pharmacy,p90_min,11.1254
+"Tondo, other 258 barangays",M1,pharmacy,p90_p10_ratio,6.86795
+"Tondo, other 258 barangays",M1,pharmacy,share_within_10min,0.880999
+"Tondo, other 258 barangays",M2,pharmacy,median_within_5min,1
+"Tondo, other 258 barangays",M2,pharmacy,mean_within_5min,2.01026
+"Tondo, other 258 barangays",M2,pharmacy,median_within_10min,8
+"Tondo, other 258 barangays",M2,pharmacy,mean_within_10min,8.80081
+"Tondo, other 258 barangays",M2,pharmacy,median_within_15min,19
+"Tondo, other 258 barangays",M2,pharmacy,mean_within_15min,20.014
+"Tondo, other 258 barangays",M3,pharmacy,median_per_10k,1.46753
+"Tondo, other 258 barangays",M3,pharmacy,mean_per_10k,1.63086
+"Tondo, other 258 barangays",M1,primary_care,median_min,3.98556
+"Tondo, other 258 barangays",M1,primary_care,p10_min,1.59406
+"Tondo, other 258 barangays",M1,primary_care,p90_min,8.58611
+"Tondo, other 258 barangays",M1,primary_care,p90_p10_ratio,5.38632
+"Tondo, other 258 barangays",M1,primary_care,share_within_10min,0.931191
+"Tondo, other 258 barangays",M2,primary_care,median_within_5min,1
+"Tondo, other 258 barangays",M2,primary_care,mean_within_5min,1.8087
+"Tondo, other 258 barangays",M2,primary_care,median_within_10min,6
+"Tondo, other 258 barangays",M2,primary_care,mean_within_10min,7.32563
+"Tondo, other 258 barangays",M2,primary_care,median_within_15min,15
+"Tondo, other 258 barangays",M2,primary_care,mean_within_15min,15.8154
+"Tondo, other 258 barangays",M3,primary_care,median_per_10k,1.26654
+"Tondo, other 258 barangays",M3,primary_care,mean_per_10k,1.30855
+"Tondo, other 258 barangays",M1,hospital,median_min,7.25728
+"Tondo, other 258 barangays",M1,hospital,p10_min,3.16594
+"Tondo, other 258 barangays",M1,hospital,p90_min,13.7295
+"Tondo, other 258 barangays",M1,hospital,p90_p10_ratio,4.33664
+"Tondo, other 258 barangays",M1,hospital,share_within_10min,0.757097
+"Tondo, other 258 barangays",M2,hospital,median_within_5min,0
+"Tondo, other 258 barangays",M2,hospital,mean_within_5min,0.371598
+"Tondo, other 258 barangays",M2,hospital,median_within_10min,2
+"Tondo, other 258 barangays",M2,hospital,mean_within_10min,1.71435
+"Tondo, other 258 barangays",M2,hospital,median_within_15min,4
+"Tondo, other 258 barangays",M2,hospital,mean_within_15min,3.84873
+"Tondo, other 258 barangays",M3,hospital,median_per_10k,0.301061
+"Tondo, other 258 barangays",M3,hospital,mean_per_10k,0.347397
+"Tondo, other 258 barangays",M1,public_elementary,median_min,6.33126
+"Tondo, other 258 barangays",M1,public_elementary,p10_min,2.78279
+"Tondo, other 258 barangays",M1,public_elementary,p90_min,10.91
+"Tondo, other 258 barangays",M1,public_elementary,p90_p10_ratio,3.92053
+"Tondo, other 258 barangays",M1,public_elementary,share_within_10min,0.859656
+"Tondo, other 258 barangays",M2,public_elementary,median_within_5min,0
+"Tondo, other 258 barangays",M2,public_elementary,mean_within_5min,0.410433
+"Tondo, other 258 barangays",M2,public_elementary,median_within_10min,2
+"Tondo, other 258 barangays",M2,public_elementary,mean_within_10min,1.95156
+"Tondo, other 258 barangays",M2,public_elementary,median_within_15min,4
+"Tondo, other 258 barangays",M2,public_elementary,mean_within_15min,4.55147
+"Tondo, other 258 barangays",M3,public_elementary,median_per_10k,1274.53
+"Tondo, other 258 barangays",M3,public_elementary,mean_per_10k,1274.75
+"Tondo, other 258 barangays",M1,public_high,median_min,9.03682
+"Tondo, other 258 barangays",M1,public_high,p10_min,4.35741
+"Tondo, other 258 barangays",M1,public_high,p90_min,18.0247
+"Tondo, other 258 barangays",M1,public_high,p90_p10_ratio,4.13655
+"Tondo, other 258 barangays",M1,public_high,share_within_10min,0.590156
+"Tondo, other 258 barangays",M2,public_high,median_within_5min,0
+"Tondo, other 258 barangays",M2,public_high,mean_within_5min,0.131106
+"Tondo, other 258 barangays",M2,public_high,median_within_10min,1
+"Tondo, other 258 barangays",M2,public_high,mean_within_10min,0.753558
+"Tondo, other 258 barangays",M2,public_high,median_within_15min,2
+"Tondo, other 258 barangays",M2,public_high,mean_within_15min,1.82816
+"Tondo, other 258 barangays",M3,public_high,median_per_10k,282.027
+"Tondo, other 258 barangays",M3,public_high,mean_per_10k,548.676
+"Tondo, other 258 barangays",M1,open_space,median_min,13.4706
+"Tondo, other 258 barangays",M1,open_space,p10_min,5.08152
+"Tondo, other 258 barangays",M1,open_space,p90_min,26.6534
+"Tondo, other 258 barangays",M1,open_space,p90_p10_ratio,5.24516
+"Tondo, other 258 barangays",M1,open_space,share_within_10min,0.331921
+"Tondo, other 258 barangays",M2,open_space,median_within_5min,0
+"Tondo, other 258 barangays",M2,open_space,mean_within_5min,0.148501
+"Tondo, other 258 barangays",M2,open_space,median_within_10min,0
+"Tondo, other 258 barangays",M2,open_space,mean_within_10min,0.647143
+"Tondo, other 258 barangays",M2,open_space,median_within_15min,1
+"Tondo, other 258 barangays",M2,open_space,mean_within_15min,1.35418
+"Tondo, other 258 barangays",M3,open_space,median_per_10k,0.037437
+"Tondo, other 258 barangays",M3,open_space,mean_per_10k,0.0880746
+"Tondo, other 258 barangays",M1,transit,median_min,2.21839
+"Tondo, other 258 barangays",M1,transit,p10_min,0.52604
+"Tondo, other 258 barangays",M1,transit,p90_min,5.95809
+"Tondo, other 258 barangays",M1,transit,p90_p10_ratio,11.3263
+"Tondo, other 258 barangays",M1,transit,share_within_10min,0.934919
+"Tondo, other 258 barangays",M2,transit,median_within_5min,3
+"Tondo, other 258 barangays",M2,transit,mean_within_5min,3.22094
+"Tondo, other 258 barangays",M2,transit,median_within_10min,15
+"Tondo, other 258 barangays",M2,transit,mean_within_10min,15.2154
+"Tondo, other 258 barangays",M2,transit,median_within_15min,34
+"Tondo, other 258 barangays",M2,transit,mean_within_15min,36.6383
+"Tondo, other 258 barangays",M1,food_retail_no_convenience,median_min,4.22588
+"Tondo, other 258 barangays",M1,food_retail_no_convenience,p10_min,1.7473
+"Tondo, other 258 barangays",M1,food_retail_no_convenience,p90_min,10.0758
+"Tondo, other 258 barangays",M1,food_retail_no_convenience,share_within_10min,0.898874
+"Tondo, other 258 barangays",M4,,mean_categories_within_15min,8.00492
+"Tondo, other 258 barangays",M4,,median_categories_within_15min,9
+"Tondo, other 258 barangays",M4,,share_with_0,0.0199825
+"Tondo, other 258 barangays",M4,,share_with_1,0.0135699
+"Tondo, other 258 barangays",M4,,share_with_2,0.00223798
+"Tondo, other 258 barangays",M4,,share_with_3,0.0116238
+"Tondo, other 258 barangays",M4,,share_with_4,0.0144988
+"Tondo, other 258 barangays",M4,,share_with_5,0.00799334
+"Tondo, other 258 barangays",M4,,share_with_6,0.0188018
+"Tondo, other 258 barangays",M4,,share_with_7,0.066491
+"Tondo, other 258 barangays",M4,,share_with_8,0.327419
+"Tondo, other 258 barangays",M4,,share_with_9,0.517382
+"Tondo, other 258 barangays",M5,,share_within_500m_bus_jeepney,0.915682
+"Tondo, other 258 barangays",M5,,share_within_1km_rail,0.180699
+"Tondo, other 258 barangays",M5,,share_convenient,0.915686
+"Quezon City, other barangays",people,,people,3.0625e+06
+"Quezon City, other barangays",M1,food_retail,median_min,4.22714
+"Quezon City, other barangays",M1,food_retail,p10_min,1.51137
+"Quezon City, other barangays",M1,food_retail,p90_min,9.97019
+"Quezon City, other barangays",M1,food_retail,p90_p10_ratio,6.59677
+"Quezon City, other barangays",M1,food_retail,share_within_10min,0.900586
+"Quezon City, other barangays",M2,food_retail,median_within_5min,1
+"Quezon City, other barangays",M2,food_retail,mean_within_5min,2.37615
+"Quezon City, other barangays",M2,food_retail,median_within_10min,7
+"Quezon City, other barangays",M2,food_retail,mean_within_10min,9.72503
+"Quezon City, other barangays",M2,food_retail,median_within_15min,19
+"Quezon City, other barangays",M2,food_retail,mean_within_15min,22.094
+"Quezon City, other barangays",M3,food_retail,median_per_10k,4.52543
+"Quezon City, other barangays",M3,food_retail,mean_per_10k,5.94447
+"Quezon City, other barangays",M1,palengke,median_min,11.8068
+"Quezon City, other barangays",M1,palengke,p10_min,4.57196
+"Quezon City, other barangays",M1,palengke,p90_min,24.0085
+"Quezon City, other barangays",M1,palengke,p90_p10_ratio,5.25125
+"Quezon City, other barangays",M1,palengke,share_within_10min,0.398507
+"Quezon City, other barangays",M2,palengke,median_within_5min,0
+"Quezon City, other barangays",M2,palengke,mean_within_5min,0.177441
+"Quezon City, other barangays",M2,palengke,median_within_10min,0
+"Quezon City, other barangays",M2,palengke,mean_within_10min,0.724868
+"Quezon City, other barangays",M2,palengke,median_within_15min,1
+"Quezon City, other barangays",M2,palengke,mean_within_15min,1.61877
+"Quezon City, other barangays",M3,palengke,median_per_10k,0.204311
+"Quezon City, other barangays",M3,palengke,mean_per_10k,0.396178
+"Quezon City, other barangays",M1,pharmacy,median_min,6.04158
+"Quezon City, other barangays",M1,pharmacy,p10_min,2.29281
+"Quezon City, other barangays",M1,pharmacy,p90_min,13.4784
+"Quezon City, other barangays",M1,pharmacy,p90_p10_ratio,5.87855
+"Quezon City, other barangays",M1,pharmacy,share_within_10min,0.780248
+"Quezon City, other barangays",M2,pharmacy,median_within_5min,0
+"Quezon City, other barangays",M2,pharmacy,mean_within_5min,0.989809
+"Quezon City, other barangays",M2,pharmacy,median_within_10min,3
+"Quezon City, other barangays",M2,pharmacy,mean_within_10min,4.12987
+"Quezon City, other barangays",M2,pharmacy,median_within_15min,8
+"Quezon City, other barangays",M2,pharmacy,mean_within_15min,9.42546
+"Quezon City, other barangays",M3,pharmacy,median_per_10k,1.80543
+"Quezon City, other barangays",M3,pharmacy,mean_per_10k,2.3657
+"Quezon City, other barangays",M1,primary_care,median_min,5.83725
+"Quezon City, other barangays",M1,primary_care,p10_min,2.17651
+"Quezon City, other barangays",M1,primary_care,p90_min,12.4862
+"Quezon City, other barangays",M1,primary_care,p90_p10_ratio,5.73681
+"Quezon City, other barangays",M1,primary_care,share_within_10min,0.810239
+"Quezon City, other barangays",M2,primary_care,median_within_5min,0
+"Quezon City, other barangays",M2,primary_care,mean_within_5min,0.977436
+"Quezon City, other barangays",M2,primary_care,median_within_10min,3
+"Quezon City, other barangays",M2,primary_care,mean_within_10min,4.21687
+"Quezon City, other barangays",M2,primary_care,median_within_15min,7
+"Quezon City, other barangays",M2,primary_care,mean_within_15min,9.86213
+"Quezon City, other barangays",M3,primary_care,median_per_10k,1.77466
+"Quezon City, other barangays",M3,primary_care,mean_per_10k,2.61205
+"Quezon City, other barangays",M1,hospital,median_min,13.0474
+"Quezon City, other barangays",M1,hospital,p10_min,5.22889
+"Quezon City, other barangays",M1,hospital,p90_min,30.3581
+"Quezon City, other barangays",M1,hospital,p90_p10_ratio,5.80583
+"Quezon City, other barangays",M1,hospital,share_within_10min,0.343511
+"Quezon City, other barangays",M2,hospital,median_within_5min,0
+"Quezon City, other barangays",M2,hospital,mean_within_5min,0.136632
+"Quezon City, other barangays",M2,hospital,median_within_10min,0
+"Quezon City, other barangays",M2,hospital,mean_within_10min,0.659076
+"Quezon City, other barangays",M2,hospital,median_within_15min,1
+"Quezon City, other barangays",M2,hospital,mean_within_15min,1.6146
+"Quezon City, other barangays",M3,hospital,median_per_10k,0.154196
+"Quezon City, other barangays",M3,hospital,mean_per_10k,0.460676
+"Quezon City, other barangays",M1,public_elementary,median_min,11.951
+"Quezon City, other barangays",M1,public_elementary,p10_min,4.56837
+"Quezon City, other barangays",M1,public_elementary,p90_min,23.785
+"Quezon City, other barangays",M1,public_elementary,p90_p10_ratio,5.20645
+"Quezon City, other barangays",M1,public_elementary,share_within_10min,0.390159
+"Quezon City, other barangays",M2,public_elementary,median_within_5min,0
+"Quezon City, other barangays",M2,public_elementary,mean_within_5min,0.118502
+"Quezon City, other barangays",M2,public_elementary,median_within_10min,0
+"Quezon City, other barangays",M2,public_elementary,mean_within_10min,0.471915
+"Quezon City, other barangays",M2,public_elementary,median_within_15min,1
+"Quezon City, other barangays",M2,public_elementary,mean_within_15min,1.10494
+"Quezon City, other barangays",M3,public_elementary,median_per_10k,524.082
+"Quezon City, other barangays",M3,public_elementary,mean_per_10k,895.515
+"Quezon City, other barangays",M1,public_high,median_min,16.4869
+"Quezon City, other barangays",M1,public_high,p10_min,6.36415
+"Quezon City, other barangays",M1,public_high,p90_min,32.3215
+"Quezon City, other barangays",M1,public_high,p90_p10_ratio,5.07868
+"Quezon City, other barangays",M1,public_high,share_within_10min,0.234656
+"Quezon City, other barangays",M2,public_high,median_within_5min,0
+"Quezon City, other barangays",M2,public_high,mean_within_5min,0.0543745
+"Quezon City, other barangays",M2,public_high,median_within_10min,0
+"Quezon City, other barangays",M2,public_high,mean_within_10min,0.237153
+"Quezon City, other barangays",M2,public_high,median_within_15min,0
+"Quezon City, other barangays",M2,public_high,mean_within_15min,0.541617
+"Quezon City, other barangays",M3,public_high,median_per_10k,0
+"Quezon City, other barangays",M3,public_high,mean_per_10k,461.8
+"Quezon City, other barangays",M1,open_space,median_min,11.1828
+"Quezon City, other barangays",M1,open_space,p10_min,3.81935
+"Quezon City, other barangays",M1,open_space,p90_min,20.0257
+"Quezon City, other barangays",M1,open_space,p90_p10_ratio,5.24321
+"Quezon City, other barangays",M1,open_space,share_within_10min,0.429933
+"Quezon City, other barangays",M2,open_space,median_within_5min,0
+"Quezon City, other barangays",M2,open_space,mean_within_5min,0.208855
+"Quezon City, other barangays",M2,open_space,median_within_10min,0
+"Quezon City, other barangays",M2,open_space,mean_within_10min,0.683209
+"Quezon City, other barangays",M2,open_space,median_within_15min,1
+"Quezon City, other barangays",M2,open_space,mean_within_15min,1.45872
+"Quezon City, other barangays",M3,open_space,median_per_10k,0.235387
+"Quezon City, other barangays",M3,open_space,mean_per_10k,0.506603
+"Quezon City, other barangays",M1,transit,median_min,4.98925
+"Quezon City, other barangays",M1,transit,p10_min,0.886479
+"Quezon City, other barangays",M1,transit,p90_min,16.2454
+"Quezon City, other barangays",M1,transit,p90_p10_ratio,18.3257
+"Quezon City, other barangays",M1,transit,share_within_10min,0.758239
+"Quezon City, other barangays",M2,transit,median_within_5min,0
+"Quezon City, other barangays",M2,transit,mean_within_5min,1.38936
+"Quezon City, other barangays",M2,transit,median_within_10min,4
+"Quezon City, other barangays",M2,transit,mean_within_10min,6.2723
+"Quezon City, other barangays",M2,transit,median_within_15min,11
+"Quezon City, other barangays",M2,transit,mean_within_15min,15.1111
+"Quezon City, other barangays",M1,food_retail_no_convenience,median_min,6.20985
+"Quezon City, other barangays",M1,food_retail_no_convenience,p10_min,2.41524
+"Quezon City, other barangays",M1,food_retail_no_convenience,p90_min,14.1959
+"Quezon City, other barangays",M1,food_retail_no_convenience,share_within_10min,0.778177
+"Quezon City, other barangays",M4,,mean_categories_within_15min,6.7681
+"Quezon City, other barangays",M4,,median_categories_within_15min,7
+"Quezon City, other barangays",M4,,share_with_0,0.005406
+"Quezon City, other barangays",M4,,share_with_1,0.0156952
+"Quezon City, other barangays",M4,,share_with_2,0.0117098
+"Quezon City, other barangays",M4,,share_with_3,0.039003
+"Quezon City, other barangays",M4,,share_with_4,0.0547157
+"Quezon City, other barangays",M4,,share_with_5,0.105025
+"Quezon City, other barangays",M4,,share_with_6,0.1564
+"Quezon City, other barangays",M4,,share_with_7,0.183707
+"Quezon City, other barangays",M4,,share_with_8,0.211399
+"Quezon City, other barangays",M4,,share_with_9,0.216939
+"Quezon City, other barangays",M5,,share_within_500m_bus_jeepney,0.639684
+"Quezon City, other barangays",M5,,share_within_1km_rail,0.0920754
+"Quezon City, other barangays",M5,,share_convenient,0.642781
+"City of Pasig, other barangays",people,,people,849676
+"City of Pasig, other barangays",M1,food_retail,median_min,3.59375
+"City of Pasig, other barangays",M1,food_retail,p10_min,1.35968
+"City of Pasig, other barangays",M1,food_retail,p90_min,7.96674
+"City of Pasig, other barangays",M1,food_retail,p90_p10_ratio,5.85926
+"City of Pasig, other barangays",M1,food_retail,share_within_10min,0.957662
+"City of Pasig, other barangays",M2,food_retail,median_within_5min,2
+"City of Pasig, other barangays",M2,food_retail,mean_within_5min,2.50955
+"City of Pasig, other barangays",M2,food_retail,median_within_10min,9
+"City of Pasig, other barangays",M2,food_retail,mean_within_10min,9.99507
+"City of Pasig, other barangays",M2,food_retail,median_within_15min,21
+"City of Pasig, other barangays",M2,food_retail,mean_within_15min,23.3323
+"City of Pasig, other barangays",M3,food_retail,median_per_10k,4.94795
+"City of Pasig, other barangays",M3,food_retail,mean_per_10k,7.50495
+"City of Pasig, other barangays",M1,palengke,median_min,11.3031
+"City of Pasig, other barangays",M1,palengke,p10_min,4.65856
+"City of Pasig, other barangays",M1,palengke,p90_min,20.703
+"City of Pasig, other barangays",M1,palengke,p90_p10_ratio,4.44408
+"City of Pasig, other barangays",M1,palengke,share_within_10min,0.411015
+"City of Pasig, other barangays",M2,palengke,median_within_5min,0
+"City of Pasig, other barangays",M2,palengke,mean_within_5min,0.158861
+"City of Pasig, other barangays",M2,palengke,median_within_10min,0
+"City of Pasig, other barangays",M2,palengke,mean_within_10min,0.643487
+"City of Pasig, other barangays",M2,palengke,median_within_15min,1
+"City of Pasig, other barangays",M2,palengke,mean_within_15min,1.52992
+"City of Pasig, other barangays",M3,palengke,median_per_10k,0.198555
+"City of Pasig, other barangays",M3,palengke,mean_per_10k,0.426233
+"City of Pasig, other barangays",M1,pharmacy,median_min,4.94798
+"City of Pasig, other barangays",M1,pharmacy,p10_min,1.77713
+"City of Pasig, other barangays",M1,pharmacy,p90_min,10.0307
+"City of Pasig, other barangays",M1,pharmacy,p90_p10_ratio,5.64434
+"City of Pasig, other barangays",M1,pharmacy,share_within_10min,0.898733
+"City of Pasig, other barangays",M2,pharmacy,median_within_5min,1
+"City of Pasig, other barangays",M2,pharmacy,mean_within_5min,1.4657
+"City of Pasig, other barangays",M2,pharmacy,median_within_10min,4
+"City of Pasig, other barangays",M2,pharmacy,mean_within_10min,5.53193
+"City of Pasig, other barangays",M2,pharmacy,median_within_15min,11
+"City of Pasig, other barangays",M2,pharmacy,mean_within_15min,12.3516
+"City of Pasig, other barangays",M3,pharmacy,median_per_10k,2.29402
+"City of Pasig, other barangays",M3,pharmacy,mean_per_10k,3.24039
+"City of Pasig, other barangays",M1,primary_care,median_min,4.55945
+"City of Pasig, other barangays",M1,primary_care,p10_min,1.7059
+"City of Pasig, other barangays",M1,primary_care,p90_min,9.86514
+"City of Pasig, other barangays",M1,primary_care,p90_p10_ratio,5.78297
+"City of Pasig, other barangays",M1,primary_care,share_within_10min,0.904665
+"City of Pasig, other barangays",M2,primary_care,median_within_5min,1
+"City of Pasig, other barangays",M2,primary_care,mean_within_5min,1.45586
+"City of Pasig, other barangays",M2,primary_care,median_within_10min,5
+"City of Pasig, other barangays",M2,primary_care,mean_within_10min,5.75976
+"City of Pasig, other barangays",M2,primary_care,median_within_15min,11
+"City of Pasig, other barangays",M2,primary_care,mean_within_15min,12.708
+"City of Pasig, other barangays",M3,primary_care,median_per_10k,2.47107
+"City of Pasig, other barangays",M3,primary_care,mean_per_10k,3.59702
+"City of Pasig, other barangays",M1,hospital,median_min,10.638
+"City of Pasig, other barangays",M1,hospital,p10_min,4.00814
+"City of Pasig, other barangays",M1,hospital,p90_min,20.5076
+"City of Pasig, other barangays",M1,hospital,p90_p10_ratio,5.1165
+"City of Pasig, other barangays",M1,hospital,share_within_10min,0.456435
+"City of Pasig, other barangays",M2,hospital,median_within_5min,0
+"City of Pasig, other barangays",M2,hospital,mean_within_5min,0.174808
+"City of Pasig, other barangays",M2,hospital,median_within_10min,0
+"City of Pasig, other barangays",M2,hospital,mean_within_10min,0.777227
+"City of Pasig, other barangays",M2,hospital,median_within_15min,1
+"City of Pasig, other barangays",M2,hospital,mean_within_15min,1.812
+"City of Pasig, other barangays",M3,hospital,median_per_10k,0.269422
+"City of Pasig, other barangays",M3,hospital,mean_per_10k,0.558329
+"City of Pasig, other barangays",M1,public_elementary,median_min,9.88515
+"City of Pasig, other barangays",M1,public_elementary,p10_min,3.81357
+"City of Pasig, other barangays",M1,public_elementary,p90_min,19.0478
+"City of Pasig, other barangays",M1,public_elementary,p90_p10_ratio,4.99474
+"City of Pasig, other barangays",M1,public_elementary,share_within_10min,0.507404
+"City of Pasig, other barangays",M2,public_elementary,median_within_5min,0
+"City of Pasig, other barangays",M2,public_elementary,mean_within_5min,0.148337
+"City of Pasig, other barangays",M2,public_elementary,median_within_10min,0
+"City of Pasig, other barangays",M2,public_elementary,mean_within_10min,0.622
+"City of Pasig, other barangays",M2,public_elementary,median_within_15min,1
+"City of Pasig, other barangays",M2,public_elementary,mean_within_15min,1.45
+"City of Pasig, other barangays",M3,public_elementary,median_per_10k,864.851
+"City of Pasig, other barangays",M3,public_elementary,mean_per_10k,1054.53
+"City of Pasig, other barangays",M1,public_high,median_min,13.5028
+"City of Pasig, other barangays",M1,public_high,p10_min,5.90904
+"City of Pasig, other barangays",M1,public_high,p90_min,24.2864
+"City of Pasig, other barangays",M1,public_high,p90_p10_ratio,4.11004
+"City of Pasig, other barangays",M1,public_high,share_within_10min,0.290414
+"City of Pasig, other barangays",M2,public_high,median_within_5min,0
+"City of Pasig, other barangays",M2,public_high,mean_within_5min,0.0721033
+"City of Pasig, other barangays",M2,public_high,median_within_10min,0
+"City of Pasig, other barangays",M2,public_high,mean_within_10min,0.325714
+"City of Pasig, other barangays",M2,public_high,median_within_15min,1
+"City of Pasig, other barangays",M2,public_high,mean_within_15min,0.732423
+"City of Pasig, other barangays",M3,public_high,median_per_10k,228.222
+"City of Pasig, other barangays",M3,public_high,mean_per_10k,650.026
+"City of Pasig, other barangays",M1,open_space,median_min,10.0962
+"City of Pasig, other barangays",M1,open_space,p10_min,3.1457
+"City of Pasig, other barangays",M1,open_space,p90_min,22.118
+"City of Pasig, other barangays",M1,open_space,p90_p10_ratio,7.0312
+"City of Pasig, other barangays",M1,open_space,share_within_10min,0.49421
+"City of Pasig, other barangays",M2,open_space,median_within_5min,0
+"City of Pasig, other barangays",M2,open_space,mean_within_5min,0.264108
+"City of Pasig, other barangays",M2,open_space,median_within_10min,1
+"City of Pasig, other barangays",M2,open_space,mean_within_10min,0.889451
+"City of Pasig, other barangays",M2,open_space,median_within_15min,1
+"City of Pasig, other barangays",M2,open_space,mean_within_15min,1.97119
+"City of Pasig, other barangays",M3,open_space,median_per_10k,0.312351
+"City of Pasig, other barangays",M3,open_space,mean_per_10k,0.879692
+"City of Pasig, other barangays",M1,transit,median_min,4.25821
+"City of Pasig, other barangays",M1,transit,p10_min,0.774568
+"City of Pasig, other barangays",M1,transit,p90_min,12.5932
+"City of Pasig, other barangays",M1,transit,p90_p10_ratio,16.2584
+"City of Pasig, other barangays",M1,transit,share_within_10min,0.825939
+"City of Pasig, other barangays",M2,transit,median_within_5min,0
+"City of Pasig, other barangays",M2,transit,mean_within_5min,0.837211
+"City of Pasig, other barangays",M2,transit,median_within_10min,2
+"City of Pasig, other barangays",M2,transit,mean_within_10min,3.73392
+"City of Pasig, other barangays",M2,transit,median_within_15min,7
+"City of Pasig, other barangays",M2,transit,mean_within_15min,9.10423
+"City of Pasig, other barangays",M1,food_retail_no_convenience,median_min,5.53819
+"City of Pasig, other barangays",M1,food_retail_no_convenience,p10_min,2.11048
+"City of Pasig, other barangays",M1,food_retail_no_convenience,p90_min,11.0616
+"City of Pasig, other barangays",M1,food_retail_no_convenience,share_within_10min,0.856037
+"City of Pasig, other barangays",M4,,mean_categories_within_15min,7.4718
+"City of Pasig, other barangays",M4,,median_categories_within_15min,8
+"City of Pasig, other barangays",M4,,share_with_0,0.00229203
+"City of Pasig, other barangays",M4,,share_with_1,5.90216e-05
+"City of Pasig, other barangays",M4,,share_with_2,0.00112024
+"City of Pasig, other barangays",M4,,share_with_3,0.00373982
+"City of Pasig, other barangays",M4,,share_with_4,0.0226059
+"City of Pasig, other barangays",M4,,share_with_5,0.0756431
+"City of Pasig, other barangays",M4,,share_with_6,0.120299
+"City of Pasig, other barangays",M4,,share_with_7,0.184795
+"City of Pasig, other barangays",M4,,share_with_8,0.330726
+"City of Pasig, other barangays",M4,,share_with_9,0.258719
+"City of Pasig, other barangays",M5,,share_within_500m_bus_jeepney,0.708087
+"City of Pasig, other barangays",M5,,share_within_1km_rail,0.0238375
+"City of Pasig, other barangays",M5,,share_convenient,0.71154
+Metro Manila,people,,people,1.40018e+07
+Metro Manila,M1,food_retail,median_min,3.82319
+Metro Manila,M1,food_retail,p10_min,1.3737
+Metro Manila,M1,food_retail,p90_min,9.31189
+Metro Manila,M1,food_retail,p90_p10_ratio,6.77871
+Metro Manila,M1,food_retail,share_within_10min,0.916675
+Metro Manila,M2,food_retail,median_within_5min,2
+Metro Manila,M2,food_retail,mean_within_5min,2.74936
+Metro Manila,M2,food_retail,median_within_10min,9
+Metro Manila,M2,food_retail,mean_within_10min,11.3218
+Metro Manila,M2,food_retail,median_within_15min,21
+Metro Manila,M2,food_retail,mean_within_15min,25.9713
+Metro Manila,M3,food_retail,median_per_10k,3.97648
+Metro Manila,M3,food_retail,mean_per_10k,5.74928
+Metro Manila,M1,palengke,median_min,10.6073
+Metro Manila,M1,palengke,p10_min,4.11993
+Metro Manila,M1,palengke,p90_min,25.3224
+Metro Manila,M1,palengke,p90_p10_ratio,6.14631
+Metro Manila,M1,palengke,share_within_10min,0.465739
+Metro Manila,M2,palengke,median_within_5min,0
+Metro Manila,M2,palengke,mean_within_5min,0.213137
+Metro Manila,M2,palengke,median_within_10min,0
+Metro Manila,M2,palengke,mean_within_10min,0.89762
+Metro Manila,M2,palengke,median_within_15min,1
+Metro Manila,M2,palengke,mean_within_15min,2.01136
+Metro Manila,M3,palengke,median_per_10k,0.223414
+Metro Manila,M3,palengke,mean_per_10k,0.375667
+Metro Manila,M1,pharmacy,median_min,5.35234
+Metro Manila,M1,pharmacy,p10_min,1.95944
+Metro Manila,M1,pharmacy,p90_min,12.7783
+Metro Manila,M1,pharmacy,p90_p10_ratio,6.52137
+Metro Manila,M1,pharmacy,share_within_10min,0.817723
+Metro Manila,M2,pharmacy,median_within_5min,1
+Metro Manila,M2,pharmacy,mean_within_5min,1.32701
+Metro Manila,M2,pharmacy,median_within_10min,4
+Metro Manila,M2,pharmacy,mean_within_10min,5.38106
+Metro Manila,M2,pharmacy,median_within_15min,10
+Metro Manila,M2,pharmacy,mean_within_15min,12.1179
+Metro Manila,M3,pharmacy,median_per_10k,1.77067
+Metro Manila,M3,pharmacy,mean_per_10k,2.39327
+Metro Manila,M1,primary_care,median_min,5.04959
+Metro Manila,M1,primary_care,p10_min,1.86048
+Metro Manila,M1,primary_care,p90_min,11.9975
+Metro Manila,M1,primary_care,p90_p10_ratio,6.44859
+Metro Manila,M1,primary_care,share_within_10min,0.844257
+Metro Manila,M2,primary_care,median_within_5min,1
+Metro Manila,M2,primary_care,mean_within_5min,1.34105
+Metro Manila,M2,primary_care,median_within_10min,4
+Metro Manila,M2,primary_care,mean_within_10min,5.59127
+Metro Manila,M2,primary_care,median_within_15min,11
+Metro Manila,M2,primary_care,mean_within_15min,12.76
+Metro Manila,M3,primary_care,median_per_10k,1.88795
+Metro Manila,M3,primary_care,mean_per_10k,2.64396
+Metro Manila,M1,hospital,median_min,11.7608
+Metro Manila,M1,hospital,p10_min,4.54212
+Metro Manila,M1,hospital,p90_min,27.5489
+Metro Manila,M1,hospital,p90_p10_ratio,6.0652
+Metro Manila,M1,hospital,share_within_10min,0.405059
+Metro Manila,M2,hospital,median_within_5min,0
+Metro Manila,M2,hospital,mean_within_5min,0.175329
+Metro Manila,M2,hospital,median_within_10min,0
+Metro Manila,M2,hospital,mean_within_10min,0.795549
+Metro Manila,M2,hospital,median_within_15min,1
+Metro Manila,M2,hospital,mean_within_15min,1.88791
+Metro Manila,M3,hospital,median_per_10k,0.178122
+Metro Manila,M3,hospital,mean_per_10k,0.421376
+Metro Manila,M1,public_elementary,median_min,9.61931
+Metro Manila,M1,public_elementary,p10_min,3.67253
+Metro Manila,M1,public_elementary,p90_min,24.4239
+Metro Manila,M1,public_elementary,p90_p10_ratio,6.65044
+Metro Manila,M1,public_elementary,share_within_10min,0.523098
+Metro Manila,M2,public_elementary,median_within_5min,0
+Metro Manila,M2,public_elementary,mean_within_5min,0.185371
+Metro Manila,M2,public_elementary,median_within_10min,1
+Metro Manila,M2,public_elementary,mean_within_10min,0.784014
+Metro Manila,M2,public_elementary,median_within_15min,1
+Metro Manila,M2,public_elementary,mean_within_15min,1.79183
+Metro Manila,M3,public_elementary,median_per_10k,739.342
+Metro Manila,M3,public_elementary,mean_per_10k,943.39
+Metro Manila,M1,public_high,median_min,13.8953
+Metro Manila,M1,public_high,p10_min,5.39563
+Metro Manila,M1,public_high,p90_min,32.8189
+Metro Manila,M1,public_high,p90_p10_ratio,6.08249
+Metro Manila,M1,public_high,share_within_10min,0.310146
+Metro Manila,M2,public_high,median_within_5min,0
+Metro Manila,M2,public_high,mean_within_5min,0.0794042
+Metro Manila,M2,public_high,median_within_10min,0
+Metro Manila,M2,public_high,mean_within_10min,0.350652
+Metro Manila,M2,public_high,median_within_15min,1
+Metro Manila,M2,public_high,mean_within_15min,0.806734
+Metro Manila,M3,public_high,median_per_10k,83.3773
+Metro Manila,M3,public_high,mean_per_10k,474.306
+Metro Manila,M1,open_space,median_min,12.1765
+Metro Manila,M1,open_space,p10_min,3.99601
+Metro Manila,M1,open_space,p90_min,24.8216
+Metro Manila,M1,open_space,p90_p10_ratio,6.2116
+Metro Manila,M1,open_space,share_within_10min,0.390933
+Metro Manila,M2,open_space,median_within_5min,0
+Metro Manila,M2,open_space,mean_within_5min,0.209965
+Metro Manila,M2,open_space,median_within_10min,0
+Metro Manila,M2,open_space,mean_within_10min,0.73912
+Metro Manila,M2,open_space,median_within_15min,1
+Metro Manila,M2,open_space,mean_within_15min,1.66051
+Metro Manila,M3,open_space,median_per_10k,0.134997
+Metro Manila,M3,open_space,mean_per_10k,0.51065
+Metro Manila,M1,transit,median_min,4.63162
+Metro Manila,M1,transit,p10_min,0.796685
+Metro Manila,M1,transit,p90_min,17.2377
+Metro Manila,M1,transit,p90_p10_ratio,21.6367
+Metro Manila,M1,transit,share_within_10min,0.764756
+Metro Manila,M2,transit,median_within_5min,0
+Metro Manila,M2,transit,mean_within_5min,1.48321
+Metro Manila,M2,transit,median_within_10min,4
+Metro Manila,M2,transit,mean_within_10min,6.59064
+Metro Manila,M2,transit,median_within_15min,10
+Metro Manila,M2,transit,mean_within_15min,15.6569
+Metro Manila,M1,food_retail_no_convenience,median_min,5.84121
+Metro Manila,M1,food_retail_no_convenience,p10_min,2.23118
+Metro Manila,M1,food_retail_no_convenience,p90_min,13.6226
+Metro Manila,M1,food_retail_no_convenience,share_within_10min,0.793795
+Metro Manila,M4,,mean_categories_within_15min,6.98106
+Metro Manila,M4,,median_categories_within_15min,7
+Metro Manila,M4,,share_with_0,0.00484635
+Metro Manila,M4,,share_with_1,0.00985109
+Metro Manila,M4,,share_with_2,0.0162367
+Metro Manila,M4,,share_with_3,0.0307042
+Metro Manila,M4,,share_with_4,0.053542
+Metro Manila,M4,,share_with_5,0.0890257
+Metro Manila,M4,,share_with_6,0.127977
+Metro Manila,M4,,share_with_7,0.174066
+Metro Manila,M4,,share_with_8,0.242753
+Metro Manila,M4,,share_with_9,0.250998
+Metro Manila,M5,,share_within_500m_bus_jeepney,0.655707
+Metro Manila,M5,,share_within_1km_rail,0.113782
+Metro Manila,M5,,share_convenient,0.659382
