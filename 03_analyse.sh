@@ -10,8 +10,7 @@
 #   06_audits                 the DepEd registry match and the service and walk audit worksheets
 # The notebooks import their logic from src/03_analyse/ (measures, sensitivity, audits, charts)
 # and are saved with their outputs by src/shared/run_notebook.py.
-# Writes results/tables/ and results/figures/ (committed), and data/work/hex_measures.parquet
-# for the web map. About 3 minutes.
+# Writes results/tables/ and results/figures/ (committed). About 3 minutes.
 source "$(dirname "$0")/src/shared/setup.sh"
 
 require_inputs ./02_build_tables.sh data/derived/barangays.csv data/derived/service_quality.csv \

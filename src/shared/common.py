@@ -122,11 +122,5 @@ def require(*paths, how):
         sys.exit(f"missing input: {', '.join(missing)}\n{how}")
 
 
-def not_built(script, pr):
-    """Stop a pipeline script that is still a stub, naming the PR that builds it."""
-    print(f"{Path(script).resolve().relative_to(ROOT)}: not built yet, arrives in PR {pr}", file=sys.stderr)
-    raise SystemExit(2)
-
-
 for _d in (WORK, DERIVED):
     _d.mkdir(parents=True, exist_ok=True)

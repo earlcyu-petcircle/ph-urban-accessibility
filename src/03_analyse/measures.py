@@ -195,19 +195,6 @@ def context_table(w):
     return pd.DataFrame(rows)
 
 
-def hex_table(w):
-    """People-weighted measures per H3 resolution-10 hexagon, for the web map (PR 4)."""
-    w = w.assign(m4=coverage(w), **{f"m_{c}": minutes(w[f"d_{c}"]) for c in CATEGORIES})
-    cols = [f"m_{c}" for c in CATEGORIES] + ["m4"]
-    g = w[["h3_10", "people", *cols]].copy()
-    for c in cols:
-        g[c] = g[c] * g.people
-    h = g.groupby("h3_10").sum()
-    for c in cols:
-        h[c] = h[c] / h.people.where(h.people > 0)
-    return h.reset_index()
-
-
 def group_median(values, people, keys):
     """People-weighted median of `values` within each key (the value at which half the people are reached)."""
     d = pd.DataFrame({"k": keys, "v": values, "p": people}).sort_values(["k", "v"])

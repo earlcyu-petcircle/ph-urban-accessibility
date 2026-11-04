@@ -11,9 +11,9 @@
 # is saved by hand to data/manual/popcen2024/ncr.xlsx (docs/data-quality.md, "Getting the hand
 # downloads"). The DOH National Health Facility Registry is not used: it refuses scripts and
 # its export fails in a browser too.
-# Two layers in docs/paper.md section 3 are not downloaded in this phase: the Mapillary
-# imagery for the walk audit (PR 3, read through its API) and the map-only context layers
-# (Relative Wealth Index, UP NOAH flood hazard; PR 4).
+# Two layers in docs/paper.md section 3 are not downloaded: the Mapillary imagery for the walk
+# audit is viewed by hand through the audit worksheets' links, and the map-only context layers
+# (Relative Wealth Index, UP NOAH flood hazard) are not used.
 set -euo pipefail
 
 RAW="data/raw"

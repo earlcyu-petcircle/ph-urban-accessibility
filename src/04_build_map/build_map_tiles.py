@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Vector tiles and small files for the interactive web map in docs/map/ (MapLibre GL JS reading
-PMTiles). Everything is built from the PR 3 results; nothing new is measured.
+PMTiles). Everything is built from the analysis results (03_analyse.sh); nothing new is measured.
 
   docs/map/data/hexes.pmtiles      H3 resolution-10 hexagons with residents: people, and for
                                    each category the median resident's walk in metres (M1),

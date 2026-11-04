@@ -1,6 +1,6 @@
 """
 Atlas Grid, the design of the ph-lottery-outlets story site, for the static charts and maps
-(mirrored from that repository's src/shared/atlas.py; this project's story site arrives in PR 4).
+(mirrored from that repository's src/shared/atlas.py; used for this project's charts).
 
 White ground, near-black ink and one cobalt accent; headings in Bricolage Grotesque 800, text
 in Public Sans and numbers in JetBrains Mono; bars flat cobalt on a 2px black baseline, with
