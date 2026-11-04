@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - run: ruff check .
+      - run: ruff format --check .
+      - name: shell syntax
+        run: for f in *.sh src/*/*.sh; do bash -n "$f"; done
+      - run: pytest -q

@@ -1,0 +1,12 @@
+# Downloads and large intermediates; regenerate with ./run_all.sh
+data/raw/
+data/work/
+# Hand downloads (PSA and DOH files behind bot checks) and the private home points; see docs/paper.md
+data/manual/
+
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+.ipynb_checkpoints/
