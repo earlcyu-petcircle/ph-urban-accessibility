@@ -2,7 +2,7 @@
 
 This note covers the first two phases of the study: collecting the data and building the analysis inputs.
 It reports how complete each layer is and where the gaps sit, so the analysis knows what it stands on.
-It holds no measures and no findings; those come with the analysis (PR 3) in the [paper](paper.md).
+It holds no measures and no findings; those are in the [paper](paper.md#6-results) and on the [comparison site](https://earlcyu-petcircle.github.io/ph-urban-accessibility/).
 
 Every number here is rebuilt by `./02_build_tables.sh` (or `./run_all.sh`) from the downloads in `data/raw/` and the hand download in `data/manual/`.
 The machine-readable versions are in [`data/derived/`](../data/derived/): `data_quality.json`, `census_2024_check.json`, `service_quality.csv` and `barangays.csv`.
@@ -35,13 +35,13 @@ Snapshots in this build: OpenStreetMap extract of 3 November 2026 (replication t
 | Health check | Healthsites.io (HDX) | Facility | Sep 2026 | ODbL | Used when HDX allows; refused in this build |
 
 The study box is Metro Manila plus 2 km on every side (120.88-121.16 E, 14.33-14.81 N); Overture and the walking network are cut to it, and services count anywhere within 2 km of Metro Manila.
-Two layers in [section 3 of the paper](paper.md#3-data-sources) are not collected here: the Mapillary imagery for the walk audit arrives with the analysis (PR 3), and the map-only context layers (Relative Wealth Index, UP NOAH flood hazard) with the web map (PR 4).
+Two layers in [section 3 of the paper](paper.md#3-data-sources) are not collected: the Mapillary imagery for the walk audit is viewed by hand through the links in the audit worksheets (paper, section 6.7), and the map-only context layers (Relative Wealth Index, UP NOAH flood hazard) were left out of the comparison site, which keeps to the measures.
 
 Three changes from the design's source list, all forced by the download servers:
 
 - **DepEd school locations: the 2019 OSMaPaaralan list replaces the 2008 HDX file.** HDX answered every scripted download that day with a bot challenge (HTTP 202 and an empty body), and refused the same link in a browser session driven by the tooling.
   OSMaPaaralan is served from GitHub, is eleven years newer, and carries what the design needs from a registry: the DepEd school ID, the school level and enrolment (for the crowding measure, M3).
-- **Healthsites.io is optional.** The same HDX block stopped it (and still did on the PR 3 run), so `01_collect_data.sh` warns and `02_build_tables.sh` skips the check; it runs again whenever the download gets through.
+- **Healthsites.io is optional.** The same HDX block stopped it (and still did on 4 November 2026, when the analysis ran), so `01_collect_data.sh` warns and `02_build_tables.sh` skips the check; it runs again whenever the download gets through.
 - **The DOH National Health Facility Registry is not used.** It answers scripts with HTTP 403, and its export fails even in a browser, so it is dropped for good: hospitals and primary care rest on Overture and OpenStreetMap, there is no health registry match, and hospitals have no bed counts, so the crowding measure (M3) counts each hospital as 1, the design's fallback.
 
 ## Getting the hand downloads
@@ -103,7 +103,7 @@ Where the census and WorldPop disagree, a few buildings can carry many people.
 The largest gaps are boundary problems: Post Proper Southside, one of the EMBO barangays, has 68,388 people in the 2024 census on a COD-AB polygon where WorldPop sees 4,780, so its 383 residential buildings average 179 people and one 13 m² footprint takes 3,241.
 These barangays only enter the Metro Manila context percentiles.
 The study barangays' census counts sit within 3% of WorldPop's for Barangay 136 and Oranbo; Loyola Heights' is 21% below it, which the campus check below should explain.
-The by-hand footprint checks for Barangay 136, the Ateneo campus and Capitol Commons are part of the analysis audits (PR 3).
+The by-hand footprint checks for Barangay 136, the Ateneo campus and Capitol Commons are part of the audits still to be scored by hand (paper, section 6.7).
 
 ## The service layer
 

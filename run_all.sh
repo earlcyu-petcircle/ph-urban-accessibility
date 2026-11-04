@@ -6,10 +6,10 @@
 #   ./01_collect_data.sh   downloads into data/raw/
 #   ./02_build_tables.sh   people, services and the walking network in data/work/ and data/derived/
 #   ./03_analyse.sh        walking times, the five measures and the checks in results/
-#   ./04_build_map.sh      web map tiles in docs/map/data/
+#   ./04_build_map.sh      the comparison site's data in docs/map/data/
 # Needs Python 3.12, curl and tippecanoe (brew install tippecanoe), plus the PSA 2024 census
 # workbook saved by hand into data/manual/
-# (docs/data-quality.md). Phases 3 and 4 are stubs until PR 3 and PR 4 and stop there.
+# (docs/data-quality.md).
 set -euo pipefail
 cd "$(dirname "$0")"
 source src/shared/setup.sh

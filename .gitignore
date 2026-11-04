@@ -1,7 +1,7 @@
 # Downloads and large intermediates; regenerate with ./run_all.sh
 data/raw/
 data/work/
-# Hand downloads (PSA and DOH files behind bot checks) and the private home points; see docs/paper.md
+# Hand downloads (the PSA census workbook, behind a bot check) and the private home points; see docs/data-quality.md
 data/manual/
 
 .venv/

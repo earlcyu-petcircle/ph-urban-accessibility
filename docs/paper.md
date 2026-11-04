@@ -118,14 +118,14 @@ The PSA census workbook refuses scripted downloads, so it is saved by hand into 
 | Health check | [Healthsites.io](https://data.humdata.org/dataset/philippines-healthsites) | Facility | Sep 2026 | ODbL | An open completeness check on the health layer, used when HDX allows the download (it refused in this build) |
 | School registry | DepEd's public-school list as cleaned by OpenStreetMap Philippines ([OSMaPaaralan](https://github.com/OSMPH/deped_schools_db)); [HOT OpenStreetMap education facilities](https://data.humdata.org/dataset/hotosm_phl_education_facilities) | School | 2019; Oct 2026 | DepEd data published for OpenStreetMap use; ODbL | Public schools for the learning categories, with level and enrolment, and their match rate |
 | Walk audit | Mapillary street imagery | Photo | Varies | CC BY-SA | Sidewalks, crossings, shade, obstruction and sari-sari stores on sample routes |
-| Context, map only | Meta Relative Wealth Index; UP NOAH flood hazard | 2.4 km tile; hazard zone | 2021; varies | CC BY-NC 4.0; to confirm | Optional map layers for context, not measures |
+| Context, map only | Meta Relative Wealth Index; UP NOAH flood hazard | 2.4 km tile; hazard zone | 2021; varies | CC BY-NC 4.0; to confirm | Planned as optional map context; left out of the comparison site, which keeps to the measures |
 
 What was considered and not used:
 
 - **Timetabled public transport.** The only public Metro Manila feed (Sakay and DOTC GTFS) was last updated in March 2015, before the jeepney route rationalisation, so transit is measured as walking access to stops and routes instead.
 - **Google Places.** Its terms forbid storing places, and Overture plus OpenStreetMap cover the same ground openly.
 - **OpenStreetMap sidewalk tags as a walking impedance.** Too patchy: around each place, only 1,291 of 5,359 ways near Tondo, 154 of 1,794 near Loyola Heights and 172 of 868 near Oranbo carry any sidewalk tag (Overpass, 4 November 2026). The walk audit covers walk quality instead.
-- **The Relative Wealth Index as a measure.** Its 2.4 km tiles are coarser than all three barangays, so it is kept as map context only.
+- **The Relative Wealth Index as a measure.** Its 2.4 km tiles are coarser than all three barangays, so it was planned as map context only, and in the end left out.
 - **OpenStreetMap history to measure the past.** Mapping completeness has changed more than the places have, so a historical comparison would mostly measure the map's growth.
 - **The whole Tondo district as the Tondo unit.** It holds 259 barangays and about 638,000 people, which is not like for like with two single barangays (appendix C).
 
@@ -539,7 +539,7 @@ Libraries are added to `requirements.txt` in the PR that first uses them.
 | | M1 nearest walk and M2 choice (RQ1, RQ2) | [`notebooks/01_proximity_and_choice.ipynb`](../notebooks/01_proximity_and_choice.ipynb), with `measures.py` | `results/tables/measures.csv` | 3 |
 | | M3 crowding (RQ3) | [`notebooks/02_crowding.ipynb`](../notebooks/02_crowding.ipynb) | figures | 3 |
 | | M4 coverage and M5 transit (RQ4) | [`notebooks/03_coverage_and_transit.ipynb`](../notebooks/03_coverage_and_transit.ipynb) | figures | 3 |
-| | Context and fairness (RQ5) | [`notebooks/04_context_and_fairness.ipynb`](../notebooks/04_context_and_fairness.ipynb) | `results/tables/context.csv`, `data/work/hex_measures.parquet` | 3 |
+| | Context and fairness (RQ5) | [`notebooks/04_context_and_fairness.ipynb`](../notebooks/04_context_and_fairness.ipynb) | `results/tables/context.csv` | 3 |
 | | The ten sensitivity checks | [`notebooks/05_robustness.ipynb`](../notebooks/05_robustness.ipynb), with `sensitivity.py` | `results/tables/sensitivity.csv`, `robustness.csv` | 3 |
 | | Registry match and the audit samples | [`notebooks/06_audits.ipynb`](../notebooks/06_audits.ipynb), with `audits.py` | `results/tables/registry_match.csv`, `service_audit_sample.csv`, `walk_audit_routes.csv` | 3 |
 | | Figures (Atlas style, Riso palette) | `src/03_analyse/charts.py` | `results/figures/` | 3 |
@@ -575,4 +575,5 @@ The research design was then redone from the literature, reviewed in three round
 [#2](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/2) puts this paper and the project skeleton in place.
 [#3](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/3) collects the data and builds the analysis inputs (section 5); the 2008 DepEd school file gave way to DepEd's 2019 list as cleaned by OpenStreetMap Philippines, because HDX refused scripted downloads that day and the newer list carries school levels and enrolment.
 [#4](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/4) runs the analysis (section 6); with it the DOH registry was dropped for good, because its export fails even in a browser.
-The fourth pull request builds the story site and turns its map into a comparison of any three barangays, with the three I have lived in as one featured point of view; with it the repository was renamed from metro-manila-accessibility to ph-urban-accessibility, since later series may cover the whole country.
+[#5](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/5) builds the story site and turns its map into a comparison of any three barangays, with the three I have lived in as one featured point of view; with it the repository was renamed from metro-manila-accessibility to ph-urban-accessibility, since later series may cover the whole country.
+[#6](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/6) cleans up: it removes leftovers of the step-by-step build and updates the notes that pointed to later steps.
