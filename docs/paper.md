@@ -4,7 +4,7 @@ Earl Yu, November 2026.
 Open data only.
 
 This is the full paper for the project.
-The research design is final (approved on 4 November 2026); the data, results and discussion sections fill in as the next pull requests land, and each one says which.
+The research design is final (approved on 4 November 2026) and the data are collected and built (section 5); the results and discussion fill in as the next pull requests land, and each one says which.
 
 **In short.**
 Which of the three Metro Manila barangays I have lived in puts everyday life within a short walk?
@@ -101,7 +101,7 @@ Where people actually go, and whether access shapes health or income, are out of
 ## 3. Data sources
 
 Every source is public and free to download.
-The PSA census workbook and the DOH facility registry refuse scripted downloads, so they are saved by hand into `data/manual/`.
+The PSA census workbook and the DOH facility registry refuse scripted downloads, so they are saved by hand into `data/manual/`; HDX sometimes challenges scripts too, and the [data-quality notes](data-quality.md#getting-the-hand-downloads) give the fallback for each file.
 
 | Role | Source | Grain | Year | Licence | Why this one |
 |---|---|---|---|---|---|
@@ -114,7 +114,7 @@ The PSA census workbook and the DOH facility registry refuse scripted downloads,
 | Services, markets, parks, network, transit | [OpenStreetMap](https://download.geofabrik.de/asia/philippines.html), Geofabrik Philippines extract | Point, polygon, way | Pinned snapshot | ODbL | Palengke, parks, the walking network, and jeepney, bus and rail routes |
 | Health registry | DOH National Health Facility Registry (downloaded by hand) | Facility | Live | Government publication | The official list of health facilities, with hospital beds for M3 |
 | Health check | [Healthsites.io](https://data.humdata.org/dataset/philippines-healthsites) | Facility | Sep 2026 | ODbL | A completeness check on the health layer |
-| School registry | DepEd school locations; HOT OpenStreetMap education facilities | School | 2008; Oct 2026 | HDX terms; ODbL | Public schools for the learning categories and their match rate |
+| School registry | DepEd's public-school list as cleaned by OpenStreetMap Philippines ([OSMaPaaralan](https://github.com/OSMPH/deped_schools_db)); [HOT OpenStreetMap education facilities](https://data.humdata.org/dataset/hotosm_phl_education_facilities) | School | 2019; Oct 2026 | DepEd data published for OpenStreetMap use; ODbL | Public schools for the learning categories, with level and enrolment, and their match rate |
 | Walk audit | Mapillary street imagery | Photo | Varies | CC BY-SA | Sidewalks, crossings, shade, obstruction and sari-sari stores on sample routes |
 | Context, map only | Meta Relative Wealth Index; UP NOAH flood hazard | 2.4 km tile; hazard zone | 2021; varies | CC BY-NC 4.0; to confirm | Optional map layers for context, not measures |
 
@@ -247,13 +247,26 @@ It follows the [PH lottery story site](https://earlcyu-petcircle.github.io/ph-lo
 
 ## 5. Data
 
-*To be filled in by PR 2 (data collection and build).*
+Three inputs hold everything the measures need, built by `./02_build_tables.sh` from the downloads (the large files sit in the gitignored `data/work/`):
 
-PR 2 adds the analysis inputs and the tables this section will describe:
+- **People:** 1,573,122 residential buildings, each carrying its share of its barangay's 2024 census count, spread by WorldPop and, for check 09, by GHS-POP.
+- **Services:** every Overture, OpenStreetMap and DepEd record in the nine categories within 2 km of Metro Manila, with duplicates grouped and a default layer marked; plus the access points round each open space and the vertices of every bus and jeepney route.
+- **The walking network:** 16,741 km of walkable OpenStreetMap ways (snapshot of 3 November 2026), 97.3% of nodes in one connected piece.
 
-- `data/derived/barangays.csv`: one row per Metro Manila barangay, with people, area, density and the study flag.
-- `data/derived/service_quality.csv`: service counts by source, and registry match rates per barangay.
-- `docs/data-quality.md`: how each source was parsed and joined, the column dictionary, and where the gaps sit.
+The small tables are committed:
+
+- [`data/derived/barangays.csv`](../data/derived/barangays.csv): one row per Metro Manila barangay (1,712), with people, area, density, the study and Tondo flags, and building counts.
+- [`data/derived/service_quality.csv`](../data/derived/service_quality.csv): service counts by source, and registry match rates, for Metro Manila, the three study cities and the three barangays.
+- [`data/derived/data_quality.json`](../data/derived/data_quality.json) and [`census_2024_check.json`](../data/derived/census_2024_check.json): every count and check below.
+- [`docs/data-quality.md`](data-quality.md): how each source was parsed and joined, the column dictionary, and where the gaps sit.
+
+The data-quality headline:
+
+- The 2024 census workbook sums to the official 14,001,751 for Metro Manila, and every person lands on a COD-AB barangay; all three study barangays match by name, with 1,302, 21,768 and 3,374 people.
+- 99.1% of WorldPop's Metro Manila population sits in a 100 m cell with a residential footprint, so people are placed by buildings and WorldPop together in every barangay.
+- In Metro Manila the default layer holds 7,666 food shops, 505 markets, 3,210 pharmacies, 3,582 primary care places, 563 hospitals, 483 public elementary and 231 public high schools, 666 open spaces and 4,201 transit stops and stations.
+- 82% of the DepEd public elementary schools and 86% of the public high schools in Metro Manila are found in OpenStreetMap or Overture.
+- The known gaps: 234 sari-sari stores mapped in all of Metro Manila and none in Barangay 136; 95 mapped jeepney routes against 768 bus routes; hospitals without a registry check or bed counts until the DOH registry is saved by hand; and 112 barangays, none of them study barangays, whose census count is more than three times WorldPop's, mostly where COD-AB and the census draw the boundary differently.
 
 ## 6. Results
 
@@ -273,7 +286,7 @@ PR 2 adds the analysis inputs and the tables this section will describe:
   The study states this on every food figure, chart and map legend, counts sari-sari stores on the walk-audit routes to give a stores-per-kilometre figure beside the measures, and reports food access with and without convenience stores so readers can see how much the definition matters.
 - **Potential, not realised, access.** There is no data on where people actually go.
 - **Mapped is not there.** Beyond informal retail, new shops are missed and closed ones kept, which the service audit measures.
-- **Quality, price and capacity** of services are invisible except where registries give capacity.
+- **Quality, price and capacity** of services are invisible except where registries give capacity: school enrolment from DepEd, and hospital beds only once the DOH registry is saved by hand.
 - **The walk itself.** Heat, floods, crossings, footbridges, safety and sidewalks are not in the network; the walk audit covers only a sample of routes.
 - **Jeepney routes may be dated.** OpenStreetMap routes may pre-date the LTFRB route rationalisation, which check 10 brackets.
 - **Population can land in the wrong place.** Placement errors cluster at ports, reclamations, campuses and malls, so every building in Barangay 136, the Ateneo campus and Capitol Commons get a by-hand check.
@@ -292,8 +305,7 @@ What would take this further, already visible from the design:
 
 ## 10. How to reproduce
 
-The phase scripts are in place but stop with the pull request that builds them, so nothing can be reproduced yet.
-From PR 2 the steps will be:
+Phases 1 and 2 run now; phases 3 and 4 stop with a message until PR 3 and PR 4 build them.
 
 ```bash
 git clone https://github.com/earlcyu-petcircle/metro-manila-accessibility.git
@@ -308,7 +320,8 @@ cd metro-manila-accessibility
 ```
 
 It needs Python 3.12, `curl` and [tippecanoe](https://github.com/felt/tippecanoe) (`brew install tippecanoe`); nothing else is installed globally, since `src/shared/setup.sh` makes a local virtual environment from `requirements.txt`.
-The PSA 2024 census workbook and the DOH facility registry are saved by hand into `data/manual/`, and the private home points for the home lens go in `data/manual/homes.csv`; the whole folder is gitignored.
+The downloads take about 1.3 GB and the build about two minutes.
+The PSA 2024 census workbook (and, optionally, the DOH facility registry) is saved by hand into `data/manual/` as the [data-quality notes](data-quality.md#getting-the-hand-downloads) describe, and the private home points for the home lens go in `data/manual/homes.csv`; the whole folder is gitignored.
 
 ## References
 
@@ -347,12 +360,12 @@ Entries marked (abstract) were read from their abstract or publication page only
 30. Bohannon, R. W. "Comfortable and maximum walking speed of adults aged 20-79 years: reference values and determinants." *Age and Ageing* 26 (1), 15-19, 1997. <https://doi.org/10.1093/ageing/26.1.15> (abstract)
 31. Interaksyon. "More sari-sari stores selling 'tingi' supplies spring up near schools, says study." 14 August 2025. <https://media.interaksyon.com/trends-spotlights/2025/08/14/300595/more-sari-sari-stores-selling-tingi-supplies-spring-up-near-schools-says-study/> (news; used only for the size of one firm's store network)
 
-Data: PSA 2024 Census of Population; WorldPop, University of Southampton (CC BY 4.0); JRC GHS-POP (CC BY 4.0); OCHA COD-AB Philippines (CC BY-IGO); © OpenStreetMap contributors (ODbL); Overture Maps buildings (ODbL) and places (CDLA Permissive 2.0 and per-source terms); DOH National Health Facility Registry; Healthsites.io (ODbL); DepEd; Mapillary (CC BY-SA).
+Data: PSA 2024 Census of Population; WorldPop, University of Southampton (CC BY 4.0); JRC GHS-POP (CC BY 4.0); OCHA COD-AB Philippines (CC BY-IGO); © OpenStreetMap contributors (ODbL); Overture Maps buildings (ODbL) and places (CDLA Permissive 2.0 and per-source terms); DOH National Health Facility Registry; Healthsites.io (ODbL); DepEd, via OpenStreetMap Philippines' OSMaPaaralan; HOT (ODbL); Mapillary (CC BY-SA).
 
 ## Appendix A. Code and pipeline
 
 The code sits in one folder per phase under [`src/`](../src/), named after the phase script at the repo root that runs it, with shared paths and study constants in [`src/shared/common.py`](../src/shared/common.py) and the phase scripts' setup in [`src/shared/setup.sh`](../src/shared/setup.sh).
-Every script below is a stub for now: it describes its step and stops with the PR that builds it.
+The phase 1 and 2 scripts are built; the phase 3 and 4 scripts are stubs that describe their step and stop with the PR that builds them.
 From PR 3 the analysis runs as narrative notebooks in [`notebooks/`](../notebooks/), which import their logic from `src/03_analyse/`.
 Libraries are added to `requirements.txt` in the PR that first uses them.
 
@@ -360,11 +373,11 @@ Libraries are added to `requirements.txt` in the PR that first uses them.
 |---|---|---|---|---|
 | `01_collect_data.sh` | Download the open sources | `src/01_collect_data/download_sources.sh` | `data/raw/` (gitignored) | 2 |
 | | Overture places and buildings | `src/01_collect_data/download_overture.py` | `data/raw/` | 2 |
-| `02_build_tables.sh` | Read the 2024 census workbook | `src/02_build_tables/read_census_2024.py` | `data/work/`, `data/derived/` | 2 |
+| `02_build_tables.sh` | Read the 2024 census workbook and join it to COD-AB | `src/02_build_tables/read_census_2024.py` | `data/work/census_2024.parquet`, `data/derived/census_2024_check.json` | 2 |
 | | Place people in buildings | `src/02_build_tables/place_people.py` | `data/work/origins.parquet` | 2 |
-| | The nine-category service layer and registry match | `src/02_build_tables/build_services.py` | `data/work/`, `data/derived/` | 2 |
-| | The walking network | `src/02_build_tables/build_walk_network.py` | `data/work/` | 2 |
-| | Barangay and data-quality tables | `src/02_build_tables/build_tables.py` | `data/derived/` | 2 |
+| | The nine-category service layer and registry match | `src/02_build_tables/build_services.py` | `data/work/services.parquet`, `open_space_access.parquet`, `transit_routes.parquet`, `data/derived/service_quality.csv` | 2 |
+| | The walking network | `src/02_build_tables/build_walk_network.py` | `data/work/walk_nodes.parquet`, `walk_edges.parquet` | 2 |
+| | Barangay and data-quality tables | `src/02_build_tables/build_tables.py` | `data/derived/barangays.csv`, `data_quality.json` | 2 |
 | `03_analyse.sh` | Walking times | `src/03_analyse/walk_times.py` | `data/work/` | 3 |
 | | The five measures | `src/03_analyse/measures.py` | `results/tables/` | 3 |
 | | The ten sensitivity checks | `src/03_analyse/sensitivity.py` | `results/tables/` | 3 |
@@ -383,3 +396,4 @@ The study is built in steps, each a pull request.
 A first pass ([#1](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/1)), closed unmerged on 4 November 2026, scored all 1,710 Metro Manila barangays and compared the whole Tondo district against two single barangays, with its logic split across SQL files and Python scripts.
 The research design was then redone from the literature, reviewed in three rounds and approved on 4 November 2026: barangay level for all three places, a private home lens, walking plus walking to transit, nine service categories, a profile of measures rather than one score, today's data only, and a street-imagery walk audit.
 [#2](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/2) puts this paper and the project skeleton in place.
+[#3](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/3) collects the data and builds the analysis inputs (section 5); the 2008 DepEd school file gave way to DepEd's 2019 list as cleaned by OpenStreetMap Philippines, because HDX refused scripted downloads that day and the newer list carries school levels and enrolment.

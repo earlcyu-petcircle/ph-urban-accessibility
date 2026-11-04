@@ -1,0 +1,146 @@
+{
+  "source": "PSA 2024 Census of Population, Table C - Population by Barangay, NCR, as of 1 July 2024",
+  "file": "data/manual/popcen2024/ncr.xlsx",
+  "census_barangays": 1715,
+  "census_cities": 17,
+  "census_total": 14001751,
+  "table_b_ncr_total": 14001751,
+  "codab_barangays": 1712,
+  "match": {
+    "name": 1698,
+    "name_ncr": 10,
+    "none": 2,
+    "name_split": 1,
+    "fuzzy": 1
+  },
+  "census_barangays_matched": 1715,
+  "census_people_matched": 14001751,
+  "census_unmatched": [],
+  "codab_unmatched": [
+    {
+      "adm4_pcode": "PH1303901906",
+      "adm4_name": "Manila North Cemetery",
+      "adm3_name": "City of Manila",
+      "people": 0.0
+    },
+    {
+      "adm4_pcode": "PH1303901907",
+      "adm4_name": "Tutuban Mall (Claimed by Five Barangays of Tondo, Manila)",
+      "adm3_name": "City of Manila",
+      "people": 0.0
+    }
+  ],
+  "codab_split": {
+    "Barangay 176": 6
+  },
+  "matched_on_another_name_or_city": [
+    {
+      "adm4_pcode": "PH1307501176",
+      "adm4_name": "Barangay 176",
+      "adm3_name": "Caloocan City",
+      "census_name": "Barangay 176-A 1; Barangay 176-B 1; Barangay 176-C 1; Barangay 176-D 1; Barangay 176-E 1; Barangay 176-F 1",
+      "match": "name_split"
+    },
+    {
+      "adm4_pcode": "PH1307503008",
+      "adm4_name": "North Bay Blvd., North",
+      "adm3_name": "City of Navotas",
+      "census_name": "North Bay Boulevard North",
+      "match": "fuzzy"
+    },
+    {
+      "adm4_pcode": "PH1307602003",
+      "adm4_name": "Cembo",
+      "adm3_name": "City of Makati",
+      "census_name": "Cembo 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602004",
+      "adm4_name": "Comembo",
+      "adm3_name": "City of Makati",
+      "census_name": "Comembo 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602007",
+      "adm4_name": "East Rembo",
+      "adm3_name": "City of Makati",
+      "census_name": "East Rembo 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602016",
+      "adm4_name": "Pembo",
+      "adm3_name": "City of Makati",
+      "census_name": "Pembo 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602019",
+      "adm4_name": "Pitogo",
+      "adm3_name": "City of Makati",
+      "census_name": "Pitogo 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602021",
+      "adm4_name": "Post Proper Northside",
+      "adm3_name": "City of Makati",
+      "census_name": "Post Proper Northside 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602022",
+      "adm4_name": "Post Proper Southside",
+      "adm3_name": "City of Makati",
+      "census_name": "Post Proper Southside 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602028",
+      "adm4_name": "South Cembo",
+      "adm3_name": "City of Makati",
+      "census_name": "South Cembo 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602032",
+      "adm4_name": "West Rembo",
+      "adm3_name": "City of Makati",
+      "census_name": "West Rembo 1",
+      "match": "name_ncr"
+    },
+    {
+      "adm4_pcode": "PH1307602033",
+      "adm4_name": "Rizal",
+      "adm3_name": "City of Makati",
+      "census_name": "Rizal 1",
+      "match": "name_ncr"
+    }
+  ],
+  "census_people_not_placed": 0,
+  "people_on_codab_barangays": 14001751.0,
+  "tondo_district_barangays": 259,
+  "study_barangays": {
+    "Barangay 136": {
+      "pcode": "PH1303901136",
+      "people": 1302,
+      "match": "name",
+      "district": "Tondo I/II"
+    },
+    "Loyola Heights": {
+      "pcode": "PH1307404055",
+      "people": 21768,
+      "match": "name",
+      "district": null
+    },
+    "Oranbo": {
+      "pcode": "PH1307403013",
+      "people": 3374,
+      "match": "name",
+      "district": null
+    }
+  },
+  "problems": []
+}
