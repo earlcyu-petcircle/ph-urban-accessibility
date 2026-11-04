@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Data: raw downloads and intermediate work stay local
+data/raw/
+data/work/
+
+# Private: home locations for the home lens, never committed
+home.local.toml
+
+# OS
+.DS_Store

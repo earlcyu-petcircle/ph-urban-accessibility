@@ -1,0 +1,64 @@
+# Study design for the Metro Manila accessibility study.
+# Every parameter the pipeline uses lives here; docs/research-design.md explains each one.
+# Home locations never go in this file: they live in the gitignored home.local.toml.
+
+[[barangays]]
+pcode = "PH1303901136"
+name = "Barangay 136"
+city = "City of Manila"
+district = "Tondo"
+lived = "born and raised"
+
+[[barangays]]
+pcode = "PH1307404055"
+name = "Loyola Heights"
+city = "Quezon City"
+lived = "two years of college"
+
+[[barangays]]
+pcode = "PH1307403013"
+name = "Oranbo"
+city = "City of Pasig"
+lived = "now"
+
+[walking]
+speed_kmh = 4.2                       # observed Metro Manila pace is 70.62 m/min (Tolentino & Sigua 2022)
+thresholds_min = [5, 10, 15, 20]
+sufficiency_min = 10                  # the 10-minute minimum, about 700 m
+check_walkshed_min = [10, 15, 20]     # equal walk-sheds around each barangay's population centre
+
+[transit]                             # UN SDG 11.2.1
+low_capacity_m = 500                  # bus or jeepney stop or route
+high_capacity_m = 1000                # LRT or MRT station
+jeepney_routes_count_as_stops = true
+
+[measures]
+e2sfca_catchment_min = 15
+coverage_min = 15
+
+[area]
+fringe_km = 2.0                       # services up to this far beyond Metro Manila still count
+h3_resolution = 10
+
+[sources]
+overture_release = "2026-10-21.0"
+worldpop_year = 2024
+census = "PSA 2024 Census of Population (POPCEN)"
+overture_min_confidence = 0.5
+dedupe_m = 50
+open_space_min_ha = 0.1
+
+[services]                            # nine categories, grouped by the social functions of Moreno et al. (2021)
+supplying = ["food_retail", "palengke", "pharmacy"]
+caring = ["primary_care", "hospital"]
+learning = ["public_elementary", "public_high"]
+enjoying = ["open_space"]
+moving = ["transit"]
+
+[sensitivity]
+speed_kmh = [3.6, 4.2, 4.8]
+overture_min_confidence = [0.3, 0.5, 0.7]
+h3_resolution = [9, 10]
+population_surface = ["worldpop", "ghs_pop"]
+service_source = ["overture", "osm", "merged"]
+jeepney_routes_count_as_stops = [true, false]
