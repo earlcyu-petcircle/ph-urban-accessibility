@@ -79,7 +79,6 @@ HEALTHSITES_CSV = RAW / "healthsites_philippines.csv"
 DEPED_SCHOOLS = RAW / "deped_schools_osmapaaralan_2019.tsv"
 HOT_EDUCATION = RAW / "hotosm_education_facilities.parquet"
 CENSUS_NCR_XLSX = MANUAL / "popcen2024" / "ncr.xlsx"
-DOH_NHFR_FOLDER = MANUAL / "doh_nhfr"  # optional hand download; see docs/data-quality.md
 
 # The nine service categories, grouped by the social functions of Moreno et al. (2021).
 SERVICES = {

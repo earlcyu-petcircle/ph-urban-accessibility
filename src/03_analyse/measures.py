@@ -1,21 +1,208 @@
-#!/usr/bin/env python3
 """
-The five measures per origin, then summarised per barangay over residents:
-M1 nearest walk, M2 choice (counts within 5, 10 and 15 minutes), M3 crowding-adjusted supply
-(E2SFCA, 15-minute catchment), M4 15-minute coverage of the nine categories, and M5 transit
-access after UN SDG 11.2.1 (500 m to a bus or jeepney stop or route, 1 km to rail).
+The five measures, summarised over residents (every statistic is weighted by people):
 
-  results/tables/measures_by_barangay.csv, results/tables/metro_percentiles.csv
+  M1 nearest walk     minutes to the nearest service of each category: median, P10, P90, the
+                      P90/P10 ratio and the share within the 10-minute minimum
+  M2 choice           services of each category within 5, 10 and 15 minutes: median and mean
+  M3 crowding         E2SFCA access per 10,000 residents: median and mean
+  M4 coverage         how many of the nine categories are within 15 minutes: mean, and the share
+                      of residents with each count
+  M5 transit          shares within 500 m of a bus or jeepney stop or route, within 1 km of an
+                      LRT or MRT station, and within either (UN SDG 11.2.1)
 
-Not built yet: arrives in PR 3.
-Run after walk_times.py:  python src/03_analyse/measures.py
+and the context: each barangay's median resident placed among all Metro Manila residents, among
+residents of barangays of similar density, and beside its neighbours.
+
+Used by the notebooks; reads data/work/walk_times.parquet (walk_times.py).
 """
 
 import sys
 from pathlib import Path
 
+import numpy as np
+import pandas as pd
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "shared"))  # shared helpers in src/shared/
 
-from common import not_built
+from common import (
+    BARANGAYS,
+    CATEGORIES,
+    COVERAGE_MIN,
+    DERIVED,
+    SUFFICIENCY_MIN,
+    TRANSIT_HIGH_CAPACITY_M,
+    TRANSIT_LOW_CAPACITY_M,
+    WALK_SPEED_KMH,
+    WORK,
+    metres,
+    require,
+)
 
-not_built(__file__, pr=3)
+STUDY = [v["name"] for v in BARANGAYS.values()]
+LABEL = {
+    "food_retail": "Food retail",
+    "palengke": "Palengke",
+    "pharmacy": "Pharmacy",
+    "primary_care": "Primary care",
+    "hospital": "Hospital",
+    "public_elementary": "Public elementary",
+    "public_high": "Public high",
+    "open_space": "Open space",
+    "transit": "Transit",
+    "food_retail_no_convenience": "Food retail without convenience stores",
+}
+M3_CATEGORIES = tuple(c for c in CATEGORIES if c != "transit")
+
+
+def minutes(m, speed_kmh=WALK_SPEED_KMH):
+    return m / (speed_kmh * 1000 / 60)
+
+
+def wquantile(x, w, q):
+    """People-weighted quantile(s) q of x (the value below which a share q of people fall)."""
+    x, w = np.asarray(x, dtype=float), np.asarray(w, dtype=float)
+    ok = np.isfinite(x) & (w > 0)
+    x, w = x[ok], w[ok]
+    order = np.argsort(x)
+    x, cw = x[order], np.cumsum(w[order])
+    return np.interp(np.atleast_1d(q) * cw[-1], cw - w[order] / 2, x)
+
+
+def wmedian(x, w, step=False):
+    """People-weighted median; with step=True the value at which half the people are reached
+    (for counts, so the median is a whole number)."""
+    if not step:
+        return float(wquantile(x, w, 0.5)[0])
+    x, w = np.asarray(x, dtype=float), np.asarray(w, dtype=float)
+    order = np.argsort(x)
+    cw = np.cumsum(w[order])
+    return float(x[order][np.searchsorted(cw, 0.5 * cw[-1])])
+
+
+def wmean(x, w):
+    return float(np.average(np.asarray(x, dtype=float), weights=w))
+
+
+def load():
+    require(WORK / "walk_times.parquet", how="Run src/03_analyse/walk_times.py first.")
+    w = pd.read_parquet(WORK / "walk_times.parquet")
+    b = pd.read_csv(DERIVED / "barangays.csv", keep_default_na=False)
+    w = w.merge(b[["pcode", "barangay", "city", "tondo_district", "study", "people_per_km2"]], on="pcode")
+    return w, b
+
+
+def areas(w):
+    """The study barangays, their neighbours and Metro Manila, as {name: row mask}."""
+    out = {name: w.study.eq(name) for name in STUDY}
+    out["Tondo, other 258 barangays"] = w.tondo_district & w.study.eq("")
+    out["Quezon City, other barangays"] = w.city.eq("Quezon City") & w.study.eq("")
+    out["City of Pasig, other barangays"] = w.city.eq("City of Pasig") & w.study.eq("")
+    out["Metro Manila"] = pd.Series(True, index=w.index)
+    return out
+
+
+def coverage(w, minutes_=COVERAGE_MIN, speed_kmh=WALK_SPEED_KMH, prefix="d_"):
+    """M4: how many of the nine categories each origin has within `minutes_`."""
+    lim = metres(minutes_, speed_kmh)
+    return sum((w[f"{prefix}{c}"] <= lim).astype(int) for c in CATEGORIES)
+
+
+def transit_shares(d_bus, d_rail, people):
+    low = d_bus <= TRANSIT_LOW_CAPACITY_M
+    high = d_rail <= TRANSIT_HIGH_CAPACITY_M
+    return {
+        "share_within_500m_bus_jeepney": wmean(low, people),
+        "share_within_1km_rail": wmean(high, people),
+        "share_convenient": wmean(low | high, people),
+    }
+
+
+def measures_table(w):
+    """Every measure for every area, in long form: area, measure, category, stat, value."""
+    rows = []
+
+    def add(area, measure, category, stat, value):
+        rows.append({"area": area, "measure": measure, "category": category, "stat": stat, "value": float(value)})
+
+    for area, mask in areas(w).items():
+        d = w[mask]
+        p = d.people.values
+        add(area, "people", "", "people", p.sum())
+        for c in CATEGORIES:
+            mins = minutes(d[f"d_{c}"].values)
+            p10, p50, p90 = wquantile(mins, p, [0.1, 0.5, 0.9])
+            add(area, "M1", c, "median_min", p50)
+            add(area, "M1", c, "p10_min", p10)
+            add(area, "M1", c, "p90_min", p90)
+            add(area, "M1", c, "p90_p10_ratio", p90 / max(p10, 0.1))
+            add(area, "M1", c, "share_within_10min", wmean(mins <= SUFFICIENCY_MIN, p))
+            for m in (5, 10, 15):
+                add(area, "M2", c, f"median_within_{m}min", wmedian(d[f"n_{c}_{m}"], p, step=True))
+                add(area, "M2", c, f"mean_within_{m}min", wmean(d[f"n_{c}_{m}"], p))
+            if c in M3_CATEGORIES:
+                add(area, "M3", c, "median_per_10k", wmedian(d[f"a_{c}"], p))
+                add(area, "M3", c, "mean_per_10k", wmean(d[f"a_{c}"], p))
+        mins = minutes(d.d_food_retail_no_convenience.values)
+        p10, p50, p90 = wquantile(mins, p, [0.1, 0.5, 0.9])
+        for stat, v in (("median_min", p50), ("p10_min", p10), ("p90_min", p90)):
+            add(area, "M1", "food_retail_no_convenience", stat, v)
+        add(area, "M1", "food_retail_no_convenience", "share_within_10min", wmean(mins <= SUFFICIENCY_MIN, p))
+        cov = coverage(d)
+        add(area, "M4", "", "mean_categories_within_15min", wmean(cov, p))
+        add(area, "M4", "", "median_categories_within_15min", wmedian(cov, p, step=True))
+        for k in range(10):
+            add(area, "M4", "", f"share_with_{k}", wmean(cov == k, p))
+        for stat, v in transit_shares(d.d_bus_jeepney, d.d_rail, p).items():
+            add(area, "M5", "", stat, v)
+    return pd.DataFrame(rows)
+
+
+def context_table(w):
+    """Each study barangay's median resident as a percentile of Metro Manila residents.
+
+    `share_metro_worse` is the share of all Metro Manila residents with worse access (a longer
+    walk, or fewer categories); `share_similar_density_worse` the same among residents of
+    barangays in the same people-weighted density tenth."""
+    w = w.copy()
+    dens = w.drop_duplicates("pcode")[["pcode", "people_per_km2"]]
+    pop = w.groupby("pcode").people.sum()
+    dens = dens.assign(pop=dens.pcode.map(pop)).sort_values("people_per_km2")
+    dens["tenth"] = np.minimum((dens["pop"].cumsum() / dens["pop"].sum() * 10).astype(int), 9)
+    w["density_tenth"] = w.pcode.map(dens.set_index("pcode").tenth)
+    w["m4"] = coverage(w)
+    rows = []
+    for name in STUDY:
+        d = w[w.study.eq(name)]
+        tenth = int(d.density_tenth.iloc[0])
+        similar = w[w.density_tenth.eq(tenth)]
+        for metric, col, better_low in [(f"M1 {c}", f"d_{c}", True) for c in CATEGORIES] + [("M4", "m4", False)]:
+            med = wmedian(d[col], d.people, step=not better_low)
+
+            def worse(frame, med=med, col=col, better_low=better_low):
+                x = frame[col]
+                return wmean(x > med if better_low else x < med, frame.people)
+
+            rows.append(
+                {
+                    "barangay": name,
+                    "metric": metric,
+                    "median": minutes(med) if better_low else med,
+                    "share_metro_worse": worse(w),
+                    "density_tenth": tenth + 1,
+                    "share_similar_density_worse": worse(similar),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def hex_table(w):
+    """People-weighted measures per H3 resolution-10 hexagon, for the web map (PR 4)."""
+    w = w.assign(m4=coverage(w), **{f"m_{c}": minutes(w[f"d_{c}"]) for c in CATEGORIES})
+    cols = [f"m_{c}" for c in CATEGORIES] + ["m4"]
+    g = w[["h3_10", "people", *cols]].copy()
+    for c in cols:
+        g[c] = g[c] * g.people
+    h = g.groupby("h3_10").sum()
+    for c in cols:
+        h[c] = h[c] / h.people.where(h.people > 0)
+    return h.reset_index()

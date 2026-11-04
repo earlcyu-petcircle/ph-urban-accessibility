@@ -1,0 +1,31 @@
+barangay,metric,median,share_metro_worse,density_tenth,share_similar_density_worse
+Barangay 136,M1 food_retail,1.71776,0.8494,7,0.809238
+Barangay 136,M1 palengke,12.9704,0.38152,7,0.248194
+Barangay 136,M1 pharmacy,2.25649,0.87031,7,0.838017
+Barangay 136,M1 primary_care,2.49359,0.826595,7,0.759944
+Barangay 136,M1 hospital,10.4923,0.566547,7,0.535409
+Barangay 136,M1 public_elementary,3.74565,0.895787,7,0.867791
+Barangay 136,M1 public_high,3.97904,0.947778,7,0.938397
+Barangay 136,M1 open_space,14.3617,0.398941,7,0.354748
+Barangay 136,M1 transit,2.86069,0.659092,7,0.529693
+Barangay 136,M4,9,0.749002,7,0.638337
+Loyola Heights,M1 food_retail,5.9761,0.263464,1,0.420588
+Loyola Heights,M1 palengke,8.81159,0.606695,1,0.791362
+Loyola Heights,M1 pharmacy,7.93305,0.285583,1,0.468925
+Loyola Heights,M1 primary_care,7.3232,0.292752,1,0.462834
+Loyola Heights,M1 hospital,17.2024,0.285789,1,0.43971
+Loyola Heights,M1 public_elementary,20.9008,0.136545,1,0.367464
+Loyola Heights,M1 public_high,20.5952,0.268375,1,0.511219
+Loyola Heights,M1 open_space,6.92319,0.766113,1,0.704505
+Loyola Heights,M1 transit,7.81277,0.313522,1,0.402664
+Loyola Heights,M4,7,0.332183,1,0.596025
+Oranbo,M1 food_retail,3.68161,0.521154,1,0.669532
+Oranbo,M1 palengke,6.37855,0.766492,1,0.884668
+Oranbo,M1 pharmacy,4.71704,0.571526,1,0.744195
+Oranbo,M1 primary_care,6.60422,0.348291,1,0.521432
+Oranbo,M1 hospital,10.8246,0.548718,1,0.694463
+Oranbo,M1 public_elementary,6.69792,0.698119,1,0.861876
+Oranbo,M1 public_high,21.4324,0.247883,1,0.485622
+Oranbo,M1 open_space,3.94861,0.901969,1,0.864788
+Oranbo,M1 transit,3.32192,0.612209,1,0.68979
+Oranbo,M4,8,0.506249,1,0.76776

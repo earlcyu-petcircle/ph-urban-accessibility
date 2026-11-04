@@ -15,7 +15,7 @@ Snapshots in this build: OpenStreetMap extract of 3 November 2026 (replication t
 - **The service layer has all nine categories.** In Metro Manila it holds 7,666 food shops, 505 markets, 3,210 pharmacies, 3,582 primary care places, 563 hospitals, 483 public elementary and 231 public high schools, 666 open spaces and 4,201 transit stops and stations.
 - **The DepEd registry is mostly found in the open sources.** 82% of Metro Manila's public elementary schools and 86% of its public high schools in the DepEd list have an OpenStreetMap or Overture record of the same name nearby.
 - **The walking network is large and connected.** 16,741 km of walkable ways, 97.3% of nodes in one connected piece, including 47.7 km of footbridges and stairs.
-- **Three gaps to carry into the analysis.** Sari-sari stores are almost unmapped (234 named in all of Metro Manila); only 95 jeepney routes are mapped in the study box against 768 bus routes; and the DOH facility registry could not be downloaded, so hospitals have no registry check and no bed counts yet.
+- **Three gaps to carry into the analysis.** Sari-sari stores are almost unmapped (234 named in all of Metro Manila); only 95 jeepney routes are mapped in the study box against 768 bus routes; and the DOH facility registry cannot be exported (its export fails even in a browser), so hospitals and primary care rest on Overture and OpenStreetMap alone, with no registry check and no bed counts.
 - **One boundary problem for the metro context.** 112 barangays (527,000 people) have a census count more than three times WorldPop's estimate, mostly where COD-AB and the 2024 census draw a barangay differently (Post Proper Southside: 68,388 people on a polygon WorldPop puts at 4,780); none of them is a study barangay.
 
 ## What was collected
@@ -31,32 +31,30 @@ Snapshots in this build: OpenStreetMap extract of 3 November 2026 (replication t
 | Services, open space, transit, network | OpenStreetMap, Geofabrik Philippines extract | Point, polygon, way, route | 3 Nov 2026 | ODbL | 141,064 tagged points and areas; 174,506 walkable ways |
 | School registry | OSMaPaaralan: DepEd's MaPaaralan public-school list, cleaned by OpenStreetMap Philippines | School, with DepEd ID, ISCED level and 2015 enrolment | 2019 | DepEd data published for OpenStreetMap use; only counts committed | 1,064 schools in the study box |
 | School check | HOT OpenStreetMap education facilities (HDX export) | School | 12 Oct 2026 | ODbL | 1,862 schools in Metro Manila |
-| Health registry | DOH National Health Facility Registry | Facility, with beds | Live | Government publication | Not available in this build |
-| Health check | Healthsites.io (HDX) | Facility | Sep 2026 | ODbL | Not available in this build |
+| Health registry | DOH National Health Facility Registry | Facility, with beds | Live | Government publication | Not used: the export fails |
+| Health check | Healthsites.io (HDX) | Facility | Sep 2026 | ODbL | Used when HDX allows; refused in this build |
 
 The study box is Metro Manila plus 2 km on every side (120.88-121.16 E, 14.33-14.81 N); Overture and the walking network are cut to it, and services count anywhere within 2 km of Metro Manila.
 Two layers in [section 3 of the paper](paper.md#3-data-sources) are not collected here: the Mapillary imagery for the walk audit arrives with the analysis (PR 3), and the map-only context layers (Relative Wealth Index, UP NOAH flood hazard) with the web map (PR 4).
 
-Two changes from the design's source list, both forced by the download servers on 4 November 2026:
+Three changes from the design's source list, all forced by the download servers:
 
 - **DepEd school locations: the 2019 OSMaPaaralan list replaces the 2008 HDX file.** HDX answered every scripted download that day with a bot challenge (HTTP 202 and an empty body), and refused the same link in a browser session driven by the tooling.
   OSMaPaaralan is served from GitHub, is eleven years newer, and carries what the design needs from a registry: the DepEd school ID, the school level and enrolment (for the crowding measure, M3).
-- **Healthsites.io is optional.** The same HDX block stopped it, so `01_collect_data.sh` warns and `02_build_tables.sh` skips the check; it runs again whenever the download gets through.
+- **Healthsites.io is optional.** The same HDX block stopped it (and still did on the PR 3 run), so `01_collect_data.sh` warns and `02_build_tables.sh` skips the check; it runs again whenever the download gets through.
+- **The DOH National Health Facility Registry is not used.** It answers scripts with HTTP 403, and its export fails even in a browser, so it is dropped for good: hospitals and primary care rest on Overture and OpenStreetMap, there is no health registry match, and hospitals have no bed counts, so the crowding measure (M3) counts each hospital as 1, the design's fallback.
 
 ## Getting the hand downloads
 
-Two sources refuse scripted downloads, and HDX sometimes does too.
+One source refuses scripted downloads, and HDX sometimes does too.
 
 | File | Needed | Where to get it | Save as |
 |---|---|---|---|
 | PSA 2024 census, NCR | Yes | [2024 Census of Population (POPCEN) Population Counts Declared Official by the President](https://psa.gov.ph/content/2024-census-population-popcen-population-counts-declared-official-president), the National Capital Region "Table C - Population by Barangay" workbook | `data/manual/popcen2024/ncr.xlsx` |
-| DOH National Health Facility Registry | No; adds the DOH match and hospital beds | [nhfr.doh.gov.ph](https://nhfr.doh.gov.ph/), the facility list exported as Excel or CSV | `data/manual/doh_nhfr/<any name>.xlsx` or `.csv` |
 | COD-AB boundaries (if HDX challenges the script) | Yes | [OCHA COD-AB Philippines on HDX](https://data.humdata.org/dataset/cod-ab-phl), `phl_admin_boundaries.gdb.zip` | `data/raw/phl_admin_boundaries.gdb.zip` |
 | Healthsites.io (if HDX challenges the script) | No | [Philippines Healthsites on HDX](https://data.humdata.org/dataset/philippines-healthsites), the CSV | `data/raw/healthsites_philippines.csv` |
 
 - psa.gov.ph serves scripts a Cloudflare bot check; the NCR workbook used here is the same file the [ph-lottery-outlets](https://github.com/earlcyu-petcircle/ph-lottery-outlets) study downloaded by hand on 2 November 2026.
-- nhfr.doh.gov.ph answers scripts with HTTP 403 and, from this machine, showed a Cloudflare "you have been blocked" page in a browser too, so the DOH file has to be saved from a machine the site lets in.
-  `build_services.py` finds its columns by name (facility code, name, health facility type, latitude, longitude and bed capacity) and stops with the column list if one is missing; that path has not yet run on a real export.
 - `download_sources.sh` keeps any file already in `data/raw/`, so a file saved by hand is used as is.
   The COD-AB file in this build is the HDX file of 28 May 2026 as downloaded by script on 29 October and 2 November 2026 (two copies, byte for byte the same, 360,586,879 bytes as HDX lists).
 
@@ -117,8 +115,8 @@ The rules live in `src/02_build_tables/build_services.py`, one named pattern eac
 | Food retail | `grocery_store`, `convenience_store` and other grocery categories; kind `supermarket` by chain or name, `convenience`, `grocery`, or `sari_sari` by name | `shop` = supermarket, convenience, grocery, greengrocer, general or kiosk, or any shop named sari-sari | |
 | Palengke | `farmers_market`, or a food or shopping place named palengke, public or wet market, talipapa, mercado or market (not super, mini, flea, night or online) | `amenity=marketplace`, `shop=market` | |
 | Pharmacy | `pharmacy`, `drugstore` | `amenity=pharmacy`, `healthcare=pharmacy`, `shop=chemist` (Watsons sells medicine) | |
-| Primary care | Clinic and health-centre categories, and `hospital` records named as clinics; dental, animal, cosmetic, laboratory and other specialist names out | `amenity` = clinic or doctors, `healthcare` = clinic, doctor or centre, with the same exclusions | DOH, when saved |
-| Hospital | `hospital` records with a hospital name, minus wards, departments, outpatient units and other parts of a hospital | `amenity` or `healthcare` = hospital unless named a clinic | DOH, when saved |
+| Primary care | Clinic and health-centre categories, and `hospital` records named as clinics; dental, animal, cosmetic, laboratory and other specialist names out | `amenity` = clinic or doctors, `healthcare` = clinic, doctor or centre, with the same exclusions | |
+| Hospital | `hospital` records with a hospital name, minus wards, departments, outpatient units and other parts of a hospital | `amenity` or `healthcare` = hospital unless named a clinic | |
 | Public elementary, public high | `public_school`, or a school with a public-school name; level from the name | `amenity=school` that is public by `operator:type` or name; level from `isced:level` or the name | DepEd: defines the category |
 | Open space | | Parks, playgrounds, gardens, commons, village greens, recreation grounds and squares of 0.1 ha or more, not private; a space inside a bigger one is dropped | |
 | Transit | `bus_station` (terminals) | Bus stops and platforms; the stop positions of the LRT-1, LRT-2 and MRT-3 routes; the ways of every bus and jeepney route (`transit_routes.parquet`) | |
@@ -130,7 +128,7 @@ The rules live in `src/02_build_tables/build_services.py`, one named pattern eac
 - **The default layer.** `in_default` marks one record per group from OpenStreetMap, the registries and Overture at confidence 0.5 or more, preferring OpenStreetMap's point, then the registry's, then the most confident Overture record.
   Where a registry lists a category, it decides membership: a public school is in the default layer only if its group holds a DepEd school, because a name rule lets private and misplaced schools in (it admits 841 Overture "public elementary" records in Metro Manila against 501 DepEd schools).
   The OpenStreetMap-only and Overture-only records stay in `services.parquet` for check 07.
-- **Capacity.** Every default public school carries its DepEd 2015 enrolment (`group_capacity`), for the crowding measure; hospital beds wait for the DOH registry.
+- **Capacity.** Every default public school carries its DepEd 2015 enrolment (`group_capacity`), for the crowding measure; hospitals have no bed counts and count 1 each.
 
 ### Counts in Metro Manila
 
@@ -150,7 +148,7 @@ The rules live in `src/02_build_tables/build_services.py`, one named pattern eac
 
 - **Overture and OpenStreetMap overlap little.** Only 16% of food shops and 7% of primary care places appear in both, so the source check (07) matters most for those two.
 - **Hospitals are the noisiest category.** Overture adds 355 hospitals with no OpenStreetMap counterpart; a sample shows real hospitals OpenStreetMap lacks, but also hospital clinics in malls named "Medical Center", the odd duplicate more than 150 m from its twin, and a few points misplaced from other countries ("Modern Cancer Hospital Guangzhou China").
-  The DOH registry would settle membership as DepEd does for schools; until then the service audit (PR 3) measures the error.
+  With no usable DOH registry, the service audit measures the error instead.
 - **Sari-sari stores are almost absent**, as the paper expects: 234 in the default layer for all of Metro Manila, and none in Barangay 136.
 
 ### Registry match
@@ -165,7 +163,7 @@ The rules live in `src/02_build_tables/build_services.py`, one named pattern eac
 | Oranbo | 1 of 1 | none listed |
 | Barangay 136 | none listed | none listed |
 
-*A DepEd school is found when its duplicate group holds an OpenStreetMap or Overture record of the default layer. The DOH match and the Healthsites.io check are empty in this build (see the hand downloads above).*
+*A DepEd school is found when its duplicate group holds an OpenStreetMap or Overture record of the default layer. There is no DOH match (the registry cannot be exported), and the Healthsites.io check is empty in this build because HDX refused the download.*
 
 The HOT education export of 12 October 2026 holds 1,862 schools in Metro Manila against 1,851 in this build's OpenStreetMap extraction three weeks later, so the two extractions agree.
 
@@ -248,7 +246,7 @@ The HOT education export of 12 October 2026 holds 1,862 schools in Metro Manila 
 
 ## Limitations
 
-- The DOH registry is missing from this build, so hospitals rest on name rules and carry no beds; adding the file and rerunning `./02_build_tables.sh` fills both in.
+- There is no DOH registry, so hospitals and primary care rest on Overture and OpenStreetMap name and tag rules and hospitals carry no beds.
 - The DepEd list is from 2019; schools opened since then appear only through OpenStreetMap and Overture, which the default layer leaves out of the public-school categories.
 - Footprint area is the weight inside a cell; floor counts are known for under 1% of residential footprints, so high-rise condominiums are underweighted against low-rise houses in the same cell.
 - Overture's geocoding errors put a few places far from home; confidence filtering and the service audit, not this build, deal with them.

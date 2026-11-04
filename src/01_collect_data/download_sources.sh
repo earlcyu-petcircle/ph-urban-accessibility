@@ -7,10 +7,10 @@
 #
 # Overture Maps places and buildings come from download_overture.py, which reads the
 # study area from the boundaries downloaded here.
-# Two sources refuse scripted downloads and are saved by hand (docs/data-quality.md,
-# "Getting the hand downloads"): the PSA 2024 census workbook for the National Capital Region
-# (data/manual/popcen2024/ncr.xlsx) and the DOH National Health Facility Registry
-# (data/manual/doh_nhfr/).
+# The PSA 2024 census workbook for the National Capital Region refuses scripted downloads and
+# is saved by hand to data/manual/popcen2024/ncr.xlsx (docs/data-quality.md, "Getting the hand
+# downloads"). The DOH National Health Facility Registry is not used: it refuses scripts and
+# its export fails in a browser too.
 # Two layers in docs/paper.md section 3 are not downloaded in this phase: the Mapillary
 # imagery for the walk audit (PR 3, read through its API) and the map-only context layers
 # (Relative Wealth Index, UP NOAH flood hazard; PR 4).
@@ -90,9 +90,6 @@ fetch deped_schools_osmapaaralan_2019.tsv --max-time 300 \
 # 8. HOT OpenStreetMap education facilities (HDX export, ODbL), a second school list.
 fetch hotosm_education_facilities.parquet --max-time 600 \
   "https://production-raw-data-api.s3.amazonaws.com/ISO3/PHL/_layers/osm/education_facilities.parquet"
-
-# The DOH National Health Facility Registry (nhfr.doh.gov.ph) answers scripts with HTTP 403,
-# so it is saved by hand (see the header).
 
 ls -la "$RAW"
 if [ "${#OPTIONAL_FAILED[@]}" -gt 0 ]; then
