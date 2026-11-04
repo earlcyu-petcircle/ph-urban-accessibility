@@ -1,0 +1,57 @@
+{
+ "featured": {
+  "label": "Three barangays Earl has lived in",
+  "pcodes": [
+   "PH1303901136",
+   "PH1307404055",
+   "PH1307403013"
+  ]
+ },
+ "area": {
+  "name": "Metro Manila",
+  "bounds": [
+   120.9064,
+   14.3517,
+   121.135,
+   14.7853
+  ]
+ },
+ "metro": {
+  "s": 77.6,
+  "m4": 6.98,
+  "min": {
+   "food": 3.8,
+   "mkt": 10.6,
+   "phar": 5.4,
+   "care": 5.0,
+   "hosp": 11.8,
+   "elem": 9.6,
+   "high": 13.9,
+   "open": 12.2,
+   "trans": 4.6
+  },
+  "w10": {
+   "food": 92,
+   "mkt": 47,
+   "phar": 82,
+   "care": 84,
+   "hosp": 41,
+   "elem": 52,
+   "high": 31,
+   "open": 39,
+   "trans": 76
+  },
+  "t": [
+   66,
+   11,
+   66
+  ],
+  "pop": 14001800
+ },
+ "barangays_ranked": 1709,
+ "min_buildings": 5,
+ "hexagons_left_off": {
+  "hexagons": 3241,
+  "people": 207802
+ }
+}

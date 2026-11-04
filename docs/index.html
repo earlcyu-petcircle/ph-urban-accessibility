@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walking to Everyday Life | Earl Yu / Atlas</title>
+<meta name="description" content="Compare any three Metro Manila barangays on foot: walking time to food, the palengke, pharmacies, clinics, hospitals, public schools, open space and transit, for every 2024 census resident.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How much of everyday life is a short walk from home?">
+<meta property="og:description" content="Pick any three Metro Manila barangays and compare how far their residents walk to nine everyday services.">
+<meta property="og:url" content="https://earlcyu-petcircle.github.io/ph-urban-accessibility/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect x=%272%27 y=%272%27 width=%2712%27 height=%2712%27 fill=%27%231F4FE0%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Atlas Grid: Earl Yu's personal-project brand (as on the ph-lottery-outlets story site) */
+:root{
+  color-scheme: light;
+  --bg:#FFFFFF;
+  --ink:#111111;
+  --ink-soft:#333333;
+  --muted:#555555;
+  --accent:#1F4FE0;
+  --highlight:#FFE14D;
+  --grid:#F3F5FB;
+  --rule:#DADDE6;
+  --head:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --pad:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16.5px/1.6 var(--body);overflow-x:hidden}
+a{color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--pad)}
+p+p{margin-top:.8em}
+strong{font-weight:600}
+.num,.mono{font-family:var(--mono);font-feature-settings:"zero" 0}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:3px solid var(--ink)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;padding-top:13px;padding-bottom:13px}
+.brand{font:800 18px var(--head);letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap}
+.brand::before{content:"";display:inline-block;width:12px;height:12px;background:var(--accent);margin-right:8px}
+.links{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:14px;font-weight:500}
+.links a{color:var(--ink);text-decoration:none}
+.links a:hover{color:var(--accent)}
+
+/* Hero */
+.hero{background:linear-gradient(var(--grid) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,var(--grid) 1px,var(--bg) 1px) 0 0/24px 24px;border-bottom:1px solid var(--ink)}
+.hero .wrap{padding-top:64px;padding-bottom:44px}
+.kicker{font:600 12px var(--mono);letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.hero h1{font:800 clamp(2.5rem,6.4vw,4.6rem)/.96 var(--head);letter-spacing:-.035em;margin:16px 0 22px;max-width:15ch;text-wrap:balance}
+mark{background:var(--highlight);color:inherit;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.answer{max-width:44rem;font-size:1.12rem;color:var(--ink-soft)}
+.answer strong{color:var(--ink)}
+.byline{margin-top:20px;font:13px var(--mono);color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 18px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;padding:40px 0 18px}
+.stat{border-left:3px solid var(--accent);padding-left:14px}
+.stat .n{display:block;font:600 clamp(2rem,3.6vw,2.6rem)/1 var(--mono);letter-spacing:-.04em}
+.stat .l{display:block;font-size:14px;line-height:1.45;color:var(--muted);margin-top:10px}
+.counts{font:12.5px var(--mono);color:var(--muted);padding:6px 0 48px;display:flex;flex-wrap:wrap;gap:4px 22px}
+
+/* Sections */
+section.block{border-top:1px solid var(--ink);padding:64px 0}
+.head{margin-bottom:28px;max-width:46rem}
+.head h2{font:800 clamp(1.9rem,3.8vw,2.7rem)/1.02 var(--head);letter-spacing:-.03em;margin-top:10px}
+.head p{margin-top:14px;color:var(--ink-soft)}
+.prose{max-width:44rem;color:var(--ink-soft)}
+.prose h3{font:800 1.3rem/1.15 var(--head);letter-spacing:-.02em;color:var(--ink);margin:30px 0 8px}
+ul.sq{list-style:square;padding-left:1.15em}
+ul.sq li{margin:.45em 0}
+ul.sq li::marker{color:var(--accent)}
+
+/* Map */
+.mapframe{border:1.5px solid var(--ink);background:var(--grid);height:min(76vh,700px);min-height:480px}
+.mapframe iframe{display:block;width:100%;height:100%;border:0}
+.mapnote{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 20px;margin-top:10px;font-size:13.5px;color:var(--muted)}
+.mapnote a{font-family:var(--mono);font-size:13px;white-space:nowrap}
+
+/* Context strip */
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:30px}
+.fact{border-top:2px solid var(--ink);padding-top:10px}
+.fact .n{font:600 1.5rem/1.1 var(--mono);letter-spacing:-.03em}
+.fact p{font-size:14px;color:var(--muted);margin-top:6px}
+
+/* Findings */
+.finding{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px 52px;align-items:start;padding:44px 0;border-top:1px solid var(--rule)}
+.finding:first-of-type{border-top:0;padding-top:12px}
+.finding .lab{font:600 13px var(--mono);color:var(--accent)}
+.finding h3{font:800 clamp(1.5rem,2.6vw,1.75rem)/1.08 var(--head);letter-spacing:-.02em;margin:8px 0 14px}
+.finding p{color:var(--ink-soft)}
+.rq{font-size:14px;color:var(--muted);border-left:3px solid var(--rule);padding-left:12px;margin-bottom:14px}
+figure{margin:0}
+.ctitle{font:800 15px/1.25 var(--head);letter-spacing:-.01em;margin-bottom:12px}
+figure svg{display:block;width:100%;height:auto;max-width:540px;overflow:visible}
+figcaption{font-size:13px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:540px}
+svg text{font-family:var(--mono);paint-order:stroke;stroke:#FFFFFF;stroke-width:4px;stroke-linejoin:round}
+svg .v{fill:var(--ink);font-weight:600}
+svg .l{fill:var(--ink-soft)}
+svg .s{fill:var(--muted)}
+svg .g{font-family:var(--head);font-weight:800;fill:var(--ink)}
+
+/* Four scopes */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.card{border:1.5px solid var(--ink);padding:16px 16px 14px;display:flex;flex-direction:column}
+.card h3{font:800 1.25rem/1.1 var(--head);letter-spacing:-.02em}
+.card .verdict{font-size:14px;color:var(--ink-soft);margin:6px 0 12px;min-height:2.9em}
+.card svg{display:block;width:100%;height:auto;margin:4px 0 6px}
+.card .unit{font:11px var(--mono);color:var(--muted)}
+.card dl{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13px;margin:12px 0 14px;border-top:1px solid var(--rule);padding-top:10px}
+.card dt{color:var(--muted)}
+.card dd{font-family:var(--mono);font-size:12.5px;text-align:right;color:var(--ink)}
+.card button{margin-top:auto}
+button,.btn{font:600 12px var(--mono);background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:0;padding:7px 10px;cursor:pointer;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{background:var(--grid);color:var(--ink)}
+
+/* Tables */
+.tables{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;margin-top:48px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+.tsub{font-size:13px;line-height:1.5;color:var(--muted);margin:-6px 0 10px}
+th{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;text-align:left;border-bottom:2px solid var(--ink);padding:6px 6px 6px 0;vertical-align:bottom}
+td{padding:7px 6px 7px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.n,th.n{text-align:right}
+td.n{font:13px var(--mono);white-space:nowrap}
+td.n small{display:block;font-size:11px;color:var(--muted)}
+tr:last-child td{border-bottom:2px solid var(--ink)}
+.src td:first-child{font-weight:600;white-space:nowrap}
+
+/* Method, data, cite */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 52px}
+.files{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin-top:8px}
+.file{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.file a{font:600 13.5px var(--mono);overflow-wrap:anywhere}
+.file .size{font:12px var(--mono);color:var(--muted);text-align:right}
+.file p{grid-column:1/-1;font-size:13.5px;color:var(--muted)}
+pre{align-self:start;font:13px/1.6 var(--mono);background:var(--grid);border-left:3px solid var(--ink);padding:14px 16px;overflow-x:auto;color:var(--ink);white-space:pre}
+.cite pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.citebar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:22px 0 8px}
+.citebar .kicker{color:var(--ink)}
+ol.refs{list-style:none;counter-reset:r;columns:2;column-gap:44px;font-size:13.5px;color:var(--ink-soft)}
+ol.refs li{counter-increment:r;break-inside:avoid;padding:0 0 10px 34px;position:relative;overflow-wrap:anywhere}
+ol.refs li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;font:600 12px/1.75 var(--mono);color:var(--accent)}
+
+/* Footer */
+footer{border-top:3px solid var(--ink);padding:26px 0 44px;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 28px}
+
+@media (max-width:980px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tables{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:820px){
+  .finding,.two{grid-template-columns:minmax(0,1fr)}
+  ol.refs{columns:1}
+}
+@media (max-width:720px){
+  :root{--pad:16px}
+  body{font-size:16px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}
+  .facts,.files{grid-template-columns:minmax(0,1fr)}
+  .hero .wrap{padding-top:40px}
+  section.block{padding:48px 0}
+  .links{gap:2px 14px;font-size:13.5px}
+  html{scroll-padding-top:100px}
+  table{font-size:13px}
+  td.n{font-size:11.5px}
+  td.n small{font-size:10px}
+  th{font-size:9.5px;letter-spacing:0}
+}
+@media (max-width:520px){
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .card .verdict{min-height:0}
+  .mapframe{height:82vh;min-height:520px}
+}
+.mapframe{height:min(84vh,820px);min-height:560px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Earl Yu / Atlas</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#compare">Compare</a><a href="#measures">Measures</a><a href="#featured">One point of view</a><a href="#method">Method</a><a href="#limits">Limits</a><a href="#data">Data</a><a href="#cite">Cite</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <p class="kicker">PH / URBAN ACCESSIBILITY / METRO MANILA / 2026</p>
+    <h1>How much of everyday life is <mark>a short walk</mark> from home?</h1>
+    <p class="answer">Pick any three Metro Manila barangays and compare them on foot: how long residents walk to food, the palengke, a pharmacy, a clinic, a hospital, a public school, open space and transit, how many of those nine are within 15 minutes, and how crowded they are once neighbours are counted. <strong>Every resident counts:</strong> all 14 million people of the 2024 census, placed in their buildings and walked along the street network. Three barangays I have lived in are loaded first, as one point of view; swap in your own.</p>
+    <p class="byline"><span>Earl Yu</span><span>November 2026</span><span>Open data only</span><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/docs/paper.md">Read the full paper</a></p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><span class="n">77.6</span><span class="l">Metro Manila's 15-minute score: the average resident has 7.0 of the nine everyday services within a 15-minute walk</span></div>
+    <div class="stat"><span class="n">25%</span><span class="l">of Metro Manila residents have all nine within 15 minutes; 20% have five or fewer</span></div>
+    <div class="stat"><span class="n">66%</span><span class="l">have convenient public transport by the UN's test: a bus or jeepney within 500 m, or rail within 1 km</span></div>
+    <div class="stat"><span class="n">47%</span><span class="l">are within 10 minutes of a palengke, and 39% of open space: the two scarcest basics on foot</span></div>
+  </div>
+  <p class="counts"><span>14,001,751 residents</span><span>1,573,122 residential buildings</span><span>1,709 barangays with people</span><span>9 everyday services</span><span>16,741 km of walkable streets</span></p>
+</div>
+
+<section class="block" id="compare" aria-labelledby="compare-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">COMPARE /</p>
+      <h2 id="compare-h">Pick up to three barangays</h2>
+      <p>Search by name or city, or click the map. The table sets your picks side by side with Metro Manila; colour the map by the 15-minute score or by the walk to any one service, and switch to hexagons for finer detail.</p>
+    </div>
+    <div class="mapframe">
+      <iframe id="atlas-map" name="atlas-map" src="map/?embed" title="Interactive comparison of walking access in Metro Manila barangays"></iframe>
+    </div>
+    <p class="mapnote"><span>Starts with three barangays I have lived in; the Featured button brings them back.</span><a href="map/">Open the map full screen</a></p>
+  </div>
+</section>
+
+<section class="block" id="measures" aria-labelledby="measures-h">
+  <div class="wrap">
+    <div class="two">
+      <div class="head">
+        <p class="kicker">THE MEASURES /</p>
+        <h2 id="measures-h">Five ways to read one walk</h2>
+        <p>No single number says how walkable a place is, so the comparison keeps five measures side by side rather than folding them into one score.</p>
+      </div>
+      <div class="prose">
+        <ul class="sq">
+          <li><strong>15-minute score (0-100).</strong> The share of the nine services with at least one within 15 minutes on foot (1,050 m), averaged over the barangay's residents. 100 means everyone has all nine.</li>
+          <li><strong>Minutes to the nearest.</strong> The walk for the barangay's median resident to the nearest service of each kind, at 4.2 km/h, along streets.</li>
+          <li><strong>Residents within 10 minutes.</strong> The share within the 10-minute minimum (700 m), about the walk three in four Metro Manila walking trips stay within.</li>
+          <li><strong>Transit.</strong> The UN's test of convenient public transport (SDG 11.2.1): within 500 m of a bus or jeepney stop or route, or 1 km of an LRT or MRT station.</li>
+          <li><strong>Supply against Metro Manila.</strong> How much service there is per resident once the neighbours who share it are counted (E2SFCA, 15-minute catchment). A clinic round the corner serves far more people in a dense street.</li>
+        </ul>
+        <p>The nine services: food retail (supermarket, grocery, convenience store), the palengke, pharmacy, primary care, hospital, public elementary school, public high school, open space of 0.1 ha or more, and transit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="featured" aria-labelledby="featured-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">ONE POINT OF VIEW /</p>
+      <h2 id="featured-h">Three barangays I have lived in</h2>
+      <p>I was born and raised in Barangay 136 in Tondo, spent two years of college in Loyola Heights near Ateneo, and live in Oranbo, Pasig, now. They are three very different pieces of the city: one crowded block, a university barangay of campus, strip and villages, and a small barangay around a newer mixed-use district.</p>
+    </div>
+
+    <div class="tables" style="margin-top:0">
+      <div>
+      <div class="tcap"><p class="ctitle">Minutes on foot to the nearest, median resident</p><p class="tsub">At 4.2 km/h along streets. Bold: shortest of the three (measures.csv).</p></div>
+      <div class="tablewrap">
+        <table aria-label="Minutes on foot to the nearest service, median resident">
+          <thead><tr><th scope="col">Service</th><th class="n" scope="col">Barangay 136</th><th class="n" scope="col">Loyola Heights</th><th class="n" scope="col">Oranbo</th><th class="n" scope="col">Metro Manila</th></tr></thead>
+          <tbody>
+            <tr><td>Food retail</td><td class="n"><strong>1.7</strong></td><td class="n">6.0</td><td class="n">3.7</td><td class="n">3.8</td></tr>
+            <tr><td>Palengke</td><td class="n">13.0</td><td class="n">8.8</td><td class="n"><strong>6.4</strong></td><td class="n">10.6</td></tr>
+            <tr><td>Pharmacy</td><td class="n"><strong>2.3</strong></td><td class="n">7.9</td><td class="n">4.7</td><td class="n">5.4</td></tr>
+            <tr><td>Primary care</td><td class="n"><strong>2.5</strong></td><td class="n">7.3</td><td class="n">6.6</td><td class="n">5.0</td></tr>
+            <tr><td>Hospital</td><td class="n"><strong>10.5</strong></td><td class="n">17.2</td><td class="n">10.8</td><td class="n">11.8</td></tr>
+            <tr><td>Public elementary</td><td class="n"><strong>3.7</strong></td><td class="n">20.9</td><td class="n">6.7</td><td class="n">9.6</td></tr>
+            <tr><td>Public high</td><td class="n"><strong>4.0</strong></td><td class="n">20.6</td><td class="n">21.4</td><td class="n">13.9</td></tr>
+            <tr><td>Open space</td><td class="n">14.4</td><td class="n">6.9</td><td class="n"><strong>3.9</strong></td><td class="n">12.2</td></tr>
+            <tr><td>Transit</td><td class="n"><strong>2.9</strong></td><td class="n">7.8</td><td class="n">3.3</td><td class="n">4.6</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div>
+      <div class="tcap"><p class="ctitle">The headline measures</p><p class="tsub">Supply is the mean resident's E2SFCA access as a multiple of the Metro Manila mean (measures.csv).</p></div>
+      <div class="tablewrap">
+        <table aria-label="Headline measures for the three barangays">
+          <thead><tr><th scope="col">Measure</th><th class="n" scope="col">B. 136</th><th class="n" scope="col">Loyola</th><th class="n" scope="col">Oranbo</th><th class="n" scope="col">Metro</th></tr></thead>
+          <tbody>
+            <tr><td>15-minute score</td><td class="n"><strong>97.1</strong></td><td class="n">72.3</td><td class="n">85.8</td><td class="n">77.6</td></tr>
+            <tr><td>All nine within 15 min</td><td class="n"><strong>74%</strong></td><td class="n">11%</td><td class="n">5%</td><td class="n">25%</td></tr>
+            <tr><td>Convenient transit</td><td class="n"><strong>100%</strong></td><td class="n">48%</td><td class="n">95%</td><td class="n">66%</td></tr>
+            <tr><td>Food supply per resident</td><td class="n">0.33&times;</td><td class="n"><strong>2.70&times;</strong></td><td class="n">2.23&times;</td><td class="n">1.00&times;</td></tr>
+            <tr><td>Hospital supply per resident</td><td class="n">0.41&times;</td><td class="n">0.65&times;</td><td class="n"><strong>1.48&times;</strong></td><td class="n">1.00&times;</td></tr>
+            <tr><td>Elementary places per resident</td><td class="n"><strong>2.36&times;</strong></td><td class="n">0.15&times;</td><td class="n">1.01&times;</td><td class="n">1.00&times;</td></tr>
+            <tr><td>People (2024)</td><td class="n">1,302</td><td class="n">21,768</td><td class="n">3,374</td><td class="n">14.0M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+
+    <div class="two" style="margin-top:44px">
+      <div class="prose">
+        <h3 style="margin-top:0">No barangay wins outright</h3>
+        <ul class="sq">
+          <li><strong>Barangay 136</strong> puts the most within a short walk: three in four residents have all nine basics within 15 minutes. But it has the least supply per person of the three once neighbours are counted (a third of Metro Manila's food supply per resident), and its longest walks are to the palengke and open space.</li>
+          <li><strong>Oranbo</strong> has the nearest open space and palengke, and more supply per resident than Metro Manila for most services, but nobody there is within 10 minutes of a public high school.</li>
+          <li><strong>Loyola Heights</strong> trails on most basics, above all public schools (about 21 minutes for the median resident), and only 48% of its residents have convenient public transport.</li>
+        </ul>
+        <p><button type="button" data-map="p=PH1303901136,PH1307404055,PH1307403013&amp;by=score&amp;detail=barangays">Show the three on the map</button></p>
+      </div>
+      <div class="prose">
+        <h3 style="margin-top:0">What survives ten changes of assumption</h3>
+        <p>Every resident is counted, so there is no sampling error to test. Instead a difference between two of the three counts as a finding only if it keeps its order under all ten checks: walking speed, the time threshold, equal walk-sheds instead of barangay lines, straight-line distance, coarser origins, each data source alone, Overture's confidence cut-off, a second population surface and the jeepney rule. 14 of 33 pairwise differences do:</p>
+        <ul class="sq">
+          <li>Loyola Heights has a longer walk than both others to food, pharmacies and public elementary schools, and fewer basics within 15 minutes than Barangay 136.</li>
+          <li>Barangay 136 has the shortest walk to a public elementary school, and the longest to open space.</li>
+          <li>Most differences between Barangay 136 and Oranbo reverse on equal walk-sheds, so they say as much about the barangays' sizes as about the places.</li>
+        </ul>
+        <p class="note" style="font-size:13.5px;color:var(--muted)">Barangays you pick on the map have not been through these checks, so read small gaps between them loosely.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="method" aria-labelledby="method-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">METHOD /</p>
+      <h2 id="method-h">How it was measured</h2>
+    </div>
+    <div class="two">
+      <div class="prose">
+        <ul class="sq">
+          <li><strong>Place every resident.</strong> Each barangay's 2024 census count is spread over WorldPop's 100 m cells, then over the residential buildings in each cell by footprint area: 1,573,122 buildings carry all 14,001,751 people.</li>
+          <li><strong>Map the services.</strong> Overture Maps places and OpenStreetMap, merged with duplicates grouped, and DepEd's list of public schools; services up to 2 km beyond Metro Manila count.</li>
+          <li><strong>Walk the streets.</strong> Every walkable OpenStreetMap way, expressways out and footbridges in, at 4.2 km/h, close to the observed Metro Manila pace.</li>
+          <li><strong>Summarise per resident.</strong> Every figure is weighted by people, never by area; a barangay's minutes are its median resident's.</li>
+          <li><strong>Show it without showing homes.</strong> The map shows barangays and H3 hexagons (about 0.015 km²); hexagons with fewer than five buildings are left off.</li>
+        </ul>
+      </div>
+      <div>
+      <div class="tcap"><p class="ctitle">Sources</p><p class="tsub">Every source is public and free to download.</p></div>
+      <div class="tablewrap">
+        <table class="src" aria-label="Sources">
+          <thead><tr><th scope="col">Role</th><th scope="col">Source</th><th scope="col">Year</th></tr></thead>
+          <tbody>
+            <tr><td>People</td><td>PSA 2024 Census of Population, by barangay</td><td class="mono">2024</td></tr>
+            <tr><td>Where people live</td><td>WorldPop R2025A, 100 m (CC BY 4.0); Overture buildings (ODbL)</td><td class="mono">2024-26</td></tr>
+            <tr><td>Boundaries</td><td>OCHA COD-AB Philippines (CC BY-IGO)</td><td class="mono">2025</td></tr>
+            <tr><td>Services</td><td>Overture Maps places; OpenStreetMap (ODbL)</td><td class="mono">2026</td></tr>
+            <tr><td>Public schools</td><td>DepEd school list via OpenStreetMap Philippines' OSMaPaaralan</td><td class="mono">2019</td></tr>
+            <tr><td>Streets and transit</td><td>OpenStreetMap, Geofabrik extract of 3 Nov 2026</td><td class="mono">2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="limits" aria-labelledby="limits-h">
+  <div class="wrap">
+    <div class="two">
+      <div class="head">
+        <p class="kicker">LIMITATIONS /</p>
+        <h2 id="limits-h">What to hold loosely</h2>
+        <p>Each is set out in full in the paper's limitations section.</p>
+      </div>
+      <div class="prose">
+        <ul class="sq">
+          <li><strong>Sari-sari stores are almost unmapped.</strong> Only 234 are named in all of Metro Manila's open data, so the walk to everyday food is too long everywhere, most of all in dense streets.</li>
+          <li><strong>Mapped is not there.</strong> New shops are missed and closed ones kept; Overture also lists some hospital clinics and wards as hospitals.</li>
+          <li><strong>No health registry.</strong> The DOH facility registry cannot be exported, so hospitals and clinics rest on open map data, and hospitals count one each rather than by beds.</li>
+          <li><strong>Jeepney routes are thinly mapped</strong> (95 in the study area), so transit shares are floors.</li>
+          <li><strong>The walk itself is not scored:</strong> heat, floods, crossings and sidewalks are not in the network.</li>
+          <li><strong>Potential, not realised, access:</strong> nothing here says where people actually go.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="data" aria-labelledby="data-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">DATA /</p>
+      <h2 id="data-h">Download and reproduce</h2>
+      <p>Every number on this page and the map comes from the committed tables below.</p>
+    </div>
+    <div class="files">
+      <div class="file"><a href="map/data/barangay_measures.csv">barangay_measures.csv</a><span class="size">460 KB</span><p>Every measure for every Metro Manila barangay: the table behind the comparison.</p></div>
+      <div class="file"><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/results/tables/measures.csv">measures.csv</a><span class="size">table</span><p>The five measures for the three featured barangays, their neighbours and Metro Manila.</p></div>
+      <div class="file"><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/results/tables/robustness.csv">robustness.csv</a><span class="size">table</span><p>Which differences between the three survive each of the ten checks.</p></div>
+      <div class="file"><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/data/derived/barangays.csv">barangays.csv</a><span class="size">table</span><p>People, area and density for every barangay.</p></div>
+      <div class="file"><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/tree/main/notebooks">notebooks/</a><span class="size">6 notebooks</span><p>The analysis, with each table and chart beside a short reading.</p></div>
+      <div class="file"><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/docs/data-quality.md">data-quality.md</a><span class="size">note</span><p>How each source was collected and joined, and where the gaps sit.</p></div>
+    </div>
+
+    <div class="two" style="margin-top:44px">
+      <div class="prose">
+        <h3 style="margin-top:0">Run it yourself</h3>
+        <p>Needs Python 3.12, <code class="mono">curl</code> and <a href="https://github.com/felt/tippecanoe">tippecanoe</a>, about 1.3 GB of downloads, and the 2024 census workbook for Metro Manila saved by hand as <a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/docs/data-quality.md#getting-the-hand-downloads">data-quality.md</a> describes.</p>
+        <p>The code, notebooks and full paper are in the <a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility">GitHub repository</a>.</p>
+      </div>
+      <pre><code>git clone https://github.com/earlcyu-petcircle/ph-urban-accessibility.git
+cd ph-urban-accessibility
+./run_all.sh            # collect, build, analyse, map
+python3 src/04_build_map/serve_map.py
+# this page at http://localhost:8000/</code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="block cite" id="cite" aria-labelledby="cite-h">
+  <div class="wrap">
+    <div class="two">
+      <div class="head">
+        <p class="kicker">CITE /</p>
+        <h2 id="cite-h">Citation</h2>
+        <p>Yu, E. (2026). <em>Walking to everyday life: access to services in three Metro Manila barangays.</em> https://earlcyu-petcircle.github.io/ph-urban-accessibility/</p>
+      </div>
+      <div>
+        <div class="citebar"><span class="kicker">BIBTEX</span><button type="button" id="copy-bib">Copy</button></div>
+<pre id="bibtex">@misc{yu2026walking,
+  author = {Yu, Earl},
+  title = {Walking to everyday life: access to services in three Metro Manila barangays},
+  year = {2026},
+  month = nov,
+  howpublished = {\url{https://earlcyu-petcircle.github.io/ph-urban-accessibility/}},
+  note = {Code and data: \url{https://github.com/earlcyu-petcircle/ph-urban-accessibility}}
+}</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="refs" aria-labelledby="refs-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">REFERENCES /</p>
+      <h2 id="refs-h">Sources cited</h2>
+    </div>
+    <ol class="refs">
+      <li>Moreno, C., Allam, Z., Chabaud, D., Gall, C. and Pratlong, F. "Introducing the "15-minute city"." <em>Smart Cities</em> 4 (1), 93-111, 2021. <a href="https://doi.org/10.3390/smartcities4010006">doi</a></li>
+      <li>Tolentino, N. J. Y. and Sigua, R. G. "Characteristics of walking and cycling in Metro Manila, Philippines." <em>Philippine Transportation Journal</em> 5 (1), 2022. <a href="https://ncts.upd.edu.ph/tssp/wp-content/uploads/2022/12/TSSP2022_Vol5-No1_02-Tolentino-and-Sigua.pdf">ncts.upd.edu.ph</a></li>
+      <li>Luo, W. and Qi, Y. "An enhanced two-step floating catchment area (E2SFCA) method." <em>Health &amp; Place</em> 15 (4), 1100-1107, 2009. <a href="https://doi.org/10.1016/j.healthplace.2009.06.002">doi</a></li>
+      <li>Mañago, C. A. R. et al. "Development of a fifteen-minute city index using walkability scores and age-classified population: the case of Pasig City." <em>ISPRS International Journal of Geo-Information</em> 14 (2), 78, 2025. <a href="https://doi.org/10.3390/ijgi14020078">doi</a></li>
+      <li>UN Statistics Division and UN-Habitat. <em>SDG indicator metadata 11.2.1.</em> 2025. <a href="https://unstats.un.org/sdgs/metadata/files/Metadata-11-02-01.pdf">unstats.un.org</a></li>
+      <li>Hasselwander, M. et al. "MaaS for the masses." <em>Multimodal Transportation</em> 2 (3), 100086, 2023. <a href="https://doi.org/10.1016/j.multra.2023.100086">doi</a></li>
+      <li>Kwan, M.-P. "The uncertain geographic context problem." <em>Annals of the AAG</em> 102 (5), 958-968, 2012. <a href="https://doi.org/10.1080/00045608.2012.687349">doi</a></li>
+      <li>Ballantyne, P. and Berragan, C. "Overture Point of Interest data for the United Kingdom." <em>Environment and Planning B</em> 51 (8), 1974-1980, 2024. <a href="https://doi.org/10.1177/23998083241263124">doi</a></li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><a class="brand" href="#top">Earl Yu / Atlas</a></span>
+    <span>Data: PSA 2024 Census; WorldPop (CC BY 4.0); OCHA COD-AB (CC BY-IGO); &copy; OpenStreetMap contributors (ODbL); Overture Maps; DepEd via OSMaPaaralan. Basemap: OpenFreeMap.</span>
+  </div>
+</footer>
+
+<script>
+// "Show on the map": steer the embedded comparison by its #p=...&by=... link, then bring it into view
+const frame = document.getElementById("atlas-map");
+document.querySelectorAll("button[data-map]").forEach(b => b.addEventListener("click", () => {
+  frame.src = "map/?embed#" + b.dataset.map;
+  document.getElementById("compare").scrollIntoView({behavior: "smooth"});
+}));
+
+const copy = document.getElementById("copy-bib");
+copy.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(document.getElementById("bibtex").textContent);
+    copy.textContent = "Copied";
+  } catch {
+    copy.textContent = "Select and copy";
+  }
+  setTimeout(() => { copy.textContent = "Copy"; }, 1800);
+});
+</script>
+</body>
+</html>

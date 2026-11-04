@@ -4,7 +4,7 @@ Earl Yu, November 2026.
 Open data only.
 
 This is the full paper for the project.
-The research design is final (approved on 4 November 2026), the data are collected and built (section 5) and the results are in (section 6); the full discussion and the story site and map come with the next pull request.
+The research design is final (approved on 4 November 2026), the data are collected and built (section 5) and the results are in (section 6), and a comparison site lets any reader set three barangays of their own side by side ([https://earlcyu-petcircle.github.io/ph-urban-accessibility/](https://earlcyu-petcircle.github.io/ph-urban-accessibility/), section 4.7).
 
 **In short.**
 Which of the three Metro Manila barangays I have lived in puts everyday life within a short walk?
@@ -13,6 +13,7 @@ Five measures, from walking time to the nearest service to supply per resident o
 A difference between the three counts as a finding only if it survives ten changes of assumption.
 No barangay wins outright: Barangay 136 has the most of the nine basics within 15 minutes (8.7 on average) but the least supply per resident once crowding is counted; Oranbo has more supply per resident than Metro Manila for most services and the nearest open space, but no public high school within reach; Loyola Heights trails on most basics, above all public schools, and only 48% of its residents have convenient public transport.
 14 of the 33 pairwise differences survive all ten checks.
+The same measures exist for every Metro Manila barangay, and the comparison site lets a reader pick any three; the three here are one personal point of view, loaded first.
 One caveat is already known: sari-sari stores, the corner shops of everyday Filipino life, are almost absent from open maps, so food access will be understated, most of all in Barangay 136.
 
 ## Contents
@@ -228,16 +229,18 @@ Every parameter lives in [`src/shared/common.py`](../src/shared/common.py).
 - **Registry match.** The share of DepEd public schools found in the merged service layer, per area (the DOH registry cannot be exported, so health has no registry match).
 - **Walk audit.** About 20 routes in and around each barangay scored on street imagery for sidewalk, crossings, shade and obstruction, after the Pasig protocol [28], with a count of sari-sari stores seen per kilometre; reported beside M1 to M5, not inside them.
 
-### 4.7 The interactive web map
+### 4.7 The comparison site
 
-The web map is part of the method: every colour on it is an M1 to M5 value from the pipeline, and it doubles as a quality check, since an odd patch usually means a data error.
-It follows the [PH lottery story site](https://earlcyu-petcircle.github.io/ph-lottery-outlets/): a one-page story with the map embedded near the top, plus a standalone full-screen version.
+The study's three barangays are one point of view, and a reader will want to compare places of their own, so the site lets anyone compare any three.
+It is a static site on GitHub Pages ([https://earlcyu-petcircle.github.io/ph-urban-accessibility/](https://earlcyu-petcircle.github.io/ph-urban-accessibility/)) in the style of the [PH lottery story site](https://earlcyu-petcircle.github.io/ph-lottery-outlets/): a one-page story with the comparison embedded near the top, plus a standalone full-screen version.
 
-- **Layers.** Access hexagons (M1 minutes, M2 count or M4 coverage for the chosen category, on fixed classes shared by every category); the three barangays in outline with their check walk-sheds; services by category and source; LRT and MRT lines and stations, and bus and jeepney routes; barangay and city boundaries; optional flood hazard and wealth context.
-- **Interactions.** Go-to buttons for Barangay 136, Loyola Heights, Oranbo and Metro Manila; a category picker and a 5, 10, 15 and 20-minute control; a hover card with people, minutes to each category, count within 15 minutes and metro percentile; a strip comparing each barangay's median walk; a walking-speed toggle.
-- **What a reader learns.** Where inside and around each barangay access is good or poor, which services drive the gaps, where each sits against the rest of Metro Manila, and how far the picture moves when assumptions change.
-- **Build.** The same stack as the PH lottery map: MapLibre GL JS 5.6.0, PMTiles 4.3.0, the OpenFreeMap Positron basemap and tiles built with tippecanoe, served from `docs/` on GitHub Pages.
-- **Privacy.** Hexagons hold many buildings, and no home location is stored in the repo or shown on the map.
+- **Pick up to three barangays.** Search by name or city, or click the map; the three barangays I have lived in are the featured preset, loaded first and restored with one button.
+- **Side by side.** For each pick and for Metro Manila: the 15-minute score (M4 as 0-100: the share of the nine services within 15 minutes, averaged over residents) and its rank among the 1,709 barangays with people; the median resident's minutes to each service (M1); the share within 10 minutes; the transit shares (M5); and supply per resident against the Metro Manila mean (M3).
+- **The map.** Barangays or H3 resolution-10 hexagons coloured by the 15-minute score or by minutes to any one service, on fixed classes shared by every service; the services themselves; LRT and MRT lines, and bus and jeepney routes; barangay and city outlines; and the featured barangays' 10, 15 and 20-minute walk-sheds.
+- **Data-driven.** The page reads the per-barangay results and the featured preset from files the pipeline writes (`docs/map/data/`), so a new area or a new featured set needs new data, not new code.
+- **What it does not carry.** The sensitivity checks of section 4.5 cover only the three featured barangays, so the page says that small gaps between other picks may not hold; M2 counts and the walking-speed and threshold variants stay in the paper and notebooks.
+- **Build.** MapLibre GL JS 5.6.0, PMTiles 4.3.0, the OpenFreeMap Positron basemap and tiles built with tippecanoe, served from `docs/`.
+- **Privacy.** Only barangays and hexagons are shown; hexagons with fewer than five buildings are left off, and no home location is stored or shown.
 
 ### 4.8 What the design can and cannot say
 
@@ -415,7 +418,7 @@ Of the 33 pairwise differences in the headline metrics (the median walk to each 
 
 ## 7. Discussion
 
-*The full discussion comes with the story site (PR 4). What the results already say:*
+*What the results say about the three featured barangays; the comparison site extends the same measures to any barangay.*
 
 - **No barangay wins outright.** Barangay 136 puts the most of the nine basics within a short walk, but it has the least supply per resident of the three for most services once neighbours are counted, and lacks open space and a palengke nearby; Oranbo has more supply per resident than Metro Manila for most services and the shortest walk to open space, but no public high school within reach; Loyola Heights trails on most basics, most of all public schools, and has the lowest transit share.
 - **Proximity and crowding point different ways in the densest place,** as the design expected: Barangay 136's short walks hide less supply per person for food, hospitals and the palengke.
@@ -445,7 +448,8 @@ Of the 33 pairwise differences in the headline metrics (the median walk to each 
 
 ## 9. Conclusion and future work
 
-*The conclusion comes with the full discussion in PR 4.*
+No barangay of the three puts all of everyday life within a short walk: the densest has nearly everything close but shares it among the most people, the newest district has room but no public high school nearby, and the university barangay trails on most basics.
+The same measures now cover every Metro Manila barangay, so readers can set their own places against these three.
 
 What would take this further, already visible from the design:
 
@@ -456,18 +460,19 @@ What would take this further, already visible from the design:
 
 ## 10. How to reproduce
 
-Phases 1 to 3 run now; phase 4 stops with a message until PR 4 builds it.
+All four phases run.
 
 ```bash
-git clone https://github.com/earlcyu-petcircle/metro-manila-accessibility.git
-cd metro-manila-accessibility
+git clone https://github.com/earlcyu-petcircle/ph-urban-accessibility.git
+cd ph-urban-accessibility
 ./run_all.sh              # every phase below, in order
 ./run_all.sh --refresh    # same, but pull fresh OpenStreetMap and Overture snapshots
 
 ./01_collect_data.sh      # downloads into data/raw/
 ./02_build_tables.sh      # people, services and the walking network
 ./03_analyse.sh           # the five measures, checks and audits in results/
-./04_build_map.sh         # web map tiles in docs/map/data/
+./04_build_map.sh         # comparison site data in docs/map/data/
+python3 src/04_build_map/serve_map.py   # the site at http://localhost:8000/
 ```
 
 It needs Python 3.12, `curl` and [tippecanoe](https://github.com/felt/tippecanoe) (`brew install tippecanoe`); nothing else is installed globally, since `src/shared/setup.sh` makes a local virtual environment from `requirements.txt`.
@@ -516,7 +521,7 @@ Data: PSA 2024 Census of Population; WorldPop, University of Southampton (CC BY 
 ## Appendix A. Code and pipeline
 
 The code sits in one folder per phase under [`src/`](../src/), named after the phase script at the repo root that runs it, with shared paths and study constants in [`src/shared/common.py`](../src/shared/common.py) and the phase scripts' setup in [`src/shared/setup.sh`](../src/shared/setup.sh).
-The phase 1 to 3 scripts are built; the phase 4 scripts are stubs that describe their step and stop with PR 4.
+All four phases are built.
 The analysis runs as six narrative notebooks in [`notebooks/`](../notebooks/), committed with their outputs so each table and chart sits beside a short reading; their logic lives in [`src/03_analyse/`](../src/03_analyse/), which they import.
 Shared helpers are in [`src/shared/`](../src/shared/): `common.py` (paths and study constants), `service_rules.py` (the rules that sort places into categories), `atlas.py` (the Atlas Grid chart style and its Riso data palette, mirrored from ph-lottery-outlets, with the fonts committed in `fonts/`), `run_notebook.py` (the notebook runner) and `setup.sh` (the phase scripts' setup).
 Libraries are added to `requirements.txt` in the PR that first uses them.
@@ -538,8 +543,10 @@ Libraries are added to `requirements.txt` in the PR that first uses them.
 | | The ten sensitivity checks | [`notebooks/05_robustness.ipynb`](../notebooks/05_robustness.ipynb), with `sensitivity.py` | `results/tables/sensitivity.csv`, `robustness.csv` | 3 |
 | | Registry match and the audit samples | [`notebooks/06_audits.ipynb`](../notebooks/06_audits.ipynb), with `audits.py` | `results/tables/registry_match.csv`, `service_audit_sample.csv`, `walk_audit_routes.csv` | 3 |
 | | Figures (Atlas style, Riso palette) | `src/03_analyse/charts.py` | `results/figures/` | 3 |
-| `04_build_map.sh` | Web map tiles | `src/04_build_map/build_map_tiles.py` | `docs/map/data/` | 4 |
+| `04_build_map.sh` | Map tiles, every barangay's measures and the featured preset | `src/04_build_map/build_map_tiles.py` | `docs/map/data/` | 4 |
+| | The map's classes and colours, from `src/shared/map_layers.py` | `src/04_build_map/write_web_palette.py` | `docs/map/palette.js` | 4 |
 | | Local preview server | `src/04_build_map/serve_map.py` | | 4 |
+| | The story page and the comparison map | [`docs/index.html`](index.html), [`docs/map/index.html`](map/index.html) | | 4 |
 
 ## Appendix B. Every figure and table
 
@@ -558,13 +565,14 @@ Libraries are added to `requirements.txt` in the PR that first uses them.
 | [`registry_match.csv`](../results/tables/registry_match.csv) | DepEd schools found in the open sources | 6.7 |
 | [`service_audit_sample.csv`](../results/tables/service_audit_sample.csv), [`walk_audit_routes.csv`](../results/tables/walk_audit_routes.csv) | The audit worksheets, to be scored by hand | 6.7 |
 
-*The web map comes with PR 4.*
+The comparison site is at [https://earlcyu-petcircle.github.io/ph-urban-accessibility/](https://earlcyu-petcircle.github.io/ph-urban-accessibility/); [`docs/map/data/barangay_measures.csv`](map/data/barangay_measures.csv) holds every measure for every barangay with people.
 
 ## Appendix C. Project history
 
 The study is built in steps, each a pull request.
-A first pass ([#1](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/1)), closed unmerged on 4 November 2026, scored all 1,710 Metro Manila barangays and compared the whole Tondo district against two single barangays, with its logic split across SQL files and Python scripts.
+A first pass ([#1](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/1)), closed unmerged on 4 November 2026, scored all 1,710 Metro Manila barangays and compared the whole Tondo district against two single barangays, with its logic split across SQL files and Python scripts.
 The research design was then redone from the literature, reviewed in three rounds and approved on 4 November 2026: barangay level for all three places, a private home lens, walking plus walking to transit, nine service categories, a profile of measures rather than one score, today's data only, and a street-imagery walk audit.
-[#2](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/2) puts this paper and the project skeleton in place.
-[#3](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/3) collects the data and builds the analysis inputs (section 5); the 2008 DepEd school file gave way to DepEd's 2019 list as cleaned by OpenStreetMap Philippines, because HDX refused scripted downloads that day and the newer list carries school levels and enrolment.
-[#4](https://github.com/earlcyu-petcircle/metro-manila-accessibility/pull/4) runs the analysis (section 6); with it the DOH registry was dropped for good, because its export fails even in a browser.
+[#2](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/2) puts this paper and the project skeleton in place.
+[#3](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/3) collects the data and builds the analysis inputs (section 5); the 2008 DepEd school file gave way to DepEd's 2019 list as cleaned by OpenStreetMap Philippines, because HDX refused scripted downloads that day and the newer list carries school levels and enrolment.
+[#4](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/4) runs the analysis (section 6); with it the DOH registry was dropped for good, because its export fails even in a browser.
+The fourth pull request builds the story site and turns its map into a comparison of any three barangays, with the three I have lived in as one featured point of view; with it the repository was renamed from metro-manila-accessibility to ph-urban-accessibility, since later series may cover the whole country.
