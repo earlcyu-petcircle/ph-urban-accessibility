@@ -24,6 +24,7 @@ PALETTE = {
     "MINUTE_BREAKS": ml.MINUTE_BREAKS,
     "MINUTES": ml.MINUTES,
     "SLOTS": ml.SLOTS,
+    "SERVICE": ml.SERVICE,
     "TRANSIT": ml.TRANSIT,
     "NO_PEOPLE": ml.NO_PEOPLE,
 }

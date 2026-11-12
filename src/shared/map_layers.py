@@ -30,6 +30,10 @@ SHARE_BREAKS = [25, 50, 75, 95]
 SHARE = atlas.SEQUENTIAL[1:]
 # The three comparison slots keep the chart colours (cobalt, pink, amber)
 SLOTS = atlas.CATEGORICAL[:3]
+# Service points: plum, the strongest Riso colour left once the slots take cobalt, pink and amber
+# (teal would sit beside the pink slot, which the palette's colour-blind rule forbids); drawn
+# with a white halo so they stand out on the pale basemap
+SERVICE = atlas.CATEGORICAL[4]
 # Transit lines: rail in ink, bus in sky, jeepney in plum (not the barangay colours)
 TRANSIT = {"rail": atlas.INK, "bus": atlas.CATEGORICAL[5], "jeepney": atlas.CATEGORICAL[4]}
 NO_PEOPLE = atlas.NO_PEOPLE

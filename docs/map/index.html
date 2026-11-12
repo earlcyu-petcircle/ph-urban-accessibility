@@ -59,7 +59,7 @@ button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.4rem .8rem;align-items:end}
 .row2 > div > span{display:block;font:600 .62rem var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
 #svc-count{font-size:.8rem;color:var(--ink-soft);margin:.35rem 0 0;display:flex;align-items:center;gap:.4rem}
-#svc-count::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--ink);border:1.5px solid var(--bg);outline:1px solid var(--ink);flex:none}
+#svc-count::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--service,#9C3F8F);box-shadow:0 0 0 1.5px var(--bg),0 0 0 2.5px var(--rule);flex:none}
 /* The picks table: one column per pick, one row per answer */
 table{width:100%;border-collapse:collapse;font-size:.8rem;table-layout:fixed}
 col.lbl{width:34%}
@@ -162,11 +162,12 @@ body.embed .standalone{display:none}
 </aside>
 <div id="map"></div>
 
-<!-- CODES, SCORE, SLOTS, TRANSIT: written from src/shared/map_layers.py -->
+<!-- CODES, SCORE, SLOTS, SERVICE, TRANSIT: written from src/shared/map_layers.py -->
 <script src="palette.js"></script>
 <script>
 // ?embed: shown inside the story page, which carries the title and the method
 if (new URLSearchParams(location.search).has("embed")) document.body.classList.add("embed");
+document.documentElement.style.setProperty("--service", SERVICE);
 
 const protocol = new pmtiles.Protocol();
 maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -197,7 +198,7 @@ const BRGY_FILL = ["case", ["!=", ["typeof", ["get", "score"]], "number"], NO_PE
 const HEX_FILL = steps(["*", ["get", "m4_42_15"], 100 / 9], SCORE_BREAKS, SCORE);
 function legend() {
   const row = (c, t, round) => `<div class="row"><span class="sw" style="background:${c}${round ? ";border-radius:50%;width:12px" : ""}"></span>${t}</div>`;
-  let html = row("#111111", `${LABEL[svc]}: one dot per service`, true) +
+  let html = row(SERVICE, `${LABEL[svc]}: one dot per service`, true) +
     picks.map((p, i) => row(SLOTS[i], esc(BY[p].n))).join("");
   if (bg !== "none") {
     const labels = ["under 50", "50 to 70", "70 to 80", "80 to 90", "90 to 99", "100: all nine within 15 min"];
@@ -432,8 +433,8 @@ map.on("load", async () => {
     paint: {"line-color": "#000000", "line-width": 3.5}});
   map.addLayer({id: "services", type: "circle", source: "services", "source-layer": "services",
     filter: ["==", ["get", "cat"], svc],
-    paint: {"circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 2.5, 14, 4.5, 17, 7], "circle-color": "#111111",
-            "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1.2}});
+    paint: {"circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 3, 14, 5, 17, 7.5], "circle-color": SERVICE,
+            "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1.5}});
 
   const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, maxWidth: "300px"});
   map.on("mousemove", "brgy-hit", (e) => {
