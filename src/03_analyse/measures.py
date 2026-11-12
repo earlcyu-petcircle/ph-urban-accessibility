@@ -208,11 +208,20 @@ def group_mean(values, people, keys):
     return d.v / d.p
 
 
+def group_quantile(values, people, keys, q):
+    """People-weighted quantile q of `values` within each key, interpolated as in `wquantile`."""
+    d = pd.DataFrame({"k": keys, "v": np.asarray(values, dtype=float), "p": np.asarray(people, dtype=float)})
+    return d.groupby("k").apply(lambda g: float(wquantile(g.v, g.p, q)[0]), include_groups=False)
+
+
 def barangay_table(w):
-    """The same measures for every barangay with people, for the comparison site: the median
-    resident's walk to each category (M1) and the share within the 10-minute minimum, the
-    share of Metro Manila residents with a longer walk than that median, E2SFCA access against
-    the Metro Manila mean (M3), mean categories within 15 minutes (M4) as a 0-100 score, and
+    """The same measures for every barangay with people, for the comparison site, which answers
+    the five research questions for any pick: the median resident's walk to each category (M1),
+    the P10 and P90 walks (the spread inside the barangay) and the share within the 10-minute
+    minimum; the median resident's count within 5, 10 and 15 minutes (M2); the share of Metro
+    Manila residents with a longer walk than that median; E2SFCA access against the Metro
+    Manila mean (M3); mean categories within 15 minutes (M4) as a 0-100 score, the share with
+    all nine and the share of Metro Manila residents with fewer than the median resident; and
     the transit shares (M5). One row per barangay, wide."""
     w = w[w.people > 0]
     keys, p = w.pcode.values, w.people.values
@@ -221,7 +230,11 @@ def barangay_table(w):
         d = w[f"d_{c}"].values
         med = group_median(d, p, keys)
         out[f"min_{c}"] = minutes(med)
+        out[f"p10_min_{c}"] = minutes(group_quantile(d, p, keys, 0.1))
+        out[f"p90_min_{c}"] = minutes(group_quantile(d, p, keys, 0.9))
         out[f"within10_{c}"] = group_mean(minutes(d) <= SUFFICIENCY_MIN, p, keys)
+        for m in (5, 10, 15):
+            out[f"n{m}_{c}"] = group_median(w[f"n_{c}_{m}"].values, p, keys)
         order = np.argsort(d)
         xs, cw = d[order], np.cumsum(p[order])
         out[f"metro_longer_{c}"] = (
@@ -232,6 +245,11 @@ def barangay_table(w):
     cov = coverage(w).values
     out["m4_mean"] = group_mean(cov, p, keys)
     out["score"] = out.m4_mean / len(CATEGORIES) * 100
+    out["share_all_nine"] = group_mean(cov == len(CATEGORIES), p, keys)
+    cov_med = group_median(cov, p, keys)
+    order = np.argsort(cov)
+    xs, cw = cov[order], np.cumsum(p[order])
+    out["m4_metro_fewer"] = np.r_[0, cw][np.searchsorted(xs, cov_med.reindex(out.index).values, "left")] / cw[-1]
     out["share_bus_jeepney_500m"] = group_mean(w.d_bus_jeepney.values <= TRANSIT_LOW_CAPACITY_M, p, keys)
     out["share_rail_1km"] = group_mean(w.d_rail.values <= TRANSIT_HIGH_CAPACITY_M, p, keys)
     out["share_convenient"] = group_mean(
