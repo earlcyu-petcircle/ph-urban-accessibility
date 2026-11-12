@@ -13,7 +13,9 @@ PMTiles). Everything is built from the analysis results (03_analyse.sh); nothing
   docs/map/data/transit.pmtiles    LRT and MRT lines, and every mapped bus and jeepney route
   docs/map/data/barangays.pmtiles  Metro Manila's barangay and city outlines, with people and M4
   docs/map/data/study.geojson      the three barangays and their 10, 15 and 20-minute walk-sheds
-  docs/map/data/summary.json       each barangay's medians for the panel's comparison strip
+  docs/map/data/barangays.json     every barangay's answers to the five research questions, with
+                                   its people, land area and density, for the picks table
+  docs/map/data/summary.json       the featured preset and Metro Manila's figures for the same rows
 
 Privacy: no building or home is published. Hexagons hold 34 residential buildings at the median;
 those with fewer than MIN_BUILDINGS are left off the map (their residents still count in every
@@ -196,7 +198,7 @@ print(f"transit: {tg['mode'].value_counts().to_dict()}")
 # ---------------------------------------------------------------------------
 geo = read_ncr_barangays(columns=["adm4_pcode"]).rename(columns={"adm4_pcode": "pcode"})
 bt = barangay_table(w)
-bt = b[["pcode", "barangay", "city"]].merge(bt, on="pcode", how="left")
+bt = b[["pcode", "barangay", "city", "area_km2", "people_per_km2"]].merge(bt, on="pcode", how="left")
 bt.to_csv(MAP_DATA / "barangay_measures.csv", index=False, float_format="%.4g")
 bbox = geo.set_index("pcode").bounds.round(5)
 records = []
@@ -210,10 +212,16 @@ for r in bt.itertuples(index=False):
             "n": r.barangay,
             "c": r.city,
             "pop": int(round(r.people)),
+            "a": round(r.area_km2, 3),
+            "d": int(r.people_per_km2),
             "s": round(r.score, 1),
             "rank": int(r.score_rank),
             "m4": round(r.m4_mean, 2),
+            "a9": round(r.share_all_nine * 100),
+            "q4": round(r.m4_metro_fewer * 100),
             "min": {CODES[c]: round(v[f"min_{c}"], 1) for c in CATEGORIES},
+            "r": {CODES[c]: [round(v[f"p10_min_{c}"], 1), round(v[f"p90_min_{c}"], 1)] for c in CATEGORIES},
+            "k": {CODES[c]: [int(v[f"n{m}_{c}"]) for m in (5, 10, 15)] for c in CATEGORIES},
             "w10": {CODES[c]: round(v[f"within10_{c}"] * 100) for c in CATEGORIES},
             "q": {CODES[c]: round(v[f"metro_longer_{c}"] * 100) for c in CATEGORIES},
             "x": {CODES[c]: round(v[f"m3_index_{c}"], 2) for c in M3_CATEGORIES},
@@ -296,6 +304,10 @@ summary = {
             for s_ in ("share_within_500m_bus_jeepney", "share_within_1km_rail", "share_convenient")
         ],
         "pop": round(float(mm[mm.measure == "people"].value.iloc[0])),
+        "a": round(float(b.area_km2.sum()), 1),
+        "r": {CODES[c]: [round(metro("M1", s_, c), 1) for s_ in ("p10_min", "p90_min")] for c in CATEGORIES},
+        "k": {CODES[c]: [int(metro("M2", f"median_within_{m}min", c)) for m in (5, 10, 15)] for c in CATEGORIES},
+        "a9": round(metro("M4", "share_with_9") * 100),
     },
     "barangays_ranked": int(bt.score_rank.max()),
     "min_buildings": MIN_BUILDINGS,

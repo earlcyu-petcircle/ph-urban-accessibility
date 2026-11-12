@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Compare Barangays on Foot</title>
-<meta name="description" content="Pick up to three Metro Manila barangays and compare how far their residents walk to food, the palengke, pharmacies, clinics, hospitals, public schools, open space and transit.">
+<meta name="description" content="Pick up to three Metro Manila barangays and see the study's five research questions answered for each: how far residents walk to food, the palengke, pharmacies, clinics, hospitals, public schools, open space and transit, how many are within reach, how crowded they are, and how each barangay compares.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect x=%272%27 y=%272%27 width=%2712%27 height=%2712%27 fill=%27%231F4FE0%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,12 +20,13 @@
   --accent:#1F4FE0; --highlight:#FFE14D; --grid:#F3F5FB; --rule:#DADDE6;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
   --head:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;
+  --panel:min(620px,56%);
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:15px/1.55 "Public Sans",system-ui,sans-serif}
 a{color:var(--accent)}
-#map{position:absolute;inset:0 0 0 400px;background:var(--grid)}
-#panel{position:absolute;top:0;left:0;bottom:0;width:400px;overflow-y:auto;padding:1.2rem 1.2rem 2rem;
+#map{position:absolute;inset:0 0 0 var(--panel);background:var(--grid)}
+#panel{position:absolute;top:0;left:0;bottom:0;width:var(--panel);overflow-y:auto;padding:1.2rem 1.2rem 2rem;
   background:var(--bg);border-right:3px solid var(--ink)}
 .back{display:inline-flex;align-items:center;gap:.5rem;font:800 .95rem var(--head);letter-spacing:-.02em;color:var(--ink);text-decoration:none;margin:0 0 1rem}
 .back::before{content:"";width:10px;height:10px;background:var(--accent)}
@@ -48,28 +49,46 @@ button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 #results li{padding:.35rem .5rem;cursor:pointer;font-size:.88rem;border-bottom:1px solid var(--rule)}
 #results li span{color:var(--muted);font-size:.8rem}
 #results li[aria-selected=true],#results li:hover{background:var(--grid)}
-.chips{display:flex;flex-direction:column;gap:.35rem;margin:.6rem 0 0}
-.chip{display:flex;align-items:center;gap:.5rem;border:1.5px solid var(--ink);padding:.3rem .45rem;font-size:.88rem}
+.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.35rem;margin:.6rem 0 0}
+.chip{display:flex;align-items:center;gap:.4rem;border:1.5px solid var(--ink);padding:.3rem .4rem;font-size:.86rem;min-width:0}
 .chip .sw{width:12px;height:12px;flex:none}
-.chip .nm{flex:1;line-height:1.25}
-.chip .nm span{display:block;color:var(--muted);font-size:.76rem}
-.chip button{padding:.1rem .45rem}
-.empty{font-size:.82rem;color:var(--muted);border:1.5px dashed var(--rule);padding:.35rem .45rem}
-table{width:100%;border-collapse:collapse;font-size:.8rem}
-th{font:600 .62rem var(--mono);text-transform:uppercase;letter-spacing:.03em;text-align:right;
-  border-bottom:2px solid var(--ink);padding:.3rem .2rem;vertical-align:bottom}
+.chip .nm{flex:1;line-height:1.2;min-width:0;overflow-wrap:anywhere}
+.chip .nm span{display:block;color:var(--muted);font-size:.74rem}
+.chip button{padding:.1rem .4rem}
+.empty{font-size:.82rem;color:var(--muted);border:1.5px dashed var(--rule);padding:.35rem .45rem;display:flex;align-items:center}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.4rem .8rem;align-items:end}
+.row2 > div > span{display:block;font:600 .62rem var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+#svc-count{font-size:.8rem;color:var(--ink-soft);margin:.35rem 0 0;display:flex;align-items:center;gap:.4rem}
+#svc-count::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--service,#9C3F8F);box-shadow:0 0 0 1.5px var(--bg),0 0 0 2.5px var(--rule);flex:none}
+/* The picks table: one column per pick, one row per answer */
+table{width:100%;border-collapse:collapse;font-size:.8rem;table-layout:fixed}
+col.lbl{width:34%}
+thead th{position:sticky;top:-1.2rem;z-index:2;background:var(--bg);font:600 .64rem/1.25 var(--mono);letter-spacing:.02em;text-align:right;
+  border-bottom:2px solid var(--ink);padding:.45rem .25rem .3rem;vertical-align:bottom;overflow-wrap:anywhere}
 th:first-child,td:first-child{text-align:left}
-th .sw{display:inline-block;width:9px;height:9px;margin-right:3px}
-td{padding:.26rem .2rem;border-bottom:1px solid var(--rule);text-align:right;font-family:var(--mono);font-size:.74rem;white-space:nowrap}
-td:first-child{font-family:"Public Sans",sans-serif;font-size:.8rem;white-space:normal}
-tr.sec td{font:600 .62rem var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--ink);padding-top:.6rem;text-align:left}
+th .sw{display:block;width:100%;height:4px;margin-bottom:.3rem}
+td{padding:.28rem .25rem;border-bottom:1px solid var(--rule);text-align:right;font-family:var(--mono);font-size:.74rem;vertical-align:top}
+td small{display:block;font-size:.64rem;color:var(--muted);font-weight:400}
+td:first-child{font-family:"Public Sans",sans-serif;font-size:.8rem}
+td:first-child button{all:unset;cursor:pointer;border-bottom:1px dotted var(--muted)}
+td:first-child button:hover,td:first-child button:focus-visible{color:var(--accent);border-bottom-color:var(--accent)}
+tr.on td{background:#FFF6C2}
+tr.rq td{border-bottom:2px solid var(--ink);padding-top:1rem;text-align:left;font-family:"Public Sans",sans-serif;white-space:normal}
+tr.rq b{display:block;font:600 .66rem var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+tr.rq span{display:block;font:800 .98rem/1.15 var(--head);letter-spacing:-.01em;color:var(--ink);margin-top:.15rem}
+tr.rq i{display:block;font-style:normal;font-size:.74rem;color:var(--muted);margin-top:.2rem}
+tr.sub td{font:600 .6rem var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding-top:.55rem;text-align:left;white-space:normal}
 td.best{font-weight:600;color:var(--accent)}
 td.metro{color:var(--muted)}
 .caption{font-size:.74rem;color:var(--muted);margin-top:.4rem}
 #legend .row{display:flex;align-items:center;gap:.45rem;font-size:.8rem;padding:.08rem 0}
 .sw{width:16px;height:12px;border:1px solid rgba(17,17,17,.2);flex:none}
 .note{font-size:.78rem;color:var(--muted)}
+.check{font-size:.78rem;color:var(--ink);border-left:3px solid var(--highlight);padding:.1rem 0 .1rem .5rem;margin:.6rem 0 0}
 #msg{font-size:.8rem;color:var(--ink);background:var(--highlight);padding:.2rem .4rem;display:none;margin-top:.4rem}
+details{margin-top:1.3rem}
+details summary{font:600 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding-bottom:.3rem;border-bottom:2px solid var(--ink)}
+details[open] summary{margin-bottom:.5rem}
 footer{margin-top:1.4rem;padding-top:.6rem;border-top:2px solid var(--ink);font-size:.72rem;color:var(--muted)}
 .maplibregl-popup-content{font:13px/1.45 "Public Sans",sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--ink);border-radius:0;padding:.55rem .7rem;box-shadow:none}
 .maplibregl-popup-tip{display:none}
@@ -78,12 +97,18 @@ footer{margin-top:1.4rem;padding-top:.6rem;border-top:2px solid var(--ink);font-
 .tt td:last-child{text-align:right;font-family:var(--mono);font-size:.72rem}
 .tt-hint{font-size:.72rem;color:var(--muted);margin-top:.25rem}
 /* Embedded in the story page, which carries the title and the method */
-body.embed #panel{width:360px;padding-top:1rem}
-body.embed #map{left:360px}
+body.embed{--panel:min(600px,58%)}
+body.embed #panel{padding-top:1rem}
+body.embed thead th{top:-1rem}
 body.embed .standalone{display:none}
 @media (max-width:760px){
-  #panel,body.embed #panel{position:absolute;top:auto;left:0;right:0;bottom:0;width:auto;height:52%;border-right:0;border-top:3px solid var(--ink);padding:.9rem 16px}
-  #map,body.embed #map{inset:0 0 52% 0}
+  #panel,body.embed #panel{position:absolute;top:auto;left:0;right:0;bottom:0;width:auto;height:62%;border-right:0;border-top:3px solid var(--ink);padding:.9rem 16px}
+  #map,body.embed #map{inset:0 0 62% 0}
+  thead th,body.embed thead th{top:-.9rem;font-size:.58rem}
+  col.lbl{width:30%}
+  td{font-size:.68rem;padding:.26rem .15rem}
+  td:first-child{font-size:.74rem}
+  .chips{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 </head>
@@ -92,9 +117,9 @@ body.embed .standalone{display:none}
   <a class="back standalone" href="../">Earl Yu / Atlas</a>
   <p class="kicker standalone">PH / URBAN ACCESSIBILITY / MAP</p>
   <h1 class="standalone">Compare barangays on foot</h1>
-  <p class="lead standalone">Pick up to three Metro Manila barangays and see how far their residents walk to nine everyday services, and how many of those services are within 15 minutes. The <a href="../">story page</a> explains the measures.</p>
+  <p class="lead standalone">Pick up to three Metro Manila barangays: the table answers the study's five research questions for each, beside Metro Manila, and the map shows where the chosen service is. The <a href="../">story page</a> explains the measures.</p>
 
-  <h2>Compare up to three barangays</h2>
+  <h2>Pick up to three barangays</h2>
   <div class="search">
     <input type="search" id="q" placeholder="Search a barangay or city" autocomplete="off" aria-label="Search a barangay by name or city" aria-controls="results" aria-autocomplete="list">
     <ul id="results" role="listbox"></ul>
@@ -104,41 +129,45 @@ body.embed .standalone{display:none}
   <p id="msg" role="status"></p>
   <div class="buttons"><button id="featured" type="button">Featured: three barangays Earl has lived in</button><button id="clear" type="button">Clear</button></div>
 
-  <h2>Side by side</h2>
-  <table id="compare"><thead></thead><tbody></tbody></table>
-  <p class="caption">Minutes on foot at 4.2 km/h for the median resident, by street. Bold blue marks the best of the picks. The 15-minute score is the share of the nine services within 15 minutes, averaged over residents. Supply against Metro Manila counts the neighbours who share each service (1.00 is the Metro Manila average).</p>
+  <h2>Show on the map</h2>
+  <div class="row2">
+    <div><span>Service</span>
+      <select id="svc" aria-label="Service to show on the map"></select></div>
+    <div><span>Colour Metro Manila by</span>
+      <select id="bg" aria-label="Colour Metro Manila by">
+        <option value="none">Nothing: picks only</option>
+        <option value="barangays">15-minute score, by barangay</option>
+        <option value="hexes">15-minute score, by hexagon</option>
+      </select></div>
+  </div>
+  <p id="svc-count" aria-live="polite"></p>
 
-  <h2>Colour the map by</h2>
-  <select id="by" aria-label="Colour the map by">
-    <option value="score">15-minute score (0-100)</option>
-  </select>
-  <fieldset style="margin-top:.5rem">
-    <label><input type="radio" name="detail" value="barangays" checked> Barangays</label>
-    <label><input type="radio" name="detail" value="hexes"> Hexagons (about 0.015 km², finer detail)</label>
-  </fieldset>
+  <table id="compare"><colgroup><col class="lbl"></colgroup><thead></thead><tbody></tbody></table>
+  <p class="check">Only the three featured barangays have been through the study's ten sensitivity checks; small gaps between other picks may not hold.</p>
+  <p class="caption">Walks are along streets at 4.2 km/h. "Median resident" is the middle resident of the barangay by walk. Bold blue marks the best of the picks. Click a service name to show it on the map.</p>
 
-  <h2>Legend</h2>
-  <div id="legend"></div>
-
-  <h2>Layers</h2>
-  <fieldset>
-    <label><input type="checkbox" id="show-services" checked> Services of the chosen category (zoom in)</label>
-    <label><input type="checkbox" id="show-transit"> LRT and MRT, bus and jeepney routes</label>
-    <label><input type="checkbox" id="show-sheds"> Walk-sheds of the featured barangays (10, 15, 20 min)</label>
-  </fieldset>
+  <details id="more">
+    <summary>Legend and more layers</summary>
+    <div id="legend"></div>
+    <fieldset style="margin-top:.5rem">
+      <label><input type="checkbox" id="show-transit"> LRT and MRT, bus and jeepney routes</label>
+      <label><input type="checkbox" id="show-sheds"> Walk-sheds of the featured barangays (10, 15, 20 min)</label>
+    </fieldset>
+  </details>
 
   <footer>
-    <p>Only the three featured barangays have been through the study's ten sensitivity checks; small gaps between other picks may not hold. Sari-sari stores are almost unmapped, so food access is understated everywhere.</p>
+    <p>Sari-sari stores are almost unmapped, so food access is understated everywhere.</p>
     <p>People: PSA 2024 census, placed with WorldPop and Overture buildings. Services: Overture Maps, &copy; OpenStreetMap contributors, DepEd. Boundaries: OCHA COD-AB. Basemap: OpenFreeMap. Hexagons with fewer than five buildings are left off.</p>
   </footer>
 </aside>
 <div id="map"></div>
 
-<!-- CODES, SCORE, MINUTES, SLOTS, TRANSIT: written from src/shared/map_layers.py -->
+<!-- CODES, SCORE, SLOTS, SERVICE, TRANSIT: written from src/shared/map_layers.py -->
 <script src="palette.js"></script>
 <script>
 // ?embed: shown inside the story page, which carries the title and the method
 if (new URLSearchParams(location.search).has("embed")) document.body.classList.add("embed");
+document.documentElement.style.setProperty("--service", SERVICE);
 
 const protocol = new pmtiles.Protocol();
 maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -146,81 +175,105 @@ const here = (p) => "pmtiles://" + new URL(p, location.href).href;
 
 const LABEL = {food: "Food retail", mkt: "Palengke", phar: "Pharmacy", care: "Primary care", hosp: "Hospital",
   elem: "Public elementary", high: "Public high", open: "Open space", trans: "Transit"};
+const PLURAL = {food: "food shops", mkt: "palengkes", phar: "pharmacies", care: "primary care clinics", hosp: "hospitals",
+  elem: "public elementary schools", high: "public high schools", open: "open spaces", trans: "transit stops and stations"};
 const CATS = Object.values(CODES);
 const MAX = 3;
+const DEFAULT_SVC = "mkt";
 const fmt = (v, d = 0) => v === undefined || v === null ? "-" :
   Number(v).toLocaleString("en-AU", {maximumFractionDigits: d, minimumFractionDigits: d});
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 
-let B = [], BY = {}, S = null, picks = [], by = "score", detail = "barangays";
-CATS.forEach(c => document.getElementById("by").insertAdjacentHTML("beforeend",
-  `<option value="${c}">Minutes to the nearest: ${LABEL[c].toLowerCase()}</option>`));
+let B = [], BY = {}, S = null, picks = [], svc = DEFAULT_SVC, bg = "none";
+CATS.forEach(c => document.getElementById("svc").insertAdjacentHTML("beforeend", `<option value="${c}">${LABEL[c]}</option>`));
 
-// --- Map colours -----------------------------------------------------------------------
+// --- Background colours (off by default: the picks are the subject) ----------------------
 function steps(value, breaks, colours) {
   const s = ["step", value, colours[0]];
   breaks.forEach((b, i) => s.push(b, colours[i + 1]));
   return s;
 }
-function fill(layer) {
-  // hexagons carry metres at 4.2 km/h (70 m a minute) and mean categories within 15 minutes
-  const key = layer === "barangays" ? (by === "score" ? "score" : `d_${by}`) : (by === "score" ? "m4_42_15" : `d_${by}`);
-  const raw = ["get", key];
-  const v = layer === "barangays" ? raw : by === "score" ? ["*", raw, 100 / 9] : ["/", raw, 70];
-  return ["case", ["!=", ["typeof", raw], "number"], NO_PEOPLE,
-    by === "score" ? steps(v, SCORE_BREAKS, SCORE) : steps(v, MINUTE_BREAKS, MINUTES)];
-}
+// Barangays carry the score (0-100); hexagons the mean categories within 15 minutes at 4.2 km/h
+const BRGY_FILL = ["case", ["!=", ["typeof", ["get", "score"]], "number"], NO_PEOPLE, steps(["get", "score"], SCORE_BREAKS, SCORE)];
+const HEX_FILL = steps(["*", ["get", "m4_42_15"], 100 / 9], SCORE_BREAKS, SCORE);
 function legend() {
-  const row = (c, t) => `<div class="row"><span class="sw" style="background:${c}"></span>${t}</div>`;
-  const el = document.getElementById("legend");
-  if (by === "score") {
+  const row = (c, t, round) => `<div class="row"><span class="sw" style="background:${c}${round ? ";border-radius:50%;width:12px" : ""}"></span>${t}</div>`;
+  let html = row(SERVICE, `${LABEL[svc]}: one dot per service`, true) +
+    picks.map((p, i) => row(SLOTS[i], esc(BY[p].n))).join("");
+  if (bg !== "none") {
     const labels = ["under 50", "50 to 70", "70 to 80", "80 to 90", "90 to 99", "100: all nine within 15 min"];
-    el.innerHTML = SCORE.map((c, i) => row(c, labels[i])).join("") +
-      `<p class="caption">15-minute score: the share of the nine services within 15 minutes on foot, averaged over residents. Metro Manila: ${fmt(S.metro.s, 1)}.</p>`;
-  } else {
-    const labels = ["under 5 min", "5 to 10", "10 to 15", "15 to 20", "20 to 30", "30 or more"];
-    el.innerHTML = MINUTES.map((c, i) => row(c, labels[i])).join("") +
-      `<p class="caption">Minutes on foot to the nearest ${LABEL[by].toLowerCase()} for the median resident. Metro Manila: ${fmt(S.metro.min[by], 1)} min.</p>`;
+    html += `<p class="caption">15-minute score, ${bg === "hexes" ? "by hexagon" : "by barangay"}:</p>` +
+      SCORE.map((c, i) => row(c, labels[i])).join("") + row(NO_PEOPLE, "No residents");
   }
-  el.innerHTML += row(NO_PEOPLE, "No residents");
+  document.getElementById("legend").innerHTML = html;
 }
 
-// --- The comparison --------------------------------------------------------------------
+// --- The picks table: the five research questions, one row per answer ---------------------
 function best(values, lowerIsBetter) {
   const ok = values.filter(v => v !== null && v !== undefined);
-  if (ok.length < 2 || lowerIsBetter === null) return null;
+  if (ok.length < 2 || lowerIsBetter === null || ok.every(v => v === ok[0])) return null;
   return lowerIsBetter ? Math.min(...ok) : Math.max(...ok);
 }
 function renderTable() {
   const cols = picks.map(p => BY[p]);
-  const head = cols.map((b, i) => `<th><span class="sw" style="background:${SLOTS[i]}"></span>${esc(b.n)}</th>`).join("");
-  document.querySelector("#compare thead").innerHTML = `<tr><th></th>${head}<th>Metro Manila</th></tr>`;
-  const rows = [];
-  const line = (label, vals, metro, d, lower, unit = "") => {
-    const b = best(vals, lower);
-    rows.push(`<tr><td>${label}</td>${vals.map(v => `<td${v === b ? ' class="best"' : ""}>${fmt(v, d)}${v === null || v === undefined ? "" : unit}</td>`).join("")}<td class="metro">${fmt(metro, d)}${metro === null ? "" : unit}</td></tr>`);
-  };
-  const sec = (t) => rows.push(`<tr class="sec"><td colspan="${cols.length + 2}">${t}</td></tr>`);
+  const n = cols.length + 2;
+  const head = cols.map((b, i) => `<th scope="col"><span class="sw" style="background:${SLOTS[i]}"></span>${esc(b.n)}</th>`).join("");
+  document.querySelector("#compare thead").innerHTML = `<tr><th scope="col"></th>${head}<th scope="col">Metro Manila</th></tr>`;
+  const colgroup = document.querySelector("#compare colgroup");
+  colgroup.innerHTML = `<col class="lbl">` + "<col>".repeat(cols.length + 1);
   if (!cols.length) {
     document.querySelector("#compare tbody").innerHTML = `<tr><td colspan="2">Pick a barangay to compare.</td></tr>`;
     return;
   }
-  sec("Overall");
-  line("15-minute score (0-100)", cols.map(b => b.s), S.metro.s, 1, false);
-  line(`Rank of ${S.barangays_ranked.toLocaleString("en-AU")} (1 = best)`, cols.map(b => b.rank), null, 0, true);
-  line("Services within 15 min (of 9)", cols.map(b => b.m4), S.metro.m4, 1, false);
-  line("People (2024 census)", cols.map(b => b.pop), S.metro.pop, 0, null);
-  sec("Minutes to the nearest");
-  CATS.forEach(c => line(LABEL[c], cols.map(b => b.min[c]), S.metro.min[c], 1, true));
-  sec("Residents within 10 minutes");
-  CATS.forEach(c => line(LABEL[c], cols.map(b => b.w10[c]), S.metro.w10[c], 0, false, "%"));
-  sec("Transit (UN SDG 11.2.1)");
-  line("Bus or jeepney within 500 m", cols.map(b => b.t[0]), S.metro.t[0], 0, false, "%");
-  line("LRT or MRT within 1 km", cols.map(b => b.t[1]), S.metro.t[1], 0, false, "%");
-  line("Either: convenient transit", cols.map(b => b.t[2]), S.metro.t[2], 0, false, "%");
-  sec("Supply against Metro Manila");
-  CATS.filter(c => c !== "trans").forEach(c => line(LABEL[c], cols.map(b => b.x[c]), 1, 2, false));
-  document.querySelector("#compare tbody").innerHTML = rows.join("");
+  const rows = [];
+  const svcLabel = (c) => `<button type="button" data-svc="${c}" aria-label="Show ${LABEL[c].toLowerCase()} on the map">${LABEL[c]}</button>`;
+  // one answer: a label, each pick's value (cell text and the number that decides "best"), Metro Manila
+  const line = (label, cells, metro, lower, cat) => {
+    const b = best(cells.map(c => c.v), lower);
+    rows.push(`<tr${cat && cat === svc ? ' class="on"' : ""}${cat ? ` data-cat="${cat}"` : ""}><td>${label}</td>` +
+      cells.map(c => `<td${b !== null && c.v === b ? ' class="best"' : ""}>${c.t}</td>`).join("") +
+      `<td class="metro">${metro}</td></tr>`);
+  };
+  const val = (v, d = 0, unit = "") => ({v, t: v === null || v === undefined ? "-" : fmt(v, d) + unit});
+  const rq = (code, title, question, note) => rows.push(`<tr class="rq"><td colspan="${n}"><b>${code}</b><span>${title}</span><i>${question}${note ? " " + note : ""}</i></td></tr>`);
+  const sub = (t) => rows.push(`<tr class="sub"><td colspan="${n}">${t}</td></tr>`);
+  const m = S.metro;
+
+  rq("Profile", "The barangay", "Who lives there and how tightly.");
+  line("People (2024 census)", cols.map(b => val(b.pop)), fmt(m.pop), null);
+  line("Land area (km²)", cols.map(b => val(b.a, b.a < 1 ? 3 : 2)), fmt(m.a, 1), null);
+  line("People per km²", cols.map(b => val(b.d)), fmt(m.pop / m.a), null);
+
+  rq("RQ1 Proximity", "How long is the walk to the nearest?", "Minutes for the median resident; below, the share of residents within 10 minutes.");
+  CATS.forEach(c => line(svcLabel(c), cols.map(b => ({v: b.min[c], t: `${fmt(b.min[c], 1)}<small>${fmt(b.w10[c])}% ≤10</small>`})),
+    `${fmt(m.min[c], 1)}<small>${fmt(m.w10[c])}% ≤10</small>`, true, c));
+
+  rq("RQ2 Choice", "How many are within 5, 10 and 15 minutes?", "Count for the median resident, as 5 · 10 · 15 minutes. Best is judged at 10 minutes.");
+  CATS.forEach(c => line(svcLabel(c), cols.map(b => ({v: b.k[c][1], t: b.k[c].join(" · ")})), m.k[c].join(" · "), false, c));
+
+  rq("RQ3 Crowding", "How much service per resident, once neighbours are counted?", "Supply within 15 minutes per resident against Metro Manila (1.00). Below 1.00, more people share less.");
+  CATS.filter(c => c !== "trans").forEach(c => line(svcLabel(c), cols.map(b => val(b.x[c], 2)), fmt(1, 2), false, c));
+
+  rq("RQ4 Transit", "Is public transport convenient, and how many basics are within 15 minutes?", "The UN test (SDG 11.2.1) and the 15-minute headline.");
+  line("Bus or jeepney within 500 m", cols.map(b => val(b.t[0], 0, "%")), fmt(m.t[0]) + "%", false);
+  line("LRT or MRT within 1 km", cols.map(b => val(b.t[1], 0, "%")), fmt(m.t[1]) + "%", false);
+  line("Either: convenient transit", cols.map(b => val(b.t[2], 0, "%")), fmt(m.t[2]) + "%", false);
+  line("Services within 15 min (of 9), mean", cols.map(b => val(b.m4, 1)), fmt(m.m4, 1), false);
+  line("Residents with all nine within 15 min", cols.map(b => val(b.a9, 0, "%")), fmt(m.a9) + "%", false);
+  line("15-minute score (0-100)", cols.map(b => val(b.s, 1)), fmt(m.s, 1), false);
+
+  rq("RQ5 Context and fairness", "Where does it sit in Metro Manila, and how unequal is access inside?", "");
+  line(`Rank of ${S.barangays_ranked.toLocaleString("en-AU")} by 15-minute score (1 = best)`, cols.map(b => val(b.rank)), "-", true);
+  sub("Metro Manila residents with worse access than the median resident (above 50% is better than the city)");
+  CATS.forEach(c => line(svcLabel(c), cols.map(b => val(b.q[c], 0, "%")), "50%", false, c));
+  line("Services within 15 min", cols.map(b => val(b.q4, 0, "%")), "50%", false);
+  sub("Spread inside: minutes for the 10th and 90th percentile resident (a narrow range is more even)");
+  CATS.forEach(c => line(svcLabel(c), cols.map(b => ({v: b.r[c][1] - b.r[c][0], t: `${fmt(b.r[c][0], 1)}-${fmt(b.r[c][1], 1)}`})),
+    `${fmt(m.r[c][0], 1)}-${fmt(m.r[c][1], 1)}`, true, c));
+
+  const body = document.querySelector("#compare tbody");
+  body.innerHTML = rows.join("");
+  body.querySelectorAll("[data-svc]").forEach(b => b.onclick = () => setSvc(b.dataset.svc));
 }
 function renderChips() {
   const el = document.getElementById("chips");
@@ -242,10 +295,14 @@ function say(text) {
 function update() {
   renderChips();
   renderTable();
+  legend();
   if (map.getLayer("picked")) {
-    map.setFilter("picked", ["in", ["get", "pcode"], ["literal", picks]]);
-    map.setPaintProperty("picked", "line-color", picks.length
-      ? ["match", ["get", "pcode"], ...picks.flatMap((p, i) => [p, SLOTS[i]]), "#000000"] : "#000000");
+    const inPicks = ["in", ["get", "pcode"], ["literal", picks]];
+    const colour = picks.length ? ["match", ["get", "pcode"], ...picks.flatMap((p, i) => [p, SLOTS[i]]), "#000000"] : "#000000";
+    map.setFilter("picked", inPicks);
+    map.setPaintProperty("picked", "line-color", colour);
+    map.setFilter("picked-fill", inPicks);
+    map.setPaintProperty("picked-fill", "fill-color", colour);
   }
   writeHash();
 }
@@ -293,33 +350,43 @@ q.addEventListener("keydown", (e) => {
 });
 q.addEventListener("blur", () => setTimeout(() => results.style.display = "none", 150));
 
-// --- State in the address: #p=<pcode>,<pcode>&by=<score|category>&detail=<barangays|hexes> --
+// --- State in the address: #p=<pcode>,<pcode>&svc=<service>&bg=<none|barangays|hexes> ----
+// Older links (#by=<score|service>&detail=<barangays|hexes>) still open: a service in `by`
+// becomes the shown service, and hexagons the background.
 function writeHash() {
-  const h = `p=${picks.join(",")}&by=${by}&detail=${detail}`;
-  history.replaceState(null, "", "#" + h);
+  history.replaceState(null, "", `#p=${picks.join(",")}&svc=${svc}&bg=${bg}`);
 }
 function readHash() {
   const h = new URLSearchParams(location.hash.slice(1));
   const p = (h.get("p") ?? S.featured.pcodes.join(",")).split(",").filter(x => BY[x]).slice(0, MAX);
-  const b = h.get("by");
-  const d = h.get("detail");
-  return {p, by: b === "score" || CATS.includes(b) ? b : "score", detail: d === "hexes" ? "hexes" : "barangays"};
+  const s = h.get("svc") ?? h.get("by");
+  const g = h.get("bg") ?? (h.get("detail") === "hexes" ? "hexes" : "none");
+  return {p, svc: CATS.includes(s) ? s : DEFAULT_SVC, bg: ["none", "barangays", "hexes"].includes(g) ? g : "none"};
 }
-function setBy(v) {
-  by = v;
-  document.getElementById("by").value = v;
-  map.setPaintProperty("brgy-fill", "fill-color", fill("barangays"));
-  map.setPaintProperty("hex-fill", "fill-color", fill("hexes"));
-  map.setFilter("services", ["==", ["get", "cat"], v === "score" ? "" : v]);
+function setSvc(v) {
+  svc = v;
+  document.getElementById("svc").value = v;
+  map.setFilter("services", ["==", ["get", "cat"], v]);
+  document.querySelectorAll("#compare tbody tr[data-cat]").forEach(tr => tr.classList.toggle("on", tr.dataset.cat === v));
+  legend();
+  countServices();
+  writeHash();
+}
+function setBg(v) {
+  bg = v;
+  document.getElementById("bg").value = v;
+  map.setLayoutProperty("brgy-fill", "visibility", v === "barangays" ? "visible" : "none");
+  map.setLayoutProperty("hex-fill", "visibility", v === "hexes" ? "visible" : "none");
   legend();
   writeHash();
 }
-function setDetail(v) {
-  detail = v;
-  document.querySelector(`input[name=detail][value=${v}]`).checked = true;
-  map.setLayoutProperty("hex-fill", "visibility", v === "hexes" ? "visible" : "none");
-  map.setPaintProperty("brgy-fill", "fill-opacity", v === "hexes" ? 0 : 0.8);
-  writeHash();
+// How many of the chosen service are on screen, so their number is visible as well as their places
+function countServices() {
+  const el = document.getElementById("svc-count");
+  if (map.getZoom() < 11) { el.textContent = `Zoom in to see ${PLURAL[svc]}.`; return; }
+  const seen = new Set(map.queryRenderedFeatures({layers: ["services"]})
+    .map(f => f.geometry.coordinates.map(x => x.toFixed(5)).join(",")));
+  el.textContent = `${LABEL[svc]}: ${seen.size.toLocaleString("en-AU")} in view on the map.`;
 }
 
 // --- The map ---------------------------------------------------------------------------
@@ -341,14 +408,19 @@ map.on("load", async () => {
   map.addSource("services", {type: "vector", url: here("data/services.pmtiles")});
   map.addSource("sheds", {type: "geojson", data: "data/study.geojson"});
   const isBrgy = ["==", ["get", "kind"], "barangay"];
-  map.addLayer({id: "brgy-fill", type: "fill", source: "brgy", "source-layer": "barangays", filter: isBrgy,
-    paint: {"fill-color": fill("barangays"), "fill-opacity": 0.8}}, labels);
+  // Every barangay stays clickable, but only the picks are drawn strongly
+  map.addLayer({id: "brgy-hit", type: "fill", source: "brgy", "source-layer": "barangays", filter: isBrgy,
+    paint: {"fill-color": "#000000", "fill-opacity": 0}}, labels);
+  map.addLayer({id: "brgy-fill", type: "fill", source: "brgy", "source-layer": "barangays", filter: isBrgy, layout: {visibility: "none"},
+    paint: {"fill-color": BRGY_FILL, "fill-opacity": 0.8}}, labels);
   map.addLayer({id: "hex-fill", type: "fill", source: "hex", "source-layer": "hexes", layout: {visibility: "none"},
-    paint: {"fill-color": fill("hexes"), "fill-opacity": 0.82}}, labels);
-  map.addLayer({id: "brgy-line", type: "line", source: "brgy", "source-layer": "barangays", filter: isBrgy, minzoom: 11,
-    paint: {"line-color": "#555555", "line-width": 0.4, "line-opacity": 0.6}}, labels);
+    paint: {"fill-color": HEX_FILL, "fill-opacity": 0.82}}, labels);
+  map.addLayer({id: "picked-fill", type: "fill", source: "brgy", "source-layer": "barangays", filter: ["in", ["get", "pcode"], ["literal", []]],
+    paint: {"fill-color": "#000000", "fill-opacity": 0.12}}, labels);
+  map.addLayer({id: "brgy-line", type: "line", source: "brgy", "source-layer": "barangays", filter: isBrgy, minzoom: 12,
+    paint: {"line-color": "#555555", "line-width": 0.4, "line-opacity": 0.45}}, labels);
   map.addLayer({id: "city-line", type: "line", source: "brgy", "source-layer": "barangays", filter: ["==", ["get", "kind"], "city"],
-    paint: {"line-color": "#111111", "line-width": 1.1}}, labels);
+    paint: {"line-color": "#111111", "line-width": 1, "line-opacity": 0.7}}, labels);
   const lineMode = (m) => ["==", ["get", "mode"], m];
   ["bus", "jeepney", "rail"].forEach(m => map.addLayer({id: `transit-${m}`, type: "line", source: "transit", "source-layer": "transit",
     filter: lineMode(m), layout: {visibility: "none"},
@@ -359,23 +431,24 @@ map.on("load", async () => {
     paint: {"line-color": "#111111", "line-width": 1.2, "line-dasharray": [2, 2]}});
   map.addLayer({id: "picked", type: "line", source: "brgy", "source-layer": "barangays", filter: ["in", ["get", "pcode"], ["literal", []]],
     paint: {"line-color": "#000000", "line-width": 3.5}});
-  map.addLayer({id: "services", type: "circle", source: "services", "source-layer": "services", minzoom: 13,
-    filter: ["==", ["get", "cat"], ""],
-    paint: {"circle-radius": ["interpolate", ["linear"], ["zoom"], 13, 2.5, 17, 5.5], "circle-color": "#111111",
-            "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1}});
+  map.addLayer({id: "services", type: "circle", source: "services", "source-layer": "services",
+    filter: ["==", ["get", "cat"], svc],
+    paint: {"circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 3, 14, 5, 17, 7.5], "circle-color": SERVICE,
+            "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1.5}});
 
   const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, maxWidth: "300px"});
-  map.on("mousemove", "brgy-fill", (e) => {
-    const p = e.features[0].properties;
+  map.on("mousemove", "brgy-hit", (e) => {
+    if (map.queryRenderedFeatures(e.point, {layers: ["services"]}).length) return;
+    const p = e.features[0].properties, b = BY[p.pcode];
     map.getCanvas().style.cursor = "pointer";
-    const rows = p.score === undefined ? [["Residents", "none"]] : [["People (2024)", fmt(p.people)], ["15-minute score", fmt(p.score, 1)],
-      ...(by === "score" ? [] : [[`Minutes to ${LABEL[by].toLowerCase()}`, fmt(p[`d_${by}`], 1)]]), ["Convenient transit", fmt(p.m5) + "%"]];
+    const rows = b ? [["People (2024)", fmt(b.pop)], ["15-minute score", fmt(b.s, 1)],
+      [`Minutes to ${LABEL[svc].toLowerCase()}`, fmt(b.min[svc], 1)]] : [["Residents", "none"]];
     popup.setLngLat(e.lngLat).setHTML(`<div class="tt-title">${esc(p.barangay)}</div><div class="tt-hint">${esc(p.city)}</div>` +
       `<table class="tt">${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</table>` +
-      `<div class="tt-hint">${picks.includes(p.pcode) ? "Picked" : "Click to compare"}</div>`).addTo(map);
+      `<div class="tt-hint">${picks.includes(p.pcode) ? "Picked: click to remove" : "Click to compare"}</div>`).addTo(map);
   });
-  map.on("mouseleave", "brgy-fill", () => { map.getCanvas().style.cursor = ""; popup.remove(); });
-  map.on("click", "brgy-fill", (e) => {
+  map.on("mouseleave", "brgy-hit", () => { map.getCanvas().style.cursor = ""; popup.remove(); });
+  map.on("click", "brgy-hit", (e) => {
     const p = e.features[0].properties.pcode;
     picks.includes(p) ? remove(p) : add(p);
   });
@@ -384,12 +457,12 @@ map.on("load", async () => {
     popup.setLngLat(e.lngLat).setHTML(`<div class="tt-title">${esc(p.name || LABEL[p.cat])}</div><div class="tt-hint">${LABEL[p.cat]} &middot; ${esc(p.sources)}</div>`).addTo(map);
   });
   map.on("mouseleave", "services", () => popup.remove());
+  map.on("idle", countServices);
 
-  document.getElementById("by").onchange = (e) => setBy(e.target.value);
-  document.querySelectorAll("input[name=detail]").forEach(r => r.onchange = (e) => setDetail(e.target.value));
+  document.getElementById("svc").onchange = (e) => setSvc(e.target.value);
+  document.getElementById("bg").onchange = (e) => setBg(e.target.value);
   const toggle = (box, layers) => document.getElementById(box).addEventListener("change", e =>
     layers.forEach(l => map.setLayoutProperty(l, "visibility", e.target.checked ? "visible" : "none")));
-  toggle("show-services", ["services"]);
   toggle("show-transit", ["transit-bus", "transit-jeepney", "transit-rail", "transit-station"]);
   toggle("show-sheds", ["sheds"]);
   document.getElementById("featured").onclick = () => { picks = [...S.featured.pcodes]; say(""); update(); zoomTo(picks); };
@@ -397,15 +470,15 @@ map.on("load", async () => {
 
   const h = readHash();
   picks = h.p;
-  setBy(h.by);
-  setDetail(h.detail);
   update();
+  setSvc(h.svc);
+  setBg(h.bg);
   if (picks.length) zoomTo(picks);
 });
 addEventListener("hashchange", () => {
   if (!S) return;
   const h = readHash();
-  picks = h.p; setBy(h.by); setDetail(h.detail); update();
+  picks = h.p; update(); setSvc(h.svc); setBg(h.bg);
   if (picks.length) zoomTo(picks);
 });
 </script>

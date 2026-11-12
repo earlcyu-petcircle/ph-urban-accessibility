@@ -235,10 +235,17 @@ The study's three barangays are one point of view, and a reader will want to com
 It is a static site on GitHub Pages ([https://earlcyu-petcircle.github.io/ph-urban-accessibility/](https://earlcyu-petcircle.github.io/ph-urban-accessibility/)) in the style of the [PH lottery story site](https://earlcyu-petcircle.github.io/ph-lottery-outlets/): a one-page story with the comparison embedded near the top, plus a standalone full-screen version.
 
 - **Pick up to three barangays.** Search by name or city, or click the map; the three barangays I have lived in are the featured preset, loaded first and restored with one button.
-- **Side by side.** For each pick and for Metro Manila: the 15-minute score (M4 as 0-100: the share of the nine services within 15 minutes, averaged over residents) and its rank among the 1,709 barangays with people; the median resident's minutes to each service (M1); the share within 10 minutes; the transit shares (M5); and supply per resident against the Metro Manila mean (M3).
-- **The map.** Barangays or H3 resolution-10 hexagons coloured by the 15-minute score or by minutes to any one service, on fixed classes shared by every service; the services themselves; LRT and MRT lines, and bus and jeepney routes; barangay and city outlines; and the featured barangays' 10, 15 and 20-minute walk-sheds.
+- **The research questions, answered for every pick.** A table with one column per pick and one for Metro Manila, and one row per answer, grouped by question.
+  A profile first: people (2024 census), land area and density.
+  RQ1: the median resident's minutes to each service (M1) and the share within 10 minutes.
+  RQ2: the median resident's count of each service within 5, 10 and 15 minutes (M2).
+  RQ3: supply per resident against the Metro Manila mean (M3).
+  RQ4: the transit shares (M5), mean services within 15 minutes and the share with all nine (M4), and the 15-minute score (M4 as 0-100).
+  RQ5: the rank among the 1,709 barangays with people, the share of Metro Manila residents with worse access than the median resident for each service and for coverage, and the P10 to P90 spread inside the barangay.
+- **The map.** The picks outlined in their table colours, and every service of the chosen kind as a dot, with a count of those in view; any barangay can be clicked to pick it.
+  Colouring all of Metro Manila by the 15-minute score, by barangay or H3 resolution-10 hexagon, is optional and off by default; so are LRT and MRT lines, bus and jeepney routes, and the featured barangays' 10, 15 and 20-minute walk-sheds.
 - **Data-driven.** The page reads the per-barangay results and the featured preset from files the pipeline writes (`docs/map/data/`), so a new area or a new featured set needs new data, not new code.
-- **What it does not carry.** The sensitivity checks of section 4.5 cover only the three featured barangays, so the page says that small gaps between other picks may not hold; M2 counts and the walking-speed and threshold variants stay in the paper and notebooks.
+- **What it does not carry.** The sensitivity checks of section 4.5 cover only the three featured barangays, so the page says that small gaps between other picks may not hold; the walking-speed and threshold variants stay in the paper and notebooks.
 - **Build.** MapLibre GL JS 5.6.0, PMTiles 4.3.0, the OpenFreeMap Positron basemap and tiles built with tippecanoe, served from `docs/`.
 - **Privacy.** Only barangays and hexagons are shown; hexagons with fewer than five buildings are left off, and no home location is stored or shown.
 
@@ -577,3 +584,4 @@ The research design was then redone from the literature, reviewed in three round
 [#4](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/4) runs the analysis (section 6); with it the DOH registry was dropped for good, because its export fails even in a browser.
 [#5](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/5) builds the story site and turns its map into a comparison of any three barangays, with the three I have lived in as one featured point of view; with it the repository was renamed from metro-manila-accessibility to ph-urban-accessibility, since later series may cover the whole country.
 [#6](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/6) cleans up: it removes leftovers of the step-by-step build and updates the notes that pointed to later steps.
+[#7](https://github.com/earlcyu-petcircle/ph-urban-accessibility/pull/7) makes the comparison answer the five research questions for any three barangays, one row per answer with a profile of people, land area and density, and turns the map from a Metro-wide colouring into the picks and the places of the chosen service.
