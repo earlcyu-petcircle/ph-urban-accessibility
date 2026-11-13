@@ -2,7 +2,7 @@
 Shared paths, study constants and helpers for the pipeline.
 
 Every parameter the analysis uses lives here, so a change of threshold or speed is one
-edit; the story site's method section (docs/index.html) explains them. Home locations never go in this file:
+edit; the README's Method section explains them. Home locations never go in this file:
 they live in data/manual/homes.csv, which is gitignored.
 """
 

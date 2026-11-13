@@ -2,7 +2,7 @@
 """
 Rebuild the Atlas Grid chart fonts in this folder from Google Fonts.
 
-The story site (docs/index.html) loads Bricolage Grotesque, Public Sans and JetBrains Mono from
+The site (docs/index.html) loads Bricolage Grotesque, Public Sans and JetBrains Mono from
 Google Fonts. Matplotlib cannot pick a weight out of a variable font, so this script downloads
 the three variable fonts from the google/fonts repository at a pinned commit and cuts the
 static weights the charts use. The cut files and the fonts' Open Font Licences are committed,

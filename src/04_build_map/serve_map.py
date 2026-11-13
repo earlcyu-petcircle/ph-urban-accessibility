@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Serve the story site and web map in docs/ locally, as GitHub Pages serves them:
-  python src/04_build_map/serve_map.py  ->  the site at http://localhost:8000/, the map at /map/
+Serve the site in docs/ locally, as GitHub Pages serves it:
+  python src/04_build_map/serve_map.py  ->  the map at http://localhost:8000/
 
 PMTiles files are read by HTTP range requests, so the map does not open from file:// and the
 standard library's http.server (which ignores Range) is not enough. This adds byte-range

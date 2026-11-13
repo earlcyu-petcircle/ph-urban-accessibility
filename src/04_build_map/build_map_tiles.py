@@ -17,7 +17,7 @@ PMTiles). Everything is built from the analysis results (03_analyse.sh); nothing
   docs/map/data/barangays.json     every barangay's answers to the five research questions, with
                                    its people, land area and density, and its walk to Jollibee,
                                    for the picks table
-  docs/map/data/summary.json       the featured preset and Metro Manila's figures for the same rows
+  docs/map/data/summary.json       the example picks and Metro Manila's figures for the same rows
 
 Privacy: no building or home is published. Hexagons hold 34 residential buildings at the median;
 those with fewer than MIN_BUILDINGS are left off the map (their residents still count in every
@@ -303,7 +303,7 @@ study["geometry"] = study.geometry.set_precision(1e-6)
 (MAP_DATA / "study.geojson").write_text(study.to_json(drop_id=True) + "\n")
 
 # ---------------------------------------------------------------------------
-# 6. The page's settings: the featured preset, Metro Manila's averages and bounds
+# 6. The page's settings: the example picks, Metro Manila's averages and bounds
 # ---------------------------------------------------------------------------
 m = pd.read_csv(TABLES / "measures.csv", keep_default_na=False)
 mm = m[m.area.eq("Metro Manila")]
@@ -314,7 +314,7 @@ def metro(measure, stat, category=""):
 
 
 summary = {
-    "featured": {"label": "Three barangays Earl has lived in", "pcodes": list(BARANGAYS)},
+    "featured": {"label": "Try an example", "pcodes": list(BARANGAYS)},
     "area": {"name": "Metro Manila", "bounds": [round(v, 4) for v in geo.total_bounds]},
     "metro": {
         "s": round(metro("M4", "mean_categories_within_15min") / len(CATEGORIES) * 100, 1),
