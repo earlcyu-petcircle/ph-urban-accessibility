@@ -16,7 +16,7 @@ the default layer (OpenStreetMap, DepEd and Overture at confidence 0.5 or more).
 inside Metro Manila and its FRINGE_KM fringe.
 
 Sari-sari stores are almost absent from both sources; the few mapped ones stay in food retail
-as kind `sari_sari` (docs/paper.md, section 8).
+as kind `sari_sari` (the site's limitations section, docs/index.html#limits).
 
   data/work/services.parquet             one row per source record: category, kind, source,
                                          name, point, confidence, level, capacity, dup_group

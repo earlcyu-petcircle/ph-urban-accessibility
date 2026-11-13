@@ -1,5 +1,5 @@
 """
-The validation audits of docs/paper.md (section 4.6).
+The validation audits: is the service layer complete against the registries, and right on the ground?
 
   registry_match()           the share of DepEd public schools found in the open sources, per
                              area (from data/derived/service_quality.csv); there is no DOH

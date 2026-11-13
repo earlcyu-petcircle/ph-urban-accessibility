@@ -72,11 +72,19 @@ section.block{border-top:1px solid var(--ink);padding:64px 0}
 .head{margin-bottom:28px;max-width:46rem}
 .head h2{font:800 clamp(1.9rem,3.8vw,2.7rem)/1.02 var(--head);letter-spacing:-.03em;margin-top:10px}
 .head p{margin-top:14px;color:var(--ink-soft)}
+.head p.kicker{color:var(--accent)}
 .prose{max-width:44rem;color:var(--ink-soft)}
 .prose h3{font:800 1.3rem/1.15 var(--head);letter-spacing:-.02em;color:var(--ink);margin:30px 0 8px}
 ul.sq{list-style:square;padding-left:1.15em}
 ul.sq li{margin:.45em 0}
 ul.sq li::marker{color:var(--accent)}
+
+/* Research questions */
+ol.rqs{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px}
+ol.rqs li{border-top:2px solid var(--ink);padding-top:10px;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+ol.rqs .lab{display:block;font:600 13px var(--mono);color:var(--accent);margin-bottom:6px}
+ol.rqs strong{display:block;font:800 1.15rem/1.15 var(--head);letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
+.scope{max-width:44rem;margin-top:26px;font-size:14px;color:var(--muted)}
 
 /* Map */
 .mapframe{border:1.5px solid var(--ink);background:var(--grid);height:min(76vh,700px);min-height:480px}
@@ -155,6 +163,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
 
 @media (max-width:980px){
   .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  ol.rqs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tables{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:820px){
@@ -165,7 +174,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
   :root{--pad:16px}
   body{font-size:16px}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}
-  .facts,.files{grid-template-columns:minmax(0,1fr)}
+  .facts,.files,ol.rqs{grid-template-columns:minmax(0,1fr)}
   .hero .wrap{padding-top:40px}
   section.block{padding:48px 0}
   .links{gap:2px 14px;font-size:13.5px}
@@ -189,7 +198,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
   <div class="wrap">
     <a class="brand" href="#top">Earl Yu / Atlas</a>
     <nav class="links" aria-label="Sections">
-      <a href="#compare">Compare</a><a href="#measures">Measures</a><a href="#featured">One point of view</a><a href="#method">Method</a><a href="#limits">Limits</a><a href="#data">Data</a><a href="#cite">Cite</a>
+      <a href="#compare">Compare</a><a href="#questions">Questions</a><a href="#measures">Measures</a><a href="#featured">One point of view</a><a href="#method">Method</a><a href="#limits">Limits</a><a href="#data">Data</a><a href="#cite">Cite</a>
     </nav>
   </div>
 </header>
@@ -200,7 +209,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
     <p class="kicker">PH / URBAN ACCESSIBILITY / METRO MANILA / 2026</p>
     <h1>How much of everyday life is <mark>a short walk</mark> from home?</h1>
     <p class="answer">Pick any three Metro Manila barangays and compare them on foot: how long residents walk to food, the palengke, a pharmacy, a clinic, a hospital, a public school, open space and transit, how many of those nine are within 15 minutes, and how crowded they are once neighbours are counted. <strong>Every resident counts:</strong> all 14 million people of the 2024 census, placed in their buildings and walked along the street network. Three barangays I have lived in are loaded first, as one point of view; swap in your own.</p>
-    <p class="byline"><span>Earl Yu</span><span>November 2026</span><span>Open data only</span><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/docs/paper.md">Read the full paper</a></p>
+    <p class="byline"><span>Earl Yu</span><span>November 2026</span><span>Open data only</span><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility">Code and data on GitHub</a></p>
   </div>
 </div>
 
@@ -219,12 +228,30 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
     <div class="head">
       <p class="kicker">COMPARE /</p>
       <h2 id="compare-h">Pick up to three barangays</h2>
-      <p>Search by name or city, or click the map. The table answers the study's five research questions for each pick, one row per answer, beside Metro Manila; the map outlines your picks and shows where the chosen service is, so you can see how many are within reach.</p>
+      <p>Search by name or city, or click the map. The table answers the study's <a href="#questions">five research questions</a> for each pick, one row per answer, beside Metro Manila; the map outlines your picks and shows where the chosen service is, so you can see how many are within reach.</p>
     </div>
     <div class="mapframe">
       <iframe id="atlas-map" name="atlas-map" src="map/?embed" title="Interactive comparison of walking access in Metro Manila barangays"></iframe>
     </div>
     <p class="mapnote"><span>Starts with three barangays I have lived in; the Featured button brings them back.</span><a href="map/">Open the map full screen</a></p>
+  </div>
+</section>
+
+<section class="block" id="questions" aria-labelledby="questions-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">RESEARCH QUESTIONS /</p>
+      <h2 id="questions-h">Five questions, asked of every barangay</h2>
+      <p>Each row group in the comparison table answers one of these, for each pick and for Metro Manila.</p>
+    </div>
+    <ol class="rqs">
+      <li><span class="lab">RQ1 /</span><strong>Proximity</strong>How long is the walk from home to the nearest food shop, palengke, pharmacy, clinic, hospital, public school, open space and transit?</li>
+      <li><span class="lab">RQ2 /</span><strong>Choice</strong>How many of each are within 5, 10 and 15 minutes?</li>
+      <li><span class="lab">RQ3 /</span><strong>Crowding</strong>Once the neighbours competing for the same clinic or school are counted, how much service is there per resident? A dense barangay can have a clinic round the corner and still be short of care.</li>
+      <li><span class="lab">RQ4 /</span><strong>Transit</strong>What share of residents is within 500 m of a bus or jeepney and 1 km of rail, the UN's test of convenient public transport?</li>
+      <li><span class="lab">RQ5 /</span><strong>Context and fairness</strong>Where does each barangay sit among all Metro Manila residents, and how unequal is access inside it?</li>
+    </ol>
+    <p class="scope">Out of scope: where people actually go, and whether access shapes health or income. The study measures potential access and describes differences; it does not explain their causes.</p>
   </div>
 </section>
 
@@ -338,7 +365,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
         </ul>
       </div>
       <div>
-      <div class="tcap"><p class="ctitle">Sources</p><p class="tsub">Every source is public and free to download.</p></div>
+      <div class="tcap"><p class="ctitle">Sources</p><p class="tsub">Every source is public and free to download. Not used: the DOH health facility registry, whose export fails, and timetabled transit, since the only public Metro Manila feed dates from 2015.</p></div>
       <div class="tablewrap">
         <table class="src" aria-label="Sources">
           <thead><tr><th scope="col">Role</th><th scope="col">Source</th><th scope="col">Year</th></tr></thead>
@@ -363,7 +390,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
       <div class="head">
         <p class="kicker">LIMITATIONS /</p>
         <h2 id="limits-h">What to hold loosely</h2>
-        <p>Each is set out in full in the paper's limitations section.</p>
+        <p>The known gaps, biggest first. They apply to any barangay you pick.</p>
       </div>
       <div class="prose">
         <ul class="sq">
@@ -373,6 +400,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
           <li><strong>Jeepney routes are thinly mapped</strong> (95 in the study area), so transit shares are floors.</li>
           <li><strong>The walk itself is not scored:</strong> heat, floods, crossings and sidewalks are not in the network.</li>
           <li><strong>Potential, not realised, access:</strong> nothing here says where people actually go.</li>
+          <li><strong>The edge of Metro Manila.</strong> People just outside it are not placed, so services near the edge look less crowded than they are.</li>
+          <li><strong>The layers come from different years:</strong> the census is from mid-2024, places and streets from late 2026.</li>
+          <li><strong>The audits are drawn, not yet scored.</strong> The by-hand checks of services and walking routes on street imagery are still to come.</li>
         </ul>
       </div>
     </div>
@@ -399,7 +429,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 
       <div class="prose">
         <h3 style="margin-top:0">Run it yourself</h3>
         <p>Needs Python 3.12, <code class="mono">curl</code> and <a href="https://github.com/felt/tippecanoe">tippecanoe</a>, about 1.3 GB of downloads, and the 2024 census workbook for Metro Manila saved by hand as <a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility/blob/main/docs/data-quality.md#getting-the-hand-downloads">data-quality.md</a> describes.</p>
-        <p>The code, notebooks and full paper are in the <a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility">GitHub repository</a>.</p>
+        <p>The code and notebooks are in the <a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility">GitHub repository</a>.</p>
       </div>
       <pre><code>git clone https://github.com/earlcyu-petcircle/ph-urban-accessibility.git
 cd ph-urban-accessibility

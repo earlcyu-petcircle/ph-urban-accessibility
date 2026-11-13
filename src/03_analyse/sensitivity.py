@@ -1,5 +1,5 @@
 """
-The ten sensitivity checks in docs/paper.md (section 4.5), and the robustness verdict.
+The ten sensitivity checks, and the robustness verdict.
 
 Each check recomputes the headline metrics for the three barangays under one change of
 assumption. The headline metrics are the median resident's walk to each of the nine categories

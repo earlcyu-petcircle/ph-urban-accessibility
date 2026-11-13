@@ -2,7 +2,7 @@
 Shared paths, study constants and helpers for the pipeline.
 
 Every parameter the analysis uses lives here, so a change of threshold or speed is one
-edit; docs/paper.md (section 4) explains each one. Home locations never go in this file:
+edit; the story site's method section (docs/index.html) explains them. Home locations never go in this file:
 they live in data/manual/homes.csv, which is gitignored.
 """
 
@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "data" / "raw"  # downloads from 01_collect_data.sh (gitignored)
 MANUAL = ROOT / "data" / "manual"  # hand downloads and the private home points (gitignored)
 WORK = ROOT / "data" / "work"  # large intermediates (gitignored)
-DERIVED = ROOT / "data" / "derived"  # small tables the paper cites (committed)
+DERIVED = ROOT / "data" / "derived"  # small tables the site and notebooks cite (committed)
 TABLES = ROOT / "results" / "tables"
 FIGURES = ROOT / "results" / "figures"
 MAP_DATA = ROOT / "docs" / "map" / "data"

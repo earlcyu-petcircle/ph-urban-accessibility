@@ -2,7 +2,7 @@
 
 This note covers the first two phases of the study: collecting the data and building the analysis inputs.
 It reports how complete each layer is and where the gaps sit, so the analysis knows what it stands on.
-It holds no measures and no findings; those are in the [paper](paper.md#6-results) and on the [comparison site](https://earlcyu-petcircle.github.io/ph-urban-accessibility/).
+It holds no measures and no findings; those are on the [story site](https://earlcyu-petcircle.github.io/ph-urban-accessibility/).
 
 Every number here is rebuilt by `./02_build_tables.sh` (or `./run_all.sh`) from the downloads in `data/raw/` and the hand download in `data/manual/`.
 The machine-readable versions are in [`data/derived/`](../data/derived/): `data_quality.json`, `census_2024_check.json`, `service_quality.csv` and `barangays.csv`.
@@ -35,7 +35,7 @@ Snapshots in this build: OpenStreetMap extract of 3 November 2026 (replication t
 | Health check | Healthsites.io (HDX) | Facility | Sep 2026 | ODbL | Used when HDX allows; refused in this build |
 
 The study box is Metro Manila plus 2 km on every side (120.88-121.16 E, 14.33-14.81 N); Overture and the walking network are cut to it, and services count anywhere within 2 km of Metro Manila.
-Two layers in [section 3 of the paper](paper.md#3-data-sources) are not collected: the Mapillary imagery for the walk audit is viewed by hand through the links in the audit worksheets (paper, section 6.7), and the map-only context layers (Relative Wealth Index, UP NOAH flood hazard) were left out of the comparison site, which keeps to the measures.
+Two planned layers are not collected: the Mapillary imagery for the walk audit is viewed by hand through the links in the audit worksheets (`results/tables/`), and the map-only context layers (Relative Wealth Index, UP NOAH flood hazard) were left out of the comparison site, which keeps to the measures.
 
 Three changes from the design's source list, all forced by the download servers:
 
@@ -103,7 +103,7 @@ Where the census and WorldPop disagree, a few buildings can carry many people.
 The largest gaps are boundary problems: Post Proper Southside, one of the EMBO barangays, has 68,388 people in the 2024 census on a COD-AB polygon where WorldPop sees 4,780, so its 383 residential buildings average 179 people and one 13 m² footprint takes 3,241.
 These barangays only enter the Metro Manila context percentiles.
 The study barangays' census counts sit within 3% of WorldPop's for Barangay 136 and Oranbo; Loyola Heights' is 21% below it, which the campus check below should explain.
-The by-hand footprint checks for Barangay 136, the Ateneo campus and Capitol Commons are part of the audits still to be scored by hand (paper, section 6.7).
+The by-hand footprint checks for Barangay 136, the Ateneo campus and Capitol Commons are part of the audits still to be scored by hand (`notebooks/06_audits.ipynb`).
 
 ## The service layer
 
@@ -149,7 +149,7 @@ The rules live in `src/02_build_tables/build_services.py`, one named pattern eac
 - **Overture and OpenStreetMap overlap little.** Only 16% of food shops and 7% of primary care places appear in both, so the source check (07) matters most for those two.
 - **Hospitals are the noisiest category.** Overture adds 355 hospitals with no OpenStreetMap counterpart; a sample shows real hospitals OpenStreetMap lacks, but also hospital clinics in malls named "Medical Center", the odd duplicate more than 150 m from its twin, and a few points misplaced from other countries ("Modern Cancer Hospital Guangzhou China").
   With no usable DOH registry, the service audit measures the error instead.
-- **Sari-sari stores are almost absent**, as the paper expects: 234 in the default layer for all of Metro Manila, and none in Barangay 136.
+- **Sari-sari stores are almost absent**, as expected: 234 in the default layer for all of Metro Manila, and none in Barangay 136.
 
 ### Registry match
 
@@ -207,7 +207,7 @@ The HOT education export of 12 October 2026 holds 1,862 schools in Metro Manila 
 
 - The way filter copies OSMnx's "walk" network: any highway a person may walk on, so trunk roads such as EDSA (which have sidewalks) stay in, while expressways, cycleways, EDSA's busway, platforms, private ways, ways marked `foot=no` and anything abandoned or under construction are out.
 - Every way is cut into its node-to-node segments, walkable both ways; residential streets are 53% of the length, footways and paths 9%.
-- Sidewalk tags are too patchy to use (paper, section 3), so every walkable way counts the same; the walk audit covers walk quality.
+- Sidewalk tags are too patchy to use, so every walkable way counts the same; the walk audit covers walk quality.
 
 ## The tables
 
@@ -250,4 +250,4 @@ The HOT education export of 12 October 2026 holds 1,862 schools in Metro Manila 
 - The DepEd list is from 2019; schools opened since then appear only through OpenStreetMap and Overture, which the default layer leaves out of the public-school categories.
 - Footprint area is the weight inside a cell; floor counts are known for under 1% of residential footprints, so high-rise condominiums are underweighted against low-rise houses in the same cell.
 - Overture's geocoding errors put a few places far from home; confidence filtering and the service audit, not this build, deal with them.
-- OpenStreetMap jeepney routes cover a fraction of the network, and sari-sari stores and carinderias are almost unmapped (paper, section 8).
+- OpenStreetMap jeepney routes cover a fraction of the network, and sari-sari stores and carinderias are almost unmapped (the site's [limitations](https://earlcyu-petcircle.github.io/ph-urban-accessibility/#limits)).
