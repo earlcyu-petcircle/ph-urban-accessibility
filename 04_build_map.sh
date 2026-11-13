@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Phase 4: the comparison site's map data in docs/map/data/ (PMTiles built with tippecanoe, and the
 # per-barangay results the page compares), and its colours in docs/map/palette.js, written from
-# src/shared/map_layers.py. The story page (docs/index.html) and the map page (docs/map/) are
-# static files served by GitHub Pages.
+# src/shared/map_layers.py. The site (docs/index.html, a full-screen map that reads docs/map/) is a
+# static file served by GitHub Pages.
 # Preview:  .venv/bin/python src/04_build_map/serve_map.py   then open http://localhost:8000/
 source "$(dirname "$0")/src/shared/setup.sh"
 

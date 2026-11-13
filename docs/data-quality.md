@@ -2,7 +2,7 @@
 
 This note covers the first two phases of the study: collecting the data and building the analysis inputs.
 It reports how complete each layer is and where the gaps sit, so the analysis knows what it stands on.
-It holds no measures and no findings; those are on the [story site](https://earlcyu-petcircle.github.io/ph-urban-accessibility/).
+It holds no measures and no findings; those are on the [map](https://earlcyu-petcircle.github.io/ph-urban-accessibility/) and in the [notebooks](../notebooks/).
 
 Every number here is rebuilt by `./02_build_tables.sh` (or `./run_all.sh`) from the downloads in `data/raw/` and the hand download in `data/manual/`.
 The machine-readable versions are in [`data/derived/`](../data/derived/): `data_quality.json`, `census_2024_check.json`, `service_quality.csv`, `barangays.csv` and `jollibee.json`.
@@ -268,4 +268,4 @@ Jollibee stores are tracked beside the nine services, not as a tenth: they are s
 - The DepEd list is from 2019; schools opened since then appear only through OpenStreetMap and Overture, which the default layer leaves out of the public-school categories.
 - Footprint area is the weight inside a cell; floor counts are known for under 1% of residential footprints, so high-rise condominiums are underweighted against low-rise houses in the same cell.
 - Overture's geocoding errors put a few places far from home; confidence filtering and the service audit, not this build, deal with them.
-- OpenStreetMap jeepney routes cover a fraction of the network, and sari-sari stores and carinderias are almost unmapped (the site's [limitations](https://earlcyu-petcircle.github.io/ph-urban-accessibility/#limits)).
+- OpenStreetMap jeepney routes cover a fraction of the network, and sari-sari stores and carinderias are almost unmapped (the README's [limitations](../README.md#limitations)).

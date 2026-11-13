@@ -1,5 +1,5 @@
 """
-What the web map's tiles (src/04_build_map/build_map_tiles.py) and its page (docs/map/) share:
+What the web map's tiles (src/04_build_map/build_map_tiles.py) and its page (docs/index.html) share:
 the category codes, the fixed classes every category uses, and the colours, which
 src/04_build_map/write_web_palette.py writes to docs/map/palette.js.
 
