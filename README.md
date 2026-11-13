@@ -2,7 +2,7 @@
 
 How much of everyday life is a short walk from home, for every resident of every Metro Manila barangay?
 
-**Compare any three barangays on foot: [https://earlcyu-petcircle.github.io/ph-urban-accessibility/](https://earlcyu-petcircle.github.io/ph-urban-accessibility/)**
+**Compare any three barangays on foot: [https://earlcyu.github.io/ph-urban-accessibility/](https://earlcyu.github.io/ph-urban-accessibility/)**
 
 The site is one full-screen map.
 Pick up to three barangays and it compares the walk to nine everyday services (food shops, the palengke, pharmacies, clinics, hospitals, public elementary and high schools, open space and transit), and to Jollibee, for all 14 million people of the 2024 census, placed in their buildings and walked along the street network.
@@ -102,7 +102,7 @@ Every source is public and free to download.
 
 ## Cite
 
-Yu, E. (2026). Walking to everyday life: access to services in three Metro Manila barangays. https://earlcyu-petcircle.github.io/ph-urban-accessibility/
+Yu, E. (2026). Walking to everyday life: access to services in three Metro Manila barangays. https://earlcyu.github.io/ph-urban-accessibility/
 
 ```bibtex
 @misc{yu2026walking,
@@ -110,7 +110,7 @@ Yu, E. (2026). Walking to everyday life: access to services in three Metro Manil
   title        = {Walking to everyday life: access to services in three Metro Manila barangays},
   year         = {2026},
   month        = nov,
-  howpublished = {\url{https://earlcyu-petcircle.github.io/ph-urban-accessibility/}},
+  howpublished = {\url{https://earlcyu.github.io/ph-urban-accessibility/}},
   note         = {Code and data: \url{https://github.com/earlcyu-petcircle/ph-urban-accessibility}}
 }
 ```
