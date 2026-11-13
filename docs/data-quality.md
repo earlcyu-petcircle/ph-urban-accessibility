@@ -2,7 +2,7 @@
 
 This note covers the first two phases of the study: collecting the data and building the analysis inputs.
 It reports how complete each layer is and where the gaps sit, so the analysis knows what it stands on.
-It holds no measures and no findings; those are on the [map](https://earlcyu-petcircle.github.io/ph-urban-accessibility/) and in the [notebooks](../notebooks/).
+It holds no measures and no findings; those are on the [map](https://earlcyu.github.io/ph-urban-accessibility/) and in the [notebooks](../notebooks/).
 
 Every number here is rebuilt by `./02_build_tables.sh` (or `./run_all.sh`) from the downloads in `data/raw/` and the hand download in `data/manual/`.
 The machine-readable versions are in [`data/derived/`](../data/derived/): `data_quality.json`, `census_2024_check.json`, `service_quality.csv`, `barangays.csv` and `jollibee.json`.
