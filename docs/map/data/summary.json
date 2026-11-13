@@ -133,7 +133,20 @@
     10
    ]
   },
-  "a9": 25
+  "a9": 25,
+  "jb": {
+   "min": 13.2,
+   "w10": 33,
+   "k": [
+    0,
+    0,
+    1
+   ]
+  }
+ },
+ "jollibee_stores": {
+  "metro_manila": 349,
+  "with_fringe": 381
  },
  "barangays_ranked": 1709,
  "min_buildings": 5,

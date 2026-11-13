@@ -5,7 +5,7 @@ It reports how complete each layer is and where the gaps sit, so the analysis kn
 It holds no measures and no findings; those are on the [story site](https://earlcyu-petcircle.github.io/ph-urban-accessibility/).
 
 Every number here is rebuilt by `./02_build_tables.sh` (or `./run_all.sh`) from the downloads in `data/raw/` and the hand download in `data/manual/`.
-The machine-readable versions are in [`data/derived/`](../data/derived/): `data_quality.json`, `census_2024_check.json`, `service_quality.csv` and `barangays.csv`.
+The machine-readable versions are in [`data/derived/`](../data/derived/): `data_quality.json`, `census_2024_check.json`, `service_quality.csv`, `barangays.csv` and `jollibee.json`.
 Snapshots in this build: OpenStreetMap extract of 3 November 2026 (replication time 21:24 UTC), Overture release 2026-10-21.0, COD-AB boundaries of 28 May 2026.
 
 ## The short version
@@ -29,6 +29,7 @@ Snapshots in this build: OpenStreetMap extract of 3 November 2026 (replication t
 | Boundaries and codes | OCHA COD-AB Philippines v03 (NAMRIA and PSA), PSGC-based pcodes | Barangay | Valid from 13 Feb 2025; files 28 May 2026 | CC BY-IGO | 1,712 barangays |
 | Services | Overture Maps places at confidence 0.3 or more | Point | Release 2026-10-21.0 | CDLA Permissive 2.0 and per-source terms | 320,705 in the study box |
 | Services, open space, transit, network | OpenStreetMap, Geofabrik Philippines extract | Point, polygon, way, route | 3 Nov 2026 | ODbL | 141,064 tagged points and areas; 174,506 walkable ways |
+| Jollibee stores (tracked, not a service) | OpenStreetMap, Geofabrik Philippines extract | Point | 28 Oct 2026 | ODbL | 349 stores in Metro Manila |
 | School registry | OSMaPaaralan: DepEd's MaPaaralan public-school list, cleaned by OpenStreetMap Philippines | School, with DepEd ID, ISCED level and 2015 enrolment | 2019 | DepEd data published for OpenStreetMap use; only counts committed | 1,064 schools in the study box |
 | School check | HOT OpenStreetMap education facilities (HDX export) | School | 12 Oct 2026 | ODbL | 1,862 schools in Metro Manila |
 | Health registry | DOH National Health Facility Registry | Facility, with beds | Live | Government publication | Not used: the export fails |
@@ -192,6 +193,22 @@ The HOT education export of 12 October 2026 holds 1,862 schools in Metro Manila 
   OpenStreetMap's jeepney network is clearly incomplete, so the M5 jeepney rule (any point on a route is a stop) can only use the mapped routes; check 10 brackets it with stops only.
 - `transit_routes.parquet` holds every vertex of those routes with the route's mode, network, name and reference, for the "route as stop" rule.
 
+## The Jollibee layer
+
+Jollibee stores are tracked beside the nine services, not as a tenth: they are shown on the map and in their own rows of the picks table (the nearest walk, and the stores within 5, 10 and 15 minutes), and they are in none of the measures, the 15-minute score or the rankings.
+
+- **Source.** OpenStreetMap only, from the Geofabrik Philippines extract of 28 October 2026 (replication time 21:21 UTC), as recorded in `data/derived/jollibee.json`.
+  The rest of this build used the extract of 3 November, which Geofabrik no longer serves; the two are six days apart, and a live Overpass count on 13 November found 321 brand-tagged and 356 name-matched features in Metro Manila, so the stores barely move between them.
+  OpenStreetMap is credited under ODbL with the other layers.
+- **The brand tag rule** (`is_jollibee` in `src/shared/service_rules.py`). An `amenity=fast_food` or `amenity=restaurant` node or area with `brand:wikidata=Q37614`, or, when no `brand:wikidata` is set, a name matching `jol+i+bee` as a word, which catches the "Jolibee" spelling.
+  JFC's offices, the car parks it operates and other JFC brands (a Chowking carries its own brand ID) are not restaurants of this brand, so none counts.
+- **One point per store.** Points within 50 m are one store, because a few are mapped as both a node and a building outline; the node is kept where there is one.
+  387 records (341 with the brand ID) give 381 stores in Metro Manila and its 2 km fringe, 349 of them inside Metro Manila.
+- **Completeness.** OpenStreetMap holds roughly nine in ten of Metro Manila's Jollibee stores: a source scout on 13 November put the true number at about 350 to 380, and found a few dozen stores, spread across the cities, that are not mapped.
+- **Not used.** Jollibee's own store locator lists 276 stores in Metro Manila and lacks flagship branches such as SM Mall of Asia and Trinoma; its terms (section VIII) bar reuse of its content without written consent, so it is not used.
+  Overture places would roughly double the count, because its Meta and Foursquare records of one store sit more than 50 m apart, and it carries no brand ID.
+- Walks to the stores use the same network and the same nearest and count searches as the nine services (`src/03_analyse/jollibee_times.py`), in their own table, so the services' walk times are untouched.
+
 ## The walking network
 
 | Measure | Value |
@@ -241,6 +258,7 @@ The HOT education export of 12 October 2026 holds 1,862 schools in Metro Manila 
 | `origins.parquet` | Residential building with people | `origin_id`, `pcode`, `lon`, `lat`, `people`, `people_ghs`, `area_m2`, `wp_cell`, `h3_10`, `h3_9` |
 | `services.parquet` | Source record in Metro Manila and its fringe | `service_id`, `category`, `kind`, `source`, `name`, `lon`, `lat`, `pcode`, `confidence`, `group_capacity`, `dup_group`, `in_default` |
 | `open_space_access.parquet` | Point every 25 m round an open space | `service_id`, `lon`, `lat` |
+| `jollibee.parquet` | Jollibee store in Metro Manila and its fringe | `store_id`, `name`, `lon`, `lat`, `pcode`, `osm_ids` |
 | `transit_routes.parquet` | Vertex of a bus or jeepney route | `route_id`, `mode`, `network`, `name`, `ref`, `node_id`, `lon`, `lat` |
 | `walk_nodes.parquet`, `walk_edges.parquet` | Network node; segment | `node_id`, `lon`, `lat`; `u`, `v`, `length_m`, `way_id`, `highway` |
 

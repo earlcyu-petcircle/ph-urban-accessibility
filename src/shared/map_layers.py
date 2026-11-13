@@ -36,4 +36,7 @@ SLOTS = atlas.CATEGORICAL[:3]
 SERVICE = atlas.CATEGORICAL[4]
 # Transit lines: rail in ink, bus in sky, jeepney in plum (not the barangay colours)
 TRANSIT = {"rail": atlas.INK, "bus": atlas.CATEGORICAL[5], "jeepney": atlas.CATEGORICAL[4]}
+# Jollibee stores, tracked beside the nine services: ink dots with a white halo, apart from the
+# plum service dots and the white rail stations ringed in ink
+JOLLIBEE = atlas.INK
 NO_PEOPLE = atlas.NO_PEOPLE

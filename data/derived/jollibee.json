@@ -1,0 +1,9 @@
+{
+  "source": "OpenStreetMap, Geofabrik Philippines extract",
+  "osm_snapshot": "2026-10-28T21:21:02Z",
+  "rule": "amenity in ['fast_food', 'restaurant'] and (brand:wikidata = Q37614, or no brand:wikidata and a name matching /\\bjol+i+bee\\b/i); points within 50 m are one store",
+  "records_in_metro_manila_and_fringe": 387,
+  "records_with_brand_id": 341,
+  "stores_in_metro_manila_and_fringe": 381,
+  "stores_in_metro_manila": 349
+}

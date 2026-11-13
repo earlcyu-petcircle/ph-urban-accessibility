@@ -26,6 +26,7 @@ PALETTE = {
     "SLOTS": ml.SLOTS,
     "SERVICE": ml.SERVICE,
     "TRANSIT": ml.TRANSIT,
+    "JOLLIBEE": ml.JOLLIBEE,
     "NO_PEOPLE": ml.NO_PEOPLE,
 }
 

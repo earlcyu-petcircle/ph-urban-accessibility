@@ -1,6 +1,7 @@
 """
 The rules that sort a place into one of the nine service categories, and tell two records of
-one place apart from two places, for src/02_build_tables/build_services.py.
+one place apart from two places, for src/02_build_tables/build_services.py; and the rule that
+picks out Jollibee stores, a tracked layer outside the nine, for build_jollibee.py.
 
 They are plain patterns and functions with no inputs from disk, so tests/test_service_rules.py
 can check them. docs/data-quality.md ("The service layer") explains each one.
@@ -12,6 +13,9 @@ import unicodedata
 
 import numpy as np
 import pandas as pd
+from scipy.sparse import coo_matrix
+from scipy.sparse.csgraph import connected_components
+from scipy.spatial import cKDTree
 
 SARI_SARI = r"sari.?sari"
 SUPERMARKET = (
@@ -80,6 +84,11 @@ FOOD_SHOPS = {
     "general": "grocery",
     "kiosk": "grocery",
 }
+# Jollibee stores in OpenStreetMap: a fast-food or restaurant amenity carrying Jollibee's brand
+# ID, or, when no brand ID is set, a Jollibee name (some are spelled "Jolibee")
+JOLLIBEE_WIKIDATA = "Q37614"
+JOLLIBEE_NAME = r"\bjol+i+bee\b"
+JOLLIBEE_AMENITY = ("fast_food", "restaurant")
 
 # Words that say what a place is rather than which one it is; names are compared without them
 GENERIC = set(
@@ -158,3 +167,20 @@ def school_rows(df, level):
     elem = df[df.level.isin(["elementary", "integrated"])].assign(category="public_elementary")
     high = df[df.level.isin(["high", "integrated"])].assign(category="public_high")
     return pd.concat([elem, high], ignore_index=True)
+
+
+def is_jollibee(amenity, brand_wikidata, name):
+    """Whether OpenStreetMap features are Jollibee stores. Another brand's restaurant that JFC
+    operates (a Chowking) carries its own brand ID, and JFC's offices and car parks are not
+    restaurants, so neither counts."""
+    brand = brand_wikidata.fillna("")
+    named = brand.eq("") & has(name, JOLLIBEE_NAME)
+    return amenity.fillna("").isin(JOLLIBEE_AMENITY) & (brand.eq(JOLLIBEE_WIKIDATA) | named)
+
+
+def group_within(x, y, radius):
+    """Group codes joining points (in metres) that lie within `radius` of each other, directly
+    or through a chain of such points."""
+    pairs = cKDTree(np.column_stack([x, y])).query_pairs(radius, output_type="ndarray")
+    m = coo_matrix((np.ones(len(pairs)), (pairs[:, 0], pairs[:, 1])), shape=(len(x), len(x)))
+    return connected_components(m, directed=False)[1]

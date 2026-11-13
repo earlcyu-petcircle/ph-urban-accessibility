@@ -13,6 +13,9 @@ The five measures, summarised over residents (every statistic is weighted by peo
 and the context: each barangay's median resident placed among all Metro Manila residents, among
 residents of barangays of similar density, and beside its neighbours.
 
+Jollibee stores are tracked beside the measures, never inside them: `jollibee_table` gives the
+same nearest walk and counts for the site, and nothing here adds them to M3, M4 or the score.
+
 Used by the notebooks; reads data/work/walk_times.parquet (walk_times.py).
 """
 
@@ -257,3 +260,21 @@ def barangay_table(w):
     )
     out["score_rank"] = out.score.rank(ascending=False, method="min").astype(int)
     return out.reset_index()
+
+
+def jollibee_table(w):
+    """The tracked Jollibee layer for every barangay with people (and Metro Manila, as pcode
+    "metro"): the median resident's walk in minutes to the nearest store, the share of residents
+    within the 10-minute minimum, and the median resident's count within 5, 10 and 15 minutes.
+    `w` needs the columns of data/work/jollibee_times.parquet (jollibee_times.py)."""
+    w = w[w.people > 0]
+    keys, p = w.pcode.values, w.people.values
+    d = w.d_jollibee.values
+    out = pd.DataFrame({"min_jollibee": minutes(group_median(d, p, keys))})
+    out["within10_jollibee"] = group_mean(minutes(d) <= SUFFICIENCY_MIN, p, keys)
+    for m in (5, 10, 15):
+        out[f"n{m}_jollibee"] = group_median(w[f"n_jollibee_{m}"].values, p, keys)
+    metro = {"min_jollibee": minutes(wmedian(d, p)), "within10_jollibee": wmean(minutes(d) <= SUFFICIENCY_MIN, p)}
+    metro |= {f"n{m}_jollibee": wmedian(w[f"n_jollibee_{m}"], p, step=True) for m in (5, 10, 15)}
+    out.loc["metro"] = metro
+    return out.rename_axis("pcode").reset_index()

@@ -172,9 +172,10 @@ def gaussian(d, d0):
     return np.where(d <= d0, (np.exp(-0.5 * (d / d0) ** 2) - edge) / (1 - edge), 0.0)
 
 
-def counts_and_access(net, svc, access, pop_node, batch=64):
+def counts_and_access(net, svc, access, pop_node, batch=64, categories=CATEGORIES):
     """Per category: node counts of default-layer services within each threshold, and the
     E2SFCA access score (supply per resident within reach, Gaussian decay inside the catchment).
+    `categories` defaults to the nine; jollibee_times.py passes the tracked Jollibee layer.
 
     Supply is 1 per service, or a school's DepEd enrolment. Transit has no supply, so it gets
     counts only. A park is reached at its nearest access point, a rail station at its nearest
@@ -182,7 +183,7 @@ def counts_and_access(net, svc, access, pop_node, batch=64):
     limits = [metres(m) for m in THRESHOLDS_MIN]
     d0 = metres(E2SFCA_CATCHMENT_MIN)
     counts, scores = {}, {}
-    for c in CATEGORIES:
+    for c in categories:
         d = svc[svc.category.eq(c) & svc.in_default]
         cnt = np.zeros((len(limits), net.n), dtype=np.int32)
         acc = np.zeros(net.n)
