@@ -4,20 +4,23 @@ Vector tiles and small files for the interactive web map in docs/map/ (MapLibre 
 PMTiles). Everything is built from the analysis results (03_analyse.sh); nothing new is measured.
 
   docs/map/data/hexes.pmtiles      H3 resolution-10 hexagons with residents: people, and for
-                                   each category the median resident's walk in metres (M1),
+                                   each service (the nine and Jollibee) the median resident's
+                                   walk in metres (M1),
                                    services within 5, 10, 15 and 20 minutes (M2) and the share of
                                    Metro Manila residents with a longer walk; categories within
                                    each time at 3.6, 4.2 and 4.8 km/h (M4); the share with
                                    convenient transit (M5)
-  docs/map/data/services.pmtiles   the default service layer: category, kind, sources, name
+  docs/map/data/services.pmtiles   the default service layer and the Jollibee stores: category,
+                                   kind, sources, name
   docs/map/data/transit.pmtiles    LRT and MRT lines, and every mapped bus and jeepney route
   docs/map/data/barangays.pmtiles  Metro Manila's barangay and city outlines, with people and M4
   docs/map/data/study.geojson      the three barangays and their 10, 15 and 20-minute walk-sheds
-  docs/map/data/jollibee.geojson   the Jollibee stores, a tracked layer outside the nine services
   docs/map/data/barangays.json     every barangay's answers to the five research questions, with
-                                   its people, land area and density, and its walk to Jollibee,
-                                   for the picks table
+                                   its people, land area and density, for the picks table
   docs/map/data/summary.json       the example picks and Metro Manila's figures for the same rows
+
+Jollibee (NOT_IN_SCORE) is listed as a service everywhere, with the same per-service figures as
+the nine, but the 15-minute score, its rank and the categories within each time count the nine.
 
 Privacy: no building or home is published. Hexagons hold 34 residential buildings at the median;
 those with fewer than MIN_BUILDINGS are left off the map (their residents still count in every
@@ -49,8 +52,10 @@ from common import (
     CATEGORIES,
     CHECK_WALKSHED_MIN,
     MAP_DATA,
+    NOT_IN_SCORE,
     OSM_PBF,
     ROOT,
+    SHOWN,
     STUDY_BOX,
     TABLES,
     THRESHOLDS_MIN,
@@ -64,7 +69,7 @@ from common import (
     require,
 )
 from map_layers import CODES
-from measures import M3_CATEGORIES, barangay_table, coverage, jollibee_table, load
+from measures import CROWDING, barangay_table, coverage, load, service_stats
 from walk_times import Network, xy
 
 MIN_BUILDINGS = 5
@@ -99,13 +104,16 @@ def wsum(values, people, keys):
 
 sizes = {}
 w, b = load()
+# Jollibee's walks (jollibee_times.py), so every service shown reads from one table
+w = w.merge(pd.read_parquet(WORK / "jollibee_times.parquet"), on="origin_id", how="left", validate="1:1")
+assert w.d_jollibee.notna().all(), "jollibee_times.parquet is older than walk_times.parquet: rerun ./03_analyse.sh"
 
 # ---------------------------------------------------------------------------
 # 1. Hexagons
 # ---------------------------------------------------------------------------
 hexes = w.groupby("h3_10").agg(people=("people", "sum"), buildings=("people", "size"))
 props = {}
-for c in CATEGORIES:
+for c in SHOWN:
     code = CODES[c]
     # The median resident's walk in each hexagon
     d = w[["h3_10", "people", f"d_{c}"]].sort_values(["h3_10", f"d_{c}"])
@@ -153,22 +161,19 @@ print(
 )
 
 # ---------------------------------------------------------------------------
-# 2. Services: the default layer, inside the study box
+# 2. Services: the default layer and the Jollibee stores, inside the study box
 # ---------------------------------------------------------------------------
 svc = pd.read_parquet(WORK / "services.parquet")
 svc = svc[svc.in_default].copy()
-svc["cat"] = svc.category.map(CODES)
 svc["sources"] = svc.sources_in_group.str.replace("osm", "OpenStreetMap").str.replace("overture", "Overture")
 svc["sources"] = svc.sources.str.replace("deped", "DepEd").str.replace(";", ", ")
-svc["name"] = svc.name.fillna("")
-sg = gpd.GeoDataFrame(svc[["cat", "kind", "sources", "name"]], geometry=gpd.points_from_xy(svc.lon, svc.lat), crs=4326)
-sizes["services.pmtiles"] = tippecanoe(sg, "services.pmtiles", "services", "-Z11", "-z16", "-r1", "--no-feature-limit")
-
-# Jollibee stores: tracked context, drawn as their own layer
 jb = pd.read_parquet(WORK / "jollibee.parquet")
-jg = gpd.GeoDataFrame({"name": jb.name.fillna("Jollibee")}, geometry=gpd.points_from_xy(jb.lon, jb.lat), crs=4326)
-jg["geometry"] = jg.geometry.set_precision(1e-6)
-(MAP_DATA / "jollibee.geojson").write_text(jg.to_json(drop_id=True) + "\n")
+jb = jb.assign(category="jollibee", kind="jollibee", sources="OpenStreetMap", name=jb.name.fillna("Jollibee"))
+pts = pd.concat([svc, jb], ignore_index=True)
+pts["cat"] = pts.category.map(CODES)
+pts["name"] = pts.name.fillna("")
+sg = gpd.GeoDataFrame(pts[["cat", "kind", "sources", "name"]], geometry=gpd.points_from_xy(pts.lon, pts.lat), crs=4326)
+sizes["services.pmtiles"] = tippecanoe(sg, "services.pmtiles", "services", "-Z11", "-z16", "-r1", "--no-feature-limit")
 
 # ---------------------------------------------------------------------------
 # 3. Transit lines: LRT and MRT, and every mapped bus and jeepney route, from the OSM extract
@@ -210,10 +215,7 @@ print(f"transit: {tg['mode'].value_counts().to_dict()}")
 # 4. Every barangay: its measures (for the comparison panel and search) and its outline
 # ---------------------------------------------------------------------------
 geo = read_ncr_barangays(columns=["adm4_pcode"]).rename(columns={"adm4_pcode": "pcode"})
-bt = barangay_table(w)
-jt = jollibee_table(w.merge(pd.read_parquet(WORK / "jollibee_times.parquet"), on="origin_id", validate="1:1"))
-jb_metro = jt.set_index("pcode").loc["metro"]
-bt = bt.merge(jt[jt.pcode.ne("metro")], on="pcode", how="left", validate="1:1")
+bt = barangay_table(w, services=SHOWN)
 bt = b[["pcode", "barangay", "city", "area_km2", "people_per_km2"]].merge(bt, on="pcode", how="left")
 bt.to_csv(MAP_DATA / "barangay_measures.csv", index=False, float_format="%.4g")
 bbox = geo.set_index("pcode").bounds.round(5)
@@ -235,33 +237,27 @@ for r in bt.itertuples(index=False):
             "m4": round(r.m4_mean, 2),
             "a9": round(r.share_all_nine * 100),
             "q4": round(r.m4_metro_fewer * 100),
-            "min": {CODES[c]: round(v[f"min_{c}"], 1) for c in CATEGORIES},
-            "r": {CODES[c]: [round(v[f"p10_min_{c}"], 1), round(v[f"p90_min_{c}"], 1)] for c in CATEGORIES},
-            "k": {CODES[c]: [int(v[f"n{m}_{c}"]) for m in (5, 10, 15)] for c in CATEGORIES},
-            "w10": {CODES[c]: round(v[f"within10_{c}"] * 100) for c in CATEGORIES},
-            "q": {CODES[c]: round(v[f"metro_longer_{c}"] * 100) for c in CATEGORIES},
-            "x": {CODES[c]: round(v[f"m3_index_{c}"], 2) for c in M3_CATEGORIES},
+            "min": {CODES[c]: round(v[f"min_{c}"], 1) for c in SHOWN},
+            "r": {CODES[c]: [round(v[f"p10_min_{c}"], 1), round(v[f"p90_min_{c}"], 1)] for c in SHOWN},
+            "k": {CODES[c]: [int(v[f"n{m}_{c}"]) for m in (5, 10, 15)] for c in SHOWN},
+            "w10": {CODES[c]: round(v[f"within10_{c}"] * 100) for c in SHOWN},
+            "q": {CODES[c]: round(v[f"metro_longer_{c}"] * 100) for c in SHOWN},
+            "x": {CODES[c]: round(v[f"m3_index_{c}"], 2) for c in CROWDING},
             "t": [
                 round(r.share_bus_jeepney_500m * 100),
                 round(r.share_rail_1km * 100),
                 round(r.share_convenient * 100),
             ],
             "b": list(bbox.loc[r.pcode]),
-            # Jollibee, tracked context: minutes to the nearest, % within 10 minutes, counts within 5, 10, 15
-            "jb": {
-                "min": round(r.min_jollibee, 1),
-                "w10": round(r.within10_jollibee * 100),
-                "k": [int(v[f"n{m}_jollibee"]) for m in (5, 10, 15)],
-            },
         }
     )
 (MAP_DATA / "barangays.json").write_text(json.dumps(records, separators=(",", ":")) + "\n")
 bg = geo.merge(
-    bt[["pcode", "barangay", "city", "people", "score", *[f"min_{c}" for c in CATEGORIES], "share_convenient"]],
+    bt[["pcode", "barangay", "city", "people", "score", *[f"min_{c}" for c in SHOWN], "share_convenient"]],
     on="pcode",
 )
-bg = bg.rename(columns={f"min_{c}": f"d_{CODES[c]}" for c in CATEGORIES} | {"share_convenient": "m5"})
-for c in CATEGORIES:
+bg = bg.rename(columns={f"min_{c}": f"d_{CODES[c]}" for c in SHOWN} | {"share_convenient": "m5"})
+for c in SHOWN:
     bg[f"d_{CODES[c]}"] = bg[f"d_{CODES[c]}"].round(1)
 bg["score"] = bg.score.round(1)
 bg["m5"] = (bg.m5 * 100).round()
@@ -309,7 +305,14 @@ m = pd.read_csv(TABLES / "measures.csv", keep_default_na=False)
 mm = m[m.area.eq("Metro Manila")]
 
 
+unscored_metro = {c: service_stats(w, c) for c in NOT_IN_SCORE}
+
+
 def metro(measure, stat, category=""):
+    """Metro Manila's figure from measures.csv, or, for a service outside the score (which the
+    notebooks do not measure), from the same service_stats over every resident."""
+    if category in NOT_IN_SCORE:
+        return float(unscored_metro[category][measure, stat])
     return float(mm[(mm.measure == measure) & (mm.stat == stat) & (mm.category == category)].value.iloc[0])
 
 
@@ -319,24 +322,18 @@ summary = {
     "metro": {
         "s": round(metro("M4", "mean_categories_within_15min") / len(CATEGORIES) * 100, 1),
         "m4": round(metro("M4", "mean_categories_within_15min"), 2),
-        "min": {CODES[c]: round(metro("M1", "median_min", c), 1) for c in CATEGORIES},
-        "w10": {CODES[c]: round(metro("M1", "share_within_10min", c) * 100) for c in CATEGORIES},
+        "min": {CODES[c]: round(metro("M1", "median_min", c), 1) for c in SHOWN},
+        "w10": {CODES[c]: round(metro("M1", "share_within_10min", c) * 100) for c in SHOWN},
         "t": [
             round(metro("M5", s_) * 100)
             for s_ in ("share_within_500m_bus_jeepney", "share_within_1km_rail", "share_convenient")
         ],
         "pop": round(float(mm[mm.measure == "people"].value.iloc[0])),
         "a": round(float(b.area_km2.sum()), 1),
-        "r": {CODES[c]: [round(metro("M1", s_, c), 1) for s_ in ("p10_min", "p90_min")] for c in CATEGORIES},
-        "k": {CODES[c]: [int(metro("M2", f"median_within_{m}min", c)) for m in (5, 10, 15)] for c in CATEGORIES},
+        "r": {CODES[c]: [round(metro("M1", s_, c), 1) for s_ in ("p10_min", "p90_min")] for c in SHOWN},
+        "k": {CODES[c]: [int(metro("M2", f"median_within_{m}min", c)) for m in (5, 10, 15)] for c in SHOWN},
         "a9": round(metro("M4", "share_with_9") * 100),
-        "jb": {
-            "min": round(float(jb_metro.min_jollibee), 1),
-            "w10": round(float(jb_metro.within10_jollibee) * 100),
-            "k": [int(jb_metro[f"n{m}_jollibee"]) for m in (5, 10, 15)],
-        },
     },
-    "jollibee_stores": {"metro_manila": int(jb.pcode.notna().sum()), "with_fringe": len(jb)},
     "barangays_ranked": int(bt.score_rank.max()),
     "min_buildings": MIN_BUILDINGS,
     "hexagons_left_off": {"hexagons": len(left_off), "people": round(float(left_off.people.sum()))},
@@ -344,7 +341,4 @@ summary = {
 (MAP_DATA / "summary.json").write_text(json.dumps(summary, indent=1) + "\n")
 for k, v in sizes.items():
     print(f"{k}: {v / 1e6:.1f} MB")
-print(
-    f"wrote {MAP_DATA.relative_to(ROOT)}/: barangays.json, barangay_measures.csv, study.geojson, "
-    "jollibee.geojson, summary.json"
-)
+print(f"wrote {MAP_DATA.relative_to(ROOT)}/: barangays.json, barangay_measures.csv, study.geojson, summary.json")

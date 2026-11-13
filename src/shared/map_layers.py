@@ -7,10 +7,12 @@ Colours are the Atlas data palette, Riso (atlas.py): cobalt for better access, p
 """
 
 import atlas
-from common import CATEGORIES
+from common import NOT_IN_SCORE, SHOWN
 
-# Short property names in the tiles, in the order of CATEGORIES
-CODES = dict(zip(CATEGORIES, ("food", "mkt", "phar", "care", "hosp", "elem", "high", "open", "trans"), strict=True))
+# Short property names in the tiles and the page, in the order of SHOWN: the nine, then Jollibee
+CODES = dict(zip(SHOWN, ("food", "mkt", "phar", "care", "hosp", "elem", "high", "open", "trans", "jb"), strict=True))
+# The services the page lists but leaves out of the 15-minute score
+UNSCORED = [CODES[c] for c in NOT_IN_SCORE]
 
 # Fixed classes, the same for every category, so colours compare across categories.
 # The 15-minute score (M4 as 0-100): under 50, 50-70, 70-80, 80-90, 90-99, 100 (all nine basics)
@@ -36,7 +38,4 @@ SLOTS = atlas.CATEGORICAL[:3]
 SERVICE = atlas.CATEGORICAL[4]
 # Transit lines: rail in ink, bus in sky, jeepney in plum (not the barangay colours)
 TRANSIT = {"rail": atlas.INK, "bus": atlas.CATEGORICAL[5], "jeepney": atlas.CATEGORICAL[4]}
-# Jollibee stores, tracked beside the nine services: ink dots with a white halo, apart from the
-# plum service dots and the white rail stations ringed in ink
-JOLLIBEE = atlas.INK
 NO_PEOPLE = atlas.NO_PEOPLE

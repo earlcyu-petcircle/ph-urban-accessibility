@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Phase 2: build the analysis inputs from data/raw/ and the hand downloads in data/manual/.
 # Writes people (one row per residential building), the nine-category service layer, the
-# Jollibee stores (a tracked layer outside the nine) and the walking network to data/work/
+# Jollibee stores (a service shown beside the nine, not in the score) and the walking network to data/work/
 # (gitignored), and the small barangay, Jollibee and data-quality tables to data/derived/
 # (committed). About 2 minutes.
 source "$(dirname "$0")/src/shared/setup.sh"

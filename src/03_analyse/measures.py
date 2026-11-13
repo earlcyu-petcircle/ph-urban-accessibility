@@ -13,8 +13,9 @@ The five measures, summarised over residents (every statistic is weighted by peo
 and the context: each barangay's median resident placed among all Metro Manila residents, among
 residents of barangays of similar density, and beside its neighbours.
 
-Jollibee stores are tracked beside the measures, never inside them: `jollibee_table` gives the
-same nearest walk and counts for the site, and nothing here adds them to M3, M4 or the score.
+Jollibee (NOT_IN_SCORE in src/shared/common.py) is a service the site shows beside the nine:
+`barangay_table` and `service_stats` give it the same M1, M2 and M3 answers when asked, and
+coverage (M4), the 15-minute score and its rank count only the nine.
 
 Used by the notebooks; reads data/work/walk_times.parquet (walk_times.py).
 """
@@ -32,6 +33,7 @@ from common import (
     CATEGORIES,
     COVERAGE_MIN,
     DERIVED,
+    NOT_IN_SCORE,
     SUFFICIENCY_MIN,
     TRANSIT_HIGH_CAPACITY_M,
     TRANSIT_LOW_CAPACITY_M,
@@ -52,9 +54,12 @@ LABEL = {
     "public_high": "Public high",
     "open_space": "Open space",
     "transit": "Transit",
+    "jollibee": "Jollibee",
     "food_retail_no_convenience": "Food retail without convenience stores",
 }
 M3_CATEGORIES = tuple(c for c in CATEGORIES if c != "transit")
+# Every service with a supply to share (all but transit), counted in the score or not
+CROWDING = M3_CATEGORIES + NOT_IN_SCORE
 
 
 def minutes(m, speed_kmh=WALK_SPEED_KMH):
@@ -132,19 +137,8 @@ def measures_table(w):
         p = d.people.values
         add(area, "people", "", "people", p.sum())
         for c in CATEGORIES:
-            mins = minutes(d[f"d_{c}"].values)
-            p10, p50, p90 = wquantile(mins, p, [0.1, 0.5, 0.9])
-            add(area, "M1", c, "median_min", p50)
-            add(area, "M1", c, "p10_min", p10)
-            add(area, "M1", c, "p90_min", p90)
-            add(area, "M1", c, "p90_p10_ratio", p90 / max(p10, 0.1))
-            add(area, "M1", c, "share_within_10min", wmean(mins <= SUFFICIENCY_MIN, p))
-            for m in (5, 10, 15):
-                add(area, "M2", c, f"median_within_{m}min", wmedian(d[f"n_{c}_{m}"], p, step=True))
-                add(area, "M2", c, f"mean_within_{m}min", wmean(d[f"n_{c}_{m}"], p))
-            if c in M3_CATEGORIES:
-                add(area, "M3", c, "median_per_10k", wmedian(d[f"a_{c}"], p))
-                add(area, "M3", c, "mean_per_10k", wmean(d[f"a_{c}"], p))
+            for (measure, stat), v in service_stats(d, c).items():
+                add(area, measure, c, stat, v)
         mins = minutes(d.d_food_retail_no_convenience.values)
         p10, p50, p90 = wquantile(mins, p, [0.1, 0.5, 0.9])
         for stat, v in (("median_min", p50), ("p10_min", p10), ("p90_min", p90)):
@@ -158,6 +152,29 @@ def measures_table(w):
         for stat, v in transit_shares(d.d_bus_jeepney, d.d_rail, p).items():
             add(area, "M5", "", stat, v)
     return pd.DataFrame(rows)
+
+
+def service_stats(d, c):
+    """M1, M2 and (but for transit) M3 for one service over the residents in `d`, as
+    {(measure, stat): value}: the rows measures_table writes for each category, and Metro
+    Manila's figures for a service outside the score."""
+    p = d.people.values
+    mins = minutes(d[f"d_{c}"].values)
+    p10, p50, p90 = wquantile(mins, p, [0.1, 0.5, 0.9])
+    out = {
+        ("M1", "median_min"): p50,
+        ("M1", "p10_min"): p10,
+        ("M1", "p90_min"): p90,
+        ("M1", "p90_p10_ratio"): p90 / max(p10, 0.1),
+        ("M1", "share_within_10min"): wmean(mins <= SUFFICIENCY_MIN, p),
+    }
+    for m in (5, 10, 15):
+        out["M2", f"median_within_{m}min"] = wmedian(d[f"n_{c}_{m}"], p, step=True)
+        out["M2", f"mean_within_{m}min"] = wmean(d[f"n_{c}_{m}"], p)
+    if c in CROWDING:
+        out["M3", "median_per_10k"] = wmedian(d[f"a_{c}"], p)
+        out["M3", "mean_per_10k"] = wmean(d[f"a_{c}"], p)
+    return out
 
 
 def context_table(w):
@@ -217,19 +234,21 @@ def group_quantile(values, people, keys, q):
     return d.groupby("k").apply(lambda g: float(wquantile(g.v, g.p, q)[0]), include_groups=False)
 
 
-def barangay_table(w):
+def barangay_table(w, services=CATEGORIES):
     """The same measures for every barangay with people, for the comparison site, which answers
-    the five research questions for any pick: the median resident's walk to each category (M1),
+    the five research questions for any pick: the median resident's walk to each of `services`
+    (the nine, and for the site Jollibee too) (M1),
     the P10 and P90 walks (the spread inside the barangay) and the share within the 10-minute
     minimum; the median resident's count within 5, 10 and 15 minutes (M2); the share of Metro
     Manila residents with a longer walk than that median; E2SFCA access against the Metro
     Manila mean (M3); mean categories within 15 minutes (M4) as a 0-100 score, the share with
     all nine and the share of Metro Manila residents with fewer than the median resident; and
-    the transit shares (M5). One row per barangay, wide."""
+    the transit shares (M5). The score and its rank count only the nine, whatever `services`
+    holds. One row per barangay, wide."""
     w = w[w.people > 0]
     keys, p = w.pcode.values, w.people.values
     out = pd.DataFrame({"people": w.groupby("pcode").people.sum()})
-    for c in CATEGORIES:
+    for c in services:
         d = w[f"d_{c}"].values
         med = group_median(d, p, keys)
         out[f"min_{c}"] = minutes(med)
@@ -243,7 +262,7 @@ def barangay_table(w):
         out[f"metro_longer_{c}"] = (
             1 - np.r_[0, cw][np.searchsorted(xs, med.reindex(out.index).values, "right")] / cw[-1]
         )
-        if c in M3_CATEGORIES:
+        if c in CROWDING:
             out[f"m3_index_{c}"] = group_mean(w[f"a_{c}"].values, p, keys) / wmean(w[f"a_{c}"], p)
     cov = coverage(w).values
     out["m4_mean"] = group_mean(cov, p, keys)
@@ -260,21 +279,3 @@ def barangay_table(w):
     )
     out["score_rank"] = out.score.rank(ascending=False, method="min").astype(int)
     return out.reset_index()
-
-
-def jollibee_table(w):
-    """The tracked Jollibee layer for every barangay with people (and Metro Manila, as pcode
-    "metro"): the median resident's walk in minutes to the nearest store, the share of residents
-    within the 10-minute minimum, and the median resident's count within 5, 10 and 15 minutes.
-    `w` needs the columns of data/work/jollibee_times.parquet (jollibee_times.py)."""
-    w = w[w.people > 0]
-    keys, p = w.pcode.values, w.people.values
-    d = w.d_jollibee.values
-    out = pd.DataFrame({"min_jollibee": minutes(group_median(d, p, keys))})
-    out["within10_jollibee"] = group_mean(minutes(d) <= SUFFICIENCY_MIN, p, keys)
-    for m in (5, 10, 15):
-        out[f"n{m}_jollibee"] = group_median(w[f"n_jollibee_{m}"].values, p, keys)
-    metro = {"min_jollibee": minutes(wmedian(d, p)), "within10_jollibee": wmean(minutes(d) <= SUFFICIENCY_MIN, p)}
-    metro |= {f"n{m}_jollibee": wmedian(w[f"n_jollibee_{m}"], p, step=True) for m in (5, 10, 15)}
-    out.loc["metro"] = metro
-    return out.rename_axis("pcode").reset_index()

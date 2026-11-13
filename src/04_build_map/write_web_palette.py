@@ -19,6 +19,7 @@ OUT = Path(__file__).resolve().parents[2] / "docs" / "map" / "palette.js"
 
 PALETTE = {
     "CODES": ml.CODES,
+    "UNSCORED": ml.UNSCORED,
     "SCORE_BREAKS": ml.SCORE_BREAKS,
     "SCORE": ml.SCORE,
     "MINUTE_BREAKS": ml.MINUTE_BREAKS,
@@ -26,7 +27,6 @@ PALETTE = {
     "SLOTS": ml.SLOTS,
     "SERVICE": ml.SERVICE,
     "TRANSIT": ml.TRANSIT,
-    "JOLLIBEE": ml.JOLLIBEE,
     "NO_PEOPLE": ml.NO_PEOPLE,
 }
 
