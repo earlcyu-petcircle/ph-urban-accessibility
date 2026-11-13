@@ -17,7 +17,7 @@
 :root{
   color-scheme: light;
   --bg:#FFFFFF; --ink:#111111; --ink-soft:#333333; --muted:#555555;
-  --accent:#1F4FE0; --highlight:#FFE14D; --grid:#F3F5FB; --rule:#DADDE6;
+  --accent:#1F4FE0; --highlight:#FFE14D; --grid:#F3F5FB; --rule:#DADDE6; --quiet:#F2F3F5;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
   --head:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;
   --panel:clamp(360px,33.333vw,560px);
@@ -83,6 +83,8 @@ td:first-child{font-family:"Public Sans",sans-serif;font-size:.8rem}
 td:first-child button{all:unset;cursor:pointer;border-bottom:1px dotted var(--muted)}
 td:first-child button:hover,td:first-child button:focus-visible{color:var(--accent);border-bottom-color:var(--accent)}
 tr.on td{background:#FFF6C2}
+/* a service outside the score is marked in neutral grey, not the yellow of the nine */
+tr.on[data-unscored] td{background:var(--quiet)}
 td.best{font-weight:600;color:var(--accent)}
 td.metro{color:var(--muted)}
 tbody.grp:not(.open) > tr:not(.gh){display:none}
@@ -277,7 +279,8 @@ function renderTable() {
       cells.map(c => `<td${b !== null && c.v === b ? ' class="best"' : ""}>${c.t}</td>`).join("") +
       `<td class="metro">${metro}</td></tr>`);
   };
-  const svcLine = (c, label, cells, metro, lower) => line(label, cells, metro, lower, `${c === svc ? ' class="on"' : ""} data-cat="${c}"`);
+  const svcLine = (c, label, cells, metro, lower) =>
+    line(label, cells, metro, lower, `${c === svc ? ' class="on"' : ""} data-cat="${c}"${UNSCORED.includes(c) ? " data-unscored" : ""}`);
   const val = (v, d = 0, unit = "") => ({v, t: v === null || v === undefined ? "-" : fmt(v, d) + unit});
   const sub = (t) => rows.push(`<tr class="sub"><td colspan="${n}">${t}</td></tr>`);
   const m = S.metro;

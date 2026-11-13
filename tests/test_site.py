@@ -38,5 +38,7 @@ def test_jollibee_is_listed_once_as_a_service_outside_the_score():
     assert "show-jb" not in PAGE and "jollibee.geojson" not in PAGE
     assert not (DOCS / "map" / "data" / "jollibee.geojson").exists()
     assert "not in score" in PAGE
+    # picked, it is marked in neutral grey, not the yellow kept for the nine and the title
+    assert "tr.on[data-unscored] td{background:var(--quiet)}" in PAGE and "--quiet:#F2F3F5" in PAGE
     records = json.loads((DOCS / "map" / "data" / "barangays.json").read_text())
     assert all("jb" in r["min"] and "jb" in r["k"] and "jb" in r["x"] and "jb" not in r for r in records)
