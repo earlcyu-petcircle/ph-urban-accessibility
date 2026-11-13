@@ -21,10 +21,11 @@ def test_old_map_links_forward_to_the_front_page_with_their_picks():
     assert 'location.replace("../" + location.hash)' in forward
 
 
-def test_no_personal_wording_on_the_site():
+def test_the_examples_are_explained_once_in_a_note_not_on_the_button():
     label = json.loads((DOCS / "map" / "data" / "summary.json").read_text())["featured"]["label"]
-    for text in (PAGE, label):
-        assert "lived" not in text.lower()
+    assert "lived" not in label.lower()
+    note = "The examples are three barangays I have lived in: Barangay 136, Loyola Heights and Oranbo."
+    assert f'<p class="note">{note}</p>' in PAGE and PAGE.lower().count("lived") == 1
 
 
 def test_pick_outlines_sit_on_a_white_halo():
