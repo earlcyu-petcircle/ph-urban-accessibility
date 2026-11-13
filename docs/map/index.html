@@ -60,6 +60,10 @@ button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .row2 > div > span{display:block;font:600 .62rem var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
 #svc-count{font-size:.8rem;color:var(--ink-soft);margin:.35rem 0 0;display:flex;align-items:center;gap:.4rem}
 #svc-count::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--service,#9C3F8F);box-shadow:0 0 0 1.5px var(--bg),0 0 0 2.5px var(--rule);flex:none}
+.jb-toggle{margin:.45rem 0 0;font-size:.86rem}
+.jb-toggle i{font-style:normal;color:var(--muted);font-size:.78rem}
+tr.rq.tracked td{border-top:1.5px dashed var(--rule)}
+tr.rq.tracked b{color:var(--muted)}
 /* The picks table: one column per pick, one row per answer */
 table{width:100%;border-collapse:collapse;font-size:.8rem;table-layout:fixed}
 col.lbl{width:34%}
@@ -141,6 +145,7 @@ body.embed .standalone{display:none}
       </select></div>
   </div>
   <p id="svc-count" aria-live="polite"></p>
+  <label class="jb-toggle"><input type="checkbox" id="show-jb"> Jollibee stores <i>tracked, not part of the score</i></label>
 
   <table id="compare"><colgroup><col class="lbl"></colgroup><thead></thead><tbody></tbody></table>
   <p class="check">Only the three featured barangays have been through the study's ten sensitivity checks; small gaps between other picks may not hold.</p>
@@ -157,12 +162,12 @@ body.embed .standalone{display:none}
 
   <footer>
     <p>Sari-sari stores are almost unmapped, so food access is understated everywhere.</p>
-    <p>People: PSA 2024 census, placed with WorldPop and Overture buildings. Services: Overture Maps, &copy; OpenStreetMap contributors, DepEd. Boundaries: OCHA COD-AB. Basemap: OpenFreeMap. Hexagons with fewer than five buildings are left off.</p>
+    <p>People: PSA 2024 census, placed with WorldPop and Overture buildings. Services: Overture Maps, &copy; OpenStreetMap contributors, DepEd. Jollibee stores: &copy; OpenStreetMap contributors. Boundaries: OCHA COD-AB. Basemap: OpenFreeMap. Hexagons with fewer than five buildings are left off.</p>
   </footer>
 </aside>
 <div id="map"></div>
 
-<!-- CODES, SCORE, SLOTS, SERVICE, TRANSIT: written from src/shared/map_layers.py -->
+<!-- CODES, SCORE, SLOTS, SERVICE, TRANSIT, JOLLIBEE: written from src/shared/map_layers.py -->
 <script src="palette.js"></script>
 <script>
 // ?embed: shown inside the story page, which carries the title and the method
@@ -184,7 +189,7 @@ const fmt = (v, d = 0) => v === undefined || v === null ? "-" :
   Number(v).toLocaleString("en-AU", {maximumFractionDigits: d, minimumFractionDigits: d});
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 
-let B = [], BY = {}, S = null, picks = [], svc = DEFAULT_SVC, bg = "none";
+let B = [], BY = {}, S = null, picks = [], svc = DEFAULT_SVC, bg = "none", jb = false;
 CATS.forEach(c => document.getElementById("svc").insertAdjacentHTML("beforeend", `<option value="${c}">${LABEL[c]}</option>`));
 
 // --- Background colours (off by default: the picks are the subject) ----------------------
@@ -199,6 +204,7 @@ const HEX_FILL = steps(["*", ["get", "m4_42_15"], 100 / 9], SCORE_BREAKS, SCORE)
 function legend() {
   const row = (c, t, round) => `<div class="row"><span class="sw" style="background:${c}${round ? ";border-radius:50%;width:12px" : ""}"></span>${t}</div>`;
   let html = row(SERVICE, `${LABEL[svc]}: one dot per service`, true) +
+    (jb ? row(JOLLIBEE, "Jollibee: one dot per store (tracked, not in the score)", true) : "") +
     picks.map((p, i) => row(SLOTS[i], esc(BY[p].n))).join("");
   if (bg !== "none") {
     const labels = ["under 50", "50 to 70", "70 to 80", "80 to 90", "90 to 99", "100: all nine within 15 min"];
@@ -235,7 +241,7 @@ function renderTable() {
       `<td class="metro">${metro}</td></tr>`);
   };
   const val = (v, d = 0, unit = "") => ({v, t: v === null || v === undefined ? "-" : fmt(v, d) + unit});
-  const rq = (code, title, question, note) => rows.push(`<tr class="rq"><td colspan="${n}"><b>${code}</b><span>${title}</span><i>${question}${note ? " " + note : ""}</i></td></tr>`);
+  const rq = (code, title, question, note, cls = "rq") => rows.push(`<tr class="${cls}"><td colspan="${n}"><b>${code}</b><span>${title}</span><i>${question}${note ? " " + note : ""}</i></td></tr>`);
   const sub = (t) => rows.push(`<tr class="sub"><td colspan="${n}">${t}</td></tr>`);
   const m = S.metro;
 
@@ -271,9 +277,23 @@ function renderTable() {
   CATS.forEach(c => line(svcLabel(c), cols.map(b => ({v: b.r[c][1] - b.r[c][0], t: `${fmt(b.r[c][0], 1)}-${fmt(b.r[c][1], 1)}`})),
     `${fmt(m.r[c][0], 1)}-${fmt(m.r[c][1], 1)}`, true, c));
 
+  // Jollibee: tracked beside the five questions, never counted in them
+  rq("Tracked context", "Jollibee stores", "Not part of the 15-minute score or the rankings: minutes for the median resident, " +
+    `and stores within 5, 10 and 15 minutes. ${fmt(S.jollibee_stores.metro_manila)} stores in Metro Manila, from OpenStreetMap.`, "", "rq tracked");
+  const jbLine = (label, cells, metro, lower) => {
+    const b = best(cells.map(c => c.v), lower);
+    rows.push(`<tr data-jb${jb ? ' class="on"' : ""}><td>${label}</td>` +
+      cells.map(c => `<td${b !== null && c.v === b ? ' class="best"' : ""}>${c.t}</td>`).join("") + `<td class="metro">${metro}</td></tr>`);
+  };
+  const jbLabel = (t) => `<button type="button" data-show-jb aria-label="${t}: show Jollibee stores on the map">${t}</button>`;
+  jbLine(jbLabel("Nearest Jollibee (min)"), cols.map(b => ({v: b.jb.min, t: `${fmt(b.jb.min, 1)}<small>${fmt(b.jb.w10)}% ≤10</small>`})),
+    `${fmt(m.jb.min, 1)}<small>${fmt(m.jb.w10)}% ≤10</small>`, true);
+  [5, 10, 15].forEach((t, i) => jbLine(jbLabel(`Stores within ${t} min`), cols.map(b => val(b.jb.k[i])), fmt(m.jb.k[i]), false));
+
   const body = document.querySelector("#compare tbody");
   body.innerHTML = rows.join("");
   body.querySelectorAll("[data-svc]").forEach(b => b.onclick = () => setSvc(b.dataset.svc));
+  body.querySelectorAll("[data-show-jb]").forEach(b => b.onclick = () => setJb(true));
 }
 function renderChips() {
   const el = document.getElementById("chips");
@@ -350,18 +370,18 @@ q.addEventListener("keydown", (e) => {
 });
 q.addEventListener("blur", () => setTimeout(() => results.style.display = "none", 150));
 
-// --- State in the address: #p=<pcode>,<pcode>&svc=<service>&bg=<none|barangays|hexes> ----
+// --- State in the address: #p=<pcode>,<pcode>&svc=<service>&bg=<none|barangays|hexes>&jb=<0|1>
 // Older links (#by=<score|service>&detail=<barangays|hexes>) still open: a service in `by`
 // becomes the shown service, and hexagons the background.
 function writeHash() {
-  history.replaceState(null, "", `#p=${picks.join(",")}&svc=${svc}&bg=${bg}`);
+  history.replaceState(null, "", `#p=${picks.join(",")}&svc=${svc}&bg=${bg}&jb=${jb ? 1 : 0}`);
 }
 function readHash() {
   const h = new URLSearchParams(location.hash.slice(1));
   const p = (h.get("p") ?? S.featured.pcodes.join(",")).split(",").filter(x => BY[x]).slice(0, MAX);
   const s = h.get("svc") ?? h.get("by");
   const g = h.get("bg") ?? (h.get("detail") === "hexes" ? "hexes" : "none");
-  return {p, svc: CATS.includes(s) ? s : DEFAULT_SVC, bg: ["none", "barangays", "hexes"].includes(g) ? g : "none"};
+  return {p, svc: CATS.includes(s) ? s : DEFAULT_SVC, bg: ["none", "barangays", "hexes"].includes(g) ? g : "none", jb: h.get("jb") === "1"};
 }
 function setSvc(v) {
   svc = v;
@@ -370,6 +390,15 @@ function setSvc(v) {
   document.querySelectorAll("#compare tbody tr[data-cat]").forEach(tr => tr.classList.toggle("on", tr.dataset.cat === v));
   legend();
   countServices();
+  writeHash();
+}
+// The Jollibee layer: its own toggle, outside the service choice and the score
+function setJb(on) {
+  jb = on;
+  document.getElementById("show-jb").checked = on;
+  map.setLayoutProperty("jollibee", "visibility", on ? "visible" : "none");
+  document.querySelectorAll("#compare tbody tr[data-jb]").forEach(tr => tr.classList.toggle("on", on));
+  legend();
   writeHash();
 }
 function setBg(v) {
@@ -407,6 +436,7 @@ map.on("load", async () => {
   map.addSource("transit", {type: "vector", url: here("data/transit.pmtiles")});
   map.addSource("services", {type: "vector", url: here("data/services.pmtiles")});
   map.addSource("sheds", {type: "geojson", data: "data/study.geojson"});
+  map.addSource("jollibee", {type: "geojson", data: "data/jollibee.geojson"});
   const isBrgy = ["==", ["get", "kind"], "barangay"];
   // Every barangay stays clickable, but only the picks are drawn strongly
   map.addLayer({id: "brgy-hit", type: "fill", source: "brgy", "source-layer": "barangays", filter: isBrgy,
@@ -435,10 +465,13 @@ map.on("load", async () => {
     filter: ["==", ["get", "cat"], svc],
     paint: {"circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 3, 14, 5, 17, 7.5], "circle-color": SERVICE,
             "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1.5}});
+  map.addLayer({id: "jollibee", type: "circle", source: "jollibee", layout: {visibility: "none"},
+    paint: {"circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 2.5, 14, 4.5, 17, 7], "circle-color": JOLLIBEE,
+            "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1.5}});
 
   const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, maxWidth: "300px"});
   map.on("mousemove", "brgy-hit", (e) => {
-    if (map.queryRenderedFeatures(e.point, {layers: ["services"]}).length) return;
+    if (map.queryRenderedFeatures(e.point, {layers: ["services", "jollibee"]}).length) return;
     const p = e.features[0].properties, b = BY[p.pcode];
     map.getCanvas().style.cursor = "pointer";
     const rows = b ? [["People (2024)", fmt(b.pop)], ["15-minute score", fmt(b.s, 1)],
@@ -457,6 +490,11 @@ map.on("load", async () => {
     popup.setLngLat(e.lngLat).setHTML(`<div class="tt-title">${esc(p.name || LABEL[p.cat])}</div><div class="tt-hint">${LABEL[p.cat]} &middot; ${esc(p.sources)}</div>`).addTo(map);
   });
   map.on("mouseleave", "services", () => popup.remove());
+  map.on("mousemove", "jollibee", (e) => {
+    const p = e.features[0].properties;
+    popup.setLngLat(e.lngLat).setHTML(`<div class="tt-title">${esc(p.name)}</div><div class="tt-hint">Jollibee, tracked, not in the score &middot; OpenStreetMap</div>`).addTo(map);
+  });
+  map.on("mouseleave", "jollibee", () => popup.remove());
   map.on("idle", countServices);
 
   document.getElementById("svc").onchange = (e) => setSvc(e.target.value);
@@ -465,6 +503,7 @@ map.on("load", async () => {
     layers.forEach(l => map.setLayoutProperty(l, "visibility", e.target.checked ? "visible" : "none")));
   toggle("show-transit", ["transit-bus", "transit-jeepney", "transit-rail", "transit-station"]);
   toggle("show-sheds", ["sheds"]);
+  document.getElementById("show-jb").onchange = (e) => setJb(e.target.checked);
   document.getElementById("featured").onclick = () => { picks = [...S.featured.pcodes]; say(""); update(); zoomTo(picks); };
   document.getElementById("clear").onclick = () => { picks = []; say(""); update(); };
 
@@ -473,12 +512,13 @@ map.on("load", async () => {
   update();
   setSvc(h.svc);
   setBg(h.bg);
+  setJb(h.jb);
   if (picks.length) zoomTo(picks);
 });
 addEventListener("hashchange", () => {
   if (!S) return;
   const h = readHash();
-  picks = h.p; update(); setSvc(h.svc); setBg(h.bg);
+  picks = h.p; update(); setSvc(h.svc); setBg(h.bg); setJb(h.jb);
   if (picks.length) zoomTo(picks);
 });
 </script>

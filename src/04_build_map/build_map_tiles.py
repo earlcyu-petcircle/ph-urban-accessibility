@@ -13,8 +13,10 @@ PMTiles). Everything is built from the analysis results (03_analyse.sh); nothing
   docs/map/data/transit.pmtiles    LRT and MRT lines, and every mapped bus and jeepney route
   docs/map/data/barangays.pmtiles  Metro Manila's barangay and city outlines, with people and M4
   docs/map/data/study.geojson      the three barangays and their 10, 15 and 20-minute walk-sheds
+  docs/map/data/jollibee.geojson   the Jollibee stores, a tracked layer outside the nine services
   docs/map/data/barangays.json     every barangay's answers to the five research questions, with
-                                   its people, land area and density, for the picks table
+                                   its people, land area and density, and its walk to Jollibee,
+                                   for the picks table
   docs/map/data/summary.json       the featured preset and Metro Manila's figures for the same rows
 
 Privacy: no building or home is published. Hexagons hold 34 residential buildings at the median;
@@ -62,14 +64,19 @@ from common import (
     require,
 )
 from map_layers import CODES
-from measures import M3_CATEGORIES, barangay_table, coverage, load
+from measures import M3_CATEGORIES, barangay_table, coverage, jollibee_table, load
 from walk_times import Network, xy
 
 MIN_BUILDINGS = 5
 TIPPECANOE = shutil.which("tippecanoe")
 if TIPPECANOE is None:
     sys.exit("build_map_tiles.py needs tippecanoe on the path: brew install tippecanoe")
-require(WORK / "walk_times.parquet", TABLES / "measures.csv", how="Run ./03_analyse.sh first.")
+require(
+    WORK / "walk_times.parquet",
+    WORK / "jollibee_times.parquet",
+    TABLES / "measures.csv",
+    how="Run ./03_analyse.sh first.",
+)
 MAP_DATA.mkdir(parents=True, exist_ok=True)
 
 
@@ -157,6 +164,12 @@ svc["name"] = svc.name.fillna("")
 sg = gpd.GeoDataFrame(svc[["cat", "kind", "sources", "name"]], geometry=gpd.points_from_xy(svc.lon, svc.lat), crs=4326)
 sizes["services.pmtiles"] = tippecanoe(sg, "services.pmtiles", "services", "-Z11", "-z16", "-r1", "--no-feature-limit")
 
+# Jollibee stores: tracked context, drawn as their own layer
+jb = pd.read_parquet(WORK / "jollibee.parquet")
+jg = gpd.GeoDataFrame({"name": jb.name.fillna("Jollibee")}, geometry=gpd.points_from_xy(jb.lon, jb.lat), crs=4326)
+jg["geometry"] = jg.geometry.set_precision(1e-6)
+(MAP_DATA / "jollibee.geojson").write_text(jg.to_json(drop_id=True) + "\n")
+
 # ---------------------------------------------------------------------------
 # 3. Transit lines: LRT and MRT, and every mapped bus and jeepney route, from the OSM extract
 # ---------------------------------------------------------------------------
@@ -198,6 +211,9 @@ print(f"transit: {tg['mode'].value_counts().to_dict()}")
 # ---------------------------------------------------------------------------
 geo = read_ncr_barangays(columns=["adm4_pcode"]).rename(columns={"adm4_pcode": "pcode"})
 bt = barangay_table(w)
+jt = jollibee_table(w.merge(pd.read_parquet(WORK / "jollibee_times.parquet"), on="origin_id", validate="1:1"))
+jb_metro = jt.set_index("pcode").loc["metro"]
+bt = bt.merge(jt[jt.pcode.ne("metro")], on="pcode", how="left", validate="1:1")
 bt = b[["pcode", "barangay", "city", "area_km2", "people_per_km2"]].merge(bt, on="pcode", how="left")
 bt.to_csv(MAP_DATA / "barangay_measures.csv", index=False, float_format="%.4g")
 bbox = geo.set_index("pcode").bounds.round(5)
@@ -231,6 +247,12 @@ for r in bt.itertuples(index=False):
                 round(r.share_convenient * 100),
             ],
             "b": list(bbox.loc[r.pcode]),
+            # Jollibee, tracked context: minutes to the nearest, % within 10 minutes, counts within 5, 10, 15
+            "jb": {
+                "min": round(r.min_jollibee, 1),
+                "w10": round(r.within10_jollibee * 100),
+                "k": [int(v[f"n{m}_jollibee"]) for m in (5, 10, 15)],
+            },
         }
     )
 (MAP_DATA / "barangays.json").write_text(json.dumps(records, separators=(",", ":")) + "\n")
@@ -308,7 +330,13 @@ summary = {
         "r": {CODES[c]: [round(metro("M1", s_, c), 1) for s_ in ("p10_min", "p90_min")] for c in CATEGORIES},
         "k": {CODES[c]: [int(metro("M2", f"median_within_{m}min", c)) for m in (5, 10, 15)] for c in CATEGORIES},
         "a9": round(metro("M4", "share_with_9") * 100),
+        "jb": {
+            "min": round(float(jb_metro.min_jollibee), 1),
+            "w10": round(float(jb_metro.within10_jollibee) * 100),
+            "k": [int(jb_metro[f"n{m}_jollibee"]) for m in (5, 10, 15)],
+        },
     },
+    "jollibee_stores": {"metro_manila": int(jb.pcode.notna().sum()), "with_fringe": len(jb)},
     "barangays_ranked": int(bt.score_rank.max()),
     "min_buildings": MIN_BUILDINGS,
     "hexagons_left_off": {"hexagons": len(left_off), "people": round(float(left_off.people.sum()))},
@@ -316,4 +344,7 @@ summary = {
 (MAP_DATA / "summary.json").write_text(json.dumps(summary, indent=1) + "\n")
 for k, v in sizes.items():
     print(f"{k}: {v / 1e6:.1f} MB")
-print(f"wrote {MAP_DATA.relative_to(ROOT)}/: barangays.json, barangay_measures.csv, study.geojson, summary.json")
+print(
+    f"wrote {MAP_DATA.relative_to(ROOT)}/: barangays.json, barangay_measures.csv, study.geojson, "
+    "jollibee.geojson, summary.json"
+)

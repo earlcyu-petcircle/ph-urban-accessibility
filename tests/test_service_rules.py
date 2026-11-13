@@ -7,7 +7,9 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src" / "shared"))
 
-from service_rules import health_category, norm_name, same_place, school_level
+import numpy as np
+from common import CATEGORIES
+from service_rules import group_within, health_category, is_jollibee, norm_name, same_place, school_level
 
 
 def same(a, b):
@@ -50,3 +52,31 @@ def test_health_categories():
     primary_tag = pd.Series([False, False, False, True, False, True])
     overture = health_category(names, hospital_tag, primary_tag, trust_hospital_tag=False)
     assert list(overture) == ["hospital", None, "primary_care", "primary_care", None, None]
+
+
+def test_jollibee_stores_by_brand_id_or_name():
+    rows = pd.DataFrame(
+        [
+            ("fast_food", "Q37614", "Jollibee Cubao"),  # brand-tagged
+            ("fast_food", None, "Jolibee Pasig Palengke"),  # untagged, misspelled
+            ("restaurant", None, "JOLLIBEE"),  # untagged restaurant
+            ("fast_food", "Q1093402", "Chowking"),  # another brand JFC operates
+            ("fast_food", "Q1093402", "Jollibee and Chowking"),  # another brand ID wins over the name
+            ("parking", None, "Jollibee"),  # a car park JFC operates
+            (None, None, "Jollibee Plaza"),  # JFC's offices
+            ("fast_food", None, "Jollibeeland"),  # not the brand's name as a word
+        ],
+        columns=["amenity", "brand_wikidata", "name"],
+    )
+    got = is_jollibee(rows.amenity, rows.brand_wikidata, rows.name)
+    assert list(got) == [True, True, True, False, False, False, False, False]
+
+
+def test_points_within_fifty_metres_are_one_store():
+    x = np.array([0.0, 30.0, 70.0, 500.0])  # a chain 0-30-70 m, and one 430 m away
+    codes = group_within(x, np.zeros(4), 50)
+    assert codes[0] == codes[1] == codes[2] != codes[3]
+
+
+def test_jollibee_is_not_a_service_category():
+    assert "jollibee" not in CATEGORIES

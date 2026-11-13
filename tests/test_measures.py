@@ -58,3 +58,23 @@ def test_barangay_table_carries_every_research_question():
     p2_share = bt.loc["P2", "people"] / bt.people.sum()
     assert np.isclose(bt.loc["P1", "m4_metro_fewer"], p2_share)
     assert bt.loc["P2", "m4_metro_fewer"] == 0.0
+
+
+def test_jollibee_table_per_barangay_and_metro():
+    w = pd.DataFrame(
+        {
+            "pcode": ["a", "a", "a", "b", "b"],
+            "people": [1.0, 1.0, 1.0, 2.0, 0.0],  # the empty building in b is ignored
+            "d_jollibee": [70.0, 700.0, 1400.0, 2100.0, 0.0],  # 1, 10, 20 and 30 minutes at 4.2 km/h
+            "n_jollibee_5": [1, 0, 0, 0, 9],
+            "n_jollibee_10": [2, 1, 0, 0, 9],
+            "n_jollibee_15": [3, 2, 1, 0, 9],
+        }
+    )
+    t = measures.jollibee_table(w).set_index("pcode")
+    assert t.loc["a", "min_jollibee"] == 10.0
+    assert t.loc["a", "within10_jollibee"] == 2 / 3
+    assert list(t.loc["a", ["n5_jollibee", "n10_jollibee", "n15_jollibee"]]) == [0, 1, 2]
+    assert t.loc["b", "min_jollibee"] == 30.0
+    assert t.loc["metro", "within10_jollibee"] == 2 / 5
+    assert t.loc["metro", "n15_jollibee"] == 1
