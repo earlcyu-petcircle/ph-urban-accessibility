@@ -264,7 +264,7 @@ def main():
         for c, arr in nearest_by_node(net, {c: pts[c] for c in cats}).items():
             arrays[f"{name}:{c}"] = arr
         print(f"  nearest, {name} layer ({time.time() - t0:.0f}s)")
-    # Food without convenience stores: the paper reports food access both ways (section 8)
+    # Food without convenience stores: food access is reported both ways (sari-sari stores are unmapped)
     food = svc[svc.category.eq("food_retail") & svc.in_default & ~svc.kind.eq("convenience")]
     arrays["merged:food_retail_no_convenience"] = nearest_by_node(net, {"x": (food.lon.values, food.lat.values)})["x"]
     stops_only = layer_points(svc, access, routes, routes_as_stops=False)

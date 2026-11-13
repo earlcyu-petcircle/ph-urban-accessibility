@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build the small committed tables the paper cites, and the numbers behind docs/data-quality.md.
+Build the small committed tables the site and notebooks cite, and the numbers behind docs/data-quality.md.
 
   data/derived/barangays.csv      one row per Metro Manila barangay: people, area, density, study flag
   data/derived/data_quality.json  snapshots, row counts, licences and completeness for every layer
