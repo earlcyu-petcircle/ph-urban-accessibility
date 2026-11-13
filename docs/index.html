@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compare Barangays on Foot | Earl Yu / Atlas</title>
-<meta name="description" content="Pick up to three Metro Manila barangays and compare how much of everyday life is a short walk from home: the walk to food, the palengke, pharmacies, clinics, hospitals, public schools, open space and transit, for every resident of the 2024 census.">
+<title>How accessible is your barangay to daily essentials? | Earl Yu / Atlas</title>
+<meta name="description" content="Pick up to three Metro Manila barangays and check the walk to the nearest food shop, palengke, pharmacy, clinic, hospital, public school, open space and transit stop.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect x=%272%27 y=%272%27 width=%2712%27 height=%2712%27 fill=%27%231F4FE0%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,12 +33,11 @@ a{color:var(--accent)}
 #mapwrap{position:absolute;top:0;right:0;bottom:0;left:var(--panel)}
 #map{position:absolute;inset:0;background:var(--grid)}
 
-.wordmark{display:inline-flex;align-items:center;gap:.5rem;font:800 .95rem var(--head);letter-spacing:-.02em;margin:0 0 1.1rem}
-.wordmark::before{content:"";width:12px;height:12px;background:var(--accent)}
 .kicker{font:600 .72rem var(--mono);letter-spacing:.06em;color:var(--accent);margin:0 0 .5rem}
 h1{font:800 2.2rem/1 var(--head);letter-spacing:-.035em;margin:0 0 .7rem;text-wrap:balance}
 h1 mark{background:var(--highlight);color:inherit;padding:0 .08em}
 .summary{color:var(--ink-soft);font-size:.95rem;margin:0}
+.byline{margin:.8rem 0 0;font:.8rem var(--mono);color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 18px}
 h2{font:600 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:1.4rem 0 .5rem;padding-bottom:.3rem;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;gap:.5rem}
 h2 span{color:var(--muted);font-weight:400}
 p{margin:.4rem 0}
@@ -141,10 +140,10 @@ footer .links{display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.5rem;font:6
 <div class="app">
   <div id="panel">
     <header class="intro">
-      <p class="wordmark">Earl Yu / Atlas</p>
-      <p class="kicker">PH / URBAN ACCESSIBILITY / METRO MANILA</p>
-      <h1>Compare barangays <mark>on foot</mark></h1>
-      <p class="summary">Pick up to three Metro Manila barangays and compare how much of everyday life is a short walk from home. Every resident of the 2024 census is placed in their building and walked along the streets to the nearest food shop, palengke, pharmacy, clinic, hospital, public school, open space and transit stop.</p>
+      <p class="kicker">METRO MANILA URBAN ACCESSIBILITY</p>
+      <h1>How accessible is your barangay to <mark>daily essentials</mark>?</h1>
+      <p class="summary">Pick up to three Metro Manila barangays and compare how much of everyday life is a short walk from home. Check the walk to the nearest food shop, palengke, pharmacy, clinic, hospital, public school, open space and transit stop.</p>
+      <p class="byline"><span>Earl Yu</span><span>November 2026</span></p>
     </header>
 
     <main class="controls">
@@ -157,6 +156,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.5rem;font:6
       <div class="chips" id="chips"></div>
       <p id="msg" role="status"></p>
       <div class="buttons"><button id="example" type="button">Try an example</button><button id="clear" type="button">Clear</button></div>
+      <p class="note">The examples are three barangays I have lived in: Barangay 136, Loyola Heights and Oranbo.</p>
 
       <h2>Show on the map</h2>
       <div class="row2">
@@ -181,11 +181,11 @@ footer .links{display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.5rem;font:6
 
       <footer>
         <details>
-          <summary>Data and credits</summary>
+          <summary>Data and methodology</summary>
           <p>Sari-sari stores are almost unmapped, so food access is understated everywhere. Hexagons with fewer than five buildings are left off the map.</p>
           <p>People: PSA 2024 census, placed with WorldPop and Overture buildings. Services: Overture Maps, &copy; OpenStreetMap contributors, DepEd; Jollibee stores from OpenStreetMap only. Boundaries: OCHA COD-AB. Basemap: OpenFreeMap.</p>
         </details>
-        <p class="links"><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility#method">Method and limitations</a><a href="map/data/barangay_measures.csv">Every barangay's measures (CSV)</a><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility">Code and data on GitHub</a></p>
+        <p class="links"><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility#readme">Method and limitations</a><a href="https://github.com/earlcyu-petcircle/ph-urban-accessibility">Code and data on GitHub</a></p>
       </footer>
     </main>
   </div>
