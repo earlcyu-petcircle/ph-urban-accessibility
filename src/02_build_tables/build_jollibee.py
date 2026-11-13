@@ -3,9 +3,10 @@
 Build the Jollibee layer: every Jollibee store in OpenStreetMap inside Metro Manila and its
 FRINGE_KM fringe, one point per store.
 
-Jollibee is tracked context, not a service category: it is not in CATEGORIES, so the nine-service
-measures, the 15-minute score and the rankings never see it. The site shows it as its own map
-layer and its own rows in the picks table.
+Jollibee is a service the site lists beside the nine (NOT_IN_SCORE in src/shared/common.py),
+not one of CATEGORIES, so the nine-service measures, the 15-minute score and its rank never see
+it. The site shows it like the others: in the service choice on the map and in the picks
+table's service rows, marked "not in score".
 
 The rule (is_jollibee in src/shared/service_rules.py): an `amenity=fast_food` or `restaurant`
 node or area with `brand:wikidata=Q37614`, or, when no brand ID is set, a Jollibee name. Points

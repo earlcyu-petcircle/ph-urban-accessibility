@@ -30,3 +30,13 @@ def test_no_personal_wording_on_the_site():
 def test_pick_outlines_sit_on_a_white_halo():
     halo, outline = PAGE.index('id: "picked-halo"'), PAGE.index('id: "picked",')
     assert halo < outline
+
+
+def test_jollibee_is_listed_once_as_a_service_outside_the_score():
+    palette = (DOCS / "map" / "palette.js").read_text()
+    assert '"jollibee": "jb"' in palette and 'const UNSCORED = ["jb"];' in palette
+    assert "show-jb" not in PAGE and "jollibee.geojson" not in PAGE
+    assert not (DOCS / "map" / "data" / "jollibee.geojson").exists()
+    assert "not in score" in PAGE
+    records = json.loads((DOCS / "map" / "data" / "barangays.json").read_text())
+    assert all("jb" in r["min"] and "jb" in r["k"] and "jb" in r["x"] and "jb" not in r for r in records)

@@ -1,7 +1,8 @@
 """
 The rules that sort a place into one of the nine service categories, and tell two records of
 one place apart from two places, for src/02_build_tables/build_services.py; and the rule that
-picks out Jollibee stores, a tracked layer outside the nine, for build_jollibee.py.
+picks out Jollibee stores, a service shown beside the nine but not in the score, for
+build_jollibee.py.
 
 They are plain patterns and functions with no inputs from disk, so tests/test_service_rules.py
 can check them. docs/data-quality.md ("The service layer") explains each one.

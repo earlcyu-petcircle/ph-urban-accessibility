@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Phase 3: the data analysis. First src/03_analyse/walk_times.py walks every resident to every
 # service category along the network (data/work/walk_times.parquet), and jollibee_times.py to
-# the Jollibee stores, which are tracked beside the measures, not in them
+# the Jollibee stores, a service shown beside the nine but kept out of the 15-minute score
 # (data/work/jollibee_times.parquet); then six narrative notebooks in notebooks/ are executed
 # in order:
 #   01_proximity_and_choice   M1 nearest walk and M2 choice (RQ1, RQ2)

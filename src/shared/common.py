@@ -89,6 +89,11 @@ SERVICES = {
     "moving": ("transit",),
 }
 CATEGORIES = tuple(c for cats in SERVICES.values() for c in cats)
+# Services shown beside the nine everywhere the site lists them (map, walk times, choice,
+# crowding, fairness), but never counted in M4, the 15-minute score or its rank: Jollibee
+# stores, from OpenStreetMap (src/02_build_tables/build_jollibee.py)
+NOT_IN_SCORE = ("jollibee",)
+SHOWN = CATEGORIES + NOT_IN_SCORE
 
 
 def metres(minutes, speed_kmh=WALK_SPEED_KMH):

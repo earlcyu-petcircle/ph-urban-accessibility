@@ -5,7 +5,7 @@ How much of everyday life is a short walk from home, for every resident of every
 **Compare any three barangays on foot: [https://earlcyu-petcircle.github.io/ph-urban-accessibility/](https://earlcyu-petcircle.github.io/ph-urban-accessibility/)**
 
 The site is one full-screen map.
-Pick up to three barangays and it compares the walk to nine everyday services (food shops, the palengke, pharmacies, clinics, hospitals, public elementary and high schools, open space and transit) for all 14 million people of the 2024 census, placed in their buildings and walked along the street network.
+Pick up to three barangays and it compares the walk to nine everyday services (food shops, the palengke, pharmacies, clinics, hospitals, public elementary and high schools, open space and transit), and to Jollibee, for all 14 million people of the 2024 census, placed in their buildings and walked along the street network.
 The method, limitations and citation are below.
 Earl Yu, November 2026.
 Open data only.
@@ -33,7 +33,7 @@ Each pick is compared with the others and with Metro Manila as a whole.
 | Transit | The UN test of convenient public transport (SDG 11.2.1): within 500 m of a bus or jeepney, or 1 km of an LRT or MRT station |
 | Fairness | Where the barangay sits among all Metro Manila residents, and how even access is inside it |
 
-Jollibee stores are tracked beside these, from OpenStreetMap, but are not part of the score or the rankings.
+Jollibee is listed as a tenth service wherever the nine are (the map's service choice, the walk, choice, crowding and fairness rows), from OpenStreetMap's stores, but it is not counted in the 15-minute score or its rank.
 The study measures potential access and describes differences; it does not say where people actually go or explain the causes.
 
 ## Method

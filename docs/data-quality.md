@@ -29,7 +29,7 @@ Snapshots in this build: OpenStreetMap extract of 3 November 2026 (replication t
 | Boundaries and codes | OCHA COD-AB Philippines v03 (NAMRIA and PSA), PSGC-based pcodes | Barangay | Valid from 13 Feb 2025; files 28 May 2026 | CC BY-IGO | 1,712 barangays |
 | Services | Overture Maps places at confidence 0.3 or more | Point | Release 2026-10-21.0 | CDLA Permissive 2.0 and per-source terms | 320,705 in the study box |
 | Services, open space, transit, network | OpenStreetMap, Geofabrik Philippines extract | Point, polygon, way, route | 3 Nov 2026 | ODbL | 141,064 tagged points and areas; 174,506 walkable ways |
-| Jollibee stores (tracked, not a service) | OpenStreetMap, Geofabrik Philippines extract | Point | 28 Oct 2026 | ODbL | 349 stores in Metro Manila |
+| Jollibee stores (a service, not in the score) | OpenStreetMap, Geofabrik Philippines extract | Point | 28 Oct 2026 | ODbL | 349 stores in Metro Manila |
 | School registry | OSMaPaaralan: DepEd's MaPaaralan public-school list, cleaned by OpenStreetMap Philippines | School, with DepEd ID, ISCED level and 2015 enrolment | 2019 | DepEd data published for OpenStreetMap use; only counts committed | 1,064 schools in the study box |
 | School check | HOT OpenStreetMap education facilities (HDX export) | School | 12 Oct 2026 | ODbL | 1,862 schools in Metro Manila |
 | Health registry | DOH National Health Facility Registry | Facility, with beds | Live | Government publication | Not used: the export fails |
@@ -195,7 +195,8 @@ The HOT education export of 12 October 2026 holds 1,862 schools in Metro Manila 
 
 ## The Jollibee layer
 
-Jollibee stores are tracked beside the nine services, not as a tenth: they are shown on the map and in their own rows of the picks table (the nearest walk, and the stores within 5, 10 and 15 minutes), and they are in none of the measures, the 15-minute score or the rankings.
+Jollibee is a service listed beside the nine everywhere the site lists them: the service choice on the map, and the walk, choice, crowding and fairness rows of the picks table, each marked "not in score".
+It is in none of the five measures' tables, the 15-minute score or its rank: a check on this build found every barangay's score and rank identical with and without it.
 
 - **Source.** OpenStreetMap only, from the Geofabrik Philippines extract of 28 October 2026 (replication time 21:21 UTC), as recorded in `data/derived/jollibee.json`.
   The rest of this build used the extract of 3 November, which Geofabrik no longer serves; the two are six days apart, and a live Overpass count on 13 November found 321 brand-tagged and 356 name-matched features in Metro Manila, so the stores barely move between them.
@@ -207,7 +208,9 @@ Jollibee stores are tracked beside the nine services, not as a tenth: they are s
 - **Completeness.** OpenStreetMap holds roughly nine in ten of Metro Manila's Jollibee stores: a source scout on 13 November put the true number at about 350 to 380, and found a few dozen stores, spread across the cities, that are not mapped.
 - **Not used.** Jollibee's own store locator lists 276 stores in Metro Manila and lacks flagship branches such as SM Mall of Asia and Trinoma; its terms (section VIII) bar reuse of its content without written consent, so it is not used.
   Overture places would roughly double the count, because its Meta and Foursquare records of one store sit more than 50 m apart, and it carries no brand ID.
-- Walks to the stores use the same network and the same nearest and count searches as the nine services (`src/03_analyse/jollibee_times.py`), in their own table, so the services' walk times are untouched.
+- Walks to the stores use the same network and the same nearest, count and E2SFCA searches as the nine services (`src/03_analyse/jollibee_times.py`), in their own table, so the services' walk times are untouched; each store has a supply of one.
+- **Food retail is separate.** Food retail takes grocery, supermarket, convenience and sari-sari shops, never fast food or restaurants, so no OpenStreetMap Jollibee record is in it.
+  One Overture place named "Malinta Jollibee", which Overture files as a grocery store, is among food retail's 8,788 default points; it sits 353 m from the nearest mapped store, and is left as Overture has it.
 
 ## The walking network
 

@@ -8,7 +8,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src" / "shared"))
 
 import numpy as np
-from common import CATEGORIES
+from common import CATEGORIES, NOT_IN_SCORE, SHOWN
 from service_rules import group_within, health_category, is_jollibee, norm_name, same_place, school_level
 
 
@@ -78,5 +78,6 @@ def test_points_within_fifty_metres_are_one_store():
     assert codes[0] == codes[1] == codes[2] != codes[3]
 
 
-def test_jollibee_is_not_a_service_category():
+def test_jollibee_is_shown_as_a_service_but_not_scored():
     assert "jollibee" not in CATEGORIES
+    assert "jollibee" in NOT_IN_SCORE and SHOWN == CATEGORIES + NOT_IN_SCORE
